@@ -1,8 +1,9 @@
+using FarmingClicker.GameFlow.Messages.Notifications.States;
+
 namespace Core.StateMachine
 {
     using System;
     using Message;
-    using FarmingSimulator.GameFlow.Messages.Notifications.States;
     using UnityEngine;
 
     public abstract class State<T>:IStateBase where T : Enum

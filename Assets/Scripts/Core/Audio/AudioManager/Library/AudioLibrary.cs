@@ -7,7 +7,7 @@ namespace Core.Audio.AudioManager.Library
     using Sirenix.OdinInspector;
     using UnityEngine;
 
-    [CreateAssetMenu(menuName = "MiamiEnglish/Audio/AudioLibraryData",
+    [CreateAssetMenu(menuName = "FarmingClicker/Audio/AudioLibraryData",
                      fileName = "AudioLibraryData")]
     public class AudioLibrary : ScriptableObject
     {

@@ -1,0 +1,223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75855364e60761b4e9fbf61cda7b27c0, type: 3}
+  m_Name: AudioLibraryData
+  m_EditorClassIdentifier: 
+  <AudioClipEntries>k__BackingField:
+  - <TargetGroup>k__BackingField: 2
+    <AudioClips>k__BackingField:
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 7afc4c339d59952409ac680e47715246,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 90c7a84080f0720439c0ab8baa41a411,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 67df05235b14710488b663608d6c03c5,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 39155c4016b762343b488f2c6581e8f3,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 465eea4009f8865428ce2a20deef8f90,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 3042b31dd9ad8754a815d6f8f88956f1,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 518b9569c9552b348818ddea06f6e20f,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 6f57429c577025547bd992c372737f55,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: f4f967ef7670b3648a17155b6d057315,
+        type: 3}
+  - <TargetGroup>k__BackingField: 1
+    <AudioClips>k__BackingField:
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 5b6c5b64df5942742ba34264ec45fb0e,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 68e99f8daff1e354e96a81dee6c87f22,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 5b6c5b64df5942742ba34264ec45fb0e,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: cafa72a565cab6244b8b830eb59be077,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 135ca6e745c867545909d26b97bc8d86,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: c1ee8b60001972c4f9933896de064bd9,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: a115fd678e4e51e479d700bde776d791,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: d5f67b6555961934e9b8f88b49827fb7,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 2b7a1873003e88e40be7938f7736d5f5,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 3525a384cb598d7479445a95dffc6058,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 179d537c849d6cd48b516361fb48676c,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: aa1b3f2762708e4499c4adb4f3098447,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: e3538cb9ac308c94dbc5745274a8901c,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 637e1b2b8c927ed4cb9140f431294007,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: d7093e3054888a64b89a1adcaab4486a,
+        type: 3}
+  - <TargetGroup>k__BackingField: 4
+    <AudioClips>k__BackingField:
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 7bb032f6249d8c94897f97e83fb07e89,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: cafa72a565cab6244b8b830eb59be077,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 5b6c5b64df5942742ba34264ec45fb0e,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: e3f56fecc14218248a8f4b22a13b9365,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 68e99f8daff1e354e96a81dee6c87f22,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 08f7428a7dcf0794fb9a241b5a952acf,
+        type: 3}
+  - <TargetGroup>k__BackingField: 0
+    <AudioClips>k__BackingField: []
+  - <TargetGroup>k__BackingField: 5
+    <AudioClips>k__BackingField:
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 798923caf47b57f40b550639b23bf046,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 524c8f200f0b9af499911984478716f2,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 3ad7fba737e0a0d46b938c36da27dc9a,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 8027cff46ae0e3848b87fce5423abc76,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: ae76d9b209b025446b744289ed364935,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: c5bb4ac25854f5441aecd6de2fd98b15,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 96488e6d83fdbdb4bb5e8d132cc5f400,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: aa4da93a6439d47f697443cc08a2406e,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: b39401ec7ad3a4084a3d021f6d3163c4,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: b7546620353ae7946a9cd88a81242cd2,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 24f3e33bc477abd4aa95441f2365f813,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: b418f8f72e4499b4aad918d30fbea6e7,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 015e5977ea2c4f848b6ecd60e82f089d,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 910fd812bc12c914e9b7d3da7f557c1c,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 59244104f6e6ba2469e1e726b9b803cc,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 599471403b0325d438ea4b14a94fe0b0,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: de04d68a9e4a32a408262d9cb7adffe4,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 2af9bf0aea5b5ba4e99aa5fb80c038e5,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 0620e326d33b0854c8b6b3cb0d718f0b,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 5235de9b1bf176d48a70ac2e61554574,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: a6378eb7f99ef1d46a26de29da2bd40e,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 8954fdef9ce599f468bd04276f9da264,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 3be955160da37f4438cadfbdabe9e164,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 1baf5504b96bcd147a60ad488c3c1ebf,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 5d37be3c38c6690499796228fd71014e,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: d5b991e84697dfc43b40926a81668862,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 11c094c2a9789d64e84d794cc349b5f6,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 2d85c3e31905f0848875f5ddfe462655,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 41f981e0aa0ec6140883be5e45edd308,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 5fa19931b3cfaf3448f0562cd4924e90,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 3a9353172b91e974da7c4a86420552d1,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 2ebe71f226a665b4bb2facddad863e95,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 9daff692b0f1b5b4687af5399a77969a,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 3a792a2e7f8b2834ca9642839417ac30,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: de72aa761b0980445be13b41731e09ca,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: ccd7a5028c525f04cb765c291ec817dc,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 3ced1ba5115d4d2498bc4941dce211fc,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 88f257cba533e4b4a9a429b7e0d9c6e6,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: b8b79d7f213052c4180b5ec2ea2020d0,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 8fb480f32d8cbf9488227e18b14a68ec,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 6316f627bff3b814da38cf81db83ee8b,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 64bc65eb04fdae84f8094eafb16d40a4,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 383c1619a60fc8942b5763d54e1ff9ed,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: d1e5f552c74dca74fa035dfc1e763059,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: bac0bf7fb07ac9b4d9f84a3df6832ca9,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: a2fece238f7e0ed45b93eb38ded55da1,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 1b019a6ed5461af4bacff44a63c391d5,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: bf9cb39229a8ad144b4c34a54bb9a8bd,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: e52470591ff204e4bb7655856cdfd7cd,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 78f70f35cb57f534bb81c54e95d7bd1d,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 4289c359cc8af9a459fc2240372393bc,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 08c15eacb8f101245b0a0e816887fce5,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: bfba90c6579914c4985a473f1f060cf9,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: b1c30b1a6897c1b4fb7e9566e55324de,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 8406454595facfb44a4946a799a8420b,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: db3b5f0b34582d54caafac3ad041553a,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: c562d3dde5d490c409a733fbe2679bb1,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: c6dc979fd3caced448126e29af526428,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 4212c92ce14e7ec4a9c394bc65cea3cc,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: d68c991faae22e84fbe180f14ff979a2,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 3994aebf92defdf459df88490c58756d,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 5e6f36fa7244f414398f15625c2e3d9d,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 517694f834344274cb622d7e03138d04,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 77425ca170792b24882d507a439ca825,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 5632a9c6f6aa1964ba4eeac58df72b98,
+        type: 3}
+  - <TargetGroup>k__BackingField: 3
+    <AudioClips>k__BackingField:
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 27c632c660f71e440bc94f9ce9b8672d,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 4c9adf3eb263d4743b583d4dd0b1ef16,
+        type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: c59f71f911b8a6f4fba4d19edec37de2,
+        type: 3}
