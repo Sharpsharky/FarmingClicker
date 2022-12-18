@@ -1,4 +1,6 @@
 
+using FarmingClicker.GameFlow.Messages;
+using FarmingClicker.Navigation;
 using FarmingClicker.StateMachine.ApplicationStateMachine;
 
 namespace FarmingClicker.StateMachine
@@ -24,6 +26,11 @@ namespace FarmingClicker.StateMachine
 
         [SerializeField] private AppStateMachineProvider appStateMachineProvider;
 
+        [Header("InitializationOrder"), SerializeField] private NavigationManager navigationManager;
+
+        [SerializeField] private LoadSceneCommand initialSceneLoadCommand;
+
+        
         [Header("Control"), SerializeField] private Camera appCamera;
 
         private StateMachineRunner<AppStateMachine, ApplicationStateType> appStateMachineRunner;
@@ -49,7 +56,7 @@ namespace FarmingClicker.StateMachine
                                              {
                                                  new
                                                      ApplicationLoginState(appStateMachineRunner.StateManager,
-                                                         ApplicationStateType.Login),
+                                                         ApplicationStateType.Login, navigationManager, initialSceneLoadCommand),
                                                  new
                                                      ApplicationNavigationState(appStateMachineRunner.StateManager,
                                                          ApplicationStateType.Navigation, mainCanvas),

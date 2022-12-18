@@ -1,15 +1,24 @@
+using Core.Message;
+using FarmingClicker.GameFlow.Messages;
+
 namespace FarmingClicker.StateMachine.ApplicationStateMachine.States
 {
     using Core.StateMachine;
     using UnityEngine;
+    using Navigation;
+
     public class ApplicationLoginState : State<ApplicationStateType>, IUpdatable
     {
         private const string LOGIN_TOKEN = "LOGIN_TOKEN";
-
+        private NavigationManager navigationManager;
+        private LoadSceneCommand initialSceneLoadCommand;
         public ApplicationLoginState(IStateManager<ApplicationStateType> stateManager,
-                                     ApplicationStateType stateType)
+                                     ApplicationStateType stateType, NavigationManager navigationManager,
+                                     LoadSceneCommand initialSceneLoadCommand)
             : base(stateManager, stateType)
         {
+            this.navigationManager = navigationManager;
+            this.initialSceneLoadCommand = initialSceneLoadCommand;
         }
 
         public void OnUpdate()
@@ -35,8 +44,11 @@ namespace FarmingClicker.StateMachine.ApplicationStateMachine.States
             Debug.Log($"Attempting login with {loginToken}.");
             AppManager.LoginToken = loginToken;
 
-
-            stateManager.SwitchState(ApplicationStateType.Navigation);
+            navigationManager.Initialize();
+            
+            MessageDispatcher.Instance.Send(initialSceneLoadCommand);
+            
+            stateManager.SwitchState(ApplicationStateType.Interaction);
         }
     }
 }
