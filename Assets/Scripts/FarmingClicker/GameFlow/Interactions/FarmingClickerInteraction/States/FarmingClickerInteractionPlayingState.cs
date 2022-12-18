@@ -5,10 +5,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
 {
     using Core.StateMachine;
     
-    public class FarmingClickerInteractionBuildSceneState : State<FarmingClickerInteractionMode>
+    public class FarmingClickerInteractionPlayingState : State<FarmingClickerInteractionMode>
     {
 
-        public FarmingClickerInteractionBuildSceneState(IStateManager<FarmingClickerInteractionMode> stateManager, 
+        public FarmingClickerInteractionPlayingState(IStateManager<FarmingClickerInteractionMode> stateManager, 
             FarmingClickerInteractionMode stateType) : base(stateManager, stateType)
         {
         }
@@ -16,16 +16,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
         public override async void OnEnter()
         {
             base.OnEnter();
-            
-            MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartExitingInteraction());
-
         }
-
-        private void ExitState()
-        {
-        }
-
-
+        
         public override async void OnExit()
         {
             base.OnExit();
@@ -36,6 +28,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
 
         }
         
-        
+        private void ExitState()
+        {
+            MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartExitingInteraction());
+
+        }
     }
+
+
+
 }

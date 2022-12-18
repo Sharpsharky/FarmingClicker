@@ -38,6 +38,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
                                               new FarmingClickerInteractionInitializationState(stateMachineRunner.StateManager, FarmingClickerInteractionMode.Initialization),
                                               new FarmingClickerInteractionDisplayUIState(stateMachineRunner.StateManager, FarmingClickerInteractionMode.DisplayUI),
                                               new FarmingClickerInteractionBuildSceneState(stateMachineRunner.StateManager, FarmingClickerInteractionMode.BuildScene),
+                                              new FarmingClickerInteractionPlayingState(stateMachineRunner.StateManager, FarmingClickerInteractionMode.Playing),
                                               new FarmingClickerInteractionExitState(stateMachineRunner.StateManager, FarmingClickerInteractionMode.Exit),
                                           }, FarmingClickerInteractionMode.Initialization);
             
@@ -76,6 +77,18 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
                     if(nextState is FarmingClickerInteractionBuildSceneState farmingClickerInteractionBuildSceneState)
                     {
                         farmingClickerInteractionBuildSceneState.Initialize();
+                    }
+                    
+                    break;
+                }
+                case FarmerClickerInteractionStartPlaying farmerClickerInteractionStartPlaying:
+                {
+                    var nextState =
+                        stateMachineRunner.StateManager.SwitchState(FarmingClickerInteractionMode.Initialization);
+
+                    if(nextState is FarmingClickerInteractionPlayingState farmingClickerInteractionPlayingState)
+                    {
+                        farmingClickerInteractionPlayingState.Initialize();
                     }
                     
                     break;

@@ -1,6 +1,8 @@
 ﻿namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
 {
     using Core.StateMachine;
+    using Core.Message;
+    using Messages.Notifications.States.FarmerClickerInteraction;
     
     public class FarmingClickerInteractionInitializationState : State<FarmingClickerInteractionMode>
     {
@@ -13,6 +15,8 @@
         public override async void OnEnter()
         {
             base.OnEnter();
+            
+            MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartDisplayingUI());
         }
         
         public override async void OnExit()
