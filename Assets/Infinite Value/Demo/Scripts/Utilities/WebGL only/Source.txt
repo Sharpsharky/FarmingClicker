@@ -1,0 +1,4 @@
+https://github.com/greggman/unity-webgl-copy-and-paste
+
+License: BSD-3-Clause
+Check the files header for more informations

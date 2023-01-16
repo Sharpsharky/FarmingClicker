@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "79293482367",
+    "project_id": "farming-clicker",
+    "storage_bucket": "farming-clicker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79293482367:android:b2fe089c449ea59761464a",
+        "android_client_info": {
+          "package_name": "com.SpaceBirdStudio.FarmingClicker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79293482367-ookapfpp68s4fb8rlnfukemlj6vf4vk1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmBwqpt1mnRu8KBo5iMrhKfCMjOZPOc44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79293482367-ookapfpp68s4fb8rlnfukemlj6vf4vk1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "79293482367-dl5pt5s1jovpg3vrr1vkag89qsoms25t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.SpaceBirdStudio.FarmingClicker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
