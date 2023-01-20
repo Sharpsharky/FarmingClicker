@@ -18,7 +18,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGameCameraController
         [SerializeField] private float maxSize = 10f;
         [SerializeField] private float zoomSensitivity = 1f;
         [SerializeField] private float minY = -10f;
-        [SerializeField] private float maxY = 10f;
+        [SerializeField] private float maxY;
 
         private bool isInitialized = false;
         private Camera cam;
@@ -28,7 +28,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGameCameraController
         public void Initialize()
         {
             cam = GetComponent<Camera>();
-
+            maxY = transform.position.y;
             enabled = true;
         }
         

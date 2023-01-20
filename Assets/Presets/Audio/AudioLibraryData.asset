@@ -18,7 +18,9 @@ MonoBehaviour:
   - <TargetGroup>k__BackingField: 1
     <AudioClips>k__BackingField: []
   - <TargetGroup>k__BackingField: 4
-    <AudioClips>k__BackingField: []
+    <AudioClips>k__BackingField:
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 6a5d31c30bb48d94fab0134746724a1b, type: 3}
+    - <Clip>k__BackingField: {fileID: 8300000, guid: 2616a21916c792a42b3c7b9a7d495139, type: 3}
   - <TargetGroup>k__BackingField: 0
     <AudioClips>k__BackingField: []
   - <TargetGroup>k__BackingField: 5

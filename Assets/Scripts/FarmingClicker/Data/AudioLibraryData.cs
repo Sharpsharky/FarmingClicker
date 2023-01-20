@@ -14,6 +14,14 @@ namespace AudioLibraryData
 
     public static class UI
     {
+        /// <summary>
+        /// Name of clip click1
+        /// </summary>
+        public static readonly AudioClipInfo Click1 = new AudioClipInfo { ClipName = "click1", TargetGroup = AudioGroup.UI};
+        /// <summary>
+        /// Name of clip click2
+        /// </summary>
+        public static readonly AudioClipInfo Click2 = new AudioClipInfo { ClipName = "click2", TargetGroup = AudioGroup.UI};
     }
 
     public static class Master

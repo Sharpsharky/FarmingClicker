@@ -20,6 +20,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
         [SerializeField, InlineEditor] private GameObject farmFieldGameObject;
         [SerializeField, InlineEditor] private GameObject farmFieldFillerGameObject;
         
+        [SerializeField, InlineEditor] private GameObject upgradeFarmFieldButton;
+        [SerializeField, InlineEditor] private GameObject upgradeGranaryBuildingButton;
+        [SerializeField, InlineEditor] private GameObject upgradeShoppingBuildingButton;
+        
         private Vector3 positionOfGranaryBuilding;
         private Vector3 positionOfShoppingBuilding;
         
@@ -69,7 +73,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
         private void GenerateBuildings()
         {
             Instantiate(granaryBuilding, positionOfGranaryBuilding, Quaternion.identity);
+            Instantiate(upgradeGranaryBuildingButton, positionOfGranaryBuilding, Quaternion.identity);
             Instantiate(shoppingBuilding, positionOfShoppingBuilding, Quaternion.identity);
+            Instantiate(upgradeShoppingBuildingButton, positionOfShoppingBuilding, Quaternion.identity);
         }
         
         private void GenerateNumberOfFarms(int n)
@@ -170,6 +176,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
             
             Instantiate(farmPathGameObject, positionOfCurrentFarmPath, Quaternion.identity);
             Instantiate(farmFieldGameObject, positionOfCurrentFarmField, Quaternion.identity);
+            Instantiate(upgradeFarmFieldButton, positionOfCurrentFarmField, Quaternion.identity);
             Instantiate(farmPathFillerGameObject, positionOfCurrentFarmPathFiller, Quaternion.identity);
             Instantiate(farmFieldFillerGameObject, positionOfCurrentFarmFieldFiller, Quaternion.identity);
             

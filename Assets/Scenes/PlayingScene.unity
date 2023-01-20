@@ -1033,3 +1033,6 @@ MonoBehaviour:
   farmPathFillerGameObject: {fileID: 3259467779889928111, guid: 9a78ca2125a201c45a256e52351f5a29, type: 3}
   farmFieldGameObject: {fileID: 729652136176977051, guid: aa81ff3d4b8caf74b9d1c0dc4f60b8af, type: 3}
   farmFieldFillerGameObject: {fileID: 2451483643853162573, guid: 148488d0004058e41b14e1b8b52c599c, type: 3}
+  upgradeFarmFieldButton: {fileID: 1865957077966740903, guid: 9323b3f9be07e16448095174bafc825d, type: 3}
+  upgradeGranaryBuildingButton: {fileID: 6559622639252607645, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+  upgradeShoppingBuildingButton: {fileID: 1584889222691848727, guid: 04675638cd876b745abdc122f9587834, type: 3}
