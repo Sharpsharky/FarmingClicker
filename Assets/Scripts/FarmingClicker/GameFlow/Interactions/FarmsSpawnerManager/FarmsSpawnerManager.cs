@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using Core.Message;
-using Core.Message.Interfaces;
-using Sirenix.OdinInspector;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
 {
+    using System;
+    using System.Collections.Generic;
+    using Core.Message;
+    using Core.Message.Interfaces;
+    using Sirenix.OdinInspector;
+    using UnityEngine;
+
     public class FarmsSpawnerManager : SerializedMonoBehaviour, IMessageReceiver
     {
         
@@ -40,11 +40,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
             Debug.Log("Registering Navigation Manager.");
 
             MessageDispatcher.Instance.RegisterReceiver(this);
+        }
 
+        public void Initialize()
+        {
             InitializeVariables();
             GenerateBuildings();
             GenerateNumberOfFarms(5);
         }
+        
 
         private void InitializeVariables()
         {

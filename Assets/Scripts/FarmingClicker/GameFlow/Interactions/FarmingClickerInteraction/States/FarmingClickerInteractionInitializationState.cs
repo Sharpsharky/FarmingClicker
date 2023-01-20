@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
+﻿using UnityEngine;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
 {
     using Core.StateMachine;
     using Core.Message;
@@ -15,7 +17,7 @@
         public override async void OnEnter()
         {
             base.OnEnter();
-            
+            Debug.Log("Initialization State");
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartDisplayingUI());
         }
         

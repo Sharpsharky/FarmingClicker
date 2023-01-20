@@ -1,4 +1,5 @@
 using Core.Message;
+using UnityEditor.UI;
 using UnityEngine.InputSystem.EnhancedTouch;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGameCameraController
@@ -9,46 +10,33 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGameCameraController
     using Core.Message.Interfaces;
     using Messages.Notifications.FarmingGame;
 
-    public class FarmingGameCameraController : MonoBehaviour, IMessageReceiver
+    public class FarmingGameCameraController : MonoBehaviour
     {
+        [SerializeField] private float scrollSpeed = 10f;
+        [SerializeField] private float zoomSpeed = 10f;
+        [SerializeField] private float minSize = 1f;
+        [SerializeField] private float maxSize = 10f;
+        [SerializeField] private float zoomSensitivity = 1f;
+        [SerializeField] private float minY = -10f;
+        [SerializeField] private float maxY = 10f;
 
-        
-        public List<Type> ListenedTypes { get; } = new List<Type>();
-        
-        private void Awake()
-        {
-            ListenedTypes.Add(typeof(FarmsLoadedNotification));
-            MessageDispatcher.Instance.RegisterReceiver(this);
-            
-        }
-
-        public float scrollSpeed = 10f;
-        public float zoomSpeed = 10f;
-        public float minSize = 1f;
-        public float maxSize = 10f;
-        public float zoomSensitivity = 1f;
-        public float minY = -10f;
-        public float maxY = 10f;
+        private bool isInitialized = false;
         private Camera cam;
 
-        void Start()
+        public List<Type> ListenedTypes { get; } = new List<Type>();
+        
+        public void Initialize()
         {
             cam = GetComponent<Camera>();
+
+            enabled = true;
         }
-        void OnEnable()
-        {
-            TouchSimulation.Enable();
-        } 
+        
         void Update()
         {
-            Debug.Log($"Input.touchCount: {Input.touchCount}");
-
             MobileTouch();
             MobileZoom();
             UnityTouch();
-
-
-
         }
 
         private void MobileTouch()
@@ -98,21 +86,5 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGameCameraController
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - scroll * scrollSpeed, minSize, maxSize);
         } 
 
-        public void OnMessageReceived(object message)
-        {
-            if (!ListenedTypes.Contains(message.GetType())) return;
-
-            Debug.Log($"Navigation manager received load scene command.");
-
-            switch (message)
-            {
-
-                case FarmsLoadedNotification farmsLoadedNotification:
-                {
-                    break;
-                }
-                
-            }
-        }
     }
 }

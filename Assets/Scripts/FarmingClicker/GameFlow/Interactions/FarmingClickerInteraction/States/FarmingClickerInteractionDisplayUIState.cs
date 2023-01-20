@@ -1,5 +1,6 @@
 ﻿using Core.Message;
 using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
+using UnityEngine;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
 {
@@ -16,7 +17,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
         public override async void OnEnter()
         {
             base.OnEnter();
-            
+            Debug.Log("DisplayUIState State");
+
             
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartBuildingScene());
         }
