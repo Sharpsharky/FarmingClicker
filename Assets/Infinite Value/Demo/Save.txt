@@ -1,0 +1,22 @@
+Editing this file can result in a corrupted save or unexpected behaviour, proceed with caution.
+It will also mark your game as cheated forever.
+{
+    "creationTime": "01/21/2023 18:38:29",
+    "score": {
+        "s_digits": "1580000000000000",
+        "s_exponent": -13
+    },
+    "money": {
+        "s_digits": "11111111122222222850",
+        "s_exponent": 0
+    },
+    "upgrades": [],
+    "incomes": [
+        {
+            "name": "Trained monkey",
+            "count": 2
+        }
+    ],
+    "saveTime": "01/21/2023 18:40:35"
+}
+CheatKey: CHEATED

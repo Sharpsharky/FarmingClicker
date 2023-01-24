@@ -5,7 +5,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
         Initialization = 0,
         DisplayUI = 1,
         BuildScene = 2,
-        Playing = 3,
-        Exit = 4,
+        WorkersActivation = 3,
+        Playing = 4,
+        Exit = 5,
     }
 }

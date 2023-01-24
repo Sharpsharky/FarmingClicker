@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
 {
     using Messages.Notifications.States.FarmerClickerInteraction;
@@ -46,6 +48,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
                                                   FarmingClickerInteractionMode.DisplayUI),
                                               new FarmingClickerInteractionBuildSceneState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.BuildScene, farmsSpawnerManager, farmingGameCameraController),
+                                              new FarmingClickerInteractionWorkersActivationState(stateMachineRunner.StateManager, 
+                                                  FarmingClickerInteractionMode.WorkersActivation),
                                               new FarmingClickerInteractionPlayingState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.Playing),
                                               new FarmingClickerInteractionExitState(stateMachineRunner.StateManager, 
@@ -87,6 +91,18 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
                     if(nextState is FarmingClickerInteractionBuildSceneState farmingClickerInteractionBuildSceneState)
                     {
                         farmingClickerInteractionBuildSceneState.Initialize();
+                    }
+                    
+                    break;
+                }
+                case FarmerClickerInteractionStartActivatingBuilders farmerClickerInteractionStartActivatingBuilders:
+                {
+                    var nextState =
+                        stateMachineRunner.StateManager.SwitchState(FarmingClickerInteractionMode.WorkersActivation);
+
+                    if(nextState is FarmingClickerInteractionWorkersActivationState farmingClickerInteractionWorkersActivationState)
+                    {
+                        farmingClickerInteractionWorkersActivationState.Initialize();
                     }
                     
                     break;
