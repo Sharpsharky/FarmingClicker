@@ -1,4 +1,6 @@
 
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
 {
     using System;
@@ -39,6 +41,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
         
         private Vector3 leftEdgePosition;
         private Vector3 rightEdgePosition;
+
+        private int numberOfFarms = 5;
         
         public void Awake()
         {
@@ -47,11 +51,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
             MessageDispatcher.Instance.RegisterReceiver(this);
         }
 
-        public void Initialize()
+        public FarmData Initialize()
         {
             InitializeVariables();
             GenerateBuildings();
-            GenerateNumberOfFarms(5);
+            GenerateNumberOfFarms(numberOfFarms);
+
+            return SetUpFarmData();
+
         }
         
 
@@ -74,6 +81,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
             
         }
 
+        private FarmData SetUpFarmData()
+        {
+            FarmData farmData = new FarmData(positionOfGranaryBuilding, positionOfFirstFarmPath.y,
+                spriteRendererFillerGameObject.bounds.size.y + spriteRendererOfFarmPathGameObject.bounds.size.y, numberOfFarms, - 10);
+            
+            return farmData;
+        }
+        
         private void GenerateBuildings()
         {
             Instantiate(granaryBuilding, positionOfGranaryBuilding, Quaternion.identity);

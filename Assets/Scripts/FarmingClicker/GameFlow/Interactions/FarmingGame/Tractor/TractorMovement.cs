@@ -51,7 +51,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
         private void IterateStop()
         {
-            if (currentStopCount >= 3) nextStopY = yOfGarage;
+            if (currentStopCount >= numberOfStops)
+            {
+                nextStopY = yOfGarage;
+                ChangeDirection();
+            }
             else
             {
                 nextStopY = yOfFirstStop - distanceBetweenStops * currentStopCount;
@@ -59,11 +63,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
             currentStopCount++;
 
-            if (currentStopCount >= 3)
-            {
-                nextStopY = yOfGarage;
-                ChangeDirection();
-            }
         }
         
 

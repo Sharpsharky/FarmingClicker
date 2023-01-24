@@ -26,6 +26,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
         {
             ListenedTypes.Add(typeof(FarmerClickerInteractionStartDisplayingUI));
             ListenedTypes.Add(typeof(FarmerClickerInteractionStartBuildingScene));
+            ListenedTypes.Add(typeof(FarmerClickerInteractionStartActivatingBuilders));
             ListenedTypes.Add(typeof(FarmerClickerInteractionStartExitingInteraction));
 
             MessageDispatcher.Instance.RegisterReceiver(this);

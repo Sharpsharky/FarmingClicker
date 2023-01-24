@@ -1,4 +1,5 @@
 ﻿using Core.Message;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager;
 using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
 using UnityEngine;
 
@@ -27,10 +28,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
             Debug.Log("Build Scene State");
 
             
-            farmsSpawnerManager.Initialize();
+            var farmData = farmsSpawnerManager.Initialize();
             farmingGameCameraController.Initialize();
             
-            MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartExitingInteraction());
+            MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartActivatingBuilders(farmData));
 
         }
 
