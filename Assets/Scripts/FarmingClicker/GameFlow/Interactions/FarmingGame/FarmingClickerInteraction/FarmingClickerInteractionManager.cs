@@ -103,7 +103,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
 
                     if(nextState is FarmingClickerInteractionWorkersActivationState farmingClickerInteractionWorkersActivationState)
                     {
-                        farmingClickerInteractionWorkersActivationState.Initialize();
+                        farmingClickerInteractionWorkersActivationState.Initialize(farmerClickerInteractionStartActivatingBuilders.FarmData);
                     }
                     
                     break;

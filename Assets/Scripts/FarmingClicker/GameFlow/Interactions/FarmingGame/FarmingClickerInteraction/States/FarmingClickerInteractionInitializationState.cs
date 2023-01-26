@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using Core.Message;
+using Core.StateMachine;
+using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction;
+using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
+using UnityEngine;
 
-namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
-    using Core.StateMachine;
-    using Core.Message;
-    using Messages.Notifications.States.FarmerClickerInteraction;
-    
     public class FarmingClickerInteractionInitializationState : State<FarmingClickerInteractionMode>
     {
 
