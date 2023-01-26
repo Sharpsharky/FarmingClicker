@@ -1,23 +1,30 @@
-﻿using Core.Message;
-using Core.StateMachine;
-using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction;
-using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
-using UnityEngine;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
+    using LoadDataManager;
+    using Core.Message;
+    using Core.StateMachine;
+    using Interactions.FarmingClickerInteraction;
+    using Messages.Notifications.States.FarmerClickerInteraction;
+    using UnityEngine;
+    
     public class FarmingClickerInteractionInitializationState : State<FarmingClickerInteractionMode>
     {
-
+        private LoadDataManager loadDataManager;
+        private int numberOfFarm;
         public FarmingClickerInteractionInitializationState(IStateManager<FarmingClickerInteractionMode> stateManager, 
-            FarmingClickerInteractionMode stateType) : base(stateManager, stateType)
+            FarmingClickerInteractionMode stateType, LoadDataManager loadDataManager, int numberOfFarm) : base(stateManager, stateType)
         {
+            this.loadDataManager = loadDataManager;
+            this.numberOfFarm = numberOfFarm;
         }
 
         public override async void OnEnter()
         {
             base.OnEnter();
             Debug.Log("Initialization State");
+            
+            loadDataManager .Initialize(numberOfFarm);
+            
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartDisplayingUI());
         }
         

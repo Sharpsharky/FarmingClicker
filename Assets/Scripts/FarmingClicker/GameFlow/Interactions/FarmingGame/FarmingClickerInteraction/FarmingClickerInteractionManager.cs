@@ -1,24 +1,27 @@
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction
 {
-    using Messages.Notifications.States.FarmerClickerInteraction;
     using System;
-    using UnityEngine;
-    using Core.Message;
-    using Core.StateMachine;
-    using Sirenix.OdinInspector;
-    using Core.Message.Interfaces;
     using System.Collections.Generic;
+    using Core.Message;
+    using Core.Message.Interfaces;
+    using Core.StateMachine;
+    using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction;
+    using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States;
     using States;
-    using FarmsSpawnerManager;
+    using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
+    using Sirenix.OdinInspector;
+    using UnityEngine;
+    using LoadDataManager;
+    using Interactions.FarmsSpawnerManager;
     using FarmingGameCameraController;
 
     public class FarmingClickerInteractionManager : SerializedMonoBehaviour, IMessageReceiver
     {
 
+        [SerializeField] private int numberOfFarm;
         [SerializeField] private FarmsSpawnerManager farmsSpawnerManager;
         [SerializeField] private FarmingGameCameraController farmingGameCameraController;
+        [SerializeField] private LoadDataManager loadDataManager;
 
         private StateMachineRunner<FarmingClickerInteractionStateManager, FarmingClickerInteractionMode> stateMachineRunner;
         public List<Type> ListenedTypes { get; } = new List<Type>();
@@ -44,7 +47,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction
             stateMachineRunner.Initialize(new State<FarmingClickerInteractionMode>[]
                                           {
                                               new FarmingClickerInteractionInitializationState(stateMachineRunner.StateManager, 
-                                                  FarmingClickerInteractionMode.Initialization),
+                                                  FarmingClickerInteractionMode.Initialization, loadDataManager, numberOfFarm),
                                               new FarmingClickerInteractionDisplayUIState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.DisplayUI),
                                               new FarmingClickerInteractionBuildSceneState(stateMachineRunner.StateManager, 
