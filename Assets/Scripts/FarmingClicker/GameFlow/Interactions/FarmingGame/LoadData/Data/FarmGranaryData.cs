@@ -2,6 +2,7 @@
 {
     public class FarmGranaryData
     {
-        
+        public int upgradeLevel = 0;
+        public int numberOfWorkers = 0;
     }
 }

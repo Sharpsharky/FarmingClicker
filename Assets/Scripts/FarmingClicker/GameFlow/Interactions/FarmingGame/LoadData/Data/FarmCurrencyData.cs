@@ -2,6 +2,7 @@
 {
     public class FarmCurrencyData
     {
-        
+        public string currentCurrencyValue = "0";
+        public string currentValueOnSecond = "0";
     }
 }

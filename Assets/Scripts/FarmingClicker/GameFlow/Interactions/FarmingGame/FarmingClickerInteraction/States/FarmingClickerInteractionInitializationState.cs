@@ -9,10 +9,10 @@
     
     public class FarmingClickerInteractionInitializationState : State<FarmingClickerInteractionMode>
     {
-        private LoadDataManager loadDataManager;
+        private LoadData.LoadDataManager loadDataManager;
         private int numberOfFarm;
         public FarmingClickerInteractionInitializationState(IStateManager<FarmingClickerInteractionMode> stateManager, 
-            FarmingClickerInteractionMode stateType, LoadDataManager loadDataManager, int numberOfFarm) : base(stateManager, stateType)
+            FarmingClickerInteractionMode stateType, LoadData.LoadDataManager loadDataManager, int numberOfFarm) : base(stateManager, stateType)
         {
             this.loadDataManager = loadDataManager;
             this.numberOfFarm = numberOfFarm;

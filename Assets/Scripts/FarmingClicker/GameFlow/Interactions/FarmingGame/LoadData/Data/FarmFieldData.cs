@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadDataManager.Data
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data
 {
     public class FarmFieldData
     {

@@ -251,9 +251,11 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  numberOfFarm: 0
   farmsSpawnerManager: {fileID: 2019954693}
   farmingGameCameraController: {fileID: 1113388070}
   loadDataManager: {fileID: 84255178}
+  granaryManager: {fileID: 1168947692}
 --- !u!1 &469366613
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,8 +612,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1168947691}
+  - component: {fileID: 1168947692}
   m_Layer: 0
-  m_Name: TractorsOnPathManager
+  m_Name: GranaryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -632,6 +635,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1168947692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168947690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ff8c3734c5ba4438bf1bda6a54b23f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1169920830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,6 +1090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698392130}
+  - component: {fileID: 1698392131}
   m_Layer: 0
   m_Name: CurrencyFarmManager
   m_TagString: Untagged
@@ -1097,6 +1113,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1698392131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698392129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a444260361bac648a6c65d3f30714cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1760011233
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager;
+﻿
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
@@ -7,14 +7,23 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction;
     using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
     using UnityEngine;
+    using LoadData;
+    using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadDataManager.Data;
+    using Granary;
 
     public class FarmingClickerInteractionWorkersActivationState : State<FarmingClickerInteractionMode>
     {
-        private FarmData farmData; 
+        private LoadDataManager loadDataManager; 
+        
+        private FarmGranaryData farmGranaryData; 
+        
+        private GranaryManager granaryManager; 
 
         public FarmingClickerInteractionWorkersActivationState(IStateManager<FarmingClickerInteractionMode> stateManager, 
-            FarmingClickerInteractionMode stateType) : base(stateManager, stateType)
+            FarmingClickerInteractionMode stateType, LoadDataManager loadDataManager, GranaryManager granaryManager) : base(stateManager, stateType)
         {
+            this.loadDataManager = loadDataManager;
+            this.granaryManager = granaryManager;
         }
 
         public override async void OnEnter()
@@ -22,6 +31,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             base.OnEnter();
             Debug.Log("DisplayUIState State");
 
+            farmGranaryData = loadDataManager.FarmGranaryData;
+            granaryManager.Initialize(farmGranaryData);
+            
+            
             
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartPlaying());
         }
@@ -31,9 +44,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             base.OnExit();
         }
         
-        public void Initialize(FarmData farmData)
+        public void Initialize()
         {
-            this.farmData = farmData;
         }
         
         

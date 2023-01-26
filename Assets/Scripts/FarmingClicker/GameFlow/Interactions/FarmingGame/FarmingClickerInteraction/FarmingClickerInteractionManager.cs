@@ -1,3 +1,4 @@
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction
 {
     using System;
@@ -11,17 +12,19 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    using LoadDataManager;
     using Interactions.FarmsSpawnerManager;
     using FarmingGameCameraController;
+    using LoadData;
+    using Granary;
 
     public class FarmingClickerInteractionManager : SerializedMonoBehaviour, IMessageReceiver
     {
 
-        [SerializeField] private int numberOfFarm;
+        [SerializeField] private int numberOfFarm = 0;
         [SerializeField] private FarmsSpawnerManager farmsSpawnerManager;
         [SerializeField] private FarmingGameCameraController farmingGameCameraController;
         [SerializeField] private LoadDataManager loadDataManager;
+        [SerializeField] private GranaryManager granaryManager; 
 
         private StateMachineRunner<FarmingClickerInteractionStateManager, FarmingClickerInteractionMode> stateMachineRunner;
         public List<Type> ListenedTypes { get; } = new List<Type>();
@@ -53,7 +56,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
                                               new FarmingClickerInteractionBuildSceneState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.BuildScene, farmsSpawnerManager, farmingGameCameraController),
                                               new FarmingClickerInteractionWorkersActivationState(stateMachineRunner.StateManager, 
-                                                  FarmingClickerInteractionMode.WorkersActivation),
+                                                  FarmingClickerInteractionMode.WorkersActivation, loadDataManager, granaryManager),
                                               new FarmingClickerInteractionPlayingState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.Playing),
                                               new FarmingClickerInteractionExitState(stateMachineRunner.StateManager, 
@@ -106,7 +109,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
 
                     if(nextState is FarmingClickerInteractionWorkersActivationState farmingClickerInteractionWorkersActivationState)
                     {
-                        farmingClickerInteractionWorkersActivationState.Initialize(farmerClickerInteractionStartActivatingBuilders.FarmData);
+                        farmingClickerInteractionWorkersActivationState.Initialize();
                     }
                     
                     break;
