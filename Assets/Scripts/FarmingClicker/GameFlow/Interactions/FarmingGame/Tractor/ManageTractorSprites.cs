@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
-    public class ManageTractorSprites
+    public class ManageTractorSprites : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer tractorSpriteRenderer;
         [SerializeField] private List<Sprite> tractorsDown;

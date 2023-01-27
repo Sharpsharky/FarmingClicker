@@ -1,4 +1,6 @@
 
+using UnityEngine.Serialization;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction
 {
     using System;
@@ -12,7 +14,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    using Interactions.FarmsSpawnerManager;
     using FarmingGameCameraController;
     using LoadData;
     using Granary;
@@ -21,9 +22,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     {
 
         [SerializeField] private int numberOfFarm = 0;
-        [SerializeField] private FarmsSpawnerManager farmsSpawnerManager;
+        [SerializeField] private FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager;
         [SerializeField] private FarmingGameCameraController farmingGameCameraController;
-        [SerializeField] private LoadDataManager loadDataManager;
+        [FormerlySerializedAs("loadDataManager")] [SerializeField] private LoadDataFarmManager loadDataFarmManager;
         [SerializeField] private GranaryManager granaryManager; 
 
         private StateMachineRunner<FarmingClickerInteractionStateManager, FarmingClickerInteractionMode> stateMachineRunner;
@@ -50,13 +51,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             stateMachineRunner.Initialize(new State<FarmingClickerInteractionMode>[]
                                           {
                                               new FarmingClickerInteractionInitializationState(stateMachineRunner.StateManager, 
-                                                  FarmingClickerInteractionMode.Initialization, loadDataManager, numberOfFarm),
+                                                  FarmingClickerInteractionMode.Initialization, loadDataFarmManager, numberOfFarm),
                                               new FarmingClickerInteractionDisplayUIState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.DisplayUI),
                                               new FarmingClickerInteractionBuildSceneState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.BuildScene, farmsSpawnerManager, farmingGameCameraController),
                                               new FarmingClickerInteractionWorkersActivationState(stateMachineRunner.StateManager, 
-                                                  FarmingClickerInteractionMode.WorkersActivation, loadDataManager, granaryManager),
+                                                  FarmingClickerInteractionMode.WorkersActivation, loadDataFarmManager, granaryManager),
                                               new FarmingClickerInteractionPlayingState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.Playing),
                                               new FarmingClickerInteractionExitState(stateMachineRunner.StateManager, 

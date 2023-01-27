@@ -6,7 +6,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
 
     public class GranaryManager : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField] private GameObject tractorPrefab;
         
         public void Initialize(FarmGranaryData farmGranaryData)
         {

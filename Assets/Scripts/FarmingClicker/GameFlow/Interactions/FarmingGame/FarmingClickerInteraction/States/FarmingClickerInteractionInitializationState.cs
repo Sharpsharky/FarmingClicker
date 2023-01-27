@@ -9,12 +9,12 @@
     
     public class FarmingClickerInteractionInitializationState : State<FarmingClickerInteractionMode>
     {
-        private LoadData.LoadDataManager loadDataManager;
+        private LoadData.LoadDataFarmManager loadDataFarmManager;
         private int numberOfFarm;
         public FarmingClickerInteractionInitializationState(IStateManager<FarmingClickerInteractionMode> stateManager, 
-            FarmingClickerInteractionMode stateType, LoadData.LoadDataManager loadDataManager, int numberOfFarm) : base(stateManager, stateType)
+            FarmingClickerInteractionMode stateType, LoadData.LoadDataFarmManager loadDataFarmManager, int numberOfFarm) : base(stateManager, stateType)
         {
-            this.loadDataManager = loadDataManager;
+            this.loadDataFarmManager = loadDataFarmManager;
             this.numberOfFarm = numberOfFarm;
         }
 
@@ -23,7 +23,7 @@
             base.OnEnter();
             Debug.Log("Initialization State");
             
-            loadDataManager .Initialize(numberOfFarm);
+            loadDataFarmManager .Initialize(numberOfFarm);
             
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartDisplayingUI());
         }

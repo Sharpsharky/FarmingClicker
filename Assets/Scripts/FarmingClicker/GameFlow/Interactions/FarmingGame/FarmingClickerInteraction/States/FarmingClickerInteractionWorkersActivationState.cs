@@ -13,16 +13,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
 
     public class FarmingClickerInteractionWorkersActivationState : State<FarmingClickerInteractionMode>
     {
-        private LoadDataManager loadDataManager; 
+        private LoadDataFarmManager loadDataFarmManager; 
         
         private FarmGranaryData farmGranaryData; 
         
         private GranaryManager granaryManager; 
 
         public FarmingClickerInteractionWorkersActivationState(IStateManager<FarmingClickerInteractionMode> stateManager, 
-            FarmingClickerInteractionMode stateType, LoadDataManager loadDataManager, GranaryManager granaryManager) : base(stateManager, stateType)
+            FarmingClickerInteractionMode stateType, LoadDataFarmManager loadDataFarmManager, GranaryManager granaryManager) : base(stateManager, stateType)
         {
-            this.loadDataManager = loadDataManager;
+            this.loadDataFarmManager = loadDataFarmManager;
             this.granaryManager = granaryManager;
         }
 
@@ -31,7 +31,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             base.OnEnter();
             Debug.Log("DisplayUIState State");
 
-            farmGranaryData = loadDataManager.FarmGranaryData;
+            farmGranaryData = loadDataFarmManager.FarmGranaryData;
             granaryManager.Initialize(farmGranaryData);
             
             

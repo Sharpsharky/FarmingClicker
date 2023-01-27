@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadDataManager.Data;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 {
-    public class LoadDataManager : MonoBehaviour
+    public class LoadDataFarmManager : MonoBehaviour
     {
         public List<FarmFieldData> FarmFieldDatas = new List<FarmFieldData>();
         public FarmFieldCurrentlyBuildingData FarmFieldCurrentlyBuildingData = new FarmFieldCurrentlyBuildingData();
@@ -20,9 +21,24 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
         private const string FARM_CURRENCY_DATA_SAVING_NAME = "farmCurrencyData";
 
         private int currentNumberOfFarm = 0;
+
+        public static LoadDataFarmManager instance;
         
+        
+        private void InitializeSingleton()
+        {
+            if (instance != null) instance = this;
+            else
+            {
+                Debug.LogError("Too many instances!");
+                Destroy(gameObject);
+            }
+        }
+
         public void Initialize(int numberOfFarm)
         {
+            InitializeSingleton();
+            
             currentNumberOfFarm = numberOfFarm;
             
             

@@ -6,7 +6,6 @@ using UnityEngine;
 namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
 {
     using Core.StateMachine;
-    using FarmsSpawnerManager;
     using FarmingGameCameraController;
 
     public class FarmingClickerInteractionBuildSceneState : State<FarmingClickerInteractionMode>

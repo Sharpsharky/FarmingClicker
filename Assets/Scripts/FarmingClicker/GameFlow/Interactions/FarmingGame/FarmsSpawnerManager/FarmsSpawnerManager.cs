@@ -1,7 +1,4 @@
-
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 {
     using System;
     using System.Collections.Generic;
@@ -9,22 +6,24 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
     using Core.Message.Interfaces;
     using Sirenix.OdinInspector;
     using UnityEngine;
-
+    
     public class FarmsSpawnerManager : SerializedMonoBehaviour, IMessageReceiver
     {
         
-        [SerializeField, InlineEditor] private GameObject granaryBuilding;
-        [SerializeField, InlineEditor] private GameObject shoppingBuilding;
+        [SerializeField] private GameObject granaryBuilding;
+        [SerializeField] private GameObject shoppingBuilding;
         
-        [SerializeField, InlineEditor] private GameObject farmPathGameObject;
-        [SerializeField, InlineEditor] private GameObject farmPathFillerGameObject;
+        [SerializeField] private GameObject farmPathGameObject;
+        [SerializeField] private GameObject farmPathFillerGameObject;
         
-        [SerializeField, InlineEditor] private GameObject farmFieldGameObject;
-        [SerializeField, InlineEditor] private GameObject farmFieldFillerGameObject;
+        [SerializeField] private GameObject farmFieldGameObject;
+        [SerializeField] private GameObject farmFieldFillerGameObject;
         
-        [SerializeField, InlineEditor] private GameObject upgradeFarmFieldButton;
-        [SerializeField, InlineEditor] private GameObject upgradeGranaryBuildingButton;
-        [SerializeField, InlineEditor] private GameObject upgradeShoppingBuildingButton;
+        [SerializeField] private GameObject futureFarmFieldGameObject;
+        
+        [SerializeField] private GameObject upgradeFarmFieldButton;
+        [SerializeField] private GameObject upgradeGranaryBuildingButton;
+        [SerializeField] private GameObject upgradeShoppingBuildingButton;
         
         private Vector3 positionOfGranaryBuilding;
         private Vector3 positionOfShoppingBuilding;
@@ -103,6 +102,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
             {
                 GenerateFarmGameObject(i);
             }
+
+            GenerateFutureFarmFieldGameObject(n);
+
         }
         
         
@@ -209,8 +211,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmsSpawnerManager
             
             Instantiate(farmPathFillerGameObject, positionOfCurrentFarmPathFiller, Quaternion.identity);
             Instantiate(farmFieldFillerGameObject, positionOfCurrentFarmFieldFiller, Quaternion.identity);
-            
 
+        }
+
+        private void GenerateFutureFarmFieldGameObject(int farmNumberPosition)
+        {
+            Vector3 positionOfFutureFarmField = positionOfFirstFarmField;
+            positionOfFutureFarmField.y -= (spriteRendererOfFarmPathGameObject.bounds.size.y * farmNumberPosition + spriteRendererFillerGameObject.bounds.size.y * farmNumberPosition);
+            
+            Instantiate(futureFarmFieldGameObject, positionOfFutureFarmField, Quaternion.identity);
         }
         
         
