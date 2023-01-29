@@ -23,7 +23,7 @@
             base.OnEnter();
             Debug.Log("Initialization State");
             
-            loadDataFarmManager .Initialize(numberOfFarm);
+            loadDataFarmManager.Initialize(numberOfFarm);
             
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartDisplayingUI());
         }

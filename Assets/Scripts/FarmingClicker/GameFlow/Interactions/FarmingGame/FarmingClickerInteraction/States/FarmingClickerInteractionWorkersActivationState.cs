@@ -15,15 +15,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     {
         private LoadDataFarmManager loadDataFarmManager; 
         
-        private FarmGranaryData farmGranaryData; 
-        
-        private GranaryManager granaryManager; 
-
+       
         public FarmingClickerInteractionWorkersActivationState(IStateManager<FarmingClickerInteractionMode> stateManager, 
-            FarmingClickerInteractionMode stateType, LoadDataFarmManager loadDataFarmManager, GranaryManager granaryManager) : base(stateManager, stateType)
+            FarmingClickerInteractionMode stateType, LoadDataFarmManager loadDataFarmManager) : base(stateManager, stateType)
         {
             this.loadDataFarmManager = loadDataFarmManager;
-            this.granaryManager = granaryManager;
         }
 
         public override async void OnEnter()
@@ -31,8 +27,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             base.OnEnter();
             Debug.Log("DisplayUIState State");
 
-            farmGranaryData = loadDataFarmManager.FarmGranaryData;
-            granaryManager.Initialize(farmGranaryData);
             
             
             

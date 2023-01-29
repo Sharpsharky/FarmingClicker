@@ -1,11 +1,10 @@
-﻿using Core.Message;
-using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
-using UnityEngine;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
+    using Core.Message;
     using Core.StateMachine;
-    
+    using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction;
+    using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
+    using UnityEngine;
     public class FarmingClickerInteractionDisplayUIState : State<FarmingClickerInteractionMode>
     {
 
@@ -13,7 +12,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
             FarmingClickerInteractionMode stateType) : base(stateManager, stateType)
         {
         }
-
+        
         public override async void OnEnter()
         {
             base.OnEnter();
