@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
 {
     using System.Collections.Generic;
@@ -10,6 +12,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
         private List<FarmFieldData> farmFields = new List<FarmFieldData>();
         private List<FarmFieldController> farmFieldControllers = new List<FarmFieldController>();
 
+        public void Initialize(List<FarmFieldController> farmFieldControllers)
+        {
+            this.farmFieldControllers = farmFieldControllers;
+            farmFields = LoadDataFarmManager.instance.FarmFieldDatas;
+            
+            DistributeValuesAcrossFarmFields();
+        }
 
         private void DistributeValuesAcrossFarmFields()
         {

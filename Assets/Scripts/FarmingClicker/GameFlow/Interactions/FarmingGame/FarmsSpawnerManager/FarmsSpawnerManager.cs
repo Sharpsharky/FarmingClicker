@@ -6,9 +6,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
     using Core.Message.Interfaces;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    
+    using FarmFields;
+
     public class FarmsSpawnerManager : SerializedMonoBehaviour, IMessageReceiver
     {
+        private List<FarmFieldController> farmFieldControllers;
         
         [SerializeField] private GameObject granaryBuilding;
         [SerializeField] private GameObject shoppingBuilding;
@@ -83,7 +85,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         private FarmData SetUpFarmData()
         {
             FarmData farmData = new FarmData(positionOfGranaryBuilding, positionOfFirstFarmPath.y,
-                spriteRendererFillerGameObject.bounds.size.y + spriteRendererOfFarmPathGameObject.bounds.size.y, numberOfFarms, - 10);
+                spriteRendererFillerGameObject.bounds.size.y + spriteRendererOfFarmPathGameObject.bounds.size.y, 
+                numberOfFarms, - 10, farmFieldControllers);
             
             return farmData;
         }
@@ -205,13 +208,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             positionOfCurrentUpgradeFarmFieldButton.y -= (spriteRendererOfFarmPathGameObject.bounds.size.y * nOfFarm + spriteRendererFillerGameObject.bounds.size.y * nOfFarm);
             
             Instantiate(farmPathGameObject, positionOfCurrentFarmPath, Quaternion.identity);
-            Instantiate(farmFieldGameObject, positionOfCurrentFarmField, Quaternion.identity);
+            GameObject newFarmFieldGameObject = Instantiate(farmFieldGameObject, positionOfCurrentFarmField, Quaternion.identity);
             
             Instantiate(upgradeFarmFieldButton, positionOfCurrentUpgradeFarmFieldButton, Quaternion.identity);
             
             Instantiate(farmPathFillerGameObject, positionOfCurrentFarmPathFiller, Quaternion.identity);
             Instantiate(farmFieldFillerGameObject, positionOfCurrentFarmFieldFiller, Quaternion.identity);
 
+            
+            farmFieldControllers.Add(newFarmFieldGameObject.GetComponent<FarmFieldController>());
+            
         }
 
         private void GenerateFutureFarmFieldGameObject(int farmNumberPosition)

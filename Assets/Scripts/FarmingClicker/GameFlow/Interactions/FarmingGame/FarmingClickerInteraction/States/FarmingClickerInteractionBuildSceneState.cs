@@ -1,27 +1,29 @@
-﻿using Core.Message;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Granary;
-using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
-using UnityEngine;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
+    using Core.Message;
     using Core.StateMachine;
-    using FarmingGameCameraController;
-
+    using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction;
+    using FarmFields;
+    using Granary;
+    using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
+    using UnityEngine;
+    
     public class FarmingClickerInteractionBuildSceneState : State<FarmingClickerInteractionMode>
     {
-        private FarmsSpawnerManager farmsSpawnerManager;
-        private FarmingGameCameraController farmingGameCameraController;
+        private FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager;
+        private FarmingGameCameraController.FarmingGameCameraController farmingGameCameraController;
         private GranaryManager granaryManager; 
+        private FarmFieldsManager farmFieldsManager; 
 
         public FarmingClickerInteractionBuildSceneState(IStateManager<FarmingClickerInteractionMode> stateManager, 
-            FarmingClickerInteractionMode stateType, FarmsSpawnerManager farmsSpawnerManager, 
-            FarmingGameCameraController farmingGameCameraController, GranaryManager granaryManager) : base(stateManager, stateType)
+            FarmingClickerInteractionMode stateType, FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager, 
+            FarmingGameCameraController.FarmingGameCameraController farmingGameCameraController, GranaryManager granaryManager
+            , FarmFieldsManager farmFieldsManager) : base(stateManager, stateType)
         {
             this.farmsSpawnerManager = farmsSpawnerManager;
             this.farmingGameCameraController = farmingGameCameraController;
             this.granaryManager = granaryManager;
+            this.farmFieldsManager = farmFieldsManager;
         }
 
         public override async void OnEnter()
@@ -32,7 +34,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction.States
             var farmData = farmsSpawnerManager.Initialize();
             farmingGameCameraController.Initialize();
             granaryManager.Initialize(farmData);
-
+            
+            farmFieldsManager.Initialize(farmData.FarmFieldControllers);
+            
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartActivatingBuilders(farmData));
 
         }

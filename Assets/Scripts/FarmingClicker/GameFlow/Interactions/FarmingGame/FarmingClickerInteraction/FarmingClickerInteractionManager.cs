@@ -1,4 +1,5 @@
 
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields;
 using UnityEngine.Serialization;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction
@@ -23,6 +24,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
 
         [SerializeField] private int numberOfFarm = 0;
         [SerializeField] private FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager;
+        [SerializeField] private FarmFieldsManager farmFieldsManager;
         [SerializeField] private FarmingGameCameraController farmingGameCameraController;
         [FormerlySerializedAs("loadDataManager")] [SerializeField] private LoadDataFarmManager loadDataFarmManager;
         [SerializeField] private GranaryManager granaryManager; 
@@ -56,7 +58,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
                                                   FarmingClickerInteractionMode.DisplayUI),
                                               new FarmingClickerInteractionBuildSceneState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.BuildScene, farmsSpawnerManager, farmingGameCameraController, 
-                                                  granaryManager),
+                                                  granaryManager, farmFieldsManager),
                                               new FarmingClickerInteractionWorkersActivationState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.WorkersActivation, loadDataFarmManager),
                                               new FarmingClickerInteractionPlayingState(stateMachineRunner.StateManager, 
