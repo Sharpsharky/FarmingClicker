@@ -1,3 +1,5 @@
+
+
 namespace FarmingClicker.Dialogue
 {
     using System;
@@ -7,16 +9,18 @@ namespace FarmingClicker.Dialogue
     using DialoguePanelControllers;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using GameFlow.Interactions.FarmingGame.Upgrade;
+    using GameFlow.Messages.Commands.Popups;
     
     public class PopupManager : SerializedMonoBehaviour, IMessageReceiver
     {
-        //[field: SerializeField, FoldoutGroup("UI")]  private DialoguePopupPanel dialoguePopupPanel;
+        [field: SerializeField, FoldoutGroup("UI")]  private UpgradePanelController upgradePanelController;
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
         
         private void Start()
         {
-            //ListenedTypes.Add(typeof(DisplayDialogueCommand));
+            ListenedTypes.Add(typeof(DisplayUpgradePanelCommand));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
         }
@@ -34,29 +38,13 @@ namespace FarmingClicker.Dialogue
 
             switch(message)
             {
-                /*case DisplayDialogueCommand command:
+                case DisplayUpgradePanelCommand command:
                 {
-                    var currentConversation = database.conversations.FirstOrDefault(c => c.id == command.ID);
-                    if(currentConversation == null)
-                    {
-                        throw new
-                            Exception($"Conversation with id {command.ID} not found in the database");
-                    }
-
-                    List<Sprite> sprites = new List<Sprite>();
-                    foreach(var dialogueDatabaseEntry in currentConversation.dialogues)
-                    {
-                        sprites.Add(database.GetMappedEmotion(dialogueDatabaseEntry.character,
-                                                  dialogueDatabaseEntry.emotion));
-                    }
-
-                    var data = new DialoguePopupData(currentConversation, sprites);
-                    dialoguePopupPanel.gameObject.SetActive(true);
-                    dialoguePopupPanel.OnFinished += ClosePopup;
-                    dialoguePopupPanel.SetupData(data);
+                    upgradePanelController.OnFinished += ClosePopup;
+                    upgradePanelController.SetupData(command.data);
                     
                     break;
-                }*/
+                }
                 
             }
 

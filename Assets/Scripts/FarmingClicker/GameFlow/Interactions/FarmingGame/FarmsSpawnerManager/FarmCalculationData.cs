@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using FarmFields;
     
-    public class FarmData
+    public class FarmCalculationData
     {
         public Vector3 StartingPoint;
         public float YOfFirstStop;
@@ -13,7 +13,7 @@
         public float YOfGarage;
         public List<FarmFieldController> FarmFieldControllers;
 
-        public FarmData(Vector3 startingPoint, float yOfFirstStop, 
+        public FarmCalculationData(Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, 
             List<FarmFieldController> farmFieldControllers)
         {

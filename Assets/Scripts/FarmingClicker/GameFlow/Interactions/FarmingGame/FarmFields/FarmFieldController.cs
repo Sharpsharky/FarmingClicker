@@ -1,15 +1,13 @@
-using TMPro;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
 {
     using InfiniteValue;
     using UnityEngine;
     using System.Collections;
+    using TMPro;
 
     public class FarmFieldController : MonoBehaviour
     {
         [SerializeField] private TMP_Text currentCurrencyText;
-
         
         private int upgradeLevel = 0;
         private int numberOfWorkers = 0;
@@ -22,9 +20,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
             this.upgradeLevel = upgradeLevel;
             this.numberOfWorkers = numberOfWorkers;
             this.currentCurrency = currentCurrency;
-            this.valueOfCroppedCurrency = valueOfCroppedCurrency;
+            SetValueOfCroppedCurrency(valueOfCroppedCurrency);
             
             StartCoroutine(FakeCurrencyGenerator());
+        }
+
+        public InfVal SetValueOfCroppedCurrency(InfVal valueOfCroppedCurrency)
+        {
+            this.valueOfCroppedCurrency = valueOfCroppedCurrency;
+
+            return valueOfCroppedCurrency;
         }
         
         private IEnumerator FakeCurrencyGenerator()

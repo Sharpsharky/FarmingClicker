@@ -1,27 +1,37 @@
-
-using System;
-using System.Collections.Generic;
-using Core.Message.Interfaces;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
 {
     using UnityEngine;
+    using System;
+    using System.Collections.Generic;
+    using Core.Message;
+    using Core.Message.Interfaces;
+    using FarmsSpawnerManager;
+    using LoadData;
+    using Messages.Commands.Upgrades;
+    using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
     using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadDataManager.Data;
-
-    public class GranaryManager : MonoBehaviour
+    using InfiniteValue;
+    
+    public class GranaryManager : MonoBehaviour, IMessageReceiver
     {
         [SerializeField] private GameObject tractorPrefab;
         
         private int upgradeLevel = 0;
         private int numberOfWorkers = 0;
         
-        private FarmData initialFarmData;
+        private FarmCalculationData initialFarmCalculationData;
         
-        public void Initialize(FarmData initialFarmData)
+        private FarmGranaryData granaryData;
+        private GranaryController granaryController;
+        
+        public void Initialize(FarmCalculationData initialFarmCalculationData)
         {
-            this.initialFarmData = initialFarmData;
+            ListenedTypes.Add(typeof(BuyGranaryUpgradeCommand));
+
+            MessageDispatcher.Instance.RegisterReceiver(this);
+
+            
+            this.initialFarmCalculationData = initialFarmCalculationData;
             GetInitialData();
             InitializeWorkers();
         }
@@ -36,9 +46,37 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
         {
             for (int i = 0; i < numberOfWorkers; i++)
             {
-                Instantiate(tractorPrefab, initialFarmData.StartingPoint, Quaternion.identity);
+                Instantiate(tractorPrefab, initialFarmCalculationData.StartingPoint, Quaternion.identity);
             }
             
+        }
+        
+        private InfVal CalculateValueOfCroppedCurrency(int upgradeLevel)
+        {
+            return 1 * upgradeLevel;
+        }
+        
+        public List<Type> ListenedTypes { get; } = new List<Type>();
+        public void OnMessageReceived(object message)
+        {
+            if(!ListenedTypes.Contains(message.GetType())) return;
+
+            switch(message)
+            {
+                case BuyGranaryUpgradeCommand buyFarmFieldUpgradeCommand:
+                {
+                    granaryData.upgradeLevel +=
+                        buyFarmFieldUpgradeCommand.AmountOfBoughtUpgrades;
+
+                    var currentValueOfCroppedCurrency = granaryController.SetValueOfTransportedCurrency(
+                        CalculateValueOfCroppedCurrency(granaryData.upgradeLevel));
+                    
+                    MessageDispatcher.Instance.Send(new ChangeStatisticsOfUpgradeNotification(currentValueOfCroppedCurrency));
+                    
+                    break;
+                }
+                
+            }
         }
         
         

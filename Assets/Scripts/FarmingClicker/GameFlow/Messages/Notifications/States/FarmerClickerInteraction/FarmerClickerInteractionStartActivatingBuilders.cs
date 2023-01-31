@@ -6,11 +6,11 @@
     [Serializable]
     public record FarmerClickerInteractionStartActivatingBuilders : GameFlowMessage
     {
-        public FarmData FarmData; 
+        public FarmCalculationData FarmCalculationData; 
 
-        public FarmerClickerInteractionStartActivatingBuilders(FarmData farmData)
+        public FarmerClickerInteractionStartActivatingBuilders(FarmCalculationData farmCalculationData)
         {
-            FarmData = farmData;
+            FarmCalculationData = farmCalculationData;
         } 
     }
 }

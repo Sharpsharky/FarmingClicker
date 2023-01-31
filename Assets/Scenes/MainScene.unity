@@ -2583,6 +2583,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  upgradePanelController: {fileID: 0}
 --- !u!1 &1348571104
 GameObject:
   m_ObjectHideFlags: 0
@@ -4799,6 +4800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 954808103644771601, guid: 64f4e92f33aa3d14392be7299354e312, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 954808103644771605, guid: 64f4e92f33aa3d14392be7299354e312, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4883,5 +4888,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4892879124521163738, guid: 64f4e92f33aa3d14392be7299354e312, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4892879124521163738, guid: 64f4e92f33aa3d14392be7299354e312, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64f4e92f33aa3d14392be7299354e312, type: 3}

@@ -52,7 +52,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             MessageDispatcher.Instance.RegisterReceiver(this);
         }
 
-        public FarmData Initialize()
+        public FarmCalculationData Initialize()
         {
             InitializeVariables();
             GenerateBuildings();
@@ -82,13 +82,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             
         }
 
-        private FarmData SetUpFarmData()
+        private FarmCalculationData SetUpFarmData()
         {
-            FarmData farmData = new FarmData(positionOfGranaryBuilding, positionOfFirstFarmPath.y,
+            FarmCalculationData farmCalculationData = new FarmCalculationData(positionOfGranaryBuilding, positionOfFirstFarmPath.y,
                 spriteRendererFillerGameObject.bounds.size.y + spriteRendererOfFarmPathGameObject.bounds.size.y, 
                 numberOfFarms, - 10, farmFieldControllers);
             
-            return farmData;
+            return farmCalculationData;
         }
         
         private void GenerateBuildings()
