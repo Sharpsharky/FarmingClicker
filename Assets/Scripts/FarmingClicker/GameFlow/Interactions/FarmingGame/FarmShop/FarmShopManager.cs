@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop
 {
     using System;
@@ -12,17 +14,28 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop
     
     public class FarmShopManager : MonoBehaviour, IMessageReceiver
     {
-
         private FarmShopData farmShopData;
         private FarmShopController farmShopController;
         
-        public void Initialize()
+        public void Initialize(FarmShopController farmShopController)
         {
+            this.farmShopController = farmShopController;
+            
             ListenedTypes.Add(typeof(BuyShoppingUpgradeCommand));
-
+            
             MessageDispatcher.Instance.RegisterReceiver(this);
 
+            GetInitialData();
+
         }
+        
+        
+        private void GetInitialData()
+        {
+            farmShopData.upgradeLevel = LoadDataFarmManager.instance.FarmGranaryData.upgradeLevel;
+            farmShopData.numberOfWorkers = LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers;
+        }
+        
         
         private InfVal CalculateValueOfCroppedCurrency(int upgradeLevel)
         {

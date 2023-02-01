@@ -16,35 +16,33 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
     {
         [SerializeField] private GameObject tractorPrefab;
         
-        private int upgradeLevel = 0;
-        private int numberOfWorkers = 0;
-        
         private FarmCalculationData initialFarmCalculationData;
         
         private FarmGranaryData granaryData;
         private GranaryController granaryController;
         
-        public void Initialize(FarmCalculationData initialFarmCalculationData)
+        public void Initialize(FarmCalculationData initialFarmCalculationData, GranaryController granaryController)
         {
+            this.granaryController = granaryController;
+            this.initialFarmCalculationData = initialFarmCalculationData;
+            
             ListenedTypes.Add(typeof(BuyGranaryUpgradeCommand));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
-
             
-            this.initialFarmCalculationData = initialFarmCalculationData;
             GetInitialData();
             InitializeWorkers();
         }
 
         private void GetInitialData()
         {
-            LoadDataFarmManager.instance.FarmGranaryData.upgradeLevel = upgradeLevel;
-            LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers = numberOfWorkers;
+            granaryData.upgradeLevel = LoadDataFarmManager.instance.FarmGranaryData.upgradeLevel;
+            granaryData.numberOfWorkers= LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers;
         }
 
         private void InitializeWorkers()
         {
-            for (int i = 0; i < numberOfWorkers; i++)
+            for (int i = 0; i < granaryData.numberOfWorkers; i++)
             {
                 Instantiate(tractorPrefab, initialFarmCalculationData.StartingPoint, Quaternion.identity);
             }

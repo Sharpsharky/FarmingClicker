@@ -18,12 +18,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
 
         public void Initialize(List<FarmFieldController> farmFieldControllers)
         {
+            this.farmFieldControllers = farmFieldControllers;
+
             
             ListenedTypes.Add(typeof(BuyFarmFieldUpgradeCommand));
-
             MessageDispatcher.Instance.RegisterReceiver(this);
             
-            this.farmFieldControllers = farmFieldControllers;
             farmFields = LoadDataFarmManager.instance.FarmFieldDatas;
             
             DistributeValuesAcrossFarmFields();

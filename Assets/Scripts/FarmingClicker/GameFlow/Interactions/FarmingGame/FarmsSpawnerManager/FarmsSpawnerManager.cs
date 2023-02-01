@@ -1,3 +1,6 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Granary;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 {
     using System;
@@ -11,6 +14,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
     public class FarmsSpawnerManager : SerializedMonoBehaviour, IMessageReceiver
     {
         private List<FarmFieldController> farmFieldControllers;
+        private GranaryController granaryController;
+        private FarmShopController farmShopController;
         
         [SerializeField] private GameObject granaryBuilding;
         [SerializeField] private GameObject shoppingBuilding;
@@ -86,17 +91,20 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         {
             FarmCalculationData farmCalculationData = new FarmCalculationData(positionOfGranaryBuilding, positionOfFirstFarmPath.y,
                 spriteRendererFillerGameObject.bounds.size.y + spriteRendererOfFarmPathGameObject.bounds.size.y, 
-                numberOfFarms, - 10, farmFieldControllers);
+                numberOfFarms, - 10, farmFieldControllers, granaryController, farmShopController);
             
             return farmCalculationData;
         }
         
         private void GenerateBuildings()
         {
-            Instantiate(granaryBuilding, positionOfGranaryBuilding, Quaternion.identity);
+            GameObject granaryBuildingGameObject = Instantiate(granaryBuilding, positionOfGranaryBuilding, Quaternion.identity);
             Instantiate(upgradeGranaryBuildingButton, positionOfGranaryBuilding, Quaternion.identity);
-            Instantiate(shoppingBuilding, positionOfShoppingBuilding, Quaternion.identity);
+            GameObject shoppingBuildingGameObject = Instantiate(shoppingBuilding, positionOfShoppingBuilding, Quaternion.identity);
             Instantiate(upgradeShoppingBuildingButton, positionOfShoppingBuilding, Quaternion.identity);
+
+            granaryController = granaryBuildingGameObject.GetComponent<GranaryController>();
+            farmShopController = shoppingBuildingGameObject.GetComponent<FarmShopController>();
         }
         
         private void GenerateNumberOfFarms(int n)

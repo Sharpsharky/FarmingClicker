@@ -1,4 +1,7 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Granary;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 {
     using UnityEngine;
     using System.Collections.Generic;
@@ -12,10 +15,15 @@
         public int NumberOfStops;
         public float YOfGarage;
         public List<FarmFieldController> FarmFieldControllers;
+        public GranaryController GranaryController;
+        public FarmShopController FarmShopController;
 
+        
+        
         public FarmCalculationData(Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, 
-            List<FarmFieldController> farmFieldControllers)
+            List<FarmFieldController> farmFieldControllers, GranaryController granaryController,
+            FarmShopController farmShopController)
         {
             StartingPoint = startingPoint;
             YOfFirstStop = yOfFirstStop;
@@ -23,6 +31,8 @@
             NumberOfStops = numberOfStops;
             YOfGarage = yOfGarage;
             FarmFieldControllers = farmFieldControllers;
+            GranaryController = granaryController;
+            FarmShopController = farmShopController;
         } 
     }
 }
