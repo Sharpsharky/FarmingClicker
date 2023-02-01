@@ -10,15 +10,18 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
     using LoadData;
     using Messages.Commands.Upgrades;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
-    
+    using FarmsSpawnerManager;
+
     public class FarmFieldsManager : MonoBehaviour, IMessageReceiver
     {
         private List<FarmFieldData> farmFields = new List<FarmFieldData>();
         private List<FarmFieldController> farmFieldControllers = new List<FarmFieldController>();
+        private FarmCalculationData initialFarmCalculationData;
 
-        public void Initialize(List<FarmFieldController> farmFieldControllers)
+        public void Initialize(FarmCalculationData initialFarmCalculationData, List<FarmFieldController> farmFieldControllers)
         {
             this.farmFieldControllers = farmFieldControllers;
+            this.initialFarmCalculationData = initialFarmCalculationData;
 
             
             ListenedTypes.Add(typeof(BuyFarmFieldUpgradeCommand));
@@ -34,7 +37,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
             for (int i = 0; i < farmFields.Count; i++)
             {
                 farmFieldControllers[i].InitializeFarmField(farmFields[i].upgradeLevel, farmFields[i].numberOfWorkers, 
-                    0,CalculateValueOfCroppedCurrency(farmFields[i].upgradeLevel));
+                    0,CalculateValueOfCroppedCurrency(farmFields[i].upgradeLevel), initialFarmCalculationData.XOfFirstUpgradeFarmFieldButton);
             }
         }
         

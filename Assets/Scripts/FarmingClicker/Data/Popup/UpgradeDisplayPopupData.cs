@@ -1,4 +1,5 @@
 using FarmingClicker.GameFlow.Interactions.FarmingGame;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.General;
 
 namespace FarmingClicker.Data.Popup
 {
@@ -7,15 +8,13 @@ namespace FarmingClicker.Data.Popup
     
     public record UpgradeDisplayPopupData : IPopupData
     {
-        public FarmWorkerType FarmWorkerType;
-        public int FarmIndex;
+        public IFarmWorkerControllable FarmWorker;
         public string Title;
         public InfVal CurrentVal;
 
-        public UpgradeDisplayPopupData(FarmWorkerType farmWorkerType, int farmIndex, string title, InfVal currentVal)
+        public UpgradeDisplayPopupData(IFarmWorkerControllable farmWorker, string title, InfVal currentVal)
         {
-            FarmWorkerType = farmWorkerType;
-            FarmIndex = farmIndex;
+            FarmWorker = farmWorker;
             Title = title;
             CurrentVal = currentVal;
         }

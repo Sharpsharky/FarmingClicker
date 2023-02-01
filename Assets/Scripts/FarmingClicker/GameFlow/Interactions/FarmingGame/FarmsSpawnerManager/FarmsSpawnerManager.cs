@@ -28,10 +28,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         
         [SerializeField] private GameObject futureFarmFieldGameObject;
         
-        [SerializeField] private GameObject upgradeFarmFieldButton;
-        [SerializeField] private GameObject upgradeGranaryBuildingButton;
-        [SerializeField] private GameObject upgradeShoppingBuildingButton;
-        
         private Vector3 positionOfGranaryBuilding;
         private Vector3 positionOfShoppingBuilding;
         
@@ -39,7 +35,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         private Vector3 positionOfFirstFarmPathFiller;
         private Vector3 positionOfFirstFarmFieldFiller;
         private Vector3 positionOfFirstFarmField;
-        private Vector3 positionOfFirstUpgradeFarmFieldButton;
+        private float xOfFirstUpgradeFarmFieldButton;
         
         private float xPosOfLeftEdgeOfScreen = 0;
         private SpriteRenderer spriteRendererOfFarmPathGameObject;
@@ -83,7 +79,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             positionOfGranaryBuilding = CalculateFinalPosForTheGranaryBuilding();
             positionOfShoppingBuilding = CalculateFinalPosForTheShoppingBuilding();
             
-            positionOfFirstUpgradeFarmFieldButton = CalculateFinalPosForUpgradeFarmFieldButton();
+            xOfFirstUpgradeFarmFieldButton = CalculateFinalPosForUpgradeFarmFieldButton();
             
         }
 
@@ -91,7 +87,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         {
             FarmCalculationData farmCalculationData = new FarmCalculationData(positionOfGranaryBuilding, positionOfFirstFarmPath.y,
                 spriteRendererFillerGameObject.bounds.size.y + spriteRendererOfFarmPathGameObject.bounds.size.y, 
-                numberOfFarms, - 10, farmFieldControllers, granaryController, farmShopController);
+                numberOfFarms, - 10, farmFieldControllers, granaryController, farmShopController, xOfFirstUpgradeFarmFieldButton);
             
             return farmCalculationData;
         }
@@ -99,9 +95,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         private void GenerateBuildings()
         {
             GameObject granaryBuildingGameObject = Instantiate(granaryBuilding, positionOfGranaryBuilding, Quaternion.identity);
-            Instantiate(upgradeGranaryBuildingButton, positionOfGranaryBuilding, Quaternion.identity);
             GameObject shoppingBuildingGameObject = Instantiate(shoppingBuilding, positionOfShoppingBuilding, Quaternion.identity);
-            Instantiate(upgradeShoppingBuildingButton, positionOfShoppingBuilding, Quaternion.identity);
 
             granaryController = granaryBuildingGameObject.GetComponent<GranaryController>();
             farmShopController = shoppingBuildingGameObject.GetComponent<FarmShopController>();
@@ -132,11 +126,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             return rightEdgePos;
         }
 
-        private Vector3 CalculateFinalPosForUpgradeFarmFieldButton()
+        private float CalculateFinalPosForUpgradeFarmFieldButton()
         {
-            Vector3 posOfFirstUpgradeFarmFieldButton = positionOfFirstFarmField;
-            posOfFirstUpgradeFarmFieldButton.x = rightEdgePosition.x - 0.5f;
-            return posOfFirstUpgradeFarmFieldButton;
+            return rightEdgePosition.x - 0.5f;
         }
         
         private Vector3 CalculateFinalPosForTheGranaryBuilding()
@@ -212,13 +204,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             Vector3 positionOfCurrentFarmFieldFiller = positionOfFirstFarmFieldFiller;
             positionOfCurrentFarmFieldFiller.y -= (spriteRendererOfFarmPathGameObject.bounds.size.y * nOfFarm + spriteRendererFillerGameObject.bounds.size.y * nOfFarm);
             
-            Vector3 positionOfCurrentUpgradeFarmFieldButton = positionOfFirstUpgradeFarmFieldButton;
-            positionOfCurrentUpgradeFarmFieldButton.y -= (spriteRendererOfFarmPathGameObject.bounds.size.y * nOfFarm + spriteRendererFillerGameObject.bounds.size.y * nOfFarm);
-            
             Instantiate(farmPathGameObject, positionOfCurrentFarmPath, Quaternion.identity);
             GameObject newFarmFieldGameObject = Instantiate(farmFieldGameObject, positionOfCurrentFarmField, Quaternion.identity);
-            
-            Instantiate(upgradeFarmFieldButton, positionOfCurrentUpgradeFarmFieldButton, Quaternion.identity);
             
             Instantiate(farmPathFillerGameObject, positionOfCurrentFarmPathFiller, Quaternion.identity);
             Instantiate(farmFieldFillerGameObject, positionOfCurrentFarmFieldFiller, Quaternion.identity);

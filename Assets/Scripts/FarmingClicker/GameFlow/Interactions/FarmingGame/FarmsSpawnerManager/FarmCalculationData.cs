@@ -17,13 +17,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         public List<FarmFieldController> FarmFieldControllers;
         public GranaryController GranaryController;
         public FarmShopController FarmShopController;
-
+        public float XOfFirstUpgradeFarmFieldButton;
         
         
         public FarmCalculationData(Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, 
             List<FarmFieldController> farmFieldControllers, GranaryController granaryController,
-            FarmShopController farmShopController)
+            FarmShopController farmShopController, float xOfFirstUpgradeFarmFieldButton)
         {
             StartingPoint = startingPoint;
             YOfFirstStop = yOfFirstStop;
@@ -33,6 +33,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             FarmFieldControllers = farmFieldControllers;
             GranaryController = granaryController;
             FarmShopController = farmShopController;
+            XOfFirstUpgradeFarmFieldButton = xOfFirstUpgradeFarmFieldButton;
         } 
     }
 }

@@ -1,4 +1,6 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop
 {
@@ -16,10 +18,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop
     {
         private FarmShopData farmShopData;
         private FarmShopController farmShopController;
-        
-        public void Initialize(FarmShopController farmShopController)
+        private FarmCalculationData initialFarmCalculationData;
+
+        public void Initialize(FarmCalculationData initialFarmCalculationData, FarmShopController farmShopController)
         {
             this.farmShopController = farmShopController;
+            this.initialFarmCalculationData = initialFarmCalculationData;
             
             ListenedTypes.Add(typeof(BuyShoppingUpgradeCommand));
             
@@ -29,11 +33,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop
 
         }
         
-        
         private void GetInitialData()
         {
-            farmShopData.upgradeLevel = LoadDataFarmManager.instance.FarmGranaryData.upgradeLevel;
-            farmShopData.numberOfWorkers = LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers;
+            int upgradeLevel = LoadDataFarmManager.instance.FarmGranaryData.upgradeLevel;
+            int numberOfWorkers = LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers;
+            InfVal currentCurrency = InfVal.Parse(LoadDataFarmManager.instance.FarmGranaryData.currentCurrency);
+            InfVal currentValueOfCroppedCurrency = CalculateValueOfCroppedCurrency(upgradeLevel);
+            
+            farmShopController.Initialize(upgradeLevel, numberOfWorkers, currentCurrency, currentValueOfCroppedCurrency);
+            
         }
         
         

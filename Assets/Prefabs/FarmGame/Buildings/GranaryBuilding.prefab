@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7471891445206303383}
   - component: {fileID: 7471891445206303382}
+  - component: {fileID: 52368633263896147}
   m_Layer: 0
   m_Name: GranaryBuilding
   m_TagString: Untagged
@@ -114,6 +115,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4831117381902401678}
+  - {fileID: 3607374547475324680}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -169,3 +171,143 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &52368633263896147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7471891445206303381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d4ff5cc53c44018a06111ba7be0e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  upgradeButton: {fileID: 5032528682501575281}
+  title: Granary
+--- !u!1001 &8707601841912190263
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7471891445206303383}
+    m_Modifications:
+    - target: {fileID: 2012662494117601689, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2012662494117601689, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.049
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.383
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6559622639252607645, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+      propertyPath: m_Name
+      value: UpgradeGranaryBuildingButton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+--- !u!224 &3607374547475324680 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5393172378664290879, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+  m_PrefabInstance: {fileID: 8707601841912190263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5032528682501575281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4395723869341484870, guid: 65a6502151825554e951be7893b34ee7, type: 3}
+  m_PrefabInstance: {fileID: 8707601841912190263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

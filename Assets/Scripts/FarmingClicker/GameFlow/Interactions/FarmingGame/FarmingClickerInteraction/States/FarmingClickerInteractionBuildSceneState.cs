@@ -40,8 +40,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             farmingGameCameraController.Initialize();
             
             granaryManager.Initialize(farmCalculationData, farmCalculationData.GranaryController);
-            farmShopManager.Initialize(farmCalculationData.FarmShopController);
-            farmFieldsManager.Initialize(farmCalculationData.FarmFieldControllers);
+            farmShopManager.Initialize(farmCalculationData, farmCalculationData.FarmShopController);
+            farmFieldsManager.Initialize(farmCalculationData, farmCalculationData.FarmFieldControllers);
             
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartActivatingBuilders(farmCalculationData));
 

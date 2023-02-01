@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
 {
     using UnityEngine;
@@ -32,12 +34,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
             
             GetInitialData();
             InitializeWorkers();
+            
         }
 
         private void GetInitialData()
         {
-            granaryData.upgradeLevel = LoadDataFarmManager.instance.FarmGranaryData.upgradeLevel;
-            granaryData.numberOfWorkers= LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers;
+            int upgradeLevel = LoadDataFarmManager.instance.FarmGranaryData.upgradeLevel;
+            int numberOfWorkers= LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers;
+            InfVal currentCurrency = InfVal.Parse(LoadDataFarmManager.instance.FarmGranaryData.currentCurrency);
+            InfVal currentValueOfCroppedCurrency = CalculateValueOfCroppedCurrency(upgradeLevel);
+            
+            granaryController.Initialize(upgradeLevel, numberOfWorkers, currentCurrency, currentValueOfCroppedCurrency);
         }
 
         private void InitializeWorkers()
