@@ -4,11 +4,11 @@ namespace FarmingClicker.GameFlow.Messages.Commands.Popups
 {
     using FarmingClicker.Data.Popup;
     [Serializable]
-    public record DisplayUpgradePanelCommand : Command
+    public record DisplayBuyNewFieldPanelCommand : Command
     {
-        public UpgradeDisplayPopupData data;
+        public BuyNewFieldPopupData data;
         
-        public DisplayUpgradePanelCommand(UpgradeDisplayPopupData data)
+        public DisplayBuyNewFieldPanelCommand(BuyNewFieldPopupData data)
         {
             this.data = data;
         }

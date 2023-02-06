@@ -1,11 +1,9 @@
-using FarmingClicker.GameFlow.Interactions.FarmingGame;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.General;
-
 namespace FarmingClicker.Data.Popup
 {
     using Dialogue.DialogueDataTypes;
     using InfiniteValue;
-    
+    using GameFlow.Interactions.FarmingGame.General;
+
     public record UpgradeDisplayPopupData : IPopupData
     {
         public IFarmWorkerControllable FarmWorker;

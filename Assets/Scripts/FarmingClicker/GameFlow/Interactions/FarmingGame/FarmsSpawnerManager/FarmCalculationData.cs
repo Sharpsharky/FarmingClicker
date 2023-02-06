@@ -1,11 +1,11 @@
-﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Granary;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 {
     using UnityEngine;
     using System.Collections.Generic;
     using FarmFields;
+    using FarmShop;
+    using FutureFarmField;
+    using Granary;
     
     public class FarmCalculationData
     {
@@ -17,13 +17,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         public List<FarmFieldController> FarmFieldControllers;
         public GranaryController GranaryController;
         public FarmShopController FarmShopController;
+        public FutureFarmFieldController FutureFarmFieldController;
         public float XOfFirstUpgradeFarmFieldButton;
         
         
         public FarmCalculationData(Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, 
             List<FarmFieldController> farmFieldControllers, GranaryController granaryController,
-            FarmShopController farmShopController, float xOfFirstUpgradeFarmFieldButton)
+            FarmShopController farmShopController, FutureFarmFieldController futureFarmFieldController, 
+            float xOfFirstUpgradeFarmFieldButton)
         {
             StartingPoint = startingPoint;
             YOfFirstStop = yOfFirstStop;
@@ -33,6 +35,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             FarmFieldControllers = farmFieldControllers;
             GranaryController = granaryController;
             FarmShopController = farmShopController;
+            FutureFarmFieldController = futureFarmFieldController;
             XOfFirstUpgradeFarmFieldButton = xOfFirstUpgradeFarmFieldButton;
         } 
     }

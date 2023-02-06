@@ -11,7 +11,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
     using LoadData;
     using Messages.Commands.Upgrades;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
-    using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadDataManager.Data;
     using InfiniteValue;
     
     public class GranaryManager : MonoBehaviour, IMessageReceiver
@@ -20,7 +19,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
         
         private FarmCalculationData initialFarmCalculationData;
         
-        private FarmGranaryData granaryData;
         private GranaryController granaryController;
         
         public void Initialize(FarmCalculationData initialFarmCalculationData, GranaryController granaryController)
@@ -49,7 +47,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
 
         private void InitializeWorkers()
         {
-            for (int i = 0; i < granaryData.numberOfWorkers; i++)
+            for (int i = 0; i < granaryController.NumberOfWorkers; i++)
             {
                 Instantiate(tractorPrefab, initialFarmCalculationData.StartingPoint, Quaternion.identity);
             }
@@ -70,11 +68,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
             {
                 case BuyGranaryUpgradeCommand buyFarmFieldUpgradeCommand:
                 {
-                    granaryData.upgradeLevel +=
+                    granaryController.UpgradeLevel +=
                         buyFarmFieldUpgradeCommand.AmountOfBoughtUpgrades;
 
                     var currentValueOfCroppedCurrency = granaryController.SetValueOfTransportedCurrency(
-                        CalculateValueOfCroppedCurrency(granaryData.upgradeLevel));
+                        CalculateValueOfCroppedCurrency(granaryController.UpgradeLevel));
                     
                     MessageDispatcher.Instance.Send(new ChangeStatisticsOfUpgradeNotification(currentValueOfCroppedCurrency));
                     

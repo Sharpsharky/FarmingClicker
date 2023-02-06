@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Messages.Commands.NewField;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
 {
     using System.Collections.Generic;
@@ -34,6 +36,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
 
         private void DistributeValuesAcrossFarmFields()
         {
+            Debug.Log($"farmFields.Count: {farmFields.Count}");
             for (int i = 0; i < farmFields.Count; i++)
             {
                 farmFieldControllers[i].InitializeFarmField(farmFields[i].upgradeLevel, farmFields[i].numberOfWorkers, 
@@ -65,8 +68,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
                     
                     break;
                 }
-                
+                case BuyNewFieldCommand buyNewFieldCommand:
+                {
+                    //Create new farm
+                    break;
+                }
             }
         }
+
+        
     }
 }

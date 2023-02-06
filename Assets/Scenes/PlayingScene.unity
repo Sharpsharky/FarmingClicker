@@ -196,7 +196,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &231267590
 GameObject:
@@ -282,11 +282,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  numberOfFarm: 0
+  numberOfFarm: 1
   farmsSpawnerManager: {fileID: 2019954693}
+  farmFieldsManager: {fileID: 639601170}
+  farmShopManager: {fileID: 1079745571}
+  granaryManager: {fileID: 1168947692}
+  futureFarmFieldManager: {fileID: 1552050426}
   farmingGameCameraController: {fileID: 1113388070}
   loadDataFarmManager: {fileID: 84255178}
-  granaryManager: {fileID: 1168947692}
 --- !u!1 &469366613
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +404,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &639601170
 MonoBehaviour:
@@ -445,7 +448,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1079745571
 MonoBehaviour:
@@ -488,7 +491,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1113388066
 GameObject:
@@ -720,7 +723,7 @@ Transform:
   - {fileID: 1242917468}
   - {fileID: 1169920832}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1168947690
 GameObject:
@@ -752,7 +755,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1168947692
 MonoBehaviour:
@@ -978,7 +981,51 @@ Transform:
   m_Children:
   - {fileID: 1648451959}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1552050425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1552050427}
+  - component: {fileID: 1552050426}
+  m_Layer: 0
+  m_Name: FutureFarmFieldManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1552050426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552050425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0c94d497535d3a4da94b8516e28080b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1552050427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552050425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1648451958
 GameObject:
@@ -1130,7 +1177,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1698392131
 MonoBehaviour:
@@ -1205,7 +1252,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2019954693
 MonoBehaviour:
@@ -1235,6 +1282,3 @@ MonoBehaviour:
   farmFieldGameObject: {fileID: 729652136176977051, guid: aa81ff3d4b8caf74b9d1c0dc4f60b8af, type: 3}
   farmFieldFillerGameObject: {fileID: 2451483643853162573, guid: 148488d0004058e41b14e1b8b52c599c, type: 3}
   futureFarmFieldGameObject: {fileID: 3238485359849872657, guid: 11c4284f8a5b91e4993e77ec30bccd4e, type: 3}
-  upgradeFarmFieldButton: {fileID: 1865957077966740903, guid: 9323b3f9be07e16448095174bafc825d, type: 3}
-  upgradeGranaryBuildingButton: {fileID: 6559622639252607645, guid: 65a6502151825554e951be7893b34ee7, type: 3}
-  upgradeShoppingBuildingButton: {fileID: 1584889222691848727, guid: 04675638cd876b745abdc122f9587834, type: 3}

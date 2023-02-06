@@ -8,7 +8,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
     using UnityEngine;
     using LoadData;
-    using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadDataManager.Data;
     using Granary;
 
     public class FarmingClickerInteractionWorkersActivationState : State<FarmingClickerInteractionMode>

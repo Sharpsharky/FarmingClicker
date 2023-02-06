@@ -1,5 +1,3 @@
-
-
 namespace FarmingClicker.Dialogue
 {
     using System;
@@ -11,16 +9,19 @@ namespace FarmingClicker.Dialogue
     using UnityEngine;
     using GameFlow.Interactions.FarmingGame.Upgrade;
     using GameFlow.Messages.Commands.Popups;
-    
+    using GameFlow.Interactions.FarmingGame.NewField;
+
     public class PopupManager : SerializedMonoBehaviour, IMessageReceiver
     {
         [field: SerializeField, FoldoutGroup("UI")]  private UpgradePanelController upgradePanelController;
+        [field: SerializeField, FoldoutGroup("UI")]  private BuyNewFieldController buyNewFieldController;
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
         
         private void Start()
         {
             ListenedTypes.Add(typeof(DisplayUpgradePanelCommand));
+            ListenedTypes.Add(typeof(DisplayBuyNewFieldPanelCommand));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
         }
@@ -45,7 +46,13 @@ namespace FarmingClicker.Dialogue
                     
                     break;
                 }
-                
+                case DisplayBuyNewFieldPanelCommand command:
+                {
+                    buyNewFieldController.OnFinished += ClosePopup;
+                    buyNewFieldController.SetupData(command.data);
+                    
+                    break;
+                }
             }
 
         }

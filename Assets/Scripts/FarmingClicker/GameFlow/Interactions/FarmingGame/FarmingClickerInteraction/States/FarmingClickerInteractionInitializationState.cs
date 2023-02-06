@@ -1,6 +1,5 @@
 ﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
-    using LoadDataManager;
     using Core.Message;
     using Core.StateMachine;
     using Interactions.FarmingClickerInteraction;

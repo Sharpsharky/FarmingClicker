@@ -18,6 +18,15 @@
         private int numberOfWorkers = 0;
         private InfVal currentCurrency = 0;
         private InfVal valueOfTransportedCurrency = 0;
+
+        public int UpgradeLevel
+        {
+            get { return upgradeLevel; }
+            set { upgradeLevel = value; }
+        }
+        public int NumberOfWorkers => numberOfWorkers;
+        public InfVal CurrentCurrency => currentCurrency;
+        public InfVal ValueOfTransportedCurrency => valueOfTransportedCurrency;
         
         public void Initialize(int upgradeLevel, int numberOfWorkers, InfVal currentCurrency, InfVal valueOfTransportedCurrency)
         {

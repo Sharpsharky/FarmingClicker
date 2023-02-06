@@ -1,4 +1,6 @@
 ﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
@@ -18,31 +20,35 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         private GranaryManager granaryManager; 
         private FarmFieldsManager farmFieldsManager; 
         private FarmShopManager farmShopManager; 
+        private FutureFarmFieldManager futureFarmFieldManager; 
 
         public FarmingClickerInteractionBuildSceneState(IStateManager<FarmingClickerInteractionMode> stateManager, 
             FarmingClickerInteractionMode stateType, FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager, 
             FarmingGameCameraController.FarmingGameCameraController farmingGameCameraController, GranaryManager granaryManager
-            , FarmFieldsManager farmFieldsManager, FarmShopManager farmShopManager) : base(stateManager, stateType)
+            , FarmFieldsManager farmFieldsManager, FarmShopManager farmShopManager, FutureFarmFieldManager futureFarmFieldManager) : base(stateManager, stateType)
         {
             this.farmsSpawnerManager = farmsSpawnerManager;
             this.farmingGameCameraController = farmingGameCameraController;
             this.granaryManager = granaryManager;
             this.farmFieldsManager = farmFieldsManager;
             this.farmShopManager = farmShopManager;
+            this.futureFarmFieldManager = futureFarmFieldManager;
         }
 
         public override async void OnEnter()
         {
             base.OnEnter();
             Debug.Log("Build Scene State");
+
+            int numberOfFarmsToGenerate = LoadDataFarmManager.instance.FarmFieldDatas.Count;
             
-            var farmCalculationData = farmsSpawnerManager.Initialize();
+            var farmCalculationData = farmsSpawnerManager.Initialize(numberOfFarmsToGenerate);
             farmingGameCameraController.Initialize();
             
             granaryManager.Initialize(farmCalculationData, farmCalculationData.GranaryController);
             farmShopManager.Initialize(farmCalculationData, farmCalculationData.FarmShopController);
             farmFieldsManager.Initialize(farmCalculationData, farmCalculationData.FarmFieldControllers);
-            
+            futureFarmFieldManager.Initialize(farmCalculationData, farmCalculationData.FutureFarmFieldController);
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartActivatingBuilders(farmCalculationData));
 
         }

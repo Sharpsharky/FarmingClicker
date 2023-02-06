@@ -54,10 +54,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
             Vector3 pos = new Vector3(buttonXPos, transform.position.y, 0);
             upgradeButton.gameObject.transform.position = pos;
             upgradeButton.onClick.AddListener(DisplayUpgrade);
+            Debug.Log("DisplayUpgradeButton");
+
         }
         
         private void DisplayUpgrade()
         {
+            Debug.Log("DisplayUpgrade");
             UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, title, currentCurrency);
             
             MessageDispatcher.Instance.Send(new DisplayUpgradePanelCommand(data));

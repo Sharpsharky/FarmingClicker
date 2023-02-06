@@ -8,7 +8,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop
     using System.Collections.Generic;
     using Core.Message;
     using Core.Message.Interfaces;
-    using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadDataManager.Data;
     using Messages.Commands.Upgrades;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
     using InfiniteValue;

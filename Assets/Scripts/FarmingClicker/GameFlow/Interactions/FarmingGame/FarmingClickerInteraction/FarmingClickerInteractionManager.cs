@@ -1,6 +1,7 @@
 
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
 using UnityEngine.Serialization;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction
@@ -30,6 +31,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         [SerializeField, BoxGroup("Worker Mangers")] private FarmFieldsManager farmFieldsManager;
         [SerializeField, BoxGroup("Worker Mangers")] private FarmShopManager farmShopManager; 
         [SerializeField, BoxGroup("Worker Mangers")] private GranaryManager granaryManager; 
+        [SerializeField, BoxGroup("Worker Mangers")] private FutureFarmFieldManager futureFarmFieldManager; 
 
         [SerializeField] private FarmingGameCameraController farmingGameCameraController;
         [FormerlySerializedAs("loadDataManager")] [SerializeField] private LoadDataFarmManager loadDataFarmManager;
@@ -63,7 +65,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
                                                   FarmingClickerInteractionMode.DisplayUI),
                                               new FarmingClickerInteractionBuildSceneState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.BuildScene, farmsSpawnerManager, farmingGameCameraController, 
-                                                  granaryManager, farmFieldsManager, farmShopManager),
+                                                  granaryManager, farmFieldsManager, farmShopManager, futureFarmFieldManager),
                                               new FarmingClickerInteractionWorkersActivationState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.WorkersActivation, loadDataFarmManager),
                                               new FarmingClickerInteractionPlayingState(stateMachineRunner.StateManager, 
