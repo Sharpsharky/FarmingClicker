@@ -13,6 +13,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private bool isStopped = true;
         private float nextStopY;
         private float currentStopCount = 0;
+        private float xOfRightTractorPath;
+        private float xOfLeftTractorPath;
         
         private Vector3 startingPoint;
         private float yOfFirstStop;
@@ -20,13 +22,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private int numberOfStops;
         private float yOfGarage;
         private bool isGoingToTheLastStop = false;
-        public void Initialize(Vector3 startingPoint, float yOfFirstStop, float distanceBetweenStops, int numberOfStops, float yOfGarage)
+        
+        public void Initialize(Vector3 startingPoint, float yOfFirstStop, float distanceBetweenStops, int numberOfStops, 
+            float yOfGarage, float xOfRightTractorPath, float xOfLeftTractorPath)
         {
             this.startingPoint = startingPoint;
             this.yOfFirstStop = yOfFirstStop;
             this.distanceBetweenStops = distanceBetweenStops;
             this.numberOfStops = numberOfStops;
             this.yOfGarage = yOfGarage;
+            this.xOfRightTractorPath = xOfRightTractorPath;
+            this.xOfLeftTractorPath = xOfLeftTractorPath;
 
             transform.position = startingPoint;
             IterateStop();
@@ -39,7 +45,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             if (isStopped) return;
             
             transform.position += new Vector3(0,direction,0) * speed * Time.deltaTime;
-            if (transform.position.y < nextStopY) StopForLoading();
+            if (direction < 0 && transform.position.y <= nextStopY) StopForLoading();
+            else if (direction > 0 && transform.position.y >= nextStopY) StopForLoading();
 
 
         }
@@ -52,6 +59,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
         private void IterateStop()
         {
+            if (isGoingToTheLastStop) //If going to the last stop (Garage)
+            {
+                ChangeDirection();
+                isGoingToTheLastStop = false;
+                nextStopY = startingPoint.y;
+                currentStopCount = 0;
+                return;
+            }
+
+            if (direction > 0) ChangeDirection(); //If going to Granary
+
             if (currentStopCount >= numberOfStops)
             {
                 nextStopY = yOfGarage;
@@ -59,7 +77,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             }
             else
             {
-                if (isGoingToTheLastStop) ChangeDirection();
                 nextStopY = yOfFirstStop - distanceBetweenStops * currentStopCount;
             }
 
@@ -71,7 +88,18 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private void ChangeDirection()
         {
             direction *= -1;
-            isGoingToTheLastStop = false;
+            if (direction > 0)
+            {
+                var currentPos = transform.position;
+                currentPos.x = xOfLeftTractorPath;
+                transform.position = currentPos;
+            }
+            else
+            {
+                var currentPos = transform.position;
+                currentPos.x = xOfRightTractorPath;
+                transform.position = currentPos;
+            }
         }
 
         private IEnumerator LoadingTime(float loadingTime)

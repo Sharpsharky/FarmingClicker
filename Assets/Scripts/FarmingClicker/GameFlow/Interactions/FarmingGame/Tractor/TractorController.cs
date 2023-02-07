@@ -7,9 +7,12 @@
         [SerializeField] private ManageTractorSprites manageTractorSprites;
         [SerializeField] private TractorMovement tractorMovement;
 
-        public void Initialize(Vector3 startingPoint, float yOfFirstStop, float distanceBetweenStops, int numberOfStops, float yOfGarage)
+        [SerializeField] private float xOfLeftTractorPathRelativeToGranary = -0.5f;
+        
+        public void Initialize(Vector3 startingPoint, float yOfFirstStop, float distanceBetweenStops, int numberOfStops, float yOfGarage, Vector3 posOfGranary)
         {
-            tractorMovement.Initialize(startingPoint,yOfFirstStop,distanceBetweenStops,numberOfStops,yOfGarage);
+            float xOfLeftTractorPath = posOfGranary.x + xOfLeftTractorPathRelativeToGranary;
+            tractorMovement.Initialize(startingPoint,yOfFirstStop,distanceBetweenStops,numberOfStops,yOfGarage, posOfGranary.x,xOfLeftTractorPath);
         }
     }
 }

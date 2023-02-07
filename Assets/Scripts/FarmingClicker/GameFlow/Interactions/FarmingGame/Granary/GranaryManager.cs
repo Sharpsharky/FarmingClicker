@@ -56,7 +56,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
                 
                 newTractorController.Initialize(initialFarmCalculationData.StartingPoint, 
                     initialFarmCalculationData.YOfFirstStop, initialFarmCalculationData.DistanceBetweenStops, 
-                    initialFarmCalculationData.NumberOfStops, initialFarmCalculationData.YOfGarage);
+                    initialFarmCalculationData.NumberOfStops, initialFarmCalculationData.YOfGarage, 
+                    initialFarmCalculationData.GranaryController.gameObject.transform.position);
             }
             
         }
