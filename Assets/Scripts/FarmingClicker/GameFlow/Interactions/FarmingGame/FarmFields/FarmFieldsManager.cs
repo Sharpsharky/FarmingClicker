@@ -1,4 +1,5 @@
 using FarmingClicker.GameFlow.Messages.Commands.NewField;
+using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
 {
@@ -68,9 +69,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
                     
                     break;
                 }
-                case BuyNewFieldCommand buyNewFieldCommand:
+                case FarmFieldConstructedNotification farmFieldConstructedNotification:
                 {
-                    //Create new farm
+                    LoadDataFarmManager.instance.AddEmptyFarmField();
+                    farmFieldControllers.Add(farmFieldConstructedNotification.NewFarmFieldController);
                     break;
                 }
             }

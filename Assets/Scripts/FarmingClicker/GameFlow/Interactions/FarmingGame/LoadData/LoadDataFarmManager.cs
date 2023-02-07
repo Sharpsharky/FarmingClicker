@@ -45,8 +45,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
                 FarmFieldDatas = ES3.Load<List<FarmFieldData>>(GetProperSavingName(FARM_FIELD_DATAS_SAVING_NAME, currentNumberOfFarm));
             else
             {
-                var farmFieldData = new FarmFieldData(0,0,"0");
-                FarmFieldDatas.Add(farmFieldData);
+                AddEmptyFarmField();
             }
             if(ES3.KeyExists(GetProperSavingName(FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME, currentNumberOfFarm))) 
                 FarmFieldCurrentlyBuildingData = ES3.Load<FarmFieldCurrentlyBuildingData>(GetProperSavingName(FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME, currentNumberOfFarm));
@@ -58,13 +57,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
                 FarmGranaryData = ES3.Load<FarmGranaryData>(GetProperSavingName(FARM_GRANARY_DATA_SAVING_NAME, currentNumberOfFarm));
             else
             {
-                FarmGranaryData = new FarmGranaryData(0,0,"0");
+                FarmGranaryData = new FarmGranaryData(0,1,"0");
             }
             if(ES3.KeyExists(GetProperSavingName(FARM_SHOP_DATA_SAVING_NAME, currentNumberOfFarm))) 
                 FarmShopData = ES3.Load<FarmShopData>(GetProperSavingName(FARM_SHOP_DATA_SAVING_NAME, currentNumberOfFarm));
             else
             {
-                FarmShopData = new FarmShopData(0,0,"0");
+                FarmShopData = new FarmShopData(0,1,"0");
             }
             if(ES3.KeyExists(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm))) 
                 FarmCurrencyData = ES3.Load<FarmCurrencyData>(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm));
@@ -74,6 +73,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             }
         }
 
+        public void AddEmptyFarmField()
+        {
+            var farmFieldData = new FarmFieldData(0,1,"0");
+            FarmFieldDatas.Add(farmFieldData);
+        }
+        
         public void QuickSave()
         {
             SaveData();

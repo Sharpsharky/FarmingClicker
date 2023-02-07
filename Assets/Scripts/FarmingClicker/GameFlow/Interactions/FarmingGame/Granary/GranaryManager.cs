@@ -1,4 +1,5 @@
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
 {
@@ -16,7 +17,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
     public class GranaryManager : MonoBehaviour, IMessageReceiver
     {
         [SerializeField] private GameObject tractorPrefab;
-        
+        [SerializeField] private List<TractorController> tractorControllers = new List<TractorController>();
         private FarmCalculationData initialFarmCalculationData;
         
         private GranaryController granaryController;
@@ -49,7 +50,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
         {
             for (int i = 0; i < granaryController.NumberOfWorkers; i++)
             {
-                Instantiate(tractorPrefab, initialFarmCalculationData.StartingPoint, Quaternion.identity);
+                GameObject newTractor = Instantiate(tractorPrefab, initialFarmCalculationData.StartingPoint, Quaternion.identity);
+                var newTractorController = newTractor.GetComponent<TractorController>();
+                tractorControllers.Add(newTractorController);
+                
+                newTractorController.Initialize(initialFarmCalculationData.StartingPoint, 
+                    initialFarmCalculationData.YOfFirstStop, initialFarmCalculationData.DistanceBetweenStops, 
+                    initialFarmCalculationData.NumberOfStops, initialFarmCalculationData.YOfGarage);
             }
             
         }

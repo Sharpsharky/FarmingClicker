@@ -10,7 +10,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         [SerializeField] private float speed = 1f;
 
         private int direction = -1;
-        private bool isStopped = false;
+        private bool isStopped = true;
         private float nextStopY;
         private float currentStopCount = 0;
         
@@ -19,8 +19,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private float distanceBetweenStops;
         private int numberOfStops;
         private float yOfGarage;
-
-        private void Initialize(Vector3 startingPoint, float yOfFirstStop, float distanceBetweenStops, int numberOfStops, float yOfGarage)
+        private bool isGoingToTheLastStop = false;
+        public void Initialize(Vector3 startingPoint, float yOfFirstStop, float distanceBetweenStops, int numberOfStops, float yOfGarage)
         {
             this.startingPoint = startingPoint;
             this.yOfFirstStop = yOfFirstStop;
@@ -31,6 +31,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             transform.position = startingPoint;
             IterateStop();
 
+            isStopped = false;
         }
         
         private void Update()
@@ -54,10 +55,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             if (currentStopCount >= numberOfStops)
             {
                 nextStopY = yOfGarage;
-                ChangeDirection();
+                isGoingToTheLastStop = true;
             }
             else
             {
+                if (isGoingToTheLastStop) ChangeDirection();
                 nextStopY = yOfFirstStop - distanceBetweenStops * currentStopCount;
             }
 
@@ -69,6 +71,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private void ChangeDirection()
         {
             direction *= -1;
+            isGoingToTheLastStop = false;
         }
 
         private IEnumerator LoadingTime(float loadingTime)
