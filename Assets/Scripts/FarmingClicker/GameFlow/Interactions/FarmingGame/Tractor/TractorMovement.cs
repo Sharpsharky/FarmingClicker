@@ -1,3 +1,6 @@
+using System;
+using InfiniteValue;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
     using UnityEngine;
@@ -21,14 +24,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private float yOfGarage;
         private bool isGoingToTheLastStop = false;
         private List<FarmFieldController> farmFieldControllers;
-
-        public void Initialize(List<FarmFieldController> farmFieldControllers, Vector3 startingPoint, 
+        private TractorController tractorController;
+        
+        public void Initialize(TractorController tractorController, List<FarmFieldController> farmFieldControllers, Vector3 startingPoint, 
             float distanceBetweenStops, float xOfRightTractorPath, 
             float xOfLeftTractorPath)
         {
             this.farmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
             this.startingPoint = startingPoint;
             this.distanceBetweenStops = distanceBetweenStops;
+            this.tractorController = tractorController;
             SetNewYOfGarage();
             this.xOfRightTractorPath = xOfRightTractorPath;
             this.xOfLeftTractorPath = xOfLeftTractorPath;
@@ -122,14 +127,19 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             {
                 var currentPos = transform.position;
                 currentPos.x = xOfLeftTractorPath;
-                transform.position = currentPos;
+                transform.position = currentPos;            
+                tractorController.ChangeDirection(TractorDirections.UP);
+
             }
             else
             {
                 var currentPos = transform.position;
                 currentPos.x = xOfRightTractorPath;
                 transform.position = currentPos;
+                tractorController.ChangeDirection(TractorDirections.DOWN);
             }
+
+
         }
 
         private IEnumerator LoadingTime(float loadingTime)

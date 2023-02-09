@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields;
+using InfiniteValue;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
@@ -13,13 +15,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         [SerializeField] private float xOfLeftTractorPathRelativeToGranary = -0.5f;
         
         private List<FarmFieldController> farmFieldControllers;
+        private InfVal maxLoad = 10;
+
         
         public void Initialize(List<FarmFieldController> farmFieldControllers, Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, Vector3 posOfGranary)
         {
+            
             this.farmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
             float xOfLeftTractorPath = posOfGranary.x + xOfLeftTractorPathRelativeToGranary;
-            tractorMovement.Initialize(farmFieldControllers, startingPoint,
+            tractorMovement.Initialize(this, farmFieldControllers, startingPoint,
                 distanceBetweenStops, posOfGranary.x,xOfLeftTractorPath);
         }
 
@@ -27,6 +32,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         {
             farmFieldControllers.Add(farmFieldController);
             tractorMovement.AddNewField(farmFieldController);
+        }
+
+        public void ChangeLoad(InfVal newLoad)
+        {
+            manageTractorSprites.ChangeCropLoad(newLoad, maxLoad);
+        }
+        
+        public void ChangeDirection(TractorDirections tractorDirection)
+        {
+            manageTractorSprites.ChangeDirection(tractorDirection);
         }
         
     }
