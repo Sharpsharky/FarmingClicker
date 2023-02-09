@@ -1,9 +1,9 @@
-using System.Collections;
-using Unity.VisualScripting;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
     using UnityEngine;
+    using System.Collections;
+    using System.Collections.Generic;
+    using FarmFields;
     public class TractorMovement : MonoBehaviour
     {
 
@@ -17,20 +17,19 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private float xOfLeftTractorPath;
         
         private Vector3 startingPoint;
-        private float yOfFirstStop;
         private float distanceBetweenStops;
-        private int numberOfStops;
         private float yOfGarage;
         private bool isGoingToTheLastStop = false;
-        
-        public void Initialize(Vector3 startingPoint, float yOfFirstStop, float distanceBetweenStops, int numberOfStops, 
-            float yOfGarage, float xOfRightTractorPath, float xOfLeftTractorPath)
+        private List<FarmFieldController> farmFieldControllers;
+
+        public void Initialize(List<FarmFieldController> farmFieldControllers, Vector3 startingPoint, 
+            float distanceBetweenStops, float xOfRightTractorPath, 
+            float xOfLeftTractorPath)
         {
+            this.farmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
             this.startingPoint = startingPoint;
-            this.yOfFirstStop = yOfFirstStop;
             this.distanceBetweenStops = distanceBetweenStops;
-            this.numberOfStops = numberOfStops;
-            this.yOfGarage = yOfGarage;
+            SetNewYOfGarage();
             this.xOfRightTractorPath = xOfRightTractorPath;
             this.xOfLeftTractorPath = xOfLeftTractorPath;
 
@@ -45,12 +44,43 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             if (isStopped) return;
             
             transform.position += new Vector3(0,direction,0) * speed * Time.deltaTime;
-            if (direction < 0 && transform.position.y <= nextStopY) StopForLoading();
+            if (direction < 0 && transform.position.y <= nextStopY)
+            {
+                Debug.Log($"direction: {direction}, transform.position.y: {transform.position.y}, nextStopY: {nextStopY}");
+                StopForLoading();
+            }
             else if (direction > 0 && transform.position.y >= nextStopY) StopForLoading();
 
 
         }
+        
+        public void AddNewField(FarmFieldController farmFieldController)
+        {
+            farmFieldControllers.Add(farmFieldController);
+            SetNewYOfGarage();
+            
+            if (isGoingToTheLastStop)
+            {
+                isGoingToTheLastStop = false;
+                currentStopCount = farmFieldControllers.Count - 1;
+                IterateStop();
+            }
 
+            if (direction > 0 && isStopped)
+            {
+                var currentPos = transform.position;
+                currentPos.y = yOfGarage;
+                transform.position = currentPos;
+            }
+
+            
+        }
+
+        private void SetNewYOfGarage()
+        {
+            yOfGarage = farmFieldControllers[^1].gameObject.transform.position.y - distanceBetweenStops;
+        }
+        
         private void StopForLoading()
         {
             StartCoroutine(LoadingTime(1));
@@ -70,14 +100,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
             if (direction > 0) ChangeDirection(); //If going to Granary
 
-            if (currentStopCount >= numberOfStops)
+            if (currentStopCount >= farmFieldControllers.Count)
             {
                 nextStopY = yOfGarage;
                 isGoingToTheLastStop = true;
             }
             else
             {
-                nextStopY = yOfFirstStop - distanceBetweenStops * currentStopCount;
+                nextStopY = farmFieldControllers[0].gameObject.transform.position.y - distanceBetweenStops * currentStopCount;
             }
 
             currentStopCount++;

@@ -1,5 +1,8 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor;
+using FarmingClicker.GameFlow.Messages.Commands.NewField;
+using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
 {
@@ -28,6 +31,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
             this.initialFarmCalculationData = initialFarmCalculationData;
             
             ListenedTypes.Add(typeof(BuyGranaryUpgradeCommand));
+            ListenedTypes.Add(typeof(FarmFieldConstructedNotification));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
             
@@ -42,7 +46,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
             int numberOfWorkers= LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers;
             InfVal currentCurrency = InfVal.Parse(LoadDataFarmManager.instance.FarmGranaryData.currentCurrency);
             InfVal currentValueOfCroppedCurrency = CalculateValueOfCroppedCurrency(upgradeLevel);
-            
             granaryController.Initialize(upgradeLevel, numberOfWorkers, currentCurrency, currentValueOfCroppedCurrency);
         }
 
@@ -53,10 +56,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
                 GameObject newTractor = Instantiate(tractorPrefab, initialFarmCalculationData.StartingPoint, Quaternion.identity);
                 var newTractorController = newTractor.GetComponent<TractorController>();
                 tractorControllers.Add(newTractorController);
-                
-                newTractorController.Initialize(initialFarmCalculationData.StartingPoint, 
-                    initialFarmCalculationData.YOfFirstStop, initialFarmCalculationData.DistanceBetweenStops, 
-                    initialFarmCalculationData.NumberOfStops, initialFarmCalculationData.YOfGarage, 
+
+                newTractorController.Initialize(initialFarmCalculationData.FarmFieldControllers, 
+                    initialFarmCalculationData.StartingPoint, initialFarmCalculationData.YOfFirstStop, 
+                    initialFarmCalculationData.DistanceBetweenStops, initialFarmCalculationData.NumberOfStops, 
+                    initialFarmCalculationData.YOfGarage, 
                     initialFarmCalculationData.GranaryController.gameObject.transform.position);
             }
             
@@ -65,6 +69,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
         private InfVal CalculateValueOfCroppedCurrency(int upgradeLevel)
         {
             return 1 * upgradeLevel;
+        }
+
+        private void AddNewFieldForTractors(FarmFieldController farmFieldController)
+        {
+            foreach (var tractor in tractorControllers)
+            {
+                tractor.AddNewField(farmFieldController);
+            }
         }
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
@@ -86,6 +98,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Granary
                     
                     break;
                 }
+                case FarmFieldConstructedNotification buyNewFieldCommand:
+                {
+                    AddNewFieldForTractors(buyNewFieldCommand.NewFarmFieldController);
+                    break;
+                }
+                
                 
             }
         }

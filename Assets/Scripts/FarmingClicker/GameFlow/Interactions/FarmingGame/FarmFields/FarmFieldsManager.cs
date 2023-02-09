@@ -23,14 +23,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
 
         public void Initialize(FarmCalculationData initialFarmCalculationData, List<FarmFieldController> farmFieldControllers)
         {
-            this.farmFieldControllers = farmFieldControllers;
+            Debug.Log("initialize");
+            this.farmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
             this.initialFarmCalculationData = initialFarmCalculationData;
 
-            
             ListenedTypes.Add(typeof(BuyFarmFieldUpgradeCommand));
+            ListenedTypes.Add(typeof(FarmFieldConstructedNotification));
             MessageDispatcher.Instance.RegisterReceiver(this);
             
-            farmFields = LoadDataFarmManager.instance.FarmFieldDatas;
+            farmFields = new List<FarmFieldData>(LoadDataFarmManager.instance.FarmFieldDatas);
             
             DistributeValuesAcrossFarmFields();
         }
@@ -71,6 +72,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
                 }
                 case FarmFieldConstructedNotification farmFieldConstructedNotification:
                 {
+                    Debug.Log("FarmFieldConstructedNotification");
                     LoadDataFarmManager.instance.AddEmptyFarmField();
                     farmFieldControllers.Add(farmFieldConstructedNotification.NewFarmFieldController);
                     break;

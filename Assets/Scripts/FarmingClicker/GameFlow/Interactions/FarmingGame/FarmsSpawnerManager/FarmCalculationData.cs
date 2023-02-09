@@ -19,7 +19,7 @@
         public FarmShopController FarmShopController;
         public FutureFarmFieldController FutureFarmFieldController;
         public float XOfFirstUpgradeFarmFieldButton;
-        
+
         
         public FarmCalculationData(Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, 
