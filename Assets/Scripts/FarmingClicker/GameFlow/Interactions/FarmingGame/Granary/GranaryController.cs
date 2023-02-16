@@ -18,7 +18,9 @@
         private int numberOfWorkers = 0;
         private InfVal currentCurrency = 0;
         private InfVal valueOfTransportedCurrency = 0;
-
+        private InfVal valX5;
+        private InfVal valX10;
+        private InfVal valX50;
         public int UpgradeLevel
         {
             get { return upgradeLevel; }
@@ -28,11 +30,15 @@
         public InfVal CurrentCurrency => currentCurrency;
         public InfVal ValueOfTransportedCurrency => valueOfTransportedCurrency;
         
-        public void Initialize(int upgradeLevel, int numberOfWorkers, InfVal currentCurrency, InfVal valueOfTransportedCurrency)
+        public void Initialize(int upgradeLevel, int numberOfWorkers, InfVal currentCurrency, 
+            InfVal valueOfTransportedCurrency, InfVal valX5, InfVal valX10, InfVal valX50)
         {
             this.upgradeLevel = upgradeLevel;
             this.numberOfWorkers = numberOfWorkers;
             this.currentCurrency = currentCurrency;
+            this.valX5 = valX5;
+            this.valX10 = valX10;
+            this.valX50 = valX50;
             SetValueOfTransportedCurrency(valueOfTransportedCurrency);
             DisplayUpgradeButton(transform.position);
 
@@ -53,7 +59,8 @@
         
         private void DisplayUpgrade()
         {
-            UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, title, currentCurrency);
+            UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, title, currentCurrency, 
+                valX5, valX10, valX50);
             
             MessageDispatcher.Instance.Send(new DisplayUpgradePanelCommand(data));
 

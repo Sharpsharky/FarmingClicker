@@ -38,8 +38,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop
             int numberOfWorkers = LoadDataFarmManager.instance.FarmGranaryData.numberOfWorkers;
             InfVal currentCurrency = InfVal.Parse(LoadDataFarmManager.instance.FarmGranaryData.currentCurrency);
             InfVal currentValueOfCroppedCurrency = CalculateValueOfCroppedCurrency(upgradeLevel);
-            
-            farmShopController.Initialize(upgradeLevel, numberOfWorkers, currentCurrency, currentValueOfCroppedCurrency);
+            InfVal valX5 = CalculateValueOfCroppedCurrency(upgradeLevel+5);;
+            InfVal valX10 = CalculateValueOfCroppedCurrency(upgradeLevel+10);;
+            InfVal valX50 = CalculateValueOfCroppedCurrency(upgradeLevel+50);;
+            farmShopController.Initialize(upgradeLevel, numberOfWorkers, currentCurrency, 
+                currentValueOfCroppedCurrency, valX5, valX10, valX50);
             
         }
         

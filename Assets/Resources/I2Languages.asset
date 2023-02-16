@@ -16,12 +16,90 @@ MonoBehaviour:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
-    mTerms: []
+    mTerms:
+    - Term: StatisticComponents_Level
+      TermType: 0
+      Description: 
+      Languages:
+      - Level
+      - Poziom
+      - Eben
+      - Niveau
+      - Nivel
+      - Seviye
+      Flags: 000000000000
+      Languages_Touch: []
+    - Term: StatisticComponents_MovingSpeed
+      TermType: 0
+      Description: 
+      Languages:
+      - Moving Speed
+      - "Pr\u0119dko\u015B\u0107 poruszania"
+      - Bewegungsgeschwindigkeit
+      - Vitesse de mouvement
+      - Velocidad de movimiento
+      - "Hareket h\u0131z\u0131"
+      Flags: 000000000000
+      Languages_Touch: []
+    - Term: StatisticComponents_Value
+      TermType: 0
+      Description: 
+      Languages:
+      - Value
+      - "Warto\u015B\u0107"
+      - Wert
+      - Valeur
+      - Valor
+      - "De\u011Fer"
+      Flags: 000000000000
+      Languages_Touch: []
+    - Term: StatisticComponents_Workers
+      TermType: 0
+      Description: 
+      Languages:
+      - Employees
+      - Pracownicy
+      - Mitarbeiter
+      - "Employ\xE9s"
+      - Empleados
+      - "\xC7al\u0131\u015Fanlar"
+      Flags: 000000000000
+      Languages_Touch: []
+    - Term: StatisticComponents_WorkingSpeed
+      TermType: 0
+      Description: 
+      Languages:
+      - Work Speed
+      - "Pr\u0119dko\u015B\u0107 pracy"
+      - Arbeitsgeschwindigkeit
+      - Vitesse de travail
+      - Velocidad de trabajo
+      - "\xC7al\u0131\u015Fma h\u0131z\u0131"
+      Flags: 000000000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
-    mLanguages: []
-    IgnoreDeviceLanguage: 0
+    mLanguages:
+    - Name: English
+      Code: en
+      Flags: 0
+    - Name: Polish
+      Code: pl
+      Flags: 0
+    - Name: German
+      Code: de
+      Flags: 0
+    - Name: French
+      Code: fr
+      Flags: 0
+    - Name: Spanish
+      Code: es
+      Flags: 0
+    - Name: Turkish
+      Code: tr
+      Flags: 0
+    IgnoreDeviceLanguage: 1
     _AllowUnloadingLanguages: 0
     Google_WebServiceURL: 
     Google_SpreadsheetKey: 

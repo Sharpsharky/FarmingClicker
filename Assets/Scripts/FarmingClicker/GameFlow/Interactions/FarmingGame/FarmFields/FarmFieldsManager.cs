@@ -41,8 +41,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
             Debug.Log($"farmFields.Count: {farmFields.Count}");
             for (int i = 0; i < farmFields.Count; i++)
             {
+                InfVal valX5 = CalculateValueOfCroppedCurrency(farmFields[i].upgradeLevel+5);;
+                InfVal valX10 = CalculateValueOfCroppedCurrency(farmFields[i].upgradeLevel+10);;
+                InfVal valX50 = CalculateValueOfCroppedCurrency(farmFields[i].upgradeLevel+50);;
+                
                 farmFieldControllers[i].InitializeFarmField(farmFields[i].upgradeLevel, farmFields[i].numberOfWorkers, 
-                    0,CalculateValueOfCroppedCurrency(farmFields[i].upgradeLevel), initialFarmCalculationData.XOfFirstUpgradeFarmFieldButton);
+                    0,CalculateValueOfCroppedCurrency(farmFields[i].upgradeLevel), 
+                    initialFarmCalculationData.XOfFirstUpgradeFarmFieldButton, valX5, valX10, valX50);
             }
         }
         

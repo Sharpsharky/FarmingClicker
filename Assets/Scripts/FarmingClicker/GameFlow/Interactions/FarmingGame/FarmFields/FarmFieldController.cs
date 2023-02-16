@@ -21,13 +21,20 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
         private int numberOfWorkers = 0;
         private InfVal currentCurrency = 0;
         private InfVal valueOfCroppedCurrency = 0;
-
+        private InfVal valX5;
+        private InfVal valX10;
+        private InfVal valX50;
         
-        public void InitializeFarmField(int upgradeLevel, int numberOfWorkers, InfVal currentCurrency, InfVal valueOfCroppedCurrency, float xPosOfUpgradeButton)
+        public void InitializeFarmField(int upgradeLevel, int numberOfWorkers, InfVal currentCurrency, 
+            InfVal valueOfCroppedCurrency, float xPosOfUpgradeButton, InfVal valX5, InfVal valX10, InfVal valX50)
         {
             this.upgradeLevel = upgradeLevel;
             this.numberOfWorkers = numberOfWorkers;
             this.currentCurrency = currentCurrency;
+            this.valX5 = valX5;
+            this.valX10 = valX10;
+            this.valX50 = valX50;
+            
             SetValueOfCroppedCurrency(valueOfCroppedCurrency);
             DisplayUpgradeButton(xPosOfUpgradeButton);
 
@@ -61,7 +68,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields
         private void DisplayUpgrade()
         {
             Debug.Log("DisplayUpgrade");
-            UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, title, currentCurrency);
+            UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, title, currentCurrency,
+                valX5, valX10, valX50);
             
             MessageDispatcher.Instance.Send(new DisplayUpgradePanelCommand(data));
 

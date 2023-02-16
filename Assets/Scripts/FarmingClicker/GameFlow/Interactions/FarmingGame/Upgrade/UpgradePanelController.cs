@@ -22,13 +22,33 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         [SerializeField, BoxGroup("Title")] private TMP_Text title;
 
         [SerializeField, BoxGroup("Buttons")] private Button exitButton;
+        [SerializeField, BoxGroup("Buttons")] private Button buyButton;
         [SerializeField, BoxGroup("Buttons")] private Button upgrade1XButton;
         [SerializeField, BoxGroup("Buttons")] private Button upgrade5XButton;
         [SerializeField, BoxGroup("Buttons")] private Button upgrade10XButton;
+
+        [SerializeField, BoxGroup("Statistics")]
+        private UpgradeStatistics levelStatistic;        
+        [SerializeField, BoxGroup("Statistics")]
+        private UpgradeStatistics workersStatistic;
+        [SerializeField, BoxGroup("Statistics")]
+        private UpgradeStatistics valueStatistic;
+        [SerializeField, BoxGroup("Statistics")]
+        private UpgradeStatistics workingSpeedStatistic;
+        [SerializeField, BoxGroup("Statistics")]
+        private UpgradeStatistics movingSpeedStatistic;
         
-        [SerializeField, BoxGroup("Statistics")] private TMP_Text currentValue;
-
-
+        [SerializeField, BoxGroup("Statistic Components")]
+        private UpgradeStatisticComponents levelStatisticComponents;        
+        [SerializeField, BoxGroup("Statistic Components")]
+        private UpgradeStatisticComponents workersStatisticComponents;
+        [SerializeField, BoxGroup("Statistic Components")]
+        private UpgradeStatisticComponents valueStatisticComponents;
+        [SerializeField, BoxGroup("Statistic Components")]
+        private UpgradeStatisticComponents workingSpeedStatisticComponents;
+        [SerializeField, BoxGroup("Statistic Components")]
+        private UpgradeStatisticComponents movingSpeedStatisticComponents;
+        
         private void Awake()
         {
 
@@ -65,7 +85,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 
             
             title.text = upgradeDisplayPopupData.Title;
-            currentValue.text = upgradeDisplayPopupData.CurrentVal.ToString();
+            
+            valueStatistic.InitializeStatistic(levelStatisticComponents.GetIcon(),
+                levelStatisticComponents.GetTitle(),upgradeDisplayPopupData.CurrentVal.ToString(), 
+                upgradeDisplayPopupData.ValX5.ToString(), upgradeDisplayPopupData.ValX10.ToString());
             
             exitButton.onClick.AddListener(CloseGame);
             
@@ -92,11 +115,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             {
                 case ChangeStatisticsOfUpgradeNotification changeStatisticsOfUpgradeNotification:
                 {
-                    currentValue.text = changeStatisticsOfUpgradeNotification.CurrentValueOfCroppedCurrency.ToString();
+                    //currentValueText.text = changeStatisticsOfUpgradeNotification.CurrentValueOfCroppedCurrency.ToString();
                     break;
                 }
                 
             }
         }
     }
+
+    
 }
