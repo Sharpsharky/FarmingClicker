@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
-using Core.Message;
-using Core.Message.Interfaces;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
-using FarmingClicker.GameFlow.Messages.Commands.NewField;
-using InfiniteValue;
-using UnityEngine;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField
 {
+    using System;
+    using System.Collections.Generic;
+    using Core.Message;
+    using Core.Message.Interfaces;
+    using FarmsSpawnerManager;
+    using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
+    using LoadData;
+    using FarmingClicker.GameFlow.Messages.Commands.NewField;
+    using InfiniteValue;
+    using UnityEngine;
     public class FutureFarmFieldManager : MonoBehaviour, IMessageReceiver
     {
         private FarmCalculationData initialFarmCalculationData;

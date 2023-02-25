@@ -1,27 +1,17 @@
 namespace FarmingClicker.Data.Popup
 {
     using Dialogue.DialogueDataTypes;
-    using InfiniteValue;
-    using GameFlow.Interactions.FarmingGame.General;
+    using GameFlow.Interactions.FarmingGame.Workplaces;
 
     public record UpgradeDisplayPopupData : IPopupData
     {
-        public IFarmWorkerControllable FarmWorker;
+        public WorkplaceController WorkplaceController;
         public string Title;
-        
-        public InfVal CurrentVal;
-        public InfVal ValX5;
-        public InfVal ValX10;
-        public InfVal ValX50;
 
-        public UpgradeDisplayPopupData(IFarmWorkerControllable farmWorker, string title, InfVal currentVal, InfVal valX5, InfVal valX10, InfVal valX50)
+        public UpgradeDisplayPopupData(WorkplaceController workplaceController, string title)
         {
-            FarmWorker = farmWorker;
+            WorkplaceController = workplaceController;
             Title = title;
-            CurrentVal = currentVal;
-            ValX5 = valX5;
-            ValX10 = valX10;
-            ValX50 = valX50;
         }
     }
 }

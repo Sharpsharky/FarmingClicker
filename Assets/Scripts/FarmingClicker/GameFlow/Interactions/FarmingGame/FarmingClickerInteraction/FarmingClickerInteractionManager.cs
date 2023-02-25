@@ -1,7 +1,8 @@
-
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary;
 using UnityEngine.Serialization;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction
@@ -19,7 +20,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     using UnityEngine;
     using FarmingGameCameraController;
     using LoadData;
-    using Granary;
 
     public class FarmingClickerInteractionManager : SerializedMonoBehaviour, IMessageReceiver
     {

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
 using InfiniteValue;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
     using UnityEngine;
-    public class TractorController : MonoBehaviour
+    public class TractorController : WorkerController
     {
         [SerializeField] private TractorAcquireCrops tractorAcquireCrops;
         [SerializeField] private ManageTractorSprites manageTractorSprites;
@@ -14,21 +16,21 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
         [SerializeField] private float xOfLeftTractorPathRelativeToGranary = -0.5f;
         
-        private List<FarmFieldController> farmFieldControllers;
+        private List<WorkplaceController> farmFieldControllers;
         private InfVal maxLoad = 10;
 
         
-        public void Initialize(List<FarmFieldController> farmFieldControllers, Vector3 startingPoint, float yOfFirstStop, 
+        public void Initialize(List<WorkplaceController> workplaceControllers, Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, Vector3 posOfGranary)
         {
             
-            this.farmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
+            this.farmFieldControllers = new List<WorkplaceController>(workplaceControllers);
             float xOfLeftTractorPath = posOfGranary.x + xOfLeftTractorPathRelativeToGranary;
             tractorMovement.Initialize(this, farmFieldControllers, startingPoint,
                 distanceBetweenStops, posOfGranary.x,xOfLeftTractorPath);
         }
 
-        public void AddNewField(FarmFieldController farmFieldController)
+        public void AddNewField(WorkplaceController farmFieldController)
         {
             farmFieldControllers.Add(farmFieldController);
             tractorMovement.AddNewField(farmFieldController);

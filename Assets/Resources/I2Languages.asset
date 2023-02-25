@@ -107,6 +107,96 @@ MonoBehaviour:
       - "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C \u0440\u0430\u0431\u043E\u0442\u044B"
       Flags: 000000000000000000000000
       Languages_Touch: []
+    - Term: StatisticComponents_Load
+      TermType: 0
+      Description: 
+      Languages:
+      - Load
+      - "Obci\u0105\u017Cenie"
+      - Belastung
+      - Charger
+      - Carga
+      - "Y\xFCk"
+      - Carico
+      - Carregar
+      - "\u52A0\u8F7D"
+      - "\u30ED\u30FC\u30C9"
+      - Laden
+      - "\u041D\u0430\u0433\u0440\u0443\u0437\u043A\u0430"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
+    - Term: WorkplaceUpgrade_FarmField
+      TermType: 0
+      Description: 
+      Languages:
+      - Farm Field Upgrade
+      - Ulepszenie Pola Uprawnego
+      - Farmfeld-Upgrade
+      - "Mise \xC0 Niveau Du Champ Agricole"
+      - "Actualizaci\xF3n De Campo De Cultivo"
+      - "\xC7iftlik Alan\u0131 Y\xFCkseltmesi"
+      - Aggiornamento Del Campo Agricolo
+      - "Atualiza\xE7\xE3o De Campo Agr\xEDcola"
+      - "\u519C\u7530\u5347\u7EA7"
+      - "\u7551\u306E\u30A2\u30C3\u30D7\u30B0\u30EC\u30FC\u30C9"
+      - Boerderij Veld Upgrade
+      - "\u0410\u043F\u0433\u0440\u0435\u0439\u0434 \u041F\u043E\u043B\u044F \u0424\u0435\u0440\u043C\u044B"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
+    - Term: WorkplaceUpgrade_Granary
+      TermType: 0
+      Description: 
+      Languages:
+      - Granary
+      - Spichlerz
+      - Getreidespeicher
+      - Grenier
+      - Granero
+      - "Tah\u0131l Ambar\u0131"
+      - Granaio
+      - Celeiro
+      - "\u7CAE\u4ED3"
+      - "\u7A40\u5009"
+      - Graanschuur
+      - "\u0417\u0435\u0440\u043D\u043E\u0445\u0440\u0430\u043D\u0438\u043B\u0438\u0449\u0435"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
+    - Term: WorkplaceUpgrade_FarmShop
+      TermType: 0
+      Description: 
+      Languages:
+      - Farm Shop
+      - "Sklep Z Artyku\u0142ami Gospodarskimi"
+      - Hofladen
+      - Magasin De La Ferme
+      - Tienda De Granja
+      - "\xC7iftlik D\xFCkkan\u0131"
+      - Spaccio Aziendale
+      - Loja Rural
+      - "\u519C\u5BB6\u5E97"
+      - "\u30D5\u30A1\u30FC\u30E0\u30B7\u30E7\u30C3\u30D7"
+      - Boerderij Winkel
+      - "\u0424\u0435\u0440\u043C\u0435\u0440\u0441\u043A\u0438\u0439 \u041C\u0430\u0433\u0430\u0437\u0438\u043D"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
+    - Term: UI_Buy
+      TermType: 0
+      Description: 
+      Languages:
+      - Buy!
+      - Kup!
+      - Kauf es!
+      - "Ach\xE8te-le!"
+      - "\xA1C\xF3mpralo!"
+      - "Sat\u0131n al!"
+      - Compralo!
+      - Compre!
+      - "\u4E70\u5427\uFF01"
+      - "\u305D\u308C\u3092\u8CFC\u5165\uFF01"
+      - Koop het!
+      - "\u041A\u0443\u043F\u0438\u0442\u044C \u044D\u0442\u043E!"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
@@ -149,11 +239,11 @@ MonoBehaviour:
       Flags: 0
     IgnoreDeviceLanguage: 1
     _AllowUnloadingLanguages: 0
-    Google_WebServiceURL: 
-    Google_SpreadsheetKey: 
-    Google_SpreadsheetName: 
+    Google_WebServiceURL: https://script.google.com/macros/s/AKfycbzNY6rEuu4E4btg3kIThRRxqIAiUN18Pl8gfwuHzjUlkK5PenqB_Fel-vYU-O0KqvhV/exec
+    Google_SpreadsheetKey: 1pWIC32Pk6i1R_5dKEES1qHpqXZ872GaH1xBiy-y5bVk
+    Google_SpreadsheetName: I2Loc Farming Clicker Localization
     Google_LastUpdatedVersion: 
-    Google_Password: change_this
+    Google_Password: WielkaDupa1234
     GoogleUpdateFrequency: 3
     GoogleInEditorCheckFrequency: 2
     GoogleUpdateSynchronization: 1

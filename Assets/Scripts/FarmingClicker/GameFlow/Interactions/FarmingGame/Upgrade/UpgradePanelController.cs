@@ -1,5 +1,3 @@
-using FarmingClicker.GameFlow.Interactions.FarmingGame.General;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 {
     using System;
@@ -9,7 +7,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
     using FarmingClicker.Data.Popup;
     using Dialogue.DialogueDataTypes;
     using Dialogue.DialoguePanelControllers;
-    using Messages.Commands.Upgrades;
+    using Workplaces;
     using Sirenix.OdinInspector;
     using TMPro;
     using UnityEngine;
@@ -36,7 +34,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         [SerializeField, BoxGroup("Statistics")]
         private UpgradeStatistics workingSpeedStatistic;
         [SerializeField, BoxGroup("Statistics")]
-        private UpgradeStatistics movingSpeedStatistic;
+        private UpgradeStatistics movingSpeedStatistic;        
+        [SerializeField, BoxGroup("Statistics")]
+        private UpgradeStatistics loadStatistic;
         
         [SerializeField, BoxGroup("Statistic Components")]
         private UpgradeStatisticComponents levelStatisticComponents;        
@@ -47,7 +47,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         [SerializeField, BoxGroup("Statistic Components")]
         private UpgradeStatisticComponents workingSpeedStatisticComponents;
         [SerializeField, BoxGroup("Statistic Components")]
-        private UpgradeStatisticComponents movingSpeedStatisticComponents;
+        private UpgradeStatisticComponents movingSpeedStatisticComponents;        
+        [SerializeField, BoxGroup("Statistic Components")]
+        private UpgradeStatisticComponents loadStatisticComponents;
+        
+        private WorkplaceController currentWorkplaceController;
+
         
         private void Awake()
         {
@@ -82,26 +87,41 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         public override void SetupData(IPopupData data)
         {
             if (data is not UpgradeDisplayPopupData upgradeDisplayPopupData) return;
-
             
             title.text = upgradeDisplayPopupData.Title;
-            
-            valueStatistic.InitializeStatistic(levelStatisticComponents.GetIcon(),
-                levelStatisticComponents.GetTitle(),upgradeDisplayPopupData.CurrentVal.ToString(), 
-                upgradeDisplayPopupData.ValX5.ToString(), upgradeDisplayPopupData.ValX10.ToString());
+            currentWorkplaceController = upgradeDisplayPopupData.WorkplaceController;
+
+            InitializeStatistics(upgradeDisplayPopupData);
             
             exitButton.onClick.AddListener(CloseGame);
             
-            upgrade1XButton.onClick.AddListener(() =>{BuyUpgrade(1, upgradeDisplayPopupData.FarmWorker);});
-            upgrade5XButton.onClick.AddListener(() =>{BuyUpgrade(5, upgradeDisplayPopupData.FarmWorker);});
-            upgrade10XButton.onClick.AddListener(() =>{BuyUpgrade(10, upgradeDisplayPopupData.FarmWorker);});
+            upgrade1XButton.onClick.AddListener(() =>{BuyUpgrade(1, upgradeDisplayPopupData.WorkplaceController);});
+            upgrade5XButton.onClick.AddListener(() =>{BuyUpgrade(5, upgradeDisplayPopupData.WorkplaceController);});
+            upgrade10XButton.onClick.AddListener(() =>{BuyUpgrade(10, upgradeDisplayPopupData.WorkplaceController);});
             
             gameObject.SetActive(true);
         }
 
-        private void BuyUpgrade(int amount, IFarmWorkerControllable farmWorkerType)
+        private void InitializeStatistics(UpgradeDisplayPopupData upgradeDisplayPopupData)
         {
-            farmWorkerType.BuyUpgrade(amount);
+            levelStatistic.InitializeStatistic(
+                levelStatisticComponents.GetIcon(),
+                levelStatisticComponents.GetTitle(),
+                upgradeDisplayPopupData.WorkplaceController.GetLevelIncrementedBy().ToString(),
+                upgradeDisplayPopupData.WorkplaceController.GetLevelIncrementedBy(1).ToString());
+            
+            workersStatistic.InitializeStatistic(
+                workersStatisticComponents.GetIcon(),
+                workersStatisticComponents.GetTitle(),
+                upgradeDisplayPopupData.WorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy().ToString(),
+                upgradeDisplayPopupData.WorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy(1).ToString());
+            
+            
+        }
+
+        private void BuyUpgrade(int amount, WorkplaceController workplaceController)
+        {
+            workplaceController.BuyUpgrade(amount);
         }
 
 

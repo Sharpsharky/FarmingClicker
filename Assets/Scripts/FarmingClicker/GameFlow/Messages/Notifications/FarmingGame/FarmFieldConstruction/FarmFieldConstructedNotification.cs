@@ -1,7 +1,7 @@
-﻿namespace FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction
-{
-    using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmFields;
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
 
+namespace FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction
+{
     public record FarmFieldConstructedNotification : GameFlowMessage
     {
         public FarmFieldController NewFarmFieldController;

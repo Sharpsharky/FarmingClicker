@@ -1,13 +1,16 @@
-using System;
-using InfiniteValue;
+
+using System.Collections;
+using System.Collections.Generic;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+using UnityEngine;
+using System.Linq;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
-    using UnityEngine;
-    using System.Collections;
-    using System.Collections.Generic;
-    using FarmFields;
-    public class TractorMovement : MonoBehaviour
+
+    public class TractorMovement : MonoBehaviour, IWorkerMovable
     {
 
         [SerializeField] private float speed = 1f;
@@ -26,23 +29,30 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private List<FarmFieldController> farmFieldControllers;
         private TractorController tractorController;
         
-        public void Initialize(TractorController tractorController, List<FarmFieldController> farmFieldControllers, Vector3 startingPoint, 
-            float distanceBetweenStops, float xOfRightTractorPath, 
-            float xOfLeftTractorPath)
+        public void Initialize(WorkerController tractorController, List<WorkplaceController> workplaceControllers, Vector3 startingPoint,
+            float distanceBetweenStops, float xOfRightTractorPath, float xOfLeftTractorPath)
         {
-            this.farmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
+            
+            if(tractorController is TractorController _tractorController)
+                this.tractorController = _tractorController;
+
+            if (workplaceControllers is List<WorkplaceController> workplaceControllerList)
+            {
+                this.farmFieldControllers = workplaceControllerList.OfType<FarmFieldController>().ToList();
+            }
+            
             this.startingPoint = startingPoint;
             this.distanceBetweenStops = distanceBetweenStops;
-            this.tractorController = tractorController;
             SetNewYOfGarage();
             this.xOfRightTractorPath = xOfRightTractorPath;
             this.xOfLeftTractorPath = xOfLeftTractorPath;
-
+            
             transform.position = startingPoint;
             IterateStop();
 
-            isStopped = false;
+            isStopped = false;         
         }
+        
         
         private void Update()
         {
@@ -59,9 +69,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
         }
         
-        public void AddNewField(FarmFieldController farmFieldController)
+        public void AddNewField(WorkplaceController farmFieldController)
         {
-            farmFieldControllers.Add(farmFieldController);
+            if (farmFieldController is not FarmFieldController _farmFieldController) return;
+            farmFieldControllers.Add(_farmFieldController);
             SetNewYOfGarage();
             
             if (isGoingToTheLastStop)
@@ -153,5 +164,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             yield return null;
         }
 
+        
     }
 }

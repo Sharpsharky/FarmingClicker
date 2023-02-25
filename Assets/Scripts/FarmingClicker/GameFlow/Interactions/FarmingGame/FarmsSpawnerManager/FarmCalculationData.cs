@@ -1,12 +1,13 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 {
     using UnityEngine;
     using System.Collections.Generic;
-    using FarmFields;
-    using FarmShop;
     using FutureFarmField;
-    using Granary;
-    
+    using Workplaces.FarmFields;
+    using Workplaces.FarmShop;
+    using Workplaces.Granary;
     public class FarmCalculationData
     {
         public Vector3 StartingPoint;
@@ -15,16 +16,16 @@
         public int NumberOfStops;
         public float YOfGarage;
         public List<FarmFieldController> FarmFieldControllers;
-        public GranaryController GranaryController;
-        public FarmShopController FarmShopController;
+        public List<GranaryController> GranaryControllers;
+        public List<FarmShopController> FarmShopControllers;
         public FutureFarmFieldController FutureFarmFieldController;
         public float XOfFirstUpgradeFarmFieldButton;
 
         
         public FarmCalculationData(Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, 
-            List<FarmFieldController> farmFieldControllers, GranaryController granaryController,
-            FarmShopController farmShopController, FutureFarmFieldController futureFarmFieldController, 
+            List<FarmFieldController> farmFieldControllers, List<GranaryController> granaryControllers,
+            List<FarmShopController> farmShopControllers, FutureFarmFieldController futureFarmFieldController, 
             float xOfFirstUpgradeFarmFieldButton)
         {
             StartingPoint = startingPoint;
@@ -32,9 +33,9 @@
             DistanceBetweenStops = distanceBetweenStops;
             NumberOfStops = numberOfStops;
             YOfGarage = yOfGarage;
-            FarmFieldControllers = farmFieldControllers;
-            GranaryController = granaryController;
-            FarmShopController = farmShopController;
+            FarmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
+            GranaryControllers = new List<GranaryController>(granaryControllers);
+            FarmShopControllers = new List<FarmShopController>(farmShopControllers);
             FutureFarmFieldController = futureFarmFieldController;
             XOfFirstUpgradeFarmFieldButton = xOfFirstUpgradeFarmFieldButton;
         } 

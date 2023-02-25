@@ -1,14 +1,17 @@
-﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop;
+﻿using System.Collections.Generic;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
     using Core.Message;
     using Core.StateMachine;
     using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction;
-    using FarmFields;
-    using Granary;
     using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
     using UnityEngine;
     
@@ -45,9 +48,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             var farmCalculationData = farmsSpawnerManager.Initialize(numberOfFarmsToGenerate);
             farmingGameCameraController.Initialize();
             
-            granaryManager.Initialize(farmCalculationData, farmCalculationData.GranaryController);
-            farmShopManager.Initialize(farmCalculationData, farmCalculationData.FarmShopController);
-            farmFieldsManager.Initialize(farmCalculationData, farmCalculationData.FarmFieldControllers);
+            granaryManager.Initialize(farmCalculationData, new List<WorkplaceController>(farmCalculationData.GranaryControllers));
+            farmShopManager.Initialize(farmCalculationData,new List<WorkplaceController>(farmCalculationData.FarmShopControllers));
+            farmFieldsManager.Initialize(farmCalculationData, new List<WorkplaceController>(farmCalculationData.FarmFieldControllers));
             futureFarmFieldManager.Initialize(farmCalculationData, farmCalculationData.FutureFarmFieldController);
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartActivatingBuilders(farmCalculationData));
 

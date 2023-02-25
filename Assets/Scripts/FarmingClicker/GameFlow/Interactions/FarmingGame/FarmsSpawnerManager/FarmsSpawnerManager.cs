@@ -1,6 +1,7 @@
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmShop;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Granary;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary;
 using FarmingClicker.GameFlow.Messages.Commands.NewField;
 using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction;
 
@@ -12,13 +13,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
     using Core.Message.Interfaces;
     using Sirenix.OdinInspector;
     using UnityEngine;
-    using FarmFields;
 
     public class FarmsSpawnerManager : SerializedMonoBehaviour, IMessageReceiver
     {
         private List<FarmFieldController> farmFieldControllers = new List<FarmFieldController>();
-        private GranaryController granaryController;
-        private FarmShopController farmShopController;
+        private List<GranaryController> granaryControllers = new List<GranaryController>();
+        private List<FarmShopController> farmShopControllers = new List<FarmShopController>();
         private FutureFarmFieldController futureFarmFieldController;
         
         [SerializeField] private GameObject granaryBuilding;
@@ -90,7 +90,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             FarmCalculationData farmCalculationData = new FarmCalculationData(positionOfGranaryBuilding, positionOfFirstFarmPath.y,
                 spriteRendererFillerGameObject.bounds.size.y + spriteRendererOfFarmPathGameObject.bounds.size.y, 
                 numberOfFarms, futureFarmFieldController.gameObject.transform.position.y, farmFieldControllers, 
-                granaryController, farmShopController, futureFarmFieldController, xOfFirstUpgradeFarmFieldButton);
+                granaryControllers, farmShopControllers, futureFarmFieldController, xOfFirstUpgradeFarmFieldButton);
             
             return farmCalculationData;
         }
@@ -100,8 +100,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             GameObject granaryBuildingGameObject = Instantiate(granaryBuilding, positionOfGranaryBuilding, Quaternion.identity);
             GameObject shoppingBuildingGameObject = Instantiate(shoppingBuilding, positionOfShoppingBuilding, Quaternion.identity);
 
-            granaryController = granaryBuildingGameObject.GetComponent<GranaryController>();
-            farmShopController = shoppingBuildingGameObject.GetComponent<FarmShopController>();
+
+            var granaryController = granaryBuildingGameObject.GetComponent<GranaryController>();
+            granaryControllers.Add(granaryController);
+            
+            var farmShopController = shoppingBuildingGameObject.GetComponent<FarmShopController>();
+            farmShopControllers.Add(farmShopController);
         }
         
         private void GenerateNumberOfFarms(int n)
