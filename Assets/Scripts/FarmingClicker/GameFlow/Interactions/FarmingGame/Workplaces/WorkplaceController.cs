@@ -155,7 +155,21 @@
 
             return finalCost;
         }
+        
+        public int GetWorkingSpeedOfCurrentLevelIncrementedBy(int i = 0)
+        {
+            return 1;
+        }
 
+        public int GetMovingSpeedOfCurrentLevelIncrementedBy(int i = 0)
+        {
+            return 1;
+        }
+        
+        public InfVal GetLoadOfCurrentLevelIncrementedBy(int i = 0)
+        {
+            return 100 * upgradeLevel;
+        }
         
     }
 }

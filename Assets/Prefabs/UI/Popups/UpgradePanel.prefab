@@ -943,21 +943,29 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   title: {fileID: 954808103967450506}
+  price: {fileID: 7260530886040043216}
+  inactiveButtonColor: {r: 1, g: 1, b: 1, a: 0.65}
   exitButton: {fileID: 954808102203633832}
-  buyButton: {fileID: 0}
+  buyButton: {fileID: 1171116616915349788}
   upgrade1XButton: {fileID: 954808103405660457}
   upgrade5XButton: {fileID: 5946308362328333980}
   upgrade10XButton: {fileID: 4219300243342843271}
+  buyButtonImage: {fileID: 2774584185151186472}
+  upgrade1XButtonImage: {fileID: 954808103405660458}
+  upgrade5XButtonImage: {fileID: 1517571299703998018}
+  upgrade10XButtonImage: {fileID: 2718043716815032208}
   levelStatistic: {fileID: 4859339245290351556}
   workersStatistic: {fileID: 7735812834889202323}
   valueStatistic: {fileID: 3824129372264382282}
   workingSpeedStatistic: {fileID: 1917284349903814871}
   movingSpeedStatistic: {fileID: 7247031412750114203}
+  loadStatistic: {fileID: 335117629894883644}
   levelStatisticComponents: {fileID: 11400000, guid: 729605e99dc16fe41b3b04460163be1f, type: 2}
   workersStatisticComponents: {fileID: 11400000, guid: 96c26b489a0c50d4eb5567c45a031595, type: 2}
   valueStatisticComponents: {fileID: 11400000, guid: d0163110238ad934f8e72d13181051e6, type: 2}
   workingSpeedStatisticComponents: {fileID: 11400000, guid: 59fef5e92e1757e4b9b45eacc56aa7a3, type: 2}
   movingSpeedStatisticComponents: {fileID: 11400000, guid: 12381f5abe868e74fbb6e91b614f61ea, type: 2}
+  loadStatisticComponents: {fileID: 11400000, guid: 2beb2fd1955e2374b8e653d153cd1d19, type: 2}
 --- !u!223 &954808103644771604
 Canvas:
   m_ObjectHideFlags: 0
@@ -1490,8 +1498,7 @@ MonoBehaviour:
   icon: {fileID: 5694357572378165868}
   nameText: {fileID: 8992946395688106753}
   currentLevelText: {fileID: 4750291440665402543}
-  valX5Text: {fileID: 0}
-  valX10Text: {fileID: 0}
+  nextLevelText: {fileID: 0}
 --- !u!114 &7670034819075936655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2204,8 +2211,7 @@ MonoBehaviour:
   icon: {fileID: 1473726954892192946}
   nameText: {fileID: 5863885527870198936}
   currentLevelText: {fileID: 4775095676923194907}
-  valX5Text: {fileID: 0}
-  valX10Text: {fileID: 0}
+  nextLevelText: {fileID: 0}
 --- !u!114 &2037001667180010755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,8 +2586,7 @@ MonoBehaviour:
   icon: {fileID: 6834034532273094174}
   nameText: {fileID: 8025683995709332108}
   currentLevelText: {fileID: 72118339773706633}
-  valX5Text: {fileID: 0}
-  valX10Text: {fileID: 0}
+  nextLevelText: {fileID: 0}
 --- !u!114 &5146728489605798139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4510,8 +4515,7 @@ MonoBehaviour:
   icon: {fileID: 1466387256722896986}
   nameText: {fileID: 548504091141355656}
   currentLevelText: {fileID: 9184906335345270040}
-  valX5Text: {fileID: 0}
-  valX10Text: {fileID: 0}
+  nextLevelText: {fileID: 0}
 --- !u!114 &6502618944091193343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5772,8 +5776,7 @@ MonoBehaviour:
   icon: {fileID: 580895341924199757}
   nameText: {fileID: 8544589149238393715}
   currentLevelText: {fileID: 6043803590060682610}
-  valX5Text: {fileID: 0}
-  valX10Text: {fileID: 0}
+  nextLevelText: {fileID: 0}
 --- !u!114 &9218715659106098998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6582,8 +6585,7 @@ MonoBehaviour:
   icon: {fileID: 4368027516564233459}
   nameText: {fileID: 8065297602743429675}
   currentLevelText: {fileID: 6603609771552390220}
-  valX5Text: {fileID: 0}
-  valX10Text: {fileID: 0}
+  nextLevelText: {fileID: 0}
 --- !u!114 &5740202323036615194
 MonoBehaviour:
   m_ObjectHideFlags: 0
