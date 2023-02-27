@@ -24,13 +24,13 @@
         private List<WorkerController> workerControllers = new List<WorkerController>(); 
         
         
-        private int upgradeLevel = 0;
-        private int numberOfWorkers = 0;
-        private InfVal currentCurrency = 0;
-        private InfVal valueOfTransportedCurrency = 0;
-        private InfVal valueOfCroppedCurrency = 0;
-        private int workingSpeed = 0;
-        private int movingSpeed = 0;
+        protected int upgradeLevel = 0;
+        protected int numberOfWorkers = 0;
+        protected InfVal currentCurrency = 0;
+        protected InfVal valueOfTransportedCurrency = 0;
+        protected InfVal valueOfCroppedCurrency = 0;
+        protected int workingSpeed = 0;
+        protected int movingSpeed = 0;
 
         public int UpgradeLevel
         {
@@ -105,7 +105,6 @@
             UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, title);
             
             MessageDispatcher.Instance.Send(new DisplayUpgradePanelCommand(data));
-
         }
 
         public void BuyUpgrade(int numberOfBoughtLevels)
@@ -136,7 +135,7 @@
         {
             InfVal collectedValue = 0;
 
-            for (int j = 0; j < i + 1; i++)
+            for (int j = 0; j < i + 1; j++)
             {
                 collectedValue += 1.67f * (upgradeLevel+j+1) * 1;
             }

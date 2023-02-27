@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10x
+  m_text: x
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 223e02f20b30150459a9ff747cab74e6, type: 2}
   m_sharedMaterial: {fileID: 5358622243421224682, guid: 223e02f20b30150459a9ff747cab74e6, type: 2}
@@ -824,8 +824,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.41000366, y: -2.156}
-  m_SizeDelta: {x: -25.381, y: 10.426}
+  m_AnchoredPosition: {x: -9.124, y: -2.156}
+  m_SizeDelta: {x: 0.835, y: 10.426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &954808103462542006
 CanvasRenderer:
@@ -945,15 +945,27 @@ MonoBehaviour:
   title: {fileID: 954808103967450506}
   price: {fileID: 7260530886040043216}
   inactiveButtonColor: {r: 1, g: 1, b: 1, a: 0.65}
+  buyMultipliers: 01000000050000000a000000
+  alphaOfInactiveText: 0.65
   exitButton: {fileID: 954808102203633832}
   buyButton: {fileID: 1171116616915349788}
-  upgrade1XButton: {fileID: 954808103405660457}
-  upgrade5XButton: {fileID: 5946308362328333980}
-  upgrade10XButton: {fileID: 4219300243342843271}
+  upgradeButtons:
+  - {fileID: 954808103405660457}
+  - {fileID: 5946308362328333980}
+  - {fileID: 4219300243342843271}
+  upgradeButtonTexts:
+  - {fileID: 954808103832871842}
+  - {fileID: 5612937699379789834}
+  - {fileID: 7217266090570467114}
+  upgradeButtonImages:
+  - {fileID: 954808103405660458}
+  - {fileID: 1517571299703998018}
+  - {fileID: 2718043716815032208}
+  upgradeButtonReflections:
+  - {fileID: 954808103785295629}
+  - {fileID: 2475867712477363136}
+  - {fileID: 5673383285430476341}
   buyButtonImage: {fileID: 2774584185151186472}
-  upgrade1XButtonImage: {fileID: 954808103405660458}
-  upgrade5XButtonImage: {fileID: 1517571299703998018}
-  upgrade10XButtonImage: {fileID: 2718043716815032208}
   levelStatistic: {fileID: 4859339245290351556}
   workersStatistic: {fileID: 7735812834889202323}
   valueStatistic: {fileID: 3824129372264382282}
@@ -1138,8 +1150,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.00021409988}
-  m_SizeDelta: {x: 225, y: 225}
+  m_AnchoredPosition: {x: 8.937, y: -0.00021409988}
+  m_SizeDelta: {x: 242.875, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &954808103785295631
 Animator:
@@ -1227,7 +1239,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1x
+  m_text: x
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 223e02f20b30150459a9ff747cab74e6, type: 2}
   m_sharedMaterial: {fileID: 5358622243421224682, guid: 223e02f20b30150459a9ff747cab74e6, type: 2}
@@ -1498,7 +1510,7 @@ MonoBehaviour:
   icon: {fileID: 5694357572378165868}
   nameText: {fileID: 8992946395688106753}
   currentLevelText: {fileID: 4750291440665402543}
-  nextLevelText: {fileID: 0}
+  nextLevelText: {fileID: 726637425743749039}
 --- !u!114 &7670034819075936655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2211,7 +2223,7 @@ MonoBehaviour:
   icon: {fileID: 1473726954892192946}
   nameText: {fileID: 5863885527870198936}
   currentLevelText: {fileID: 4775095676923194907}
-  nextLevelText: {fileID: 0}
+  nextLevelText: {fileID: 2536367788748763579}
 --- !u!114 &2037001667180010755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2435,7 +2447,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.00098419, y: 0}
-  m_SizeDelta: {x: 655.08, y: 225}
+  m_SizeDelta: {x: 602.93, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1231248467698112934
 CanvasRenderer:
@@ -2586,7 +2598,7 @@ MonoBehaviour:
   icon: {fileID: 6834034532273094174}
   nameText: {fileID: 8025683995709332108}
   currentLevelText: {fileID: 72118339773706633}
-  nextLevelText: {fileID: 0}
+  nextLevelText: {fileID: 8101087151054019555}
 --- !u!114 &5146728489605798139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2865,7 +2877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -572, y: 0.000011444}
+  m_AnchoredPosition: {x: -455.76, y: 0.000011444}
   m_SizeDelta: {x: 289.647, y: 230.794}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1624365322689907147
@@ -2943,8 +2955,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.41000366, y: -2.156}
-  m_SizeDelta: {x: -25.381, y: 10.426}
+  m_AnchoredPosition: {x: -35.969, y: -2.156}
+  m_SizeDelta: {x: -164.191, y: 10.426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6244923813314607027
 CanvasRenderer:
@@ -3442,7 +3454,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5x
+  m_text: x
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 223e02f20b30150459a9ff747cab74e6, type: 2}
   m_sharedMaterial: {fileID: 5358622243421224682, guid: 223e02f20b30150459a9ff747cab74e6, type: 2}
@@ -3759,8 +3771,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.41000366, y: -2.156}
-  m_SizeDelta: {x: -25.381, y: 10.426}
+  m_AnchoredPosition: {x: 2.1200027, y: -2.1559982}
+  m_SizeDelta: {x: 19.092, y: 10.426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8740473496655339585
 CanvasRenderer:
@@ -4061,8 +4073,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.41000366, y: -2.156}
-  m_SizeDelta: {x: -25.381, y: 10.426}
+  m_AnchoredPosition: {x: -0.22699738, y: -2.1559982}
+  m_SizeDelta: {x: 26.876, y: 10.426}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7964320447087803477
 CanvasRenderer:
@@ -4515,7 +4527,7 @@ MonoBehaviour:
   icon: {fileID: 1466387256722896986}
   nameText: {fileID: 548504091141355656}
   currentLevelText: {fileID: 9184906335345270040}
-  nextLevelText: {fileID: 0}
+  nextLevelText: {fileID: 511193268050644152}
 --- !u!114 &6502618944091193343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5776,7 +5788,7 @@ MonoBehaviour:
   icon: {fileID: 580895341924199757}
   nameText: {fileID: 8544589149238393715}
   currentLevelText: {fileID: 6043803590060682610}
-  nextLevelText: {fileID: 0}
+  nextLevelText: {fileID: 2974971963450245404}
 --- !u!114 &9218715659106098998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6074,7 +6086,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 123.48, y: -485.9029}
-  m_SizeDelta: {x: 655.08, y: 225}
+  m_SizeDelta: {x: 602.934, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8388688369927827672
 GameObject:
@@ -6360,8 +6372,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0017776, y: -0.00021409988}
-  m_SizeDelta: {x: 871.81, y: 225}
+  m_AnchoredPosition: {x: 35.355995, y: -0.00021409988}
+  m_SizeDelta: {x: 801.095, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1388511097407867853
 Animator:
@@ -6585,7 +6597,7 @@ MonoBehaviour:
   icon: {fileID: 4368027516564233459}
   nameText: {fileID: 8065297602743429675}
   currentLevelText: {fileID: 6603609771552390220}
-  nextLevelText: {fileID: 0}
+  nextLevelText: {fileID: 2456497434459389361}
 --- !u!114 &5740202323036615194
 MonoBehaviour:
   m_ObjectHideFlags: 0

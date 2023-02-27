@@ -20,17 +20,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         [SerializeField, BoxGroup("Main")] private TMP_Text title;
         [SerializeField, BoxGroup("Main")] private TMP_Text price;
         [SerializeField, BoxGroup("Main")] private Color inactiveButtonColor = new Color(1,1,1,0.65f);
+        [SerializeField, BoxGroup("Main")] private List<int> buyMultipliers = new List<int>();
+        [SerializeField, BoxGroup("Main")] private float alphaOfInactiveText = 0.65f;
 
         [SerializeField, BoxGroup("Buttons")] private Button exitButton;
         [SerializeField, BoxGroup("Buttons")] private Button buyButton;
-        [SerializeField, BoxGroup("Buttons")] private Button upgrade1XButton;
-        [SerializeField, BoxGroup("Buttons")] private Button upgrade5XButton;
-        [SerializeField, BoxGroup("Buttons")] private Button upgrade10XButton;
+        [SerializeField, BoxGroup("Buttons")] private List<Button> upgradeButtons = new List<Button>();
+        [SerializeField, BoxGroup("Buttons")] private List<TMP_Text> upgradeButtonTexts = new List<TMP_Text>();
+        [SerializeField, BoxGroup("Buttons")] private List<Image> upgradeButtonImages = new List<Image>();
+        [SerializeField, BoxGroup("Buttons")] private List<GameObject> upgradeButtonReflections = new List<GameObject>();
         
         [SerializeField, BoxGroup("Button Images")] private Image buyButtonImage;
-        [SerializeField, BoxGroup("Button Images")] private Image upgrade1XButtonImage;
-        [SerializeField, BoxGroup("Button Images")] private Image upgrade5XButtonImage;
-        [SerializeField, BoxGroup("Button Images")] private Image upgrade10XButtonImage;
         
         [SerializeField, BoxGroup("Statistics")]
         private UpgradeStatistics levelStatistic;        
@@ -60,15 +60,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         
         private WorkplaceController currentWorkplaceController;
         private int startingNumberOfIncrementedLevelsAfterDisplayingPopup = 1;
-        
+        private int currentMultiplyButtonPressed = -1;
+
         private void Awake()
         {
-
             ListenedTypes.Add(typeof(ChangeStatisticsOfUpgradeNotification));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
-
-
         }
 
         public void Open()
@@ -86,9 +84,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private void RemoveListeners()
         {
             exitButton.onClick.RemoveAllListeners();
-            upgrade1XButton.onClick.RemoveAllListeners();
-            upgrade5XButton.onClick.RemoveAllListeners();
-            upgrade10XButton.onClick.RemoveAllListeners();
+            foreach (var upgradeButton in upgradeButtons)
+            {
+                upgradeButton.onClick.RemoveAllListeners();
+            }
         }
 
         public override void SetupData(IPopupData data)
@@ -97,34 +96,36 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             
             title.text = upgradeDisplayPopupData.Title;
             currentWorkplaceController = upgradeDisplayPopupData.WorkplaceController;
-
-            InitializeStatistics(upgradeDisplayPopupData,startingNumberOfIncrementedLevelsAfterDisplayingPopup);
-            
+            InitializeMultiplierButtonTexts();
+            InitializeStatistics(upgradeDisplayPopupData,buyMultipliers[0]);
+            ChangeColorOfButtons(0);
             exitButton.onClick.AddListener(CloseGame);
-            
-            upgrade1XButton.onClick.AddListener(() =>
-            {
-                InitializeStatistics(upgradeDisplayPopupData,1);
-                ChangeColorOfButtons(1);
-            });
-            upgrade5XButton.onClick.AddListener(() =>
-            {
-                InitializeStatistics(upgradeDisplayPopupData,5);
-                ChangeColorOfButtons(5);
 
-            });
-            upgrade10XButton.onClick.AddListener(() =>
+            for (int i = 0; i < upgradeButtons.Count; i++)
             {
-                InitializeStatistics(upgradeDisplayPopupData,10);
-                ChangeColorOfButtons(10);
-
-            });
+                int index = i;
+                upgradeButtons[i].onClick.AddListener(() =>
+                {
+                    InitializeStatistics(upgradeDisplayPopupData, buyMultipliers[index]);
+                    ChangeColorOfButtons(index);
+                });
+            }
             
             gameObject.SetActive(true);
         }
 
+        private void InitializeMultiplierButtonTexts()
+        {
+            for (int i = 0; i < upgradeButtons.Count; i++)
+            {
+                upgradeButtonTexts[i].text = $"{buyMultipliers[i]}x";
+            }
+        }
+        
+        
         private void InitializeStatistics(UpgradeDisplayPopupData upgradeDisplayPopupData, int levelsInfcementedByNumber)
         {
+            
             levelStatistic.InitializeStatistic(
                 levelStatisticComponents.GetIcon(),
                 levelStatisticComponents.GetTitle(),
@@ -139,56 +140,69 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             
             valueStatistic.InitializeStatistic(
                 valueStatisticComponents.GetIcon(),
-                workersStatisticComponents.GetTitle(),
+                valueStatisticComponents.GetTitle(),
                 upgradeDisplayPopupData.WorkplaceController.GetValueOfLevelIncrementedBy().ToString(),
                 upgradeDisplayPopupData.WorkplaceController.GetValueOfLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             workingSpeedStatistic.InitializeStatistic(
                 workingSpeedStatisticComponents.GetIcon(),
-                workersStatisticComponents.GetTitle(),
+                workingSpeedStatisticComponents.GetTitle(),
                 upgradeDisplayPopupData.WorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy().ToString(),
                 upgradeDisplayPopupData.WorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             movingSpeedStatistic.InitializeStatistic(
                 movingSpeedStatisticComponents.GetIcon(),
-                workersStatisticComponents.GetTitle(),
+                movingSpeedStatisticComponents.GetTitle(),
                 upgradeDisplayPopupData.WorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy().ToString(),
                 upgradeDisplayPopupData.WorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             loadStatistic.InitializeStatistic(
                 loadStatisticComponents.GetIcon(),
-                workersStatisticComponents.GetTitle(),
+                loadStatisticComponents.GetTitle(),
                 upgradeDisplayPopupData.WorkplaceController.GetLoadOfCurrentLevelIncrementedBy().ToString(),
                 upgradeDisplayPopupData.WorkplaceController.GetLoadOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
 
             price.text =
                 upgradeDisplayPopupData.WorkplaceController.GetCostOfLevelIncrementedBy(levelsInfcementedByNumber).ToString();
+            
+            buyButton.onClick.RemoveAllListeners();
+            buyButton.onClick.AddListener(() =>
+            {
+                BuyUpgrade(levelsInfcementedByNumber, upgradeDisplayPopupData.WorkplaceController);
+            });
+
+        }
+        
+
+        private void ChangeTextColorToCertainAlpha(TMP_Text targetText, float alphaLevel)
+        {
+            Color originalColor = targetText.color;
+            originalColor.a = alphaLevel;
+            targetText.color = originalColor;
         }
 
-        private void ChangeColorOfButtons(int buttonToTurnOn)
+        private void ChangeColorOfButtons(int buttonToTurnOnIndex)
         {
-            upgrade1XButtonImage.color = inactiveButtonColor;
-            upgrade5XButtonImage.color = inactiveButtonColor;
-            upgrade10XButtonImage.color = inactiveButtonColor;
-
-            switch (buttonToTurnOn)
+            if(buttonToTurnOnIndex == currentMultiplyButtonPressed) return;
+            
+            currentMultiplyButtonPressed = buttonToTurnOnIndex;
+            
+            for (int i = 0; i < upgradeButtons.Count; i++)
             {
-                case 1:
+                if (i == buttonToTurnOnIndex)
                 {
-                    upgrade1XButtonImage.color = Color.white;
-                    break;
+                    Debug.Log("ChangeColor");
+                    upgradeButtonImages[i].color = Color.white;
+                    ChangeTextColorToCertainAlpha(upgradeButtonTexts[i], 1);
+                    upgradeButtonReflections[i].SetActive(true);
                 }
-                case 5:
+                else
                 {
-                    upgrade5XButtonImage.color = Color.white;
+                    upgradeButtonImages[i].color = inactiveButtonColor;
+                    ChangeTextColorToCertainAlpha(upgradeButtonTexts[i], alphaOfInactiveText);
+                    upgradeButtonReflections[i].SetActive(false);
+                }
 
-                    break;
-                }
-                default:
-                {
-                    upgrade10XButtonImage.color = Color.white;
-                    break;
-                }
             }
         }
         
