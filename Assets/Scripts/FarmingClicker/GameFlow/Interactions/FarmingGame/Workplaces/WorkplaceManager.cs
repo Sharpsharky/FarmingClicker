@@ -5,8 +5,6 @@
     using Core.Message;
     using Core.Message.Interfaces;
     using FarmsSpawnerManager;
-    using LoadData;
-    using Tractor;
     using Sirenix.OdinInspector;
     using UnityEngine;
     using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
@@ -16,9 +14,8 @@
         [SerializeField] private GameObject workerPrefab;
         protected List<WorkPlaceData> workPlaceDataList = new List<WorkPlaceData>();
 
-        private FarmCalculationData initialFarmCalculationData;
-        
-        private List<WorkplaceController> workplaceControllers;
+        protected FarmCalculationData initialFarmCalculationData;
+        protected List<WorkplaceController> workplaceControllers;
         
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers)
         {
@@ -42,7 +39,7 @@
             {
                 workplaceControllers[i].Initialize(
                     initialFarmCalculationData,
-                    workPlaceDataList,
+                    workPlaceDataList[i],
                     workerPrefab);
             }
         }

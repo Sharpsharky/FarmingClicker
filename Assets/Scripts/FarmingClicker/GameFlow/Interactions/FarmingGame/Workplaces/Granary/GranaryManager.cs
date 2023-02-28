@@ -1,3 +1,6 @@
+using System.Linq;
+using UnityEngine;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
 {
     using System.Collections.Generic;
@@ -11,12 +14,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
     
     public class GranaryManager : WorkplaceManager
     {
-        private List<TractorController> tractorControllers = new List<TractorController>();
-        private FarmCalculationData initialFarmCalculationData;
-        
-        private GranaryController granaryController;
-
-
         public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers)
         {
             workPlaceDataList = new List<WorkPlaceData>(LoadDataFarmManager.instance.FarmGranaryData);
@@ -29,9 +26,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
         
         private void AddNewFieldForTractors(FarmFieldController farmFieldController)
         {
-            foreach (var tractor in tractorControllers)
+            List<GranaryController> granaryControllers = workplaceControllers.OfType<GranaryController>().ToList();
+            if (granaryControllers.Count == 0) return;
+
+            foreach (var granaryController in granaryControllers)
             {
-                tractor.AddNewField(farmFieldController);
+                granaryController.AddNewFieldForTractors(farmFieldController);
             }
         }
         
@@ -43,6 +43,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
             {
                 case FarmFieldConstructedNotification buyNewFieldCommand:
                 {
+                    Debug.Log("FarmFieldConstructedNotification");
                     AddNewFieldForTractors(buyNewFieldCommand.NewFarmFieldController);
                     break;
                 }

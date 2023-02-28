@@ -18,10 +18,10 @@
         [SerializeField] private Button upgradeButton;
         [SerializeField] private string title;
 
-        private FarmCalculationData initialFarmCalculationData;
-        private GameObject workerPrefab;
-        private List<WorkPlaceData> workPlaceDataList = new List<WorkPlaceData>();
-        private List<WorkerController> workerControllers = new List<WorkerController>(); 
+        protected FarmCalculationData initialFarmCalculationData;
+        protected GameObject workerPrefab;
+        protected WorkPlaceData workPlaceData;
+        protected List<WorkerController> workerControllers = new List<WorkerController>(); 
         
         
         protected int upgradeLevel = 0;
@@ -41,11 +41,11 @@
         public InfVal CurrentCurrency => currentCurrency;
         public InfVal ValueOfTransportedCurrency => valueOfTransportedCurrency;
 
-        public virtual void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkPlaceData> workPlaceDataList, GameObject workerPrefab)
+        public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, GameObject workerPrefab)
         {
             Debug.Log($"Initialize WorkplaceController {gameObject.name}");
             this.initialFarmCalculationData = initialFarmCalculationData;
-            this.workPlaceDataList = new List<WorkPlaceData>(workPlaceDataList);
+            this.workPlaceData = workPlaceData;
             this.workerPrefab = workerPrefab;
             
             SetValueOfTransportedCurrency(valueOfTransportedCurrency);
@@ -55,7 +55,9 @@
 
         private void InitializeWorkers()
         {
-            for (int i = 0; i < numberOfWorkers; i++)
+            Debug.Log($"InitializeWorkers {gameObject.name}: {numberOfWorkers}");
+
+            for (int i = 0; i < workPlaceData.numberOfWorkers; i++)
             {
                 InitializeWorker();
             }
@@ -64,18 +66,20 @@
         protected virtual void InitializeWorker()
         {
 
+            if (workerPrefab == null) return;
+            
             GameObject newWorker = Instantiate(workerPrefab, initialFarmCalculationData.StartingPoint, Quaternion.identity);
             var newWorkerController = newWorker.GetComponent<WorkerController>();
             workerControllers.Add(newWorkerController);
 
-            
+            Debug.Log("InitializeWorker");
             //Now initialize the Worker.
             
-            /*newWorkerController.Initialize(initialFarmCalculationData.FarmFieldControllers, 
+            newWorkerController.Initialize(new List<WorkplaceController>(initialFarmCalculationData.FarmFieldControllers), 
                 initialFarmCalculationData.StartingPoint, initialFarmCalculationData.YOfFirstStop, 
                 initialFarmCalculationData.DistanceBetweenStops, initialFarmCalculationData.NumberOfStops, 
                 initialFarmCalculationData.YOfGarage, 
-                initialFarmCalculationData.GranaryController.gameObject.transform.position);*/
+                initialFarmCalculationData.GranaryControllers[0].gameObject.transform.position);
             
         }
 

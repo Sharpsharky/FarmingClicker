@@ -418,6 +418,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8f51eb931cfa64586b321bd970cdbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  workerPrefab: {fileID: 0}
 --- !u!1 &1079745569
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +472,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f9f657f1095dd4099a883e0f28019b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  workerPrefab: {fileID: 0}
 --- !u!1 &1087071474
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,7 +789,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ff8c3734c5ba4438bf1bda6a54b23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tractorPrefab: {fileID: 1430959955572205630, guid: 805ad7a22ef58b84998d4d0ddf72c180, type: 3}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  workerPrefab: {fileID: 1430959955572205630, guid: 805ad7a22ef58b84998d4d0ddf72c180, type: 3}
 --- !u!1 &1169920830
 GameObject:
   m_ObjectHideFlags: 0

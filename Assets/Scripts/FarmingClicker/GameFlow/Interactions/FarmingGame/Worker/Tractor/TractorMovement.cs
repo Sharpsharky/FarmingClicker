@@ -6,6 +6,7 @@ using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
 using UnityEngine;
 using System.Linq;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {

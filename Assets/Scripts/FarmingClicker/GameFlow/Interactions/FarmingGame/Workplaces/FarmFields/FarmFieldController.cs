@@ -10,10 +10,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
     {
         [SerializeField] private TMP_Text currentCurrencyText;
 
-        public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkPlaceData> workPlaceDataList, GameObject workerPrefab)
+        public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, GameObject workerPrefab)
         {
             
-            base.Initialize(initialFarmCalculationData, workPlaceDataList, workerPrefab);
+            base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab);
             StartCoroutine(FakeCurrencyGenerator());
         }
         

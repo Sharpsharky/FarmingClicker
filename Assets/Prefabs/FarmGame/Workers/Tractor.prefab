@@ -369,6 +369,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ece4af6d037433aad5a61c542dcc3ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1430959955572205628}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: workerMovable
+      Entry: 10
+      Data: 0
+  xOfLeftTractorPathRelativeToGranary: -0.5
   tractorAcquireCrops: {fileID: 8745390384705774955}
   manageTractorSprites: {fileID: 3841328380520472475}
   tractorMovement: {fileID: 1430959955572205628}

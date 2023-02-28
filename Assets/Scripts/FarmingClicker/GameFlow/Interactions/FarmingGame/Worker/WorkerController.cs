@@ -13,7 +13,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 
         [SerializeField] private float xOfLeftTractorPathRelativeToGranary = -0.5f;
         
-        private List<WorkplaceController> farmFieldControllers;
+        protected List<WorkplaceController> farmFieldControllers;
         private InfVal maxLoad = 10;
         public void Initialize(List<WorkplaceController> farmFieldControllers, Vector3 startingPoint, float yOfFirstStop, 
             float distanceBetweenStops, int numberOfStops, float yOfGarage, Vector3 posOfGranary)
