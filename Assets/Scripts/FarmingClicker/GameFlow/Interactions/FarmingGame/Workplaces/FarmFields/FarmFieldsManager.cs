@@ -16,6 +16,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         
         public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers)
         {
+            workPlaceDataList = new List<WorkPlaceData>(LoadDataFarmManager.instance.FarmFieldDatas);
+
             base.Initialize(initialFarmCalculationData, workplaceControllers);
             
             ListenedTypes.Add(typeof(FarmFieldConstructedNotification));

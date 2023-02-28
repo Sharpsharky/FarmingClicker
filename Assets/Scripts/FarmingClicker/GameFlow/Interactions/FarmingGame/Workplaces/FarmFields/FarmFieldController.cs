@@ -12,6 +12,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
 
         public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkPlaceData> workPlaceDataList, GameObject workerPrefab)
         {
+            
             base.Initialize(initialFarmCalculationData, workPlaceDataList, workerPrefab);
             StartCoroutine(FakeCurrencyGenerator());
         }

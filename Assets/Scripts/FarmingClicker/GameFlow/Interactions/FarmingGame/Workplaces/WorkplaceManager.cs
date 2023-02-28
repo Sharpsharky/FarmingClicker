@@ -14,7 +14,6 @@
     public abstract class WorkplaceManager : SerializedMonoBehaviour, IMessageReceiver
     {
         [SerializeField] private GameObject workerPrefab;
-        [SerializeField] private List<TractorController> tractorControllers = new List<TractorController>();
         protected List<WorkPlaceData> workPlaceDataList = new List<WorkPlaceData>();
 
         private FarmCalculationData initialFarmCalculationData;
@@ -23,9 +22,9 @@
         
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers)
         {
-            this.workplaceControllers = workplaceControllers;
+            this.workplaceControllers = new List<WorkplaceController>(workplaceControllers);
             this.initialFarmCalculationData = initialFarmCalculationData;
-
+            Debug.Log($"Initialize manager: {gameObject}: {this.workplaceControllers.Count}");
             GetInitialData();
 
             RegisterThisReceiver();

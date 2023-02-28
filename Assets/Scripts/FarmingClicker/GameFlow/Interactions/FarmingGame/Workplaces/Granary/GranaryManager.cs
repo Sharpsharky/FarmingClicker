@@ -1,6 +1,3 @@
-using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
 {
     using System.Collections.Generic;
@@ -9,11 +6,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
     using Tractor;
     using FarmFields;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction;
-    using UnityEngine;
+    using LoadData;
+    using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
+    
     public class GranaryManager : WorkplaceManager
     {
-        [SerializeField] private GameObject tractorPrefab;
-        [SerializeField] private List<TractorController> tractorControllers = new List<TractorController>();
+        private List<TractorController> tractorControllers = new List<TractorController>();
         private FarmCalculationData initialFarmCalculationData;
         
         private GranaryController granaryController;
