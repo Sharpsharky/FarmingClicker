@@ -1,4 +1,4 @@
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary;

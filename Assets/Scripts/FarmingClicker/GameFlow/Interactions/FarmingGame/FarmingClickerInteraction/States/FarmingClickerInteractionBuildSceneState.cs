@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;

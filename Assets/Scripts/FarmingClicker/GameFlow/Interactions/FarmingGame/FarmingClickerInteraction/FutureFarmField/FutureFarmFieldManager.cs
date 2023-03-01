@@ -5,7 +5,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     using Core.Message;
     using Core.Message.Interfaces;
     using FarmsSpawnerManager;
-    using FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField;
     using LoadData;
     using FarmingClicker.GameFlow.Messages.Commands.NewField;
     using InfiniteValue;
@@ -28,7 +27,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             var priceOfFutureFarmField = CalculatePriceOfFutureFarmField(currentNumberOfFarms);
             int timeOfConstruction = CalculateTimeOfConstruction(currentNumberOfFarms);
             
-            futureFarmFieldController.Initialize(priceOfFutureFarmField, timeOfConstruction);
+            futureFarmFieldController.Initialize(initialFarmCalculationData, priceOfFutureFarmField, timeOfConstruction);
             
             ListenedTypes.Add(typeof(BuyNewFieldCommand));
             MessageDispatcher.Instance.RegisterReceiver(this);

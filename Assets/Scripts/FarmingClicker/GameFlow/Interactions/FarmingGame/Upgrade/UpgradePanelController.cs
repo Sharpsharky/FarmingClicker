@@ -97,23 +97,29 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             title.text = upgradeDisplayPopupData.Title;
             currentWorkplaceController = upgradeDisplayPopupData.WorkplaceController;
             InitializeMultiplierButtonTexts();
-            InitializeStatistics(upgradeDisplayPopupData,buyMultipliers[0]);
             ChangeColorOfButtons(0);
             exitButton.onClick.AddListener(CloseGame);
 
+            InitializeStatistics(buyMultipliers[0]);
+
+            InitializeButtons(upgradeDisplayPopupData);
+            
+            gameObject.SetActive(true);
+        }
+
+        private void InitializeButtons(UpgradeDisplayPopupData upgradeDisplayPopupData)
+        {
             for (int i = 0; i < upgradeButtons.Count; i++)
             {
                 int index = i;
                 upgradeButtons[i].onClick.AddListener(() =>
                 {
-                    InitializeStatistics(upgradeDisplayPopupData, buyMultipliers[index]);
+                    InitializeStatistics(buyMultipliers[index]);
                     ChangeColorOfButtons(index);
                 });
             }
-            
-            gameObject.SetActive(true);
         }
-
+        
         private void InitializeMultiplierButtonTexts()
         {
             for (int i = 0; i < upgradeButtons.Count; i++)
@@ -123,52 +129,52 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         }
         
         
-        private void InitializeStatistics(UpgradeDisplayPopupData upgradeDisplayPopupData, int levelsInfcementedByNumber)
+        private void InitializeStatistics(int levelsInfcementedByNumber)
         {
             
             levelStatistic.InitializeStatistic(
                 levelStatisticComponents.GetIcon(),
                 levelStatisticComponents.GetTitle(),
-                upgradeDisplayPopupData.WorkplaceController.GetLevelIncrementedBy().ToString(),
-                upgradeDisplayPopupData.WorkplaceController.GetLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetLevelIncrementedBy().ToString(),
+                currentWorkplaceController.GetLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             workersStatistic.InitializeStatistic(
                 workersStatisticComponents.GetIcon(),
                 workersStatisticComponents.GetTitle(),
-                upgradeDisplayPopupData.WorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy().ToString(),
-                upgradeDisplayPopupData.WorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy().ToString(),
+                currentWorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             valueStatistic.InitializeStatistic(
                 valueStatisticComponents.GetIcon(),
                 valueStatisticComponents.GetTitle(),
-                upgradeDisplayPopupData.WorkplaceController.GetValueOfLevelIncrementedBy().ToString(),
-                upgradeDisplayPopupData.WorkplaceController.GetValueOfLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetValueOfLevelIncrementedBy().ToString(),
+                currentWorkplaceController.GetValueOfLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             workingSpeedStatistic.InitializeStatistic(
                 workingSpeedStatisticComponents.GetIcon(),
                 workingSpeedStatisticComponents.GetTitle(),
-                upgradeDisplayPopupData.WorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy().ToString(),
-                upgradeDisplayPopupData.WorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy().ToString(),
+                currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             movingSpeedStatistic.InitializeStatistic(
                 movingSpeedStatisticComponents.GetIcon(),
                 movingSpeedStatisticComponents.GetTitle(),
-                upgradeDisplayPopupData.WorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy().ToString(),
-                upgradeDisplayPopupData.WorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy().ToString(),
+                currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             loadStatistic.InitializeStatistic(
                 loadStatisticComponents.GetIcon(),
                 loadStatisticComponents.GetTitle(),
-                upgradeDisplayPopupData.WorkplaceController.GetLoadOfCurrentLevelIncrementedBy().ToString(),
-                upgradeDisplayPopupData.WorkplaceController.GetLoadOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy().ToString(),
+                currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
 
             price.text =
-                upgradeDisplayPopupData.WorkplaceController.GetCostOfLevelIncrementedBy(levelsInfcementedByNumber).ToString();
+                currentWorkplaceController.GetCostOfLevelIncrementedBy(levelsInfcementedByNumber).ToString();
             
             buyButton.onClick.RemoveAllListeners();
             buyButton.onClick.AddListener(() =>
             {
-                BuyUpgrade(levelsInfcementedByNumber, upgradeDisplayPopupData.WorkplaceController);
+                BuyUpgrade(levelsInfcementedByNumber, currentWorkplaceController);
             });
 
         }
@@ -223,9 +229,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             {
                 case ChangeStatisticsOfUpgradeNotification changeStatisticsOfUpgradeNotification:
                 {
-                    //currentValueText.text = changeStatisticsOfUpgradeNotification.CurrentValueOfCroppedCurrency.ToString();
+                    InitializeStatistics(buyMultipliers[currentMultiplyButtonPressed]);
                     break;
-                }
+            }
                 
             }
         }

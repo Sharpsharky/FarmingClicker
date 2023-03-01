@@ -15,8 +15,8 @@
 
     public abstract class WorkplaceController : SerializedMonoBehaviour
     {
-        [SerializeField] private Button upgradeButton;
-        [SerializeField] private string title;
+        [SerializeField] protected Button upgradeButton;
+        [SerializeField] protected string title;
 
         protected FarmCalculationData initialFarmCalculationData;
         protected GameObject workerPrefab;

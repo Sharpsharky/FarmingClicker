@@ -3,7 +3,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
     using System.Collections;
     using TMPro;
     using UnityEngine;
-    using System.Collections.Generic;
     using FarmsSpawnerManager;
     using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
     public class FarmFieldController : WorkplaceController
@@ -14,7 +13,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         {
             
             base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab);
+            SetPositionOfButton();
             StartCoroutine(FakeCurrencyGenerator());
+        }
+
+        private void SetPositionOfButton()
+        {
+            Vector3 curPosOfUpgradeButton = gameObject.transform.position;
+            curPosOfUpgradeButton.x = initialFarmCalculationData.XOfFirstUpgradeFarmFieldButton;
+            upgradeButton.transform.position = curPosOfUpgradeButton;
         }
         
         private IEnumerator FakeCurrencyGenerator()

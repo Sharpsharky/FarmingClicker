@@ -1,16 +1,17 @@
-﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 {
     using UnityEngine;
     using System.Collections.Generic;
-    using FutureFarmField;
     using Workplaces.FarmFields;
     using Workplaces.FarmShop;
     using Workplaces.Granary;
     public class FarmCalculationData
     {
         public Vector3 StartingPoint;
+        public float XOfUpgradeFarmButton;
         public float YOfFirstStop;
         public float DistanceBetweenStops;
         public int NumberOfStops;

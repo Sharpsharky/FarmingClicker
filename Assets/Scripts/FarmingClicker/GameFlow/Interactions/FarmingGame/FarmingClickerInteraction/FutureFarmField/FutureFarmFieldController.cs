@@ -1,4 +1,4 @@
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField
 {
     using Core.Message;
     using FarmingClicker.Data.Popup;
@@ -6,22 +6,32 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FutureFarmField
     using InfiniteValue;
     using UnityEngine;
     using UnityEngine.UI;
-    
+    using FarmsSpawnerManager;
+
     public class FutureFarmFieldController : MonoBehaviour
     {
         [SerializeField] private Button upgradeButton;
 
         private InfVal priceToBuyTheNextFarmField;
         private int timeOfFarmConstruction;
+        private FarmCalculationData initialFarmCalculationData;
         
-        public void Initialize(InfVal priceToBuyTheNextFarmField, int timeOfFarmConstruction)
+        public void Initialize(FarmCalculationData initialFarmCalculationData, InfVal priceToBuyTheNextFarmField, int timeOfFarmConstruction)
         {
             this.priceToBuyTheNextFarmField = priceToBuyTheNextFarmField;
             this.timeOfFarmConstruction = timeOfFarmConstruction;
-
+            this.initialFarmCalculationData = initialFarmCalculationData;
+            SetPositionOfButton();
             upgradeButton.onClick.AddListener(OpenBuyNewFieldPopUp);
         }
 
+        private void SetPositionOfButton()
+        {
+            Vector3 curPosOfUpgradeButton = gameObject.transform.position;
+            curPosOfUpgradeButton.x = initialFarmCalculationData.XOfFirstUpgradeFarmFieldButton;
+            upgradeButton.transform.position = curPosOfUpgradeButton;
+        }
+        
         private void OpenBuyNewFieldPopUp()
         {
             var buyNewFieldPopupData = new BuyNewFieldPopupData(priceToBuyTheNextFarmField, timeOfFarmConstruction);
