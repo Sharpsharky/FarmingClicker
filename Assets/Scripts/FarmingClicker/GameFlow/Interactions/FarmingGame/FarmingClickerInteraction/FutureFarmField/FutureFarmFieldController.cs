@@ -29,7 +29,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         {
             Vector3 curPosOfUpgradeButton = gameObject.transform.position;
             curPosOfUpgradeButton.x = initialFarmCalculationData.XOfFirstUpgradeFarmFieldButton;
-            upgradeButton.transform.position = curPosOfUpgradeButton;
+            upgradeButton.transform.parent.position = curPosOfUpgradeButton;
         }
         
         private void OpenBuyNewFieldPopUp()

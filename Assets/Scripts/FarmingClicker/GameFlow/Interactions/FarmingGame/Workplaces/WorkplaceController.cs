@@ -49,7 +49,7 @@
             this.workerPrefab = workerPrefab;
             
             SetValueOfTransportedCurrency(valueOfTransportedCurrency);
-            DisplayUpgradeButton(transform.position);
+            DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
         }
 
@@ -83,6 +83,11 @@
             
         }
 
+        protected virtual Vector3 CalculatePositionOfButton()
+        {
+            return transform.position;
+        }
+        
         protected InfVal SetValueOfTransportedCurrency(InfVal valueOfTransportedCurrency)
         {
             this.valueOfTransportedCurrency = valueOfTransportedCurrency;
@@ -101,8 +106,8 @@
         }
         protected void DisplayUpgradeButton(Vector3 buttonPos)
         {
-            upgradeButton.gameObject.transform.position = buttonPos;
             upgradeButton.onClick.AddListener(DisplayUpgrade);
+            upgradeButton.gameObject.transform.parent.position = buttonPos;
         }
         
         protected void DisplayUpgrade()

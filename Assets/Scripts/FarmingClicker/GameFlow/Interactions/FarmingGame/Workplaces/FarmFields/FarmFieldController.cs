@@ -13,15 +13,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         {
             
             base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab);
-            SetPositionOfButton();
             StartCoroutine(FakeCurrencyGenerator());
         }
 
-        private void SetPositionOfButton()
+        protected override Vector3 CalculatePositionOfButton()
         {
             Vector3 curPosOfUpgradeButton = gameObject.transform.position;
             curPosOfUpgradeButton.x = initialFarmCalculationData.XOfFirstUpgradeFarmFieldButton;
-            upgradeButton.transform.position = curPosOfUpgradeButton;
+            return curPosOfUpgradeButton;
         }
         
         private IEnumerator FakeCurrencyGenerator()
