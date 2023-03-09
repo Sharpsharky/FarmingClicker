@@ -129,18 +129,18 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - Farm Field Upgrade
-      - Ulepszenie Pola Uprawnego
-      - Farmfeld-Upgrade
-      - "Mise \xC0 Niveau Du Champ Agricole"
-      - "Actualizaci\xF3n De Campo De Cultivo"
-      - "\xC7iftlik Alan\u0131 Y\xFCkseltmesi"
-      - Aggiornamento Del Campo Agricolo
-      - "Atualiza\xE7\xE3o De Campo Agr\xEDcola"
-      - "\u519C\u7530\u5347\u7EA7"
-      - "\u7551\u306E\u30A2\u30C3\u30D7\u30B0\u30EC\u30FC\u30C9"
-      - Boerderij Veld Upgrade
-      - "\u0410\u043F\u0433\u0440\u0435\u0439\u0434 \u041F\u043E\u043B\u044F \u0424\u0435\u0440\u043C\u044B"
+      - Farmland
+      - Pole Uprawne
+      - Ackerland
+      - Les Terres Agricoles
+      - Tierras De Cultivo
+      - "Tar\u0131m Arazisi"
+      - Terreni Agricoli
+      - "Terras Agr\xEDcolas"
+      - "\u519C\u7530"
+      - "\u8FB2\u5730"
+      - Landbouwgrond
+      - "\u0421\u0435\u043B\u044C\u0445\u043E\u0437\u0443\u0433\u043E\u0434\u044C\u044F"
       Flags: 000000000000000000000000
       Languages_Touch: []
     - Term: WorkplaceUpgrade_Granary
@@ -166,7 +166,7 @@ MonoBehaviour:
       Description: 
       Languages:
       - Farm Shop
-      - "Sklep Z Artyku\u0142ami Gospodarskimi"
+      - Sklep Farmerski
       - Hofladen
       - Magasin De La Ferme
       - Tienda De Granja
@@ -195,6 +195,60 @@ MonoBehaviour:
       - "\u305D\u308C\u3092\u8CFC\u5165\uFF01"
       - Koop het!
       - "\u041A\u0443\u043F\u0438\u0442\u044C \u044D\u0442\u043E!"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
+    - Term: UI_Price
+      TermType: 0
+      Description: 
+      Languages:
+      - Price
+      - Cena
+      - Preis
+      - Prix
+      - Precio
+      - Fiyat
+      - Prezzo
+      - "Pre\xE7o"
+      - "\u4EF7\u683C"
+      - "\u4FA1\u683C"
+      - Prijs
+      - "\u0426\u0435\u043D\u0430"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
+    - Term: UI_WaitingTime
+      TermType: 0
+      Description: 
+      Languages:
+      - Waiting time
+      - Czas oczekiwania
+      - Wartezeit
+      - Temps d'attente
+      - Tiempo de espera
+      - "Bekleme s\xFCresi"
+      - Tempo di attesa
+      - Tempo de espera
+      - "\u7B49\u5F85\u7684\u65F6\u95F4"
+      - "\u5F85\u3061\u6642\u9593"
+      - Wachttijd
+      - "\u0412\u0440\u0435\u043C\u044F \u043E\u0436\u0438\u0434\u0430\u043D\u0438\u044F"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
+    - Term: BuyANewField
+      TermType: 0
+      Description: 
+      Languages:
+      - Buy a new field
+      - Kup nowe pole
+      - Kaufen Sie ein neues Feld
+      - Acheter un nouveau terrain
+      - Comprar un nuevo campo
+      - "yeni bir alan sat\u0131n al"
+      - Compra un nuovo campo
+      - Compre um novo campo
+      - "\u8D2D\u4E70\u65B0\u5B57\u6BB5"
+      - "\u65B0\u3057\u3044\u7551\u3092\u8CFC\u5165"
+      - Koop een nieuw veld
+      - "\u041A\u0443\u043F\u0438\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u043F\u043E\u043B\u0435"
       Flags: 000000000000000000000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0

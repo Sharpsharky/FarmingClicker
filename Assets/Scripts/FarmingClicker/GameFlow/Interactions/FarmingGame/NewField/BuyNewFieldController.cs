@@ -24,7 +24,21 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
         
         [SerializeField, BoxGroup("Statistics")] private TMP_Text priceText;
         [SerializeField, BoxGroup("Statistics")] private TMP_Text timeOfConstructionText;
-
+        
+        [SerializeField, BoxGroup("Titles")] private TMP_Text priceTitle;
+        [SerializeField, BoxGroup("Titles")] private TMP_Text timeOfConstructionTitle;
+        [SerializeField, BoxGroup("Titles")] private TMP_Text titleText;
+        
+        [SerializeField, BoxGroup("I2Loc")] private string priceTitleI2Loc;
+        [SerializeField, BoxGroup("I2Loc")] private string timeOfConstructionTitleI2Loc;
+        [SerializeField, BoxGroup("I2Loc")] private string titleTextI2Loc;
+        
+        private void Awake()
+        {
+            priceTitle.text = $"{I2.Loc.LocalizationManager.GetTranslation(priceTitleI2Loc)}:";
+            timeOfConstructionTitle.text = $"{I2.Loc.LocalizationManager.GetTranslation(timeOfConstructionTitleI2Loc)}:";
+            titleText.text = $"{I2.Loc.LocalizationManager.GetTranslation(titleTextI2Loc)}:";
+        }
 
         public override void SetupData(IPopupData data)
         {

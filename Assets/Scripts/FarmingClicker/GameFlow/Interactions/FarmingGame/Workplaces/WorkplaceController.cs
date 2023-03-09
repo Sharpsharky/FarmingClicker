@@ -112,7 +112,7 @@
         
         protected void DisplayUpgrade()
         {
-            UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, title);
+            UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, I2.Loc.LocalizationManager.GetTranslation(title));
             
             MessageDispatcher.Instance.Send(new DisplayUpgradePanelCommand(data));
         }

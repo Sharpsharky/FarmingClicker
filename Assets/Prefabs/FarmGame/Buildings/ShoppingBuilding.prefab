@@ -108,7 +108,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   upgradeButton: {fileID: 2689679372896955676}
-  title: Farm Shop
+  title: WorkplaceUpgrade_FarmShop
 --- !u!1001 &204697843391515020
 PrefabInstance:
   m_ObjectHideFlags: 0

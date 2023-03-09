@@ -99,9 +99,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d1904428dc2f544abbed03cca8c829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   upgradeButton: {fileID: 1611682791963400388}
+  title: WorkplaceUpgrade_FarmField
   currentCurrencyText: {fileID: 3887100487801165736}
-  title: Farm Field
 --- !u!1 &4250493555686503953
 GameObject:
   m_ObjectHideFlags: 0

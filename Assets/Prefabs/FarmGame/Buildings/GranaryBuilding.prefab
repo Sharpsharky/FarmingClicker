@@ -193,7 +193,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   upgradeButton: {fileID: 1328640002074063597}
-  title: Granary
+  title: WorkplaceUpgrade_Granary
 --- !u!1001 &3887967346885367421
 PrefabInstance:
   m_ObjectHideFlags: 0

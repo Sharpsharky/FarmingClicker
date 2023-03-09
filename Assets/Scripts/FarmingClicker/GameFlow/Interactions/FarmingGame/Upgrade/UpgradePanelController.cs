@@ -134,37 +134,37 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             
             levelStatistic.InitializeStatistic(
                 levelStatisticComponents.GetIcon(),
-                levelStatisticComponents.GetTitle(),
+                $"{levelStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetLevelIncrementedBy().ToString(),
                 currentWorkplaceController.GetLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             workersStatistic.InitializeStatistic(
                 workersStatisticComponents.GetIcon(),
-                workersStatisticComponents.GetTitle(),
+                $"{workersStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy().ToString(),
                 currentWorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             valueStatistic.InitializeStatistic(
                 valueStatisticComponents.GetIcon(),
-                valueStatisticComponents.GetTitle(),
+                $"{valueStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetValueOfLevelIncrementedBy().ToString(),
                 currentWorkplaceController.GetValueOfLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             workingSpeedStatistic.InitializeStatistic(
                 workingSpeedStatisticComponents.GetIcon(),
-                workingSpeedStatisticComponents.GetTitle(),
+                $"{workingSpeedStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy().ToString(),
                 currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             movingSpeedStatistic.InitializeStatistic(
                 movingSpeedStatisticComponents.GetIcon(),
-                movingSpeedStatisticComponents.GetTitle(),
+                $"{movingSpeedStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy().ToString(),
                 currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             loadStatistic.InitializeStatistic(
                 loadStatisticComponents.GetIcon(),
-                loadStatisticComponents.GetTitle(),
+                $"{loadStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy().ToString(),
                 currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
 
