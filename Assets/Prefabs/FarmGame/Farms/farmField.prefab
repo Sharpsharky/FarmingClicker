@@ -354,6 +354,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 729652136176977029}
     m_Modifications:
+    - target: {fileID: 2089673691705296223, guid: 6144510ab7a16314990e1ab34c1cc702, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3144635134479131604, guid: 6144510ab7a16314990e1ab34c1cc702, type: 3}
       propertyPath: m_Name
       value: ButtonUpgradeFarmField

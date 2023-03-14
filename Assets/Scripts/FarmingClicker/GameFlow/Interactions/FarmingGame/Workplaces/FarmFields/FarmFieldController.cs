@@ -1,3 +1,5 @@
+using InfiniteValue;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
 {
     using System.Collections;
@@ -13,6 +15,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         {
             
             base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab);
+            Debug.Log("Initialize + FarmFieldController_>_>_>_");
+            SetCurrentCurrencyText();
             StartCoroutine(FakeCurrencyGenerator());
         }
 
@@ -27,10 +31,34 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         {
             yield return new WaitForSeconds(3f);
             currentCurrency += valueOfCroppedCurrency;
-            currentCurrencyText.text = currentCurrency.ToString();
+            SetCurrentCurrencyText();
             yield return null;
         }
 
+        public void TakeAmountOfCrops(InfVal amount)
+        {
+            currentCurrency -= CalculateAmountOfCropsToTake(amount);
+            SetCurrentCurrencyText();
+        }
+
+        private void SetCurrentCurrencyText()
+        {
+            currentCurrencyText.text = currentCurrency.ToString();
+        }
+        
+        private InfVal CalculateAmountOfCropsToTake(InfVal amount)
+        {
+            if (amount <= currentCurrency)
+            {
+                return amount;
+            }
+            else
+            {
+                return amount - currentCurrency;
+            }
+            
+            
+        }
 
         
     }

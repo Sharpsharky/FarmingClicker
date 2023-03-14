@@ -11,7 +11,7 @@ using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor;
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
 
-    public class TractorMovement : MonoBehaviour, IWorkerMovable
+    public class TractorMovement : MonoBehaviour
     {
 
         [SerializeField] private float speed = 1f;
@@ -30,17 +30,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private List<FarmFieldController> farmFieldControllers;
         private TractorController tractorController;
         
-        public void Initialize(WorkerController tractorController, List<WorkplaceController> workplaceControllers, Vector3 startingPoint,
+        public void Initialize(TractorController tractorController, List<FarmFieldController> workplaceControllers, Vector3 startingPoint,
             float distanceBetweenStops, float xOfRightTractorPath, float xOfLeftTractorPath)
         {
             
-            if(tractorController is TractorController _tractorController)
-                this.tractorController = _tractorController;
-
-            if (workplaceControllers is List<WorkplaceController> workplaceControllerList)
-            {
-                this.farmFieldControllers = workplaceControllerList.OfType<FarmFieldController>().ToList();
-            }
+            this.tractorController = tractorController;
+            farmFieldControllers = new List<FarmFieldController>(workplaceControllers);
             
             this.startingPoint = startingPoint;
             this.distanceBetweenStops = distanceBetweenStops;

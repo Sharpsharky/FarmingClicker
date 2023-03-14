@@ -51,7 +51,14 @@
             SetValueOfTransportedCurrency(valueOfTransportedCurrency);
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
+            InitializeWorkPlaceData();
         }
+
+        private void InitializeWorkPlaceData()
+        {
+            valueOfCroppedCurrency = CalculateValueOfCroppedCurrency(workPlaceData.upgradeLevel);
+        }
+        
 
         private void InitializeWorkers()
         {
@@ -63,24 +70,26 @@
             }
         }
 
-        protected virtual void InitializeWorker()
+        protected virtual WorkerController InitializeWorker()
         {
 
-            if (workerPrefab == null) return;
+            if (workerPrefab == null) return null;
             
             GameObject newWorker = Instantiate(workerPrefab, initialFarmCalculationData.StartingPoint, Quaternion.identity);
             var newWorkerController = newWorker.GetComponent<WorkerController>();
             workerControllers.Add(newWorkerController);
 
             Debug.Log("InitializeWorker");
+
+            return newWorkerController;
             //Now initialize the Worker.
-            
+            /*
             newWorkerController.Initialize(new List<WorkplaceController>(initialFarmCalculationData.FarmFieldControllers), 
                 initialFarmCalculationData.StartingPoint, initialFarmCalculationData.YOfFirstStop, 
                 initialFarmCalculationData.DistanceBetweenStops, initialFarmCalculationData.NumberOfStops, 
                 initialFarmCalculationData.YOfGarage, 
-                initialFarmCalculationData.GranaryControllers[0].gameObject.transform.position);
-            
+                initialFarmCalculationData.GranaryControllers[0].gameObject.transform.position);*/
+
         }
 
         protected virtual Vector3 CalculatePositionOfButton()
@@ -121,7 +130,7 @@
         {
             upgradeLevel += numberOfBoughtLevels;
 
-            var currentValueOfCroppedCurrency = SetValueOfTransportedCurrency(
+            var currentValueOfCroppedCurrency = SetValueOfCroppedCurrency(
                 CalculateValueOfCroppedCurrency(UpgradeLevel));
 
             MessageDispatcher.Instance.Send(
