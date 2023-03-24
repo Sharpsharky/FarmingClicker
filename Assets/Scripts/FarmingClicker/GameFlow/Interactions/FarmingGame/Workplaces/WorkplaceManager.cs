@@ -11,7 +11,7 @@
 
     public abstract class WorkplaceManager : SerializedMonoBehaviour, IMessageReceiver
     {
-        [SerializeField] private GameObject workerPrefab;
+        [SerializeField] protected GameObject workerPrefab;
         protected List<WorkPlaceData> workPlaceDataList = new List<WorkPlaceData>();
 
         protected FarmCalculationData initialFarmCalculationData;

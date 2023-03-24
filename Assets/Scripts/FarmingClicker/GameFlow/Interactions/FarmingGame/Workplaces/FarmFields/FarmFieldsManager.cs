@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
 {
     using System.Collections.Generic;
@@ -35,6 +37,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                 {
                     Debug.Log("FarmFieldConstructedNotification");
                     LoadDataFarmManager.instance.AddEmptyFarmField();
+                    farmFieldConstructedNotification.NewFarmFieldController.Initialize(initialFarmCalculationData,
+                        workPlaceDataList.LastOrDefault(),
+                        workerPrefab);
                     farmFieldControllers.Add(farmFieldConstructedNotification.NewFarmFieldController);
                     break;
                 }

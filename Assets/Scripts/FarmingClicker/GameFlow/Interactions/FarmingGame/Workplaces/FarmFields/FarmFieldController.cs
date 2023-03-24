@@ -29,9 +29,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         
         private IEnumerator FakeCurrencyGenerator()
         {
-            yield return new WaitForSeconds(3f);
-            currentCurrency += valueOfCroppedCurrency;
-            SetCurrentCurrencyText();
+            while (true)
+            {
+                yield return new WaitForSeconds(3f);
+                currentCurrency += valueOfCroppedCurrency;
+                SetCurrentCurrencyText();
+            }
+
             yield return null;
         }
 

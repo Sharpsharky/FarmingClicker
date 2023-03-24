@@ -56,7 +56,7 @@
 
         private void InitializeWorkPlaceData()
         {
-            valueOfCroppedCurrency = CalculateValueOfCroppedCurrency(workPlaceData.upgradeLevel);
+            SetValueOfCroppedCurrency(GetValueOfLevelIncrementedBy());
         }
         
 
@@ -80,7 +80,7 @@
             workerControllers.Add(newWorkerController);
 
             Debug.Log("InitializeWorker");
-
+            
             return newWorkerController;
             //Now initialize the Worker.
             /*
@@ -129,12 +129,12 @@
         public void BuyUpgrade(int numberOfBoughtLevels)
         {
             upgradeLevel += numberOfBoughtLevels;
-
-            var currentValueOfCroppedCurrency = SetValueOfCroppedCurrency(
-                CalculateValueOfCroppedCurrency(UpgradeLevel));
+            Debug.Log($"upgradeLevel: {upgradeLevel}");
+            valueOfCroppedCurrency = SetValueOfCroppedCurrency(GetValueOfLevelIncrementedBy());
+            Debug.Log($"valueOfCroppedCurrency: {valueOfCroppedCurrency}");
 
             MessageDispatcher.Instance.Send(
-                new ChangeStatisticsOfUpgradeNotification(currentValueOfCroppedCurrency));
+                new ChangeStatisticsOfUpgradeNotification(valueOfCroppedCurrency));
         }
 
 
