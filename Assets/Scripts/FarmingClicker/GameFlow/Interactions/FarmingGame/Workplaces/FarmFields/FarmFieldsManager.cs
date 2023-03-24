@@ -13,8 +13,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
     {
         private List<FarmFieldData> farmFields = new List<FarmFieldData>();
         private List<FarmFieldController> farmFieldControllers = new List<FarmFieldController>();
-        private FarmCalculationData initialFarmCalculationData;
-
         
         public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers)
         {
@@ -37,6 +35,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                 {
                     Debug.Log("FarmFieldConstructedNotification");
                     LoadDataFarmManager.instance.AddEmptyFarmField();
+                    Debug.Log($"initialFarmCalculationData: {initialFarmCalculationData.StartingPoint}");
                     farmFieldConstructedNotification.NewFarmFieldController.Initialize(initialFarmCalculationData,
                         workPlaceDataList.LastOrDefault(),
                         workerPrefab);

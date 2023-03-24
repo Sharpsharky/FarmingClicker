@@ -43,7 +43,7 @@
 
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, GameObject workerPrefab)
         {
-            Debug.Log($"Initialize WorkplaceController {gameObject.name}");
+            Debug.Log($"Initialize WorkplaceController {initialFarmCalculationData}");
             this.initialFarmCalculationData = initialFarmCalculationData;
             this.workPlaceData = workPlaceData;
             this.workerPrefab = workerPrefab;
