@@ -38,7 +38,12 @@
             set { upgradeLevel = value; }
         }
         public int NumberOfWorkers => numberOfWorkers;
-        public InfVal CurrentCurrency => currentCurrency;
+        public InfVal CurrentCurrency
+        {
+            get => currentCurrency;
+            set => currentCurrency = value;
+        }
+
         public InfVal ValueOfTransportedCurrency => valueOfTransportedCurrency;
 
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, GameObject workerPrefab)

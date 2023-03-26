@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
     using InfiniteValue;
@@ -10,18 +12,36 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         
         [SerializeField] private TMP_Text currentCropCountText;
 
-        public void AcquireCrop(InfVal cropToAdd)
+        public void Initialize(InfVal maxCropCount, TractorMovement tractorMovement)
         {
-            currentCropCount += cropToAdd;
-            if (currentCropCount > maxCropCount) currentCropCount = maxCropCount;
-            
-            
+            this.maxCropCount = maxCropCount;
+            currentCropCount = 0;
+            SetCurrentCropCountText();
+            tractorMovement.OnTractorStoppedOnFarmField += AcquireCrop;
         }
+       
+        
+        public void AcquireCrop(FarmFieldController farmFieldController)
+        {
+            var finalCrop = currentCropCount + farmFieldController.CurrentCurrency;
+            InfVal rest = 0;
+            
+            if (finalCrop > maxCropCount)
+            {
+                rest = finalCrop - maxCropCount;
+                finalCrop = maxCropCount;
+            }
+            
+            farmFieldController.CurrentCurrency = rest;
+            currentCropCount = finalCrop;
 
-        private void DisplayCurrentCropCount()
+            SetCurrentCropCountText();
+            farmFieldController.SetCurrentCurrencyText();
+        }
+        
+        private void SetCurrentCropCountText()
         {
             currentCropCountText.text = currentCropCount.ToString();
         }
-        
     }
 }

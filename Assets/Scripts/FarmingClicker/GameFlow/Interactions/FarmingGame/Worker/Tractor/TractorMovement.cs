@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
@@ -19,7 +20,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private int direction = -1;
         private bool isStopped = true;
         private float nextStopY;
-        private float currentStopCount = 0;
+        private int currentStopCount = 0;
         private float xOfRightTractorPath;
         private float xOfLeftTractorPath;
         
@@ -29,6 +30,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private bool isGoingToTheLastStop = false;
         private List<FarmFieldController> farmFieldControllers;
         private TractorController tractorController;
+
+        public event Action<FarmFieldController> OnTractorStoppedOnFarmField;
         
         public void Initialize(TractorController tractorController, List<FarmFieldController> workplaceControllers, Vector3 startingPoint,
             float distanceBetweenStops, float xOfRightTractorPath, float xOfLeftTractorPath)
@@ -101,6 +104,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
         private void IterateStop()
         {
+            if (currentStopCount > 0 && currentStopCount <= farmFieldControllers.Count)
+            {
+                StoppedByFarmField(currentStopCount-1);
+            }
+            
             if (isGoingToTheLastStop) //If going to the last stop (Garage)
             {
                 ChangeDirection();
@@ -123,10 +131,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             }
 
             currentStopCount++;
+            
 
         }
+        private void StoppedByFarmField(int indexOfFarmField)
+        {
+            Debug.Log($"Start Collecting Crops!");
+            OnTractorStoppedOnFarmField(farmFieldControllers[indexOfFarmField]);
+        }
         
-
         private void ChangeDirection()
         {
             direction *= -1;

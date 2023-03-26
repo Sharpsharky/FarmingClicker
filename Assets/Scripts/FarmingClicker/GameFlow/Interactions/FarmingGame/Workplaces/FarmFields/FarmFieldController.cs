@@ -45,7 +45,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
             SetCurrentCurrencyText();
         }
 
-        private void SetCurrentCurrencyText()
+        public void SetCurrentCurrencyText()
         {
             currentCurrencyText.text = currentCurrency.ToString();
         }
