@@ -7,7 +7,9 @@ using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
 using UnityEngine;
 using System.Linq;
+using Core.Message;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor;
+using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Granary;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
@@ -118,7 +120,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
                 return;
             }
 
-            if (direction > 0) ChangeDirection(); //If going to Granary
+            if (direction > 0) //If going to Granary
+            {
+                StoppedInGranary();
+            }
 
             if (currentStopCount >= farmFieldControllers.Count)
             {
@@ -138,6 +143,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         {
             Debug.Log($"Start Collecting Crops!");
             OnTractorStoppedOnFarmField(farmFieldControllers[indexOfFarmField]);
+        }
+        
+        private void StoppedInGranary()
+        {
+            Debug.Log($"StoppedInGranary!");
+            
+            ChangeDirection();
+            
+            var data = new TractorWentToGranaryNotification(tractorController);
+            MessageDispatcher.Instance.Send(data);
         }
         
         private void ChangeDirection()

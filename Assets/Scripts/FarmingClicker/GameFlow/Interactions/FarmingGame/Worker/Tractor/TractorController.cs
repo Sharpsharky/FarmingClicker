@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
 {
     using FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor;
-    using Workplaces;
     using InfiniteValue;
     using UnityEngine;
+    using System.Collections.Generic;
+    using Workplaces.FarmFields;
     
     public class TractorController : WorkerController
     {
@@ -35,10 +33,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
             tractorMovement.AddNewField(farmFieldController);
         }
 
+        public InfVal GetCurrentCropAndResetIt()
+        {
+            return tractorAcquireCrops.GetCurrentCropAndResetIt();
+        }
+        
         public void ChangeLoad(InfVal newLoad)
         {
             manageTractorSprites.ChangeCropLoad(newLoad, maxLoad);
         }
+        
         
         public void ChangeDirection(TractorDirections tractorDirection)
         {

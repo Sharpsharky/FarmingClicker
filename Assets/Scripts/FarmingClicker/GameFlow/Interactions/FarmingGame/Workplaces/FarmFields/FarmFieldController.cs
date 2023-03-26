@@ -35,13 +35,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                 currentCurrency += valueOfCroppedCurrency;
                 SetCurrentCurrencyText();
             }
-
-            yield return null;
         }
 
-        public void TakeAmountOfCrops(InfVal amount)
+        public void SetCurrentCurrency(InfVal amount)
         {
-            currentCurrency -= CalculateAmountOfCropsToTake(amount);
+            currentCurrency = amount;
             SetCurrentCurrencyText();
         }
 
@@ -49,21 +47,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         {
             currentCurrencyText.text = currentCurrency.ToString();
         }
-        
-        private InfVal CalculateAmountOfCropsToTake(InfVal amount)
-        {
-            if (amount <= currentCurrency)
-            {
-                return amount;
-            }
-            else
-            {
-                return amount - currentCurrency;
-            }
-            
-            
-        }
-
         
     }
 }

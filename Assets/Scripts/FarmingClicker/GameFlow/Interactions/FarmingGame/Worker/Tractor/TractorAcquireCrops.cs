@@ -11,7 +11,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         private InfVal maxCropCount;
         
         [SerializeField] private TMP_Text currentCropCountText;
-
+        
         public void Initialize(InfVal maxCropCount, TractorMovement tractorMovement)
         {
             this.maxCropCount = maxCropCount;
@@ -36,12 +36,21 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             currentCropCount = finalCrop;
 
             SetCurrentCropCountText();
-            farmFieldController.SetCurrentCurrencyText();
+            farmFieldController.SetCurrentCurrency(rest);
         }
         
         private void SetCurrentCropCountText()
         {
             currentCropCountText.text = currentCropCount.ToString();
         }
+
+        public InfVal GetCurrentCropAndResetIt()
+        {
+            InfVal curCrop = currentCropCount;
+            currentCropCount = 0;
+            SetCurrentCropCountText();
+            return curCrop;
+        }
+        
     }
 }
