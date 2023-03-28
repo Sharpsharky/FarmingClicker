@@ -1,7 +1,16 @@
 ﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
 {
-    public class LorryController
+    using UnityEngine;
+
+    public class LorryController : WorkerController
     {
         
+        [SerializeField] private LorryMovement tractorMovement;
+
+        
+        public void Initialize()
+        {
+            tractorMovement.Initialize();
+        }
     }
 }
