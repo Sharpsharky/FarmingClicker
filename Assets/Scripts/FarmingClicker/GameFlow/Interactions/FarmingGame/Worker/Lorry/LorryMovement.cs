@@ -24,7 +24,7 @@
             this.farmShopController = farmShopController;
             currentMovementSpeed = movementSpeed;
             currentMaxLoad = maxLoad;
-        
+            ModifyRotation();
         }
         
         private void Update()
@@ -53,6 +53,23 @@
         private void ReverseDirection()
         {
             currentDir *= -1;
+            ModifyRotation();
+        }
+
+        private void ModifyRotation()
+        {
+            Quaternion curRot = transform.rotation;
+
+            if (currentDir < 0)
+            {
+                curRot.y = 180;
+            }
+            else
+            {
+                curRot.y = 0;
+            }
+
+            transform.rotation = curRot;
         }
         
         

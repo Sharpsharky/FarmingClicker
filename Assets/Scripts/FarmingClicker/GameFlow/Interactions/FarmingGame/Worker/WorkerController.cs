@@ -11,7 +11,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
     {
 
         
-        private InfVal maxLoad = 10;
+        protected InfVal maxLoad = 10;
 
         
     }
