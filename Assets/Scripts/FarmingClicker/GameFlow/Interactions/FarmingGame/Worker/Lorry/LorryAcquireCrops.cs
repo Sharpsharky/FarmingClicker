@@ -1,29 +1,32 @@
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
 {
+    using Core.Message;
+    using Workplaces.Granary;
+    using Messages.Commands.Currency;
     using InfiniteValue;
-    using UnityEngine;
     using TMPro;
-    using Workplaces.FarmFields;
-
-    public class TractorAcquireCrops : MonoBehaviour
+    using UnityEngine;
+    
+    public class LorryAcquireCrops
     {
         private InfVal currentCropCount;
         private InfVal maxCropCount;
         
         [SerializeField] private TMP_Text currentCropCountText;
         
-        public void Initialize(InfVal maxCropCount, TractorMovement tractorMovement)
+        public void Initialize(InfVal maxCropCount, LorryMovement lorryMovement)
         {
             this.maxCropCount = maxCropCount;
             currentCropCount = 0;
             SetCurrentCropCountText();
-            tractorMovement.OnTractorStoppedOnFarmField += AcquireCrop;
+            lorryMovement.OnLorryStoppedInGranary += AcquireCrop;
+            lorryMovement.OnLorryStoppedInShop += PutCropsToShop;
         }
        
         
-        public void AcquireCrop(FarmFieldController farmFieldController)
+        public void AcquireCrop(GranaryController granaryController)
         {
-            var finalCrop = currentCropCount + farmFieldController.CurrentCurrency;
+            var finalCrop = currentCropCount + granaryController.CurrentCurrency;
             InfVal rest = 0;
             
             if (finalCrop > maxCropCount)
@@ -32,12 +35,20 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
                 finalCrop = maxCropCount;
             }
             
-            farmFieldController.CurrentCurrency = rest;
+            granaryController.CurrentCurrency = rest;
             currentCropCount = finalCrop;
-
+            
             SetCurrentCropCountText();
-            farmFieldController.SetCurrentCurrency(rest);
+            granaryController.SetCurrentCurrency(rest);
         }
+
+        private void PutCropsToShop()
+        {
+            MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(currentCropCount));
+            currentCropCount = 0;
+            SetCurrentCropCountText();
+        }
+        
         
         private void SetCurrentCropCountText()
         {
@@ -51,6 +62,5 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             SetCurrentCropCountText();
             return curCrop;
         }
-        
     }
 }

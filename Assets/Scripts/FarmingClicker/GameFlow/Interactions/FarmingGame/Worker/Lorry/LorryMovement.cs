@@ -1,4 +1,7 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
+﻿using System;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
 {
     using Sirenix.OdinInspector;
     using UnityEngine;
@@ -16,6 +19,9 @@
         
         private bool isStopped;
         private int currentDir = -1;
+        
+        public event Action<GranaryController> OnLorryStoppedInGranary;
+        public event Action OnLorryStoppedInShop;
         
         public void Initialize(GranaryController granaryController, FarmShopController farmShopController
             , float movementSpeed, InfVal maxLoad)
@@ -46,10 +52,17 @@
         
         private void StopForLoading()
         {
+            NotifyOnStop();
             ReverseDirection();
             StartCoroutine(LoadingTime(1));
         }
 
+        private void NotifyOnStop()
+        {
+            if (currentDir < 0) OnLorryStoppedInGranary(granaryController);
+            else OnLorryStoppedInShop();
+        }
+        
         private void ReverseDirection()
         {
             currentDir *= -1;

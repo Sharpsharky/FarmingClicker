@@ -1,18 +1,17 @@
-﻿using System;
-using Core.Message;
-using Core.Message.Interfaces;
-using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Granary;
-using InfiniteValue;
-using TMPro;
-using UnityEngine;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
 {
     using System.Collections.Generic;
     using System.Linq;
     using Worker;
     using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor;
     using FarmFields;
+    using System;
+    using Core.Message;
+    using Core.Message.Interfaces;
+    using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Granary;
+    using InfiniteValue;
+    using TMPro;
+    using UnityEngine;
 
     public class GranaryController : WorkplaceController, IMessageReceiver
     {
@@ -56,7 +55,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
             initialFarmCalculationData.GranaryControllers[0].gameObject.transform.position);
             return newWorkerController;
         }
-        
+        public void SetCurrentCurrency(InfVal amount)
+        {
+            currentCurrency = amount;
+            SetCurrentCropText();
+        }
+                
         public void OnMessageReceived(object message)
         {
             if(!ListenedTypes.Contains(message.GetType())) return;

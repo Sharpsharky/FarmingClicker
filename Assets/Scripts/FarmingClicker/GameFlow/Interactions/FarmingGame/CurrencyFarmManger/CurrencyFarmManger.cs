@@ -1,25 +1,81 @@
-using System;
-using System.Collections.Generic;
-using InfiniteValue;
-using UnityEngine;
+using Core.Message;
+using TMPro;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarmManger
 {
-    public class CurrencyFarmManger : MonoBehaviour
+    using System.Collections.Generic;
+    using InfiniteValue;
+    using UnityEngine;
+    using System;
+    using Core.Message.Interfaces;
+    using Messages.Commands.Currency;
+    using Sirenix.OdinInspector;
+
+    public class CurrencyFarmManger : SerializedMonoBehaviour, IMessageReceiver
     {
-        public static List<InfVal> currentStorageOfEveryFarm { get; set; }
-        public static InfVal currentStorageOfGranary { get; set; }
 
+        [SerializeField] private TMP_Text currentCurrencyText;
+        [SerializeField] private TMP_Text currentSuperCurrencyText;
 
-        public void Initialize(Currencies currencies)
-        {
-            currentStorageOfEveryFarm = currencies.CurrentStorageOfEveryFarm;
-            currentStorageOfGranary = currencies.CurrentStorageOfGranary;
-        }
-
+        private InfVal currentCurrency = 0;
+        private InfVal currentSuperCurrency = 0;
+        
         private void Awake()
         {
-            currentStorageOfGranary = 0;
+            currentCurrency = 0;
+            currentSuperCurrency = 0;
+
+            SetTextOfCurrentCurrency();
+            SetTextOfCurrentSuperCurrency();
+            
+            
+            ListenedTypes.Add(typeof(ModifyCurrencyCommand));
+            ListenedTypes.Add(typeof(ModifySuperCurrencyCommand));
+            MessageDispatcher.Instance.RegisterReceiver(this);        
+        }
+
+
+        private void ModifyCurrentCurrency(InfVal amountToAdd)
+        {
+            currentCurrency += amountToAdd;
+            SetTextOfCurrentCurrency();
+        }
+        
+        private void ModifyCurrentSuperCurrency(InfVal amountToAdd)
+        {
+            currentSuperCurrency += amountToAdd;
+            SetTextOfCurrentSuperCurrency();
+
+        }
+        
+        private void SetTextOfCurrentCurrency()
+        {
+            currentCurrencyText.text = currentCurrency.ToString();
+        }
+        
+        private void SetTextOfCurrentSuperCurrency()
+        {
+            currentSuperCurrencyText.text = currentSuperCurrency.ToString();
+        }
+        
+        public List<Type> ListenedTypes { get; } = new List<Type>();
+        public void OnMessageReceived(object message)
+        {
+            if(!ListenedTypes.Contains(message.GetType())) return;
+
+            switch (message)
+            {
+                case ModifyCurrencyCommand command:
+                {
+                    ModifyCurrentCurrency(command.Amount);
+                    break;
+                }
+                case ModifySuperCurrencyCommand command:
+                {
+                    ModifyCurrentSuperCurrency(command.Amount);
+                    break;
+                }
+            }
         }
     }
 }
