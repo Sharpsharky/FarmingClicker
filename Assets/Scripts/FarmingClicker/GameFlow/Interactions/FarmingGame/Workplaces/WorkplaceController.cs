@@ -21,31 +21,12 @@
         protected FarmCalculationData initialFarmCalculationData;
         protected GameObject workerPrefab;
         protected WorkPlaceData workPlaceData;
-        protected List<WorkerController> workerControllers = new List<WorkerController>(); 
+        protected List<WorkerController> workerControllers = new List<WorkerController>();
+
+        protected WorkerProperties workerProperties = new WorkerProperties();
+
+        public WorkerProperties WorkerProperties => workerProperties;
         
-        
-        protected int upgradeLevel = 0;
-        protected int numberOfWorkers = 0;
-        protected InfVal currentCurrency = 0;
-        protected InfVal valueOfTransportedCurrency = 0;
-        protected InfVal valueOfCroppedCurrency = 0;
-        protected int workingSpeed = 0;
-        protected int movingSpeed = 0;
-
-        public int UpgradeLevel
-        {
-            get { return upgradeLevel; }
-            set { upgradeLevel = value; }
-        }
-        public int NumberOfWorkers => numberOfWorkers;
-        public InfVal CurrentCurrency
-        {
-            get => currentCurrency;
-            set => currentCurrency = value;
-        }
-
-        public InfVal ValueOfTransportedCurrency => valueOfTransportedCurrency;
-
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, GameObject workerPrefab)
         {
             Debug.Log($"Initialize WorkplaceController {initialFarmCalculationData}");
@@ -53,7 +34,7 @@
             this.workPlaceData = workPlaceData;
             this.workerPrefab = workerPrefab;
             
-            SetValueOfTransportedCurrency(valueOfTransportedCurrency);
+            SetValueOfTransportedCurrency(workerProperties.valueOfTransportedCurrency);
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
             InitializeWorkPlaceData();
@@ -67,12 +48,24 @@
 
         private void InitializeWorkers()
         {
-            Debug.Log($"InitializeWorkers {gameObject.name}: {numberOfWorkers}");
-
+            Debug.Log($"InitializeWorkers {gameObject.name}: {workerProperties.numberOfWorkers}");
+            
+            CalculateInitialProperties();
             for (int i = 0; i < workPlaceData.numberOfWorkers; i++)
             {
                 InitializeWorker();
             }
+        }
+
+        private void CalculateInitialProperties()
+        {
+            workerProperties.currentCurrency = CalculateValueOfCroppedCurrency(1);
+            workerProperties.movingSpeed = GetMovingSpeedOfCurrentLevelIncrementedBy();
+            workerProperties.upgradeLevel = 0;
+            workerProperties.workingSpeed = GetWorkingSpeedOfCurrentLevelIncrementedBy();
+            workerProperties.numberOfWorkers = workPlaceData.numberOfWorkers;
+            workerProperties.valueOfCroppedCurrency = 0;
+            workerProperties.valueOfTransportedCurrency = GetLoadOfCurrentLevelIncrementedBy();
         }
 
         protected virtual WorkerController InitializeWorker()
@@ -104,7 +97,7 @@
         
         protected InfVal SetValueOfTransportedCurrency(InfVal valueOfTransportedCurrency)
         {
-            this.valueOfTransportedCurrency = valueOfTransportedCurrency;
+            workerProperties.valueOfTransportedCurrency = valueOfTransportedCurrency;
 
             return valueOfTransportedCurrency;
         }
@@ -114,7 +107,7 @@
         }
         protected InfVal SetValueOfCroppedCurrency(InfVal valueOfCroppedCurrency)
         {
-            this.valueOfCroppedCurrency = valueOfCroppedCurrency;
+            workerProperties.valueOfCroppedCurrency = valueOfCroppedCurrency;
 
             return valueOfCroppedCurrency;
         }
@@ -133,25 +126,25 @@
 
         public void BuyUpgrade(int numberOfBoughtLevels)
         {
-            upgradeLevel += numberOfBoughtLevels;
-            Debug.Log($"upgradeLevel: {upgradeLevel}");
-            valueOfCroppedCurrency = SetValueOfCroppedCurrency(GetValueOfLevelIncrementedBy());
-            Debug.Log($"valueOfCroppedCurrency: {valueOfCroppedCurrency}");
+            workerProperties.upgradeLevel += numberOfBoughtLevels;
+            Debug.Log($"upgradeLevel: {workerProperties.upgradeLevel}");
+            workerProperties.valueOfCroppedCurrency = SetValueOfCroppedCurrency(GetValueOfLevelIncrementedBy());
+            Debug.Log($"valueOfCroppedCurrency: {workerProperties.valueOfCroppedCurrency}");
 
             MessageDispatcher.Instance.Send(
-                new ChangeStatisticsOfUpgradeNotification(valueOfCroppedCurrency));
+                new ChangeStatisticsOfUpgradeNotification(workerProperties.valueOfCroppedCurrency));
         }
 
 
 
         public int GetLevelIncrementedBy(int i = 0)
         {
-            return upgradeLevel + i;
+            return workerProperties.upgradeLevel + i;
         }
         
-        public int GetWorkerkersOfCurrentLevelIncrementedBy(int i = 0)
+        public int GetWorkersOfCurrentLevelIncrementedBy(int i = 0)
         {
-            int incrementedUpgradeLevel = upgradeLevel + i;
+            int incrementedUpgradeLevel = workerProperties.upgradeLevel + i;
             return incrementedUpgradeLevel;
         }
 
@@ -161,7 +154,7 @@
 
             for (int j = 0; j < i + 1; j++)
             {
-                collectedValue += 1.67f * (upgradeLevel+j+1) * 1;
+                collectedValue += 1.67f * (workerProperties.upgradeLevel+j+1) * 1;
             }
             
             return collectedValue;
@@ -170,7 +163,7 @@
         public InfVal GetCostOfLevelIncrementedBy(int i = 0)
         {
             float a = 3.67f;
-            InfVal b = Mathf.Pow(1.07f, upgradeLevel);
+            InfVal b = Mathf.Pow(1.07f, workerProperties.upgradeLevel);
             InfVal c = Mathf.Pow(1.07f, i)-1;
             float d = 1.07f - 1;
 
@@ -184,15 +177,31 @@
             return 1;
         }
 
-        public int GetMovingSpeedOfCurrentLevelIncrementedBy(int i = 0)
+        public float GetMovingSpeedOfCurrentLevelIncrementedBy(int i = 0)
         {
             return 1;
         }
         
         public InfVal GetLoadOfCurrentLevelIncrementedBy(int i = 0)
         {
-            return 100 * upgradeLevel;
+            return 100 * workerProperties.upgradeLevel;
         }
+        public InfVal GetValueOfTransportedCurrency(int i = 0)
+        {
+            return 1;
+        }
+
+        public InfVal GetValueOfCurrentCurrencyInWorkplace()
+        {
+            return workerProperties.currentCurrency;
+        }
+        
+        public InfVal AddValueOfCurrentCurrencyInWorkplace(InfVal val)
+        {
+            workerProperties.currentCurrency += val;
+            return workerProperties.currentCurrency;
+        }
+        
         
     }
 }

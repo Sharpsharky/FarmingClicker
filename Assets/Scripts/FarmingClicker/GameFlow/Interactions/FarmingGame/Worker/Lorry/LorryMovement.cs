@@ -23,13 +23,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
         public event Action<GranaryController> OnLorryStoppedInGranary;
         public event Action OnLorryStoppedInShop;
         
-        public void Initialize(GranaryController granaryController, FarmShopController farmShopController
-            , float movementSpeed, InfVal maxLoad)
+        public void Initialize(GranaryController granaryController, FarmShopController farmShopController)
         {
             this.granaryController = granaryController;
             this.farmShopController = farmShopController;
-            currentMovementSpeed = movementSpeed;
-            currentMaxLoad = maxLoad;
+
+            currentMovementSpeed = granaryController.GetMovingSpeedOfCurrentLevelIncrementedBy();
+            currentMaxLoad = granaryController.GetLoadOfCurrentLevelIncrementedBy();
+            
             ModifyRotation();
         }
         

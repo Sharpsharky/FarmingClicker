@@ -141,8 +141,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             workersStatistic.InitializeStatistic(
                 workersStatisticComponents.GetIcon(),
                 $"{workersStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetWorkerkersOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetWorkersOfCurrentLevelIncrementedBy().ToString(),
+                currentWorkplaceController.GetWorkersOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
             
             valueStatistic.InitializeStatistic(
                 valueStatisticComponents.GetIcon(),

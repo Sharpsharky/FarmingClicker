@@ -11,12 +11,14 @@
     {
         private InfVal currentCropCount;
         private InfVal maxCropCount;
+        private GranaryController granaryController;
         
         [SerializeField] private TMP_Text currentCropCountText;
         
-        public void Initialize(InfVal maxCropCount, LorryMovement lorryMovement)
+        public void Initialize(GranaryController granaryController, LorryMovement lorryMovement)
         {
-            this.maxCropCount = maxCropCount;
+            this.granaryController = granaryController;
+            maxCropCount = granaryController.GetLoadOfCurrentLevelIncrementedBy();
             currentCropCount = 0;
             SetCurrentCropCountText();
             lorryMovement.OnLorryStoppedInGranary += AcquireCrop;
@@ -26,7 +28,7 @@
         
         public void AcquireCrop(GranaryController granaryController)
         {
-            var finalCrop = currentCropCount + granaryController.CurrentCurrency;
+            var finalCrop = currentCropCount + granaryController.GetValueOfTransportedCurrency();
             InfVal rest = 0;
             
             if (finalCrop > maxCropCount)
@@ -35,7 +37,7 @@
                 finalCrop = maxCropCount;
             }
             
-            granaryController.CurrentCurrency = rest;
+            granaryController.WorkerProperties.currentCurrency = rest;
             currentCropCount = finalCrop;
             
             SetCurrentCropCountText();

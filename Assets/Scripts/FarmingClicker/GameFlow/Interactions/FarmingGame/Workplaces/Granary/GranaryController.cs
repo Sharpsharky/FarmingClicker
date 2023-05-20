@@ -39,7 +39,7 @@
 
         public void SetCurrentCropText()
         {
-            currentCropText.text = currentCurrency.ToString();
+            currentCropText.text = GetValueOfCurrentCurrencyInWorkplace().ToString();
         }
         
         
@@ -49,15 +49,16 @@
 
             if (newWorkerController is not TractorController tractorController) return null;
             
-            tractorController.Initialize(new List<FarmFieldController>(initialFarmCalculationData.FarmFieldControllers), 
-            initialFarmCalculationData.StartingPoint, 
-            initialFarmCalculationData.DistanceBetweenStops,
-            initialFarmCalculationData.GranaryControllers[0].gameObject.transform.position);
+            tractorController.Initialize(new List<FarmFieldController>(initialFarmCalculationData.FarmFieldControllers),
+                this,
+                initialFarmCalculationData.StartingPoint, 
+                initialFarmCalculationData.DistanceBetweenStops,
+                initialFarmCalculationData.GranaryControllers[0].gameObject.transform.position);
             return newWorkerController;
         }
         public void SetCurrentCurrency(InfVal amount)
         {
-            currentCurrency = amount;
+            workerProperties.currentCurrency = amount;
             SetCurrentCropText();
         }
                 
@@ -70,7 +71,7 @@
                 case TractorWentToGranaryNotification notificaton:
                 {
                     var cropToAdd = notificaton.TractorController.GetCurrentCropAndResetIt();
-                    currentCurrency += cropToAdd;
+                    workerProperties.currentCurrency += cropToAdd;
                     SetCurrentCropText();
                     break;
                 }

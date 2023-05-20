@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
 {
     using FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor;
     using InfiniteValue;
@@ -14,17 +16,20 @@
         [SerializeField] private float xOfLeftTractorPathRelativeToGranary = -0.5f;
 
         private List<FarmFieldController> farmFieldControllers;
+        private WorkplaceController workplaceController;
 
-        private InfVal maxLoad = 10;
-
-        public void Initialize(List<FarmFieldController> farmFieldControllers, Vector3 startingPoint, 
+        public WorkplaceController WorkplaceController => workplaceController;
+        
+        public void Initialize(List<FarmFieldController> farmFieldControllers, WorkplaceController workplaceController, 
+            Vector3 startingPoint, 
             float distanceBetweenStops, Vector3 posOfGranary)
         {
             this.farmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
+            this.workplaceController = workplaceController;
             float xOfLeftTractorPath = posOfGranary.x + xOfLeftTractorPathRelativeToGranary;
             tractorMovement.Initialize(this, farmFieldControllers, startingPoint,
                 distanceBetweenStops, posOfGranary.x,xOfLeftTractorPath);
-            tractorAcquireCrops.Initialize(maxLoad, tractorMovement);
+            tractorAcquireCrops.Initialize(workplaceController.GetLoadOfCurrentLevelIncrementedBy(), tractorMovement);
         }
         
         public void AddNewField(FarmFieldController farmFieldController)
@@ -40,7 +45,7 @@
         
         public void ChangeLoad(InfVal newLoad)
         {
-            manageTractorSprites.ChangeCropLoad(newLoad, maxLoad);
+            manageTractorSprites.ChangeCropLoad(newLoad, workplaceController.GetLoadOfCurrentLevelIncrementedBy());
         }
         
         

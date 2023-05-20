@@ -59,7 +59,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         {
             if (isStopped) return;
             
-            transform.position += new Vector3(0,direction,0) * speed * Time.deltaTime;
+            transform.position += new Vector3(0,direction,0) * tractorController.WorkplaceController.
+                GetMovingSpeedOfCurrentLevelIncrementedBy() * Time.deltaTime;
+            
             if (direction < 0 && transform.position.y <= nextStopY)
             {
                 Debug.Log($"direction: {direction}, transform.position.y: {transform.position.y}, nextStopY: {nextStopY}");
