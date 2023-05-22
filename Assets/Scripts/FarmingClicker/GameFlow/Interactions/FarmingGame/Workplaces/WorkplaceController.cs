@@ -59,7 +59,7 @@
 
         private void CalculateInitialProperties()
         {
-            workerProperties.currentCurrency = CalculateValueOfCroppedCurrency(1);
+            workerProperties.currentCurrency = 0; //TODO: Change to loading from memory
             workerProperties.movingSpeed = GetMovingSpeedOfCurrentLevelIncrementedBy();
             workerProperties.upgradeLevel = 0;
             workerProperties.workingSpeed = GetWorkingSpeedOfCurrentLevelIncrementedBy();
