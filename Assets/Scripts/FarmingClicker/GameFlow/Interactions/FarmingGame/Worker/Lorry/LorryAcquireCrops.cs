@@ -28,7 +28,7 @@
         
         public void AcquireCrop(GranaryController granaryController)
         {
-            var finalCrop = currentCropCount + granaryController.GetValueOfTransportedCurrency();
+            var finalCrop = currentCropCount + granaryController.GetValueOfCurrentCurrencyInWorkplace();
             InfVal rest = 0;
             
             if (finalCrop > maxCropCount)
@@ -42,6 +42,9 @@
             
             SetCurrentCropCountText();
             granaryController.SetCurrentCurrency(rest);
+            
+            Debug.Log($"Max crop count: {maxCropCount}, Acquire crop: {currentCropCount} Rest: {rest} ");
+
         }
 
         private void PutCropsToShop()

@@ -184,7 +184,7 @@
         
         public InfVal GetLoadOfCurrentLevelIncrementedBy(int i = 0)
         {
-            return 100 * workerProperties.upgradeLevel;
+            return 10 * (workerProperties.upgradeLevel+1);
         }
         public InfVal GetValueOfTransportedCurrency(int i = 0)
         {

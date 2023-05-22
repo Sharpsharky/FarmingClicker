@@ -23,7 +23,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         
         public void AcquireCrop(FarmFieldController farmFieldController)
         {
-            var finalCrop = currentCropCount + farmFieldController.WorkerProperties.currentCurrency;
+            var finalCrop = currentCropCount + farmFieldController.GetValueOfCurrentCurrencyInWorkplace();
             InfVal rest = 0;
             
             if (finalCrop > maxCropCount)
@@ -37,6 +37,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
             SetCurrentCropCountText();
             farmFieldController.SetCurrentCurrency(rest);
+            
         }
         
         private void SetCurrentCropCountText()
