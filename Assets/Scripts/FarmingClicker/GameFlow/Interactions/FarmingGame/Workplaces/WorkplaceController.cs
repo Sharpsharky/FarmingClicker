@@ -130,8 +130,6 @@
             SetValueOfCroppedCurrency(GetValueOfLevelIncrementedBy());
             SetValueOfTransportedCurrency(GetLoadOfCurrentLevelIncrementedBy());
                 
-                
-                
             MessageDispatcher.Instance.Send(
                 new ChangeStatisticsOfUpgradeNotification(workerProperties.valueOfCroppedCurrency));
         }
@@ -175,17 +173,17 @@
         
         public int GetWorkingSpeedOfCurrentLevelIncrementedBy(int i = 0)
         {
-            return 1;
+            return 1 * (1+i/10);
         }
 
         public float GetMovingSpeedOfCurrentLevelIncrementedBy(int i = 0)
         {
-            return 1;
+            return 1 * (1+i/10);
         }
         
         public InfVal GetLoadOfCurrentLevelIncrementedBy(int i = 0)
         {
-            return 10 * (workerProperties.upgradeLevel+1);
+            return 10 * (workerProperties.upgradeLevel+ 1 + i);
         }
         public InfVal GetValueOfTransportedCurrency(int i = 0)
         {
