@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 {
     using System;
@@ -129,52 +131,53 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         }
         
         
-        private void InitializeStatistics(int levelsInfcementedByNumber)
+        private void InitializeStatistics(int levelsIncrementedByNumber)
         {
-            
+            Debug.Log($"levelsIncrementedByNumber: {levelsIncrementedByNumber}");
+            Debug.Log($"currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy(): {currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy()}");
             levelStatistic.InitializeStatistic(
                 levelStatisticComponents.GetIcon(),
                 $"{levelStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetLevelIncrementedBy(levelsIncrementedByNumber).ToString());
             
             workersStatistic.InitializeStatistic(
                 workersStatisticComponents.GetIcon(),
                 $"{workersStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetWorkersOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetWorkersOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetWorkersOfCurrentLevelIncrementedBy(levelsIncrementedByNumber).ToString());
             
             valueStatistic.InitializeStatistic(
                 valueStatisticComponents.GetIcon(),
                 $"{valueStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetValueOfLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetValueOfLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetValueOfLevelIncrementedBy(levelsIncrementedByNumber).ToString());
             
             workingSpeedStatistic.InitializeStatistic(
                 workingSpeedStatisticComponents.GetIcon(),
                 $"{workingSpeedStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy(levelsIncrementedByNumber).ToString());
             
             movingSpeedStatistic.InitializeStatistic(
                 movingSpeedStatisticComponents.GetIcon(),
                 $"{movingSpeedStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy(levelsIncrementedByNumber).ToString());
             
             loadStatistic.InitializeStatistic(
                 loadStatisticComponents.GetIcon(),
                 $"{loadStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy(levelsInfcementedByNumber).ToString());
+                currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy(levelsIncrementedByNumber).ToString());
 
             price.text =
-                currentWorkplaceController.GetCostOfLevelIncrementedBy(levelsInfcementedByNumber).ToString();
+                currentWorkplaceController.GetCostOfLevelIncrementedBy(levelsIncrementedByNumber).ToString();
             
             buyButton.onClick.RemoveAllListeners();
             buyButton.onClick.AddListener(() =>
             {
-                BuyUpgrade(levelsInfcementedByNumber, currentWorkplaceController);
+                BuyUpgrade(levelsIncrementedByNumber, currentWorkplaceController);
             });
 
         }

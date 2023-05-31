@@ -29,7 +29,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
             float xOfLeftTractorPath = posOfGranary.x + xOfLeftTractorPathRelativeToGranary;
             tractorMovement.Initialize(this, farmFieldControllers, startingPoint,
                 distanceBetweenStops, posOfGranary.x,xOfLeftTractorPath);
-            tractorAcquireCrops.Initialize(workplaceController.GetLoadOfCurrentLevelIncrementedBy(), tractorMovement);
+            tractorAcquireCrops.Initialize(workplaceController, tractorMovement);
         }
         
         public void AddNewField(FarmFieldController farmFieldController)

@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
 {
     using UnityEngine;
     using Workplaces.FarmShop;
@@ -10,11 +12,13 @@
         [SerializeField] private LorryMovement lorryMovement;
         [SerializeField] private LorryAcquireCrops lorryAcquireCrops;
 
-        public void Initialize(GranaryController granaryController, FarmShopController farmShopController)
+        private WorkplaceController workplaceController;
+        public void Initialize(WorkplaceController workplaceController, GranaryController granaryController, FarmShopController farmShopController)
         {
+            this.workplaceController = workplaceController;
             transform.position = farmShopController.transform.position;
             lorryMovement.Initialize(granaryController,farmShopController);
-            lorryAcquireCrops.Initialize(granaryController, lorryMovement);
+            lorryAcquireCrops.Initialize(workplaceController, granaryController, lorryMovement);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
 {
     using Core.Message;
     using Workplaces.Granary;
@@ -12,11 +14,13 @@
         private InfVal currentCropCount;
         private InfVal maxCropCount;
         private GranaryController granaryController;
-        
+        private WorkplaceController workplaceController;
+
         [SerializeField] private TMP_Text currentCropCountText;
         
-        public void Initialize(GranaryController granaryController, LorryMovement lorryMovement)
+        public void Initialize(WorkplaceController workplaceController, GranaryController granaryController, LorryMovement lorryMovement)
         {
+            this.workplaceController = workplaceController;
             this.granaryController = granaryController;
             maxCropCount = granaryController.GetLoadOfCurrentLevelIncrementedBy();
             currentCropCount = 0;
@@ -30,7 +34,8 @@
         {
             var finalCrop = currentCropCount + granaryController.GetValueOfCurrentCurrencyInWorkplace();
             InfVal rest = 0;
-            
+            var maxCropCount = workplaceController.GetValueOfTransportedCurrency();
+
             if (finalCrop > maxCropCount)
             {
                 rest = finalCrop - maxCropCount;

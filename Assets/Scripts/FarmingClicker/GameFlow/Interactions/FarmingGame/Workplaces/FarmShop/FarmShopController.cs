@@ -11,7 +11,7 @@
 
             if (newWorkerController is not LorryController lorryController) return null;
             
-            lorryController.Initialize(initialFarmCalculationData.GranaryControllers[0],
+            lorryController.Initialize(this, initialFarmCalculationData.GranaryControllers[0],
                 initialFarmCalculationData.FarmShopControllers[0]);
             return newWorkerController;
         }

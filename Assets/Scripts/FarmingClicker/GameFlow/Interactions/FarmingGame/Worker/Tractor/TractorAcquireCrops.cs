@@ -1,20 +1,22 @@
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
-{
-    using InfiniteValue;
-    using UnityEngine;
-    using TMPro;
-    using Workplaces.FarmFields;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+using InfiniteValue;
+using TMPro;
+using UnityEngine;
 
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
+{
     public class TractorAcquireCrops : MonoBehaviour
     {
         private InfVal currentCropCount;
-        private InfVal maxCropCount;
-        
+        private WorkplaceController workplaceController;
+
         [SerializeField] private TMP_Text currentCropCountText;
         
-        public void Initialize(InfVal maxCropCount, TractorMovement tractorMovement)
+        public void Initialize(WorkplaceController workplaceController, TractorMovement tractorMovement)
         {
-            this.maxCropCount = maxCropCount;
+            this.workplaceController = workplaceController;
             currentCropCount = 0;
             SetCurrentCropCountText();
             tractorMovement.OnTractorStoppedOnFarmField += AcquireCrop;
@@ -25,11 +27,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         {
             var finalCrop = currentCropCount + farmFieldController.GetValueOfCurrentCurrencyInWorkplace();
             InfVal rest = 0;
-            
+            var maxCropCount = workplaceController.GetValueOfTransportedCurrency();
+            Debug.Log($"finalCrop: {finalCrop}, maxCropCount: {maxCropCount}");
             if (finalCrop > maxCropCount)
             {
                 rest = finalCrop - maxCropCount;
                 finalCrop = maxCropCount;
+                Debug.Log($"rest: {rest}, finalCrop: {finalCrop}");
+
             }
             
             farmFieldController.WorkerProperties.currentCurrency = rest;

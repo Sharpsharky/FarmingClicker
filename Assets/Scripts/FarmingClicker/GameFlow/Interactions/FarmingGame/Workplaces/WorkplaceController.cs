@@ -127,10 +127,11 @@
         public void BuyUpgrade(int numberOfBoughtLevels)
         {
             workerProperties.upgradeLevel += numberOfBoughtLevels;
-            Debug.Log($"upgradeLevel: {workerProperties.upgradeLevel}");
-            workerProperties.valueOfCroppedCurrency = SetValueOfCroppedCurrency(GetValueOfLevelIncrementedBy());
-            Debug.Log($"valueOfCroppedCurrency: {workerProperties.valueOfCroppedCurrency}");
-
+            SetValueOfCroppedCurrency(GetValueOfLevelIncrementedBy());
+            SetValueOfTransportedCurrency(GetLoadOfCurrentLevelIncrementedBy());
+                
+                
+                
             MessageDispatcher.Instance.Send(
                 new ChangeStatisticsOfUpgradeNotification(workerProperties.valueOfCroppedCurrency));
         }
@@ -188,7 +189,7 @@
         }
         public InfVal GetValueOfTransportedCurrency(int i = 0)
         {
-            return 1;
+            return workerProperties.valueOfTransportedCurrency;
         }
 
         public InfVal GetValueOfCurrentCurrencyInWorkplace()

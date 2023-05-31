@@ -56,7 +56,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
         
         
         private void Update()
-        {
+        {   
             if (isStopped) return;
             
             transform.position += new Vector3(0,direction,0) * tractorController.WorkplaceController.
