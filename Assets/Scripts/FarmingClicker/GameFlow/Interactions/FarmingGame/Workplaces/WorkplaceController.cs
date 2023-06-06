@@ -30,7 +30,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         
         #region Getters and Setters
         public WorkerProperties WorkerProperties => workerProperties;
-        public event Action<int> OnWorkerPropertiesChanged;
 
         public InfVal CurrentCurrency
         {
@@ -48,8 +47,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             this.workPlaceData = workPlaceData;
             this.workerPrefab = workerPrefab;
             
-            workerProperties.Initialize(OnWorkerPropertiesChanged);
-            OnWorkerPropertiesChanged(1);
+            workerProperties.ChangeUpgradeLevel(1);
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
@@ -108,8 +106,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 
         public void BuyUpgrade(int numberOfBoughtLevels)
         {
-            OnWorkerPropertiesChanged(numberOfBoughtLevels);
-            
+            workerProperties.ChangeUpgradeLevel(numberOfBoughtLevels);
+
             MessageDispatcher.Instance.Send(
                 new ChangeStatisticsOfUpgradeNotification(workerProperties.CroppedCurrency));
         }

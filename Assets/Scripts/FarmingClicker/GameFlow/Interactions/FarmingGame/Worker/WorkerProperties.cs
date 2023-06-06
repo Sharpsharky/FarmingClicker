@@ -26,13 +26,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
         public InfVal CroppedCurrency => croppedCurrency;
 
         #endregion
-
-        public void Initialize(Action<int> OnChangeUpgradeLevel)
-        {
-            OnChangeUpgradeLevel += ChangeUpgradeLevel;
-        }
-
-        private void ChangeUpgradeLevel(int levelsToAdd)
+        public void ChangeUpgradeLevel(int levelsToAdd)
         {
             upgradeLevel = CalculateUpgradeLevel(levelsToAdd);
             numberOfWorkers = CalculateNumberOfWorkers(levelsToAdd);
