@@ -1,7 +1,5 @@
-﻿
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 {
-    using System;
     using System.Collections.Generic;
     using Core.Message;
     using FarmingClicker.Data.Popup;
@@ -111,7 +109,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             MessageDispatcher.Instance.Send(
                 new ChangeStatisticsOfUpgradeNotification(workerProperties.CroppedCurrency));
         }
-
 
     }
 }

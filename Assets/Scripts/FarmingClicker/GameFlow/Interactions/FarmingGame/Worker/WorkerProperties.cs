@@ -54,12 +54,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
         
         public float CalculateWorkingSpeed(int i = 0)
         {
-            return upgradeLevel * (1+i/10);
+            return 1 + (upgradeLevel+i) * 0.1f;
         }
 
         public float CalculateMovingSpeed(int i = 0)
         {
-            return upgradeLevel * (1+i/10);
+            return 1 + (upgradeLevel+i) * 0.02f;
         }
 
         public InfVal CalculateCostOfNextLevel(int i = 0)

@@ -32,7 +32,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
         {
             if (isStopped) return;
             
-            transform.position += new Vector3(currentDir,0,0) * granaryController.WorkerProperties.MovingSpeed
+            transform.position += new Vector3(currentDir,0,0) * farmShopController.WorkerProperties.MovingSpeed
                                                               * Time.deltaTime;
             
             if (currentDir < 0 && transform.position.x <= granaryController.transform.position.x)
