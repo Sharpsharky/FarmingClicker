@@ -428,6 +428,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   workerPrefab: {fileID: 0}
+  initialWorkerProperties: {fileID: 11400000, guid: 1684a3836dd7cb54fa67268ef2f92cf8, type: 2}
 --- !u!1001 &1011649752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -605,6 +606,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   workerPrefab: {fileID: 896023739523282435, guid: cfc5e730fa5d696448ec5a5b09ebec98, type: 3}
+  initialWorkerProperties: {fileID: 11400000, guid: 078f1825ad4a278468068c997e26c0d4, type: 2}
 --- !u!1 &1087071474
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +924,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   workerPrefab: {fileID: 1430959955572205630, guid: 805ad7a22ef58b84998d4d0ddf72c180, type: 3}
+  initialWorkerProperties: {fileID: 11400000, guid: ecda18de3de6ef647991e46e1ff879ec, type: 2}
 --- !u!1 &1169920830
 GameObject:
   m_ObjectHideFlags: 0

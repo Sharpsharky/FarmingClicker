@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107bd055903246dca3b11585eee3bbd2, type: 3}
+  m_Name: Farm Field
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  UpgradeLevel: 1
+  NumberOfWorkers: 1
+  MaxTransportedCurrency:
+    s_digits: 20
+    s_exponent: 0
+  WorkingSpeed: 1
+  MovingSpeed: 1
+  CostOfNextLevel:
+    s_digits: 10
+    s_exponent: 0
+  CroppedCurrency:
+    s_digits: 10
+    s_exponent: 0

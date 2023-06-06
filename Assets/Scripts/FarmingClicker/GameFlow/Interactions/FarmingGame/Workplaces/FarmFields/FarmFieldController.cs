@@ -1,3 +1,4 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
 using InfiniteValue;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
@@ -11,10 +12,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
     {
         [SerializeField] private TMP_Text currentCurrencyText;
 
-        public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, GameObject workerPrefab)
+        public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData
+            , GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
         {
             
-            base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab);
+            base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab, initialWorkerProperties);
             Debug.Log("Initialize + FarmFieldController_>_>_>_");
             SetCurrentCurrencyText();
             StartCoroutine(FakeCurrencyGenerator());

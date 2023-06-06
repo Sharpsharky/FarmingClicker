@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 {
-    using System;
     using InfiniteValue;
+    using UnityEngine;
 
     public class WorkerProperties
     {
@@ -14,6 +12,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
         private float movingSpeed = 0;
         private InfVal costOfNextLevel = 0;
         private InfVal croppedCurrency = 0;
+        
+        private InitialWorkerProperties initialWorkerProperties;
 
         #region Getters
 
@@ -26,6 +26,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
         public InfVal CroppedCurrency => croppedCurrency;
 
         #endregion
+
+        public void SetInitialProperties(InitialWorkerProperties initialWorkerProperties)
+        {
+            this.initialWorkerProperties = initialWorkerProperties;
+        }
+        
         public void ChangeUpgradeLevel(int levelsToAdd)
         {
             upgradeLevel = CalculateUpgradeLevel(levelsToAdd);

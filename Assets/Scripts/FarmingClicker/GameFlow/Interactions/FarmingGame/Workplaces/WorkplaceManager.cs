@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +14,9 @@
     public abstract class WorkplaceManager : SerializedMonoBehaviour, IMessageReceiver
     {
         [SerializeField] protected GameObject workerPrefab;
+        [SerializeField] protected InitialWorkerProperties initialWorkerProperties;
+
+        
         protected List<WorkPlaceData> workPlaceDataList = new List<WorkPlaceData>();
 
         protected FarmCalculationData initialFarmCalculationData;
@@ -40,7 +45,8 @@
                 workplaceControllers[i].Initialize(
                     initialFarmCalculationData,
                     workPlaceDataList[i],
-                    workerPrefab);
+                    workerPrefab,
+                    initialWorkerProperties);
             }
         }
 

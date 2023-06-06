@@ -17,7 +17,8 @@
     {
         [SerializeField] protected Button upgradeButton;
         [SerializeField] protected string title;
-
+        
+        protected InitialWorkerProperties initialWorkerProperties;
         protected FarmCalculationData initialFarmCalculationData;
         protected GameObject workerPrefab;
         protected WorkPlaceData workPlaceData;
@@ -38,13 +39,15 @@
         #endregion
         
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, 
-            GameObject workerPrefab)
+            GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
         {
             Debug.Log($"Initialize WorkplaceController {initialFarmCalculationData}");
             this.initialFarmCalculationData = initialFarmCalculationData;
             this.workPlaceData = workPlaceData;
             this.workerPrefab = workerPrefab;
-            
+            this.initialWorkerProperties = initialWorkerProperties;
+
+            workerProperties.SetInitialProperties(initialWorkerProperties);
             workerProperties.ChangeUpgradeLevel(1);
             
             DisplayUpgradeButton(CalculatePositionOfButton());

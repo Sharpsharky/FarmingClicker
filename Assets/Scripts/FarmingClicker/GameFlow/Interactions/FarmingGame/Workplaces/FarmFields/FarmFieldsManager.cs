@@ -38,7 +38,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                     Debug.Log($"initialFarmCalculationData: {initialFarmCalculationData.StartingPoint}");
                     farmFieldConstructedNotification.NewFarmFieldController.Initialize(initialFarmCalculationData,
                         workPlaceDataList.LastOrDefault(),
-                        workerPrefab);
+                        workerPrefab,
+                        initialWorkerProperties);
                     farmFieldControllers.Add(farmFieldConstructedNotification.NewFarmFieldController);
                     break;
                 }
