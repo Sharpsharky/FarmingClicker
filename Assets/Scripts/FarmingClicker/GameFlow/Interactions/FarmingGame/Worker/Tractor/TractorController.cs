@@ -45,7 +45,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
         
         public void ChangeLoad(InfVal newLoad)
         {
-            manageTractorSprites.ChangeCropLoad(newLoad, workplaceController.GetLoadOfCurrentLevelIncrementedBy());
+            manageTractorSprites.ChangeCropLoad(newLoad, workplaceController.WorkerProperties.MaxTransportedCurrency);
         }
         
         

@@ -18,7 +18,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
             this.workplaceController = workplaceController;
             transform.position = farmShopController.transform.position;
             lorryMovement.Initialize(granaryController,farmShopController);
-            lorryAcquireCrops.Initialize(workplaceController, granaryController, lorryMovement);
+            lorryAcquireCrops.Initialize(workplaceController, lorryMovement);
         }
     }
 }

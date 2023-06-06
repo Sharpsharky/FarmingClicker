@@ -39,7 +39,7 @@
 
         public void SetCurrentCropText()
         {
-            currentCropText.text = GetValueOfCurrentCurrencyInWorkplace().ToString();
+            currentCropText.text = currentCurrency.ToString();
         }
         
         
@@ -58,7 +58,7 @@
         }
         public void SetCurrentCurrency(InfVal amount)
         {
-            workerProperties.currentCurrency = amount;
+            currentCurrency = amount;
             SetCurrentCropText();
         }
                 
@@ -71,7 +71,7 @@
                 case TractorWentToGranaryNotification notificaton:
                 {
                     var cropToAdd = notificaton.TractorController.GetCurrentCropAndResetIt();
-                    workerProperties.currentCurrency += cropToAdd;
+                    currentCurrency += cropToAdd;
                     SetCurrentCropText();
                     break;
                 }

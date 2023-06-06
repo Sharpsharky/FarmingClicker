@@ -11,9 +11,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
     using Workplaces.Granary;
     public class LorryMovement : SerializedMonoBehaviour
     {
-        private float currentMovementSpeed = 1;
-        private InfVal currentMaxLoad = 1;
-
         private GranaryController granaryController;
         private FarmShopController farmShopController;
         
@@ -27,9 +24,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
         {
             this.granaryController = granaryController;
             this.farmShopController = farmShopController;
-
-            currentMovementSpeed = granaryController.GetMovingSpeedOfCurrentLevelIncrementedBy();
-            currentMaxLoad = granaryController.GetLoadOfCurrentLevelIncrementedBy();
             
             ModifyRotation();
         }
@@ -38,7 +32,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
         {
             if (isStopped) return;
             
-            transform.position += new Vector3(currentDir,0,0) * currentMovementSpeed * Time.deltaTime;
+            transform.position += new Vector3(currentDir,0,0) * granaryController.WorkerProperties.MovingSpeed
+                                                              * Time.deltaTime;
             
             if (currentDir < 0 && transform.position.x <= granaryController.transform.position.x)
             {

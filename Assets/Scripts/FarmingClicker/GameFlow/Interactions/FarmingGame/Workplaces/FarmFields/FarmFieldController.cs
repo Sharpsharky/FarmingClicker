@@ -32,20 +32,20 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
             while (true)
             {
                 yield return new WaitForSeconds(3f);
-                workerProperties.currentCurrency += workerProperties.valueOfCroppedCurrency;
+                currentCurrency += workerProperties.CroppedCurrency;
                 SetCurrentCurrencyText();
             }
         }
 
         public void SetCurrentCurrency(InfVal amount)
         {
-            workerProperties.currentCurrency = amount;
+            currentCurrency = amount;
             SetCurrentCurrencyText();
         }
 
         public void SetCurrentCurrencyText()
         {
-            currentCurrencyText.text = workerProperties.currentCurrency.ToString();
+            currentCurrencyText.text = currentCurrency.ToString();
         }
         
     }

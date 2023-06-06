@@ -1,23 +1,20 @@
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
-using UnityEngine;
-using System.Linq;
-using Core.Message;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor;
-using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Granary;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using Workplaces;
+    using Workplaces.FarmFields;
+    using UnityEngine;
+    using Core.Message;
+    using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor;
+    using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Granary;
+    using UnityEngine.Serialization;
 
     public class TractorMovement : MonoBehaviour
     {
 
-        [SerializeField] private float speed = 1f;
+        [FormerlySerializedAs("speed")] [SerializeField] private float movingSpeed = 1f;
 
         private int direction = -1;
         private bool isStopped = true;
@@ -35,13 +32,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
 
         public event Action<FarmFieldController> OnTractorStoppedOnFarmField;
         
-        public void Initialize(TractorController tractorController, List<FarmFieldController> workplaceControllers, Vector3 startingPoint,
-            float distanceBetweenStops, float xOfRightTractorPath, float xOfLeftTractorPath)
+        public void Initialize(TractorController tractorController, List<FarmFieldController> workplaceControllers,
+            Vector3 startingPoint, float distanceBetweenStops, float xOfRightTractorPath, float xOfLeftTractorPath)
         {
-            
             this.tractorController = tractorController;
             farmFieldControllers = new List<FarmFieldController>(workplaceControllers);
-            
+
+
             this.startingPoint = startingPoint;
             this.distanceBetweenStops = distanceBetweenStops;
             SetNewYOfGarage();
@@ -54,13 +51,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             isStopped = false;         
         }
         
-        
         private void Update()
         {   
             if (isStopped) return;
             
-            transform.position += new Vector3(0,direction,0) * tractorController.WorkplaceController.
-                GetMovingSpeedOfCurrentLevelIncrementedBy() * Time.deltaTime;
+            transform.position += new Vector3(0,direction,0) * 
+                                  tractorController.WorkplaceController.WorkerProperties.MovingSpeed * Time.deltaTime;
             
             if (direction < 0 && transform.position.y <= nextStopY)
             {

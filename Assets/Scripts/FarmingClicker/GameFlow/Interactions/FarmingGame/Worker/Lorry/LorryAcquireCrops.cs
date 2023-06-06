@@ -1,6 +1,4 @@
-﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
 {
     using Core.Message;
     using Workplaces.Granary;
@@ -8,33 +6,29 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
     using InfiniteValue;
     using TMPro;
     using UnityEngine;
-    
+    using Workplaces;
+
     public class LorryAcquireCrops
     {
         private InfVal currentCropCount;
-        private InfVal maxCropCount;
-        private GranaryController granaryController;
         private WorkplaceController workplaceController;
 
         [SerializeField] private TMP_Text currentCropCountText;
         
-        public void Initialize(WorkplaceController workplaceController, GranaryController granaryController, LorryMovement lorryMovement)
+        public void Initialize(WorkplaceController workplaceController, LorryMovement lorryMovement)
         {
             this.workplaceController = workplaceController;
-            this.granaryController = granaryController;
-            maxCropCount = granaryController.GetLoadOfCurrentLevelIncrementedBy();
             currentCropCount = 0;
             SetCurrentCropCountText();
             lorryMovement.OnLorryStoppedInGranary += AcquireCrop;
             lorryMovement.OnLorryStoppedInShop += PutCropsToShop;
         }
-       
         
         public void AcquireCrop(GranaryController granaryController)
         {
-            var finalCrop = currentCropCount + granaryController.GetValueOfCurrentCurrencyInWorkplace();
+            var finalCrop = currentCropCount + granaryController.CurrentCurrency;
             InfVal rest = 0;
-            var maxCropCount = workplaceController.GetValueOfTransportedCurrency();
+            var maxCropCount = workplaceController.WorkerProperties.MaxTransportedCurrency;
 
             if (finalCrop > maxCropCount)
             {
@@ -42,7 +36,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
                 finalCrop = maxCropCount;
             }
             
-            granaryController.WorkerProperties.currentCurrency = rest;
+            granaryController.CurrentCurrency = rest;
             currentCropCount = finalCrop;
             
             SetCurrentCropCountText();

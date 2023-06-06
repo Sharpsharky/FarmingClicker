@@ -133,46 +133,44 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         
         private void InitializeStatistics(int levelsIncrementedByNumber)
         {
-            Debug.Log($"levelsIncrementedByNumber: {levelsIncrementedByNumber}");
-            Debug.Log($"currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy(): {currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy()}");
             levelStatistic.InitializeStatistic(
                 levelStatisticComponents.GetIcon(),
                 $"{levelStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.GetLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetLevelIncrementedBy(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.UpgradeLevel.ToString(),
+                currentWorkplaceController.WorkerProperties.CalculateUpgradeLevel(levelsIncrementedByNumber).ToString());
             
             workersStatistic.InitializeStatistic(
                 workersStatisticComponents.GetIcon(),
                 $"{workersStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.GetWorkersOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetWorkersOfCurrentLevelIncrementedBy(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.NumberOfWorkers.ToString(),
+                currentWorkplaceController.WorkerProperties.CalculateNumberOfWorkers(levelsIncrementedByNumber).ToString());
             
             valueStatistic.InitializeStatistic(
                 valueStatisticComponents.GetIcon(),
                 $"{valueStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.GetValueOfLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetValueOfLevelIncrementedBy(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.CroppedCurrency.ToString(),
+                currentWorkplaceController.WorkerProperties.CalculateCroppedCurrency(levelsIncrementedByNumber).ToString());
             
             workingSpeedStatistic.InitializeStatistic(
                 workingSpeedStatisticComponents.GetIcon(),
                 $"{workingSpeedStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetWorkingSpeedOfCurrentLevelIncrementedBy(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.WorkingSpeed.ToString(),
+                currentWorkplaceController.WorkerProperties.CalculateWorkingSpeed(levelsIncrementedByNumber).ToString());
             
             movingSpeedStatistic.InitializeStatistic(
                 movingSpeedStatisticComponents.GetIcon(),
                 $"{movingSpeedStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetMovingSpeedOfCurrentLevelIncrementedBy(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.MovingSpeed.ToString(),
+                currentWorkplaceController.WorkerProperties.CalculateMovingSpeed(levelsIncrementedByNumber).ToString());
             
             loadStatistic.InitializeStatistic(
                 loadStatisticComponents.GetIcon(),
                 $"{loadStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy().ToString(),
-                currentWorkplaceController.GetLoadOfCurrentLevelIncrementedBy(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.MaxTransportedCurrency.ToString(),
+                currentWorkplaceController.WorkerProperties.CalculateMaxTransportedCurrency(levelsIncrementedByNumber).ToString());
 
             price.text =
-                currentWorkplaceController.GetCostOfLevelIncrementedBy(levelsIncrementedByNumber).ToString();
+                currentWorkplaceController.WorkerProperties.CalculateCostOfNextLevel(levelsIncrementedByNumber).ToString();
             
             buyButton.onClick.RemoveAllListeners();
             buyButton.onClick.AddListener(() =>
