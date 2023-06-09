@@ -34,13 +34,15 @@
         
         public void ChangeUpgradeLevel(int levelsToAdd)
         {
-            upgradeLevel = CalculateUpgradeLevel(levelsToAdd);
             numberOfWorkers = CalculateNumberOfWorkers(levelsToAdd);
-            maxTransportedCurrency = CalculateMaxTransportedCurrency(levelsToAdd);
             workingSpeed = CalculateWorkingSpeed(levelsToAdd);
             movingSpeed = CalculateMovingSpeed(levelsToAdd);
             costOfNextLevel = CalculateCostOfNextLevel(levelsToAdd);
             croppedCurrency = CalculateCroppedCurrency(levelsToAdd);
+            maxTransportedCurrency = CalculateMaxTransportedCurrency(levelsToAdd);
+            
+            upgradeLevel = CalculateUpgradeLevel(levelsToAdd);
+
         }
         
         //"i" in the following getters increment the return values by the given number of levels
@@ -51,11 +53,12 @@
         }
         public int CalculateNumberOfWorkers(int i = 0)
         {
-            return 1;
+            return initialWorkerProperties.NumberOfWorkers;
         }
         public InfVal CalculateMaxTransportedCurrency(int i = 0)
         {
-            return 10 * (upgradeLevel+ 1 + i);
+            Debug.Log($"CalculateMaxTransportedCurrency: {i}");
+            return initialWorkerProperties.MaxTransportedCurrency +(10 * (upgradeLevel + i));
         }
         
         public float CalculateWorkingSpeed(int i = 0)

@@ -48,7 +48,7 @@
             this.initialWorkerProperties = initialWorkerProperties;
 
             workerProperties.SetInitialProperties(initialWorkerProperties);
-            workerProperties.ChangeUpgradeLevel(1);
+            workerProperties.ChangeUpgradeLevel(0);
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
