@@ -1,14 +1,8 @@
-using Core.Message;
-using UnityEditor.UI;
-using UnityEngine.InputSystem.EnhancedTouch;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGameCameraController
 {
     using UnityEngine;
     using System;
     using System.Collections.Generic;
-    using Core.Message.Interfaces;
-    using Messages.Notifications.FarmingGame;
 
     public class FarmingGameCameraController : MonoBehaviour
     {

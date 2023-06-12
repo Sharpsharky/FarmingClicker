@@ -1,3 +1,5 @@
+using FarmingClicker.Data;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
 {
     using System;
@@ -52,12 +54,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         
         private void SetTextOfCurrentCurrency()
         {
-            currentCurrencyText.text = currentCurrency.ToString();
+            currentCurrencyText.text = currentCurrency.ToString(InGameData.MaxDigitsInInfVal);
         }
         
         private void SetTextOfCurrentSuperCurrency()
         {
-            currentSuperCurrencyText.text = currentSuperCurrency.ToString();
+            currentSuperCurrencyText.text = currentSuperCurrency.ToString(InGameData.MaxDigitsInInfVal);
         }
         
         public List<Type> ListenedTypes { get; } = new List<Type>();

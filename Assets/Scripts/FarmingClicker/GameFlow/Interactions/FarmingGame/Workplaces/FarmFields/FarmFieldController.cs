@@ -1,3 +1,4 @@
+using FarmingClicker.Data;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
 using InfiniteValue;
 
@@ -47,7 +48,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
 
         public void SetCurrentCurrencyText()
         {
-            currentCurrencyText.text = currentCurrency.ToString();
+            currentCurrencyText.text = currentCurrency.ToString(InGameData.MaxDigitsInInfVal);
         }
         
     }

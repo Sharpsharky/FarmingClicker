@@ -110,9 +110,9 @@
         public void BuyUpgrade(int numberOfBoughtLevels)
         {
             InfVal cost = workerProperties.CalculateCostOfNextLevel(numberOfBoughtLevels);
-            if (cost > CurrencyFarmManger.GetCurrentCurrency()) return;
+            //if (cost > CurrencyFarmManger.GetCurrentCurrency()) return;
             
-            MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-cost));
+            //MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-cost));
             
             workerProperties.ChangeUpgradeLevel(numberOfBoughtLevels);
             

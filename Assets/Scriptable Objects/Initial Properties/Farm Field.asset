@@ -29,8 +29,8 @@ MonoBehaviour:
   WorkingSpeed: 1
   MovingSpeed: 1
   CostOfNextLevel:
-    s_digits: 10
+    s_digits: 6
     s_exponent: 0
   CroppedCurrency:
-    s_digits: 10
+    s_digits: 2
     s_exponent: 0

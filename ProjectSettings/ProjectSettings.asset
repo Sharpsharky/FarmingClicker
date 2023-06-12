@@ -250,8 +250,8 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: release.keystore'
-  AndroidKeyaliasName: releasekey
+  AndroidKeystoreName: E:/Projects/Unity/FarmingClicker/Keystore/SpaceBird.keystore
+  AndroidKeyaliasName: spacebird
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
@@ -832,7 +832,8 @@ PlayerSettings:
     tvOS: TextMeshPro;UNITY_VISUAL_SCRIPTING
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

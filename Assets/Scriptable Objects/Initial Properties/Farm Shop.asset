@@ -29,7 +29,7 @@ MonoBehaviour:
   WorkingSpeed: 1
   MovingSpeed: 1
   CostOfNextLevel:
-    s_digits: 10
+    s_digits: 5
     s_exponent: 0
   CroppedCurrency:
     s_digits: 25

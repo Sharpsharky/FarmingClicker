@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using FarmingClicker.Data;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 {
@@ -139,13 +140,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
                 workersStatisticComponents.GetIcon(),
                 $"{workersStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.WorkerProperties.NumberOfWorkers.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateNumberOfWorkers(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.CalculateNumberOfWorkers(levelsIncrementedByNumber)
+                    .ToString());
             
             valueStatistic.InitializeStatistic(
                 valueStatisticComponents.GetIcon(),
                 $"{valueStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.CroppedCurrency.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateCroppedCurrency(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.CroppedCurrency.
+                    ToString(InGameData.MaxDigitsInInfVal),
+                currentWorkplaceController.WorkerProperties.CalculateCroppedCurrency(levelsIncrementedByNumber)
+                    .ToString(InGameData.MaxDigitsInInfVal));
             
             workingSpeedStatistic.InitializeStatistic(
                 workingSpeedStatisticComponents.GetIcon(),
@@ -157,24 +161,28 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
                 movingSpeedStatisticComponents.GetIcon(),
                 $"{movingSpeedStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.WorkerProperties.MovingSpeed.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateMovingSpeed(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.CalculateMovingSpeed(levelsIncrementedByNumber)
+                    .ToString());
             
             loadStatistic.InitializeStatistic(
                 loadStatisticComponents.GetIcon(),
                 $"{loadStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.MaxTransportedCurrency.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateMaxTransportedCurrency(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.MaxTransportedCurrency.ToString(InGameData.MaxDigitsInInfVal),
+                currentWorkplaceController.WorkerProperties.CalculateMaxTransportedCurrency(levelsIncrementedByNumber)
+                    .ToString(InGameData.MaxDigitsInInfVal));
 
             levelStatistic.InitializeStatistic(
                 levelStatisticComponents.GetIcon(),
                 $"{levelStatisticComponents.GetTitle()}:",
                 currentWorkplaceController.WorkerProperties.UpgradeLevel.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateUpgradeLevel(levelsIncrementedByNumber).ToString());
+                currentWorkplaceController.WorkerProperties.CalculateUpgradeLevel(levelsIncrementedByNumber)
+                    .ToString());
 
             
             
             price.text =
-                currentWorkplaceController.WorkerProperties.CalculateCostOfNextLevel(levelsIncrementedByNumber).ToString();
+                currentWorkplaceController.WorkerProperties.CalculateCostOfNextLevel(levelsIncrementedByNumber)
+                    .ToString(InGameData.MaxDigitsInInfVal);
             
             buyButton.onClick.RemoveAllListeners();
             buyButton.onClick.AddListener(() =>

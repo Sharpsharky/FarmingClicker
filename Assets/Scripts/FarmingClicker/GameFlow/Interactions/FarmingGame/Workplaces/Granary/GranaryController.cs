@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
+﻿using FarmingClicker.Data;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -39,7 +41,7 @@
 
         public void SetCurrentCropText()
         {
-            currentCropText.text = currentCurrency.ToString();
+            currentCropText.text = currentCurrency.ToString(InGameData.MaxDigitsInInfVal);
         }
         
         
