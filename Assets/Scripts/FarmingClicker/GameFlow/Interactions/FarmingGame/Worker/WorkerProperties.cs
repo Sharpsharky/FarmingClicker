@@ -57,7 +57,6 @@
         }
         public InfVal CalculateMaxTransportedCurrency(int i = 0)
         {
-            Debug.Log($"CalculateMaxTransportedCurrency: {i}");
             return initialWorkerProperties.MaxTransportedCurrency +(10 * (upgradeLevel + i));
         }
         
@@ -73,28 +72,34 @@
 
         public InfVal CalculateCostOfNextLevel(int i = 0)
         {
-            float a = 3.67f;
+            /*float a = 3.67f;
             InfVal b = Mathf.Pow(1.07f, upgradeLevel);
             InfVal c = Mathf.Pow(1.07f, i)-1;
             float d = 1.07f - 1;
 
             InfVal finalCost = a * ((b * c) / d);
+*/
+            InfVal finalCost = 0;
 
+            int targetLevel = upgradeLevel + i;
+            float scalingVal = 2.17f;
+            finalCost = (initialWorkerProperties.CroppedCurrency * Mathf.Pow(scalingVal,targetLevel+1))/ scalingVal;
+            return finalCost;
+            
+            
+            
             return finalCost;
         }
         
         public InfVal CalculateCroppedCurrency(int i = 0)
         {
-            InfVal collectedValue = 0;
+            InfVal cumulativeValue = 0;
 
-            for (int j = 0; j < i + 1; j++)
-            {
-                collectedValue += 1.67f * (upgradeLevel+j+1) * 1;
-            }
-            
-            return collectedValue;
+            int targetLevel = upgradeLevel + i;
+            float scalingVal = 2.15f;
+            cumulativeValue = (initialWorkerProperties.CroppedCurrency * Mathf.Pow(scalingVal,targetLevel+1))/ scalingVal;
+            return cumulativeValue;
         }
-        
         
     }
 }

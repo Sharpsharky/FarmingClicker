@@ -133,12 +133,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         
         private void InitializeStatistics(int levelsIncrementedByNumber)
         {
-            levelStatistic.InitializeStatistic(
-                levelStatisticComponents.GetIcon(),
-                $"{levelStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.UpgradeLevel.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateUpgradeLevel(levelsIncrementedByNumber).ToString());
-            
+            Debug.Log($"CalculateCroppedCurrency: levelsIncrementedByNumber: {levelsIncrementedByNumber}" );
+
             workersStatistic.InitializeStatistic(
                 workersStatisticComponents.GetIcon(),
                 $"{workersStatisticComponents.GetTitle()}:",
@@ -169,6 +165,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
                 currentWorkplaceController.WorkerProperties.MaxTransportedCurrency.ToString(),
                 currentWorkplaceController.WorkerProperties.CalculateMaxTransportedCurrency(levelsIncrementedByNumber).ToString());
 
+            levelStatistic.InitializeStatistic(
+                levelStatisticComponents.GetIcon(),
+                $"{levelStatisticComponents.GetTitle()}:",
+                currentWorkplaceController.WorkerProperties.UpgradeLevel.ToString(),
+                currentWorkplaceController.WorkerProperties.CalculateUpgradeLevel(levelsIncrementedByNumber).ToString());
+
+            
+            
             price.text =
                 currentWorkplaceController.WorkerProperties.CalculateCostOfNextLevel(levelsIncrementedByNumber).ToString();
             

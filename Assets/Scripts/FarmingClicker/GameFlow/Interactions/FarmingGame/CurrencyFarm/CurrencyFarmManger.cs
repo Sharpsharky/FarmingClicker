@@ -1,23 +1,21 @@
-using Core.Message;
-using TMPro;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarmManger
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
 {
-    using System.Collections.Generic;
-    using InfiniteValue;
-    using UnityEngine;
     using System;
+    using System.Collections.Generic;
+    using Core.Message;
     using Core.Message.Interfaces;
     using Messages.Commands.Currency;
+    using InfiniteValue;
     using Sirenix.OdinInspector;
-
+    using TMPro;
+    using UnityEngine;
     public class CurrencyFarmManger : SerializedMonoBehaviour, IMessageReceiver
     {
 
         [SerializeField] private TMP_Text currentCurrencyText;
         [SerializeField] private TMP_Text currentSuperCurrencyText;
 
-        private InfVal currentCurrency = 0;
+        private static InfVal currentCurrency = 0;
         private InfVal currentSuperCurrency = 0;
         
         private void Awake()
@@ -34,6 +32,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarmManger
             MessageDispatcher.Instance.RegisterReceiver(this);        
         }
 
+        public static InfVal GetCurrentCurrency()
+        {
+            return currentCurrency;
+        }
 
         private void ModifyCurrentCurrency(InfVal amountToAdd)
         {

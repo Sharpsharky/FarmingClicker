@@ -12,7 +12,9 @@
     using UnityEngine;
     using UnityEngine.UI;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
-
+    using CurrencyFarm;
+    using Messages.Commands.Currency;
+    
     public abstract class WorkplaceController : SerializedMonoBehaviour
     {
         [SerializeField] protected Button upgradeButton;
@@ -107,8 +109,13 @@
 
         public void BuyUpgrade(int numberOfBoughtLevels)
         {
+            InfVal cost = workerProperties.CalculateCostOfNextLevel(numberOfBoughtLevels);
+            if (cost > CurrencyFarmManger.GetCurrentCurrency()) return;
+            
+            MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-cost));
+            
             workerProperties.ChangeUpgradeLevel(numberOfBoughtLevels);
-
+            
             MessageDispatcher.Instance.Send(
                 new ChangeStatisticsOfUpgradeNotification(workerProperties.CroppedCurrency));
         }

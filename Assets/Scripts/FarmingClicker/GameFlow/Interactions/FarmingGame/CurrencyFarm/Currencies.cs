@@ -1,4 +1,4 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarmManger
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
 {
     using System.Collections.Generic;
     using InfiniteValue;
