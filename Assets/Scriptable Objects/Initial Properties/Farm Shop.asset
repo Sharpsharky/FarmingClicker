@@ -24,7 +24,7 @@ MonoBehaviour:
   UpgradeLevel: 1
   NumberOfWorkers: 1
   MaxTransportedCurrency:
-    s_digits: 20
+    s_digits: 7
     s_exponent: 0
   WorkingSpeed: 1
   MovingSpeed: 1

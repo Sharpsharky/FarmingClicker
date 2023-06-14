@@ -66,7 +66,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
             InfVal scalingValI = new InfVal(2.51).ToPrecision(InGameData.InfValPrecision);
             InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);   
 
-            cumulativeValue = (initialWorkerProperties.CroppedCurrency * pow)/ scalingValI;
+            cumulativeValue = (initialWorkerProperties.MaxTransportedCurrency * pow)/ scalingValI;
 
             return cumulativeValue;
             
@@ -97,7 +97,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
             InfVal scalingValI = new InfVal(2.17).ToPrecision(InGameData.InfValPrecision);
             InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);   
 
-            finalCost = (initialWorkerProperties.CroppedCurrency * pow)/ scalingValI;
+            finalCost = (initialWorkerProperties.CostOfNextLevel * pow)/ scalingValI;
 
             return finalCost;
         }
