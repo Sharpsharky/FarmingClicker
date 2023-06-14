@@ -34,7 +34,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             DistanceBetweenStops = distanceBetweenStops;
             NumberOfStops = numberOfStops;
             YOfGarage = yOfGarage;
-            FarmFieldControllers = new List<FarmFieldController>(farmFieldControllers);
+            FarmFieldControllers = farmFieldControllers;
             GranaryControllers = new List<GranaryController>(granaryControllers);
             FarmShopControllers = new List<FarmShopController>(farmShopControllers);
             FutureFarmFieldController = futureFarmFieldController;

@@ -1,22 +1,20 @@
-﻿using FarmingClicker.Data;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 {
     using InfiniteValue;
-    using UnityEngine;
+    using Data;
 
     [System.Serializable]
     public class WorkerProperties
     {
-        private int upgradeLevel = 0;
-        private int numberOfWorkers = 0;
-        private InfVal maxTransportedCurrency = new InfVal(0).ToPrecision(9);
-        private float workingSpeed = 0;
-        private float movingSpeed = 0;
-        private InfVal costOfNextLevel = new InfVal(0).ToPrecision(9);
-        public InfVal croppedCurrency = new InfVal(0).ToPrecision(9);
-        
-        private InitialWorkerProperties initialWorkerProperties;
+        protected int upgradeLevel = 0;
+        protected int numberOfWorkers = 0;
+        protected InfVal maxTransportedCurrency = new InfVal(0).ToPrecision(9);
+        protected float workingSpeed = 0;
+        protected float movingSpeed = 0;
+        protected InfVal costOfNextLevel = new InfVal(0).ToPrecision(9);
+        protected InfVal croppedCurrency = new InfVal(0).ToPrecision(9);
+
+        protected InitialWorkerProperties initialWorkerProperties;
 
         #region Getters
 
@@ -58,7 +56,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
         {
             return initialWorkerProperties.NumberOfWorkers;
         }
-        public InfVal CalculateMaxTransportedCurrency(int i = 0)
+        public virtual InfVal CalculateMaxTransportedCurrency(int i = 0)
         {
             InfVal cumulativeValue = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 
@@ -82,15 +80,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
             return 1 + (upgradeLevel+i) * 0.02f;
         }
 
-        public InfVal CalculateCostOfNextLevel(int i = 0)
+        public virtual InfVal CalculateCostOfNextLevel(int i = 0)
         {
-            /*float a = 3.67f;
-            InfVal b = Mathf.Pow(1.07f, upgradeLevel);
-            InfVal c = Mathf.Pow(1.07f, i)-1;
-            float d = 1.07f - 1;
-
-            InfVal finalCost = a * ((b * c) / d);
-*/
             InfVal finalCost = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 
             int targetLevel = upgradeLevel + i;
@@ -102,7 +93,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
             return finalCost;
         }
         
-        public InfVal CalculateCroppedCurrency(int i = 0)
+        public virtual InfVal CalculateCroppedCurrency(int i = 0)
         {
             InfVal cumulativeValue = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 

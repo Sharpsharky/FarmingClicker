@@ -16,6 +16,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData
             , GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
         {
+            workerProperties = new FarmWorkerProperties();
+            if(workerProperties is FarmWorkerProperties farmWorkerProperties){
+                farmWorkerProperties.SetNumberOfFarm(initialFarmCalculationData.FarmFieldControllers.Count);
+                Debug.Log($"SetNumberOfFarm: {initialFarmCalculationData.FarmFieldControllers.Count}");
+            }
             
             base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab, initialWorkerProperties);
             Debug.Log("Initialize + FarmFieldController_>_>_>_");

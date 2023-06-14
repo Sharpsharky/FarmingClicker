@@ -26,7 +26,7 @@
         protected WorkPlaceData workPlaceData;
         protected List<WorkerController> workerControllers = new List<WorkerController>();
 
-        public WorkerProperties workerProperties = new WorkerProperties();
+        protected WorkerProperties workerProperties = new WorkerProperties();
         protected InfVal currentCurrency = 0;
 
         #region Getters and Setters
