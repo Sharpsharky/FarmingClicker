@@ -9,10 +9,10 @@
     {
         public int UpgradeLevel = 1;
         public int NumberOfWorkers = 1;
-        public InfVal MaxTransportedCurrency = 20;
+        public InfVal MaxTransportedCurrency = new InfVal(20).ToPrecision(9);
         public float WorkingSpeed = 1;
         public float MovingSpeed = 1;
-        public InfVal CostOfNextLevel = 10;
-        public InfVal CroppedCurrency = 0;
+        public InfVal CostOfNextLevel = new InfVal(10).ToPrecision(9);
+        public InfVal CroppedCurrency = new InfVal(0).ToPrecision(9);
     }
 }

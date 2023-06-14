@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
+﻿using System;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 {
     using System.Collections.Generic;
     using Core.Message;
@@ -26,9 +28,11 @@
         protected WorkPlaceData workPlaceData;
         protected List<WorkerController> workerControllers = new List<WorkerController>();
 
-        protected WorkerProperties workerProperties = new WorkerProperties();
+        public WorkerProperties workerProperties = new WorkerProperties();
         protected InfVal currentCurrency = 0;
-        
+        public InfVal x = new InfVal(0).ToPrecision(9)
+            ;
+
         #region Getters and Setters
         public WorkerProperties WorkerProperties => workerProperties;
 
@@ -39,7 +43,12 @@
         }
         
         #endregion
-        
+
+        private void Update()
+        {
+            x = workerProperties.CroppedCurrency.ToPrecision(9);
+        }
+
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, 
             GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
         {

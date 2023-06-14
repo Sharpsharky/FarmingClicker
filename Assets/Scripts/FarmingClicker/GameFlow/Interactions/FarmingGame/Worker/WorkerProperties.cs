@@ -1,17 +1,20 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
+﻿using FarmingClicker.Data;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 {
     using InfiniteValue;
     using UnityEngine;
 
+    [System.Serializable]
     public class WorkerProperties
     {
         private int upgradeLevel = 0;
         private int numberOfWorkers = 0;
-        private InfVal maxTransportedCurrency = 0;
+        private InfVal maxTransportedCurrency = new InfVal(0).ToPrecision(9);
         private float workingSpeed = 0;
         private float movingSpeed = 0;
-        private InfVal costOfNextLevel = 0;
-        private InfVal croppedCurrency = 0;
+        private InfVal costOfNextLevel = new InfVal(0).ToPrecision(9);
+        public InfVal croppedCurrency = new InfVal(0).ToPrecision(9);
         
         private InitialWorkerProperties initialWorkerProperties;
 
@@ -26,7 +29,7 @@
         public InfVal CroppedCurrency => croppedCurrency;
 
         #endregion
-
+        
         public void SetInitialProperties(InitialWorkerProperties initialWorkerProperties)
         {
             this.initialWorkerProperties = initialWorkerProperties;
@@ -57,12 +60,16 @@
         }
         public InfVal CalculateMaxTransportedCurrency(int i = 0)
         {
-            InfVal cumulativeValue = 0;
+            InfVal cumulativeValue = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 
             int targetLevel = upgradeLevel + i;
-            float scalingVal = 2.51f;
-            cumulativeValue = (initialWorkerProperties.MaxTransportedCurrency * Mathf.Pow(scalingVal,targetLevel+1))/ scalingVal;
+            InfVal scalingValI = new InfVal(2.51).ToPrecision(InGameData.InfValPrecision);
+            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);   
+
+            cumulativeValue = (initialWorkerProperties.CroppedCurrency * pow)/ scalingValI;
+
             return cumulativeValue;
+            
         }
         
         public float CalculateWorkingSpeed(int i = 0)
@@ -84,25 +91,27 @@
 
             InfVal finalCost = a * ((b * c) / d);
 */
-            InfVal finalCost = 0;
+            InfVal finalCost = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 
             int targetLevel = upgradeLevel + i;
-            float scalingVal = 2.17f;
-            finalCost = (initialWorkerProperties.CostOfNextLevel * Mathf.Pow(scalingVal,targetLevel+1))/ scalingVal;
-            return finalCost;
-            
-            
-            
+            InfVal scalingValI = new InfVal(2.17).ToPrecision(InGameData.InfValPrecision);
+            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);   
+
+            finalCost = (initialWorkerProperties.CroppedCurrency * pow)/ scalingValI;
+
             return finalCost;
         }
         
         public InfVal CalculateCroppedCurrency(int i = 0)
         {
-            InfVal cumulativeValue = 0;
+            InfVal cumulativeValue = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 
             int targetLevel = upgradeLevel + i;
-            float scalingVal = 2.15f;
-            cumulativeValue = (initialWorkerProperties.CroppedCurrency * Mathf.Pow(scalingVal,targetLevel+1))/ scalingVal;
+            InfVal scalingValI = new InfVal(2.15).ToPrecision(InGameData.InfValPrecision);
+            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);   
+
+            cumulativeValue = (initialWorkerProperties.CroppedCurrency * pow)/ scalingValI;
+
             return cumulativeValue;
         }
         
