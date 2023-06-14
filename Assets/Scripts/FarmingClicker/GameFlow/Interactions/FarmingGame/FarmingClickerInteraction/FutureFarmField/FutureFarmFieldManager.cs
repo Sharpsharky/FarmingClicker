@@ -1,3 +1,7 @@
+using FarmingClicker.Data;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm;
+using FarmingClicker.GameFlow.Messages.Commands.Currency;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField
 {
     using System;
@@ -23,20 +27,30 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
 
 
             currentNumberOfFarms = LoadDataFarmManager.instance.FarmFieldDatas.Count;
+            Debug.Log("FutureFarmFieldManager Initialize");
+            InitializeFutureFarmFieldData();
+            futureFarmFieldController.Initialize(initialFarmCalculationData);
 
-            var priceOfFutureFarmField = CalculatePriceOfFutureFarmField(currentNumberOfFarms);
-            int timeOfConstruction = CalculateTimeOfConstruction(currentNumberOfFarms);
-            
-            futureFarmFieldController.Initialize(initialFarmCalculationData, priceOfFutureFarmField, timeOfConstruction);
-            
             ListenedTypes.Add(typeof(BuyNewFieldCommand));
             MessageDispatcher.Instance.RegisterReceiver(this);
             
 
         }
+
+        private void InitializeFutureFarmFieldData()
+        {
+            currentNumberOfFarms = LoadDataFarmManager.instance.FarmFieldDatas.Count;
+
+            var priceOfFutureFarmField = CalculatePriceOfFutureFarmField(currentNumberOfFarms).
+                ToPrecision(InGameData.InfValPrecision);
+            int timeOfConstruction = CalculateTimeOfConstruction(currentNumberOfFarms);
+            
+            futureFarmFieldController.SetDataForFutureFarmField(priceOfFutureFarmField, timeOfConstruction);
+        }
         
         private InfVal CalculatePriceOfFutureFarmField(int numberOfOwnedFarmFields)
         {
+            Debug.Log($"numberOfOwnedFarmFields: { numberOfOwnedFarmFields}");
             return 20 * numberOfOwnedFarmFields;
         }
         
@@ -46,12 +60,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         }
 
 
-        private void PutFutureFarmInNewPosition()
+        private void BuyNewField()
         {
             currentNumberOfFarms++;
-            var posOfFutureFarm = futureFarmFieldController.gameObject.transform.position;
-            posOfFutureFarm.y -= initialFarmCalculationData.DistanceBetweenStops;
-            futureFarmFieldController.gameObject.transform.position = posOfFutureFarm;
+            futureFarmFieldController.PutFutureFarmInNewPosition();
+            InitializeFutureFarmFieldData();
+            
         }
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
@@ -63,7 +77,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             {
                 case BuyNewFieldCommand buyNewFieldCommand:
                 {
-                    PutFutureFarmInNewPosition();
+                    BuyNewField();
                     break;
                 }
                 

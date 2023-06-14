@@ -1,5 +1,7 @@
 
 
+using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm;
+using FarmingClicker.GameFlow.Messages.Commands.Currency;
 using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
@@ -58,6 +60,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
 
         private void Buy(InfVal price, int timeOfConstruction)
         {
+            Debug.Log("Buy farm");
+            if (price > CurrencyFarmManger.GetCurrentCurrency()) return;
+            
+            MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-price));
+            
             MessageDispatcher.Instance.Send(new BuyNewFieldCommand(price, timeOfConstruction));
             ExitPanel();
         }

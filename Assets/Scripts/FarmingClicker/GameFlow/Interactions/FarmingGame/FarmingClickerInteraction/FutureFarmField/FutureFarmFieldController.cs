@@ -1,3 +1,5 @@
+using FarmingClicker.Data;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField
 {
     using Core.Message;
@@ -12,19 +14,36 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     {
         [SerializeField] private Button upgradeButton;
 
-        private InfVal priceToBuyTheNextFarmField;
+        private InfVal priceToBuyTheNextFarmField = new InfVal(0, InGameData.InfValPrecision);
         private int timeOfFarmConstruction;
         private FarmCalculationData initialFarmCalculationData;
         
-        public void Initialize(FarmCalculationData initialFarmCalculationData, InfVal priceToBuyTheNextFarmField, int timeOfFarmConstruction)
+        public void Initialize(FarmCalculationData initialFarmCalculationData)
         {
-            this.priceToBuyTheNextFarmField = priceToBuyTheNextFarmField;
-            this.timeOfFarmConstruction = timeOfFarmConstruction;
+            SetDataForFutureFarmField(priceToBuyTheNextFarmField,timeOfFarmConstruction);
             this.initialFarmCalculationData = initialFarmCalculationData;
             SetPositionOfButton();
             upgradeButton.onClick.AddListener(OpenBuyNewFieldPopUp);
         }
 
+        public void PutFutureFarmInNewPosition()
+        {
+            var posOfFutureFarm = transform.position;
+            posOfFutureFarm.y -= initialFarmCalculationData.DistanceBetweenStops;
+            transform.position = posOfFutureFarm;
+        }
+
+        public void SetDataForFutureFarmField(InfVal priceToBuyTheNextFarmField, int timeOfFarmConstruction)
+        {
+            this.priceToBuyTheNextFarmField = priceToBuyTheNextFarmField;
+            this.timeOfFarmConstruction = timeOfFarmConstruction;
+        }
+
+        public InfVal GetPrice()
+        {
+            return priceToBuyTheNextFarmField;
+        }
+        
         private void SetPositionOfButton()
         {
             Vector3 curPosOfUpgradeButton = gameObject.transform.position;
@@ -37,6 +56,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             var buyNewFieldPopupData = new BuyNewFieldPopupData(priceToBuyTheNextFarmField, timeOfFarmConstruction);
             MessageDispatcher.Instance.Send(new DisplayBuyNewFieldPanelCommand(buyNewFieldPopupData));
         }
+        
+        
         
     }
 }

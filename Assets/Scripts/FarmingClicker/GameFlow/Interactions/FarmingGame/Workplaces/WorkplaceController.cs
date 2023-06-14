@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 {
     using System.Collections.Generic;
     using Core.Message;
@@ -30,8 +28,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 
         public WorkerProperties workerProperties = new WorkerProperties();
         protected InfVal currentCurrency = 0;
-        public InfVal x = new InfVal(0).ToPrecision(9)
-            ;
 
         #region Getters and Setters
         public WorkerProperties WorkerProperties => workerProperties;
@@ -43,12 +39,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         }
         
         #endregion
-
-        private void Update()
-        {
-            x = workerProperties.CroppedCurrency.ToPrecision(9);
-        }
-
+        
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, 
             GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
         {
@@ -119,9 +110,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         public void BuyUpgrade(int numberOfBoughtLevels)
         {
             InfVal cost = workerProperties.CalculateCostOfNextLevel(numberOfBoughtLevels);
-            //if (cost > CurrencyFarmManger.GetCurrentCurrency()) return;
+            if (cost > CurrencyFarmManger.GetCurrentCurrency()) return;
             
-            //MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-cost));
+            MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-cost));
             
             workerProperties.ChangeUpgradeLevel(numberOfBoughtLevels);
             
