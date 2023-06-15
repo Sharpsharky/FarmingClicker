@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
+﻿using UnityEngine;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 {
     using Data;
     using InfiniteValue;
@@ -16,15 +18,19 @@
         public override InfVal CalculateCroppedCurrency(int i = 0)
         {
             InfVal cumulativeValue = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
-            
-            int targetLevel = upgradeLevel + i;
-            InfVal scalingValI = new InfVal(2.15).ToPrecision(InGameData.InfValPrecision) +100 * (numberOfFarm-1);
-            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);
-            InfVal initialCroppedCurrency =
-                new InfVal(initialWorkerProperties.CroppedCurrency + 100 * (numberOfFarm - 1)).ToPrecision(InGameData.InfValPrecision);
-            
-            cumulativeValue = (initialCroppedCurrency * pow)/ scalingValI;
 
+            int targetLevel = upgradeLevel + i;
+            InfVal scalingValI = new InfVal(1.9f).ToPrecision(InGameData.InfValPrecision);
+            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);
+
+            InfVal a = MathInfVal.Pow(60, numberOfFarm - 1, false).ToPrecision(InGameData.InfValPrecision);
+            InfVal b = MathInfVal.Pow(7, numberOfFarm - 1, false).ToPrecision(InGameData.InfValPrecision);
+            
+            InfVal initialCroppedCurrency =
+                new InfVal(a /b).ToPrecision(InGameData.InfValPrecision);
+            
+            cumulativeValue = (initialWorkerProperties.CroppedCurrency * initialCroppedCurrency * pow)/ scalingValI;
+            
             return cumulativeValue;
         }
         public override InfVal CalculateCostOfNextLevel(int i = 0)
@@ -32,13 +38,16 @@
             InfVal finalCost = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 
             int targetLevel = upgradeLevel + i;
-            InfVal scalingValI = new InfVal(2.17).ToPrecision(InGameData.InfValPrecision)+100 * (numberOfFarm-1);
-            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);   
+            InfVal scalingValI = new InfVal(1.81f).ToPrecision(InGameData.InfValPrecision);
+            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);
 
-            InfVal initialCroppedCurrency =
-                new InfVal(initialWorkerProperties.CostOfNextLevel + 100 * (numberOfFarm - 1)).ToPrecision(InGameData.InfValPrecision);
+            InfVal a = MathInfVal.Pow(60, numberOfFarm - 1, false).ToPrecision(InGameData.InfValPrecision);
+            InfVal b = MathInfVal.Pow(7, numberOfFarm - 1, false).ToPrecision(InGameData.InfValPrecision);
             
-            finalCost = (initialCroppedCurrency * pow)/ scalingValI;
+            InfVal initialCroppedCurrency =
+                new InfVal(a /b).ToPrecision(InGameData.InfValPrecision);
+            
+            finalCost = (initialWorkerProperties.CostOfNextLevel * initialCroppedCurrency * pow)/ scalingValI;
             
             return finalCost;
         }
@@ -48,13 +57,16 @@
             InfVal cumulativeValue = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 
             int targetLevel = upgradeLevel + i;
-            InfVal scalingValI = new InfVal(2.51).ToPrecision(InGameData.InfValPrecision)+100 * (numberOfFarm-1);
-            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);   
+            InfVal scalingValI = new InfVal(1.81f).ToPrecision(InGameData.InfValPrecision);
+            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1).ToPrecision(InGameData.InfValPrecision);
 
-            InfVal initialCroppedCurrency =
-                new InfVal(initialWorkerProperties.MaxTransportedCurrency + 100 * (numberOfFarm - 1)).ToPrecision(InGameData.InfValPrecision);
+            InfVal a = MathInfVal.Pow(60, numberOfFarm - 1, false).ToPrecision(InGameData.InfValPrecision);
+            InfVal b = MathInfVal.Pow(7, numberOfFarm - 1, false).ToPrecision(InGameData.InfValPrecision);
             
-            cumulativeValue = (initialCroppedCurrency * pow)/ scalingValI;
+            InfVal initialCroppedCurrency =
+                new InfVal(a /b).ToPrecision(InGameData.InfValPrecision);
+            
+            cumulativeValue = (initialWorkerProperties.MaxTransportedCurrency * initialCroppedCurrency * pow)/ scalingValI;
             
             return cumulativeValue;
             
