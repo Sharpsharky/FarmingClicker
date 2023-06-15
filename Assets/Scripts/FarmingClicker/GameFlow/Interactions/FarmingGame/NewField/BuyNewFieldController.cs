@@ -1,5 +1,6 @@
 
 
+using FarmingClicker.Data;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm;
 using FarmingClicker.GameFlow.Messages.Commands.Currency;
 using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
@@ -46,7 +47,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
         {
             if (data is not BuyNewFieldPopupData buyNewFieldPopupData) return;
 
-            priceText.text = buyNewFieldPopupData.Price.ToString();
+            priceText.text = buyNewFieldPopupData.Price.ToString(InGameData.MaxDigitsInInfVal);
             timeOfConstructionText.text = buyNewFieldPopupData.TimeOfConstruction.ToString();
             
             buyButton.onClick.AddListener(()=>{Buy(buyNewFieldPopupData.Price, buyNewFieldPopupData.TimeOfConstruction);});

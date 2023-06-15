@@ -50,8 +50,25 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         
         private InfVal CalculatePriceOfFutureFarmField(int numberOfOwnedFarmFields)
         {
-            Debug.Log($"numberOfOwnedFarmFields: { numberOfOwnedFarmFields}");
-            return 20 * numberOfOwnedFarmFields;
+            //Debug.Log($"numberOfOwnedFarmFields: { numberOfOwnedFarmFields}");
+            //return 20 * numberOfOwnedFarmFields;
+            
+            InfVal finalPrice = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
+
+            int targetLevel = numberOfOwnedFarmFields - 1;
+            InfVal scalingValI = new InfVal(3.29f).ToPrecision(InGameData.InfValPrecision);
+            InfVal pow = MathInfVal.Pow(scalingValI, targetLevel + 1, false).ToPrecision(InGameData.InfValPrecision);
+
+            InfVal a = MathInfVal.Pow(60, numberOfOwnedFarmFields - 1, false).ToPrecision(InGameData.InfValPrecision);
+            InfVal b = MathInfVal.Pow(7, numberOfOwnedFarmFields - 1, false).ToPrecision(InGameData.InfValPrecision);
+            
+            InfVal initialCroppedCurrency =
+                new InfVal(a /b).ToPrecision(InGameData.InfValPrecision);
+            
+            finalPrice = (20 * initialCroppedCurrency * pow)/ scalingValI;
+            
+            return finalPrice;
+            
         }
         
         private int CalculateTimeOfConstruction(int numberOfOwnedFarmFields)

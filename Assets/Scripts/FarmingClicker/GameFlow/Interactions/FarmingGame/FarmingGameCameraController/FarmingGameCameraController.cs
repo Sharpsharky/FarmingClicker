@@ -41,7 +41,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGameCameraController
 
                 if (touch.phase == TouchPhase.Moved)
                 {
-                    float y = transform.position.y - touch.deltaPosition.y * scrollSpeed * Time.deltaTime;
+                    float y = (transform.position.y - touch.deltaPosition.y) * Time.deltaTime;
                     y = Mathf.Clamp(y, minY, maxY);
                     transform.position = new Vector3(transform.position.x, y, transform.position.z);
                 }
