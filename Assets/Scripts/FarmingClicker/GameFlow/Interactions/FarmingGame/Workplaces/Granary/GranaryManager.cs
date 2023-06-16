@@ -1,24 +1,18 @@
-using System.Linq;
-using UnityEngine;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
 {
     using System.Collections.Generic;
     using Core.Message;
     using FarmsSpawnerManager;
-    using Tractor;
     using FarmFields;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction;
-    using LoadData;
-    using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
-    
+    using System.Linq;
+    using UnityEngine;
     public class GranaryManager : WorkplaceManager
     {
-        public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers)
+        public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers, 
+            List<WorkplaceController> targetWorkplaceControllers)
         {
-            workPlaceDataList = new List<WorkPlaceData>(LoadDataFarmManager.instance.FarmGranaryData);
-
-            base.Initialize(initialFarmCalculationData, workplaceControllers);
+            base.Initialize(initialFarmCalculationData, workplaceControllers, targetWorkplaceControllers);
             
             ListenedTypes.Add(typeof(FarmFieldConstructedNotification));
             MessageDispatcher.Instance.RegisterReceiver(this);

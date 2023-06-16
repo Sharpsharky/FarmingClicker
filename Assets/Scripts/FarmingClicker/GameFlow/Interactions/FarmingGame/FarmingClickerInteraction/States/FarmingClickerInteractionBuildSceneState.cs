@@ -1,19 +1,17 @@
-﻿using System.Collections.Generic;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
     using Core.Message;
     using Core.StateMachine;
     using FarmingClicker.GameFlow.Interactions.FarmingClickerInteraction;
     using FarmingClicker.GameFlow.Messages.Notifications.States.FarmerClickerInteraction;
     using UnityEngine;
-    
+    using System.Collections.Generic;
+    using FutureFarmField;
+    using LoadData;
+    using Workplaces;
+    using Workplaces.FarmFields;
+    using Workplaces.FarmShop;
+    using Workplaces.Granary;
     public class FarmingClickerInteractionBuildSceneState : State<FarmingClickerInteractionMode>
     {
         private FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager;
@@ -42,14 +40,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             base.OnEnter();
             Debug.Log("Build Scene State");
 
-            int numberOfFarmsToGenerate = LoadDataFarmManager.instance.FarmFieldDatas.Count;
+            int numberOfFarmsToGenerate = LoadDataFarmManager.instance.FarmFieldControllers.Count;
             
-            var farmCalculationData = farmsSpawnerManager.Initialize(numberOfFarmsToGenerate);
+            var farmCalculationData = farmsSpawnerManager.Initialize(LoadDataFarmManager.instance.FarmFieldControllers.Count);
             farmingGameCameraController.Initialize();
             
-            granaryManager.Initialize(farmCalculationData, new List<WorkplaceController>(farmCalculationData.GranaryControllers));
-            farmShopManager.Initialize(farmCalculationData,new List<WorkplaceController>(farmCalculationData.FarmShopControllers));
-            farmFieldsManager.Initialize(farmCalculationData, new List<WorkplaceController>(farmCalculationData.FarmFieldControllers));
+            granaryManager.Initialize(farmCalculationData, new List<WorkplaceController>(farmCalculationData.GranaryControllers), 
+                new List<WorkplaceController>(LoadDataFarmManager.instance.GranaryControllers));
+            farmShopManager.Initialize(farmCalculationData,new List<WorkplaceController>(farmCalculationData.FarmShopControllers), 
+                new List<WorkplaceController>(LoadDataFarmManager.instance.FarmShopControllers));
+            farmFieldsManager.Initialize(farmCalculationData, new List<WorkplaceController>(farmCalculationData.FarmFieldControllers), 
+                new List<WorkplaceController>(LoadDataFarmManager.instance.FarmFieldControllers));
             futureFarmFieldManager.Initialize(farmCalculationData, farmCalculationData.FutureFarmFieldController);
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartActivatingBuilders(farmCalculationData));
 
@@ -58,7 +59,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         private void ExitState()
         {
         }
-
 
         public override async void OnExit()
         {
@@ -69,7 +69,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         {
 
         }
-        
         
     }
 }

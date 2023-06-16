@@ -13,8 +13,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
     {
         [SerializeField] private TMP_Text currentCurrencyText;
 
-        public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData
-            , GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
+        public override void Initialize(FarmCalculationData initialFarmCalculationData, GameObject workerPrefab, 
+            InitialWorkerProperties initialWorkerProperties, int initialLevel)
         {
             workerProperties = new FarmWorkerProperties();
             if(workerProperties is FarmWorkerProperties farmWorkerProperties){
@@ -22,7 +22,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                 Debug.Log($"SetNumberOfFarm: {initialFarmCalculationData.FarmFieldControllers.Count}");
             }
             
-            base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab, initialWorkerProperties);
+            base.Initialize(initialFarmCalculationData, workerPrefab, initialWorkerProperties, initialLevel);
             Debug.Log("Initialize + FarmFieldController_>_>_>_");
             SetCurrentCurrencyText();
             StartCoroutine(FakeCurrencyGenerator());

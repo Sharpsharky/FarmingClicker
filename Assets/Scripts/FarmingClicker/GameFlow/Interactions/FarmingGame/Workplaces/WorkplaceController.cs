@@ -23,7 +23,6 @@
         protected InitialWorkerProperties initialWorkerProperties;
         protected FarmCalculationData initialFarmCalculationData;
         protected GameObject workerPrefab;
-        protected WorkPlaceData workPlaceData;
         protected List<WorkerController> workerControllers = new List<WorkerController>();
 
         protected WorkerProperties workerProperties = new WorkerProperties();
@@ -40,25 +39,34 @@
         
         #endregion
         
-        public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, 
-            GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
+        public virtual void Initialize(FarmCalculationData initialFarmCalculationData,
+            GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties, int initialLevel)
         {
             Debug.Log($"Initialize WorkplaceController {initialFarmCalculationData}");
             this.initialFarmCalculationData = initialFarmCalculationData;
-            this.workPlaceData = workPlaceData;
             this.workerPrefab = workerPrefab;
             this.initialWorkerProperties = initialWorkerProperties;
 
             workerProperties.SetInitialProperties(initialWorkerProperties);
-            workerProperties.ChangeUpgradeLevel(0);
+            workerProperties.ChangeUpgradeLevel(initialLevel);
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
         }
 
+        public void Initialize(int initialLevel)
+        {
+            workerProperties.ChangeUpgradeLevel(initialLevel);
+        }
+        
+        public int GetUpgradeLevel()
+        {
+            return workerProperties.UpgradeLevel;
+        }
+        
         private void InitializeWorkers()
         {
-            for (int i = 0; i < workPlaceData.numberOfWorkers; i++)
+            for (int i = 0; i < initialWorkerProperties.NumberOfWorkers; i++)
             {
                 InitializeWorker();
             }

@@ -1,4 +1,3 @@
-using System.Linq;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
 {
@@ -6,19 +5,18 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
     using Core.Message;
     using FarmsSpawnerManager;
     using LoadData;
-    using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction;
     using UnityEngine;
     public class FarmFieldsManager : WorkplaceManager
     {
-        private List<FarmFieldData> farmFields = new List<FarmFieldData>();
         private List<FarmFieldController> farmFieldControllers = new List<FarmFieldController>();
         
-        public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers)
+        public override void Initialize(FarmCalculationData initialFarmCalculationData, List<WorkplaceController> workplaceControllers, 
+            List<WorkplaceController> targetWorkplaceControllers)
         {
-            workPlaceDataList = new List<WorkPlaceData>(LoadDataFarmManager.instance.FarmFieldDatas);
+            farmFieldControllers = LoadDataFarmManager.instance.FarmFieldControllers;
 
-            base.Initialize(initialFarmCalculationData, workplaceControllers);
+            base.Initialize(initialFarmCalculationData, workplaceControllers, targetWorkplaceControllers);
             
             ListenedTypes.Add(typeof(FarmFieldConstructedNotification));
             MessageDispatcher.Instance.RegisterReceiver(this);
@@ -34,12 +32,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                 case FarmFieldConstructedNotification farmFieldConstructedNotification:
                 {
                     Debug.Log("FarmFieldConstructedNotification");
-                    LoadDataFarmManager.instance.AddEmptyFarmField();
+                    
                     Debug.Log($"initialFarmCalculationData: {initialFarmCalculationData.StartingPoint}");
                     farmFieldConstructedNotification.NewFarmFieldController.Initialize(initialFarmCalculationData,
-                        workPlaceDataList.LastOrDefault(),
                         workerPrefab,
-                        initialWorkerProperties);
+                        initialWorkerProperties,
+                        0);
                     farmFieldControllers.Add(farmFieldConstructedNotification.NewFarmFieldController);
                     break;
                 }

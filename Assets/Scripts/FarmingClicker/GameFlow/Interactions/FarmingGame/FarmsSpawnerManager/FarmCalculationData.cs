@@ -1,6 +1,4 @@
-﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
-
+﻿
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 {
     using UnityEngine;
@@ -8,6 +6,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
     using Workplaces.FarmFields;
     using Workplaces.FarmShop;
     using Workplaces.Granary;
+    using FarmingClickerInteraction.FutureFarmField;
+
     public class FarmCalculationData
     {
         public Vector3 StartingPoint;

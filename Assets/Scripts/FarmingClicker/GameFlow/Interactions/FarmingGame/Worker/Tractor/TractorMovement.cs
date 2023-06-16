@@ -36,7 +36,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor
             Vector3 startingPoint, float distanceBetweenStops, float xOfRightTractorPath, float xOfLeftTractorPath)
         {
             this.tractorController = tractorController;
-            farmFieldControllers = new List<FarmFieldController>(workplaceControllers);
+            farmFieldControllers = workplaceControllers;
 
 
             this.startingPoint = startingPoint;

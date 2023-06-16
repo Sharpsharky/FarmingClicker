@@ -1,7 +1,3 @@
-using FarmingClicker.Data;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm;
-using FarmingClicker.GameFlow.Messages.Commands.Currency;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField
 {
     using System;
@@ -13,6 +9,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     using FarmingClicker.GameFlow.Messages.Commands.NewField;
     using InfiniteValue;
     using UnityEngine;
+    using Data;
+
     public class FutureFarmFieldManager : MonoBehaviour, IMessageReceiver
     {
         private FarmCalculationData initialFarmCalculationData;
@@ -26,7 +24,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             this.futureFarmFieldController = futureFarmFieldController;
 
 
-            currentNumberOfFarms = LoadDataFarmManager.instance.FarmFieldDatas.Count;
+            currentNumberOfFarms = LoadDataFarmManager.instance.FarmFieldControllers.Count;
             Debug.Log("FutureFarmFieldManager Initialize");
             InitializeFutureFarmFieldData();
             futureFarmFieldController.Initialize(initialFarmCalculationData);
@@ -39,7 +37,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
 
         private void InitializeFutureFarmFieldData()
         {
-            currentNumberOfFarms = LoadDataFarmManager.instance.FarmFieldDatas.Count;
+            currentNumberOfFarms = LoadDataFarmManager.instance.FarmFieldControllers.Count;
 
             var priceOfFutureFarmField = CalculatePriceOfFutureFarmField(currentNumberOfFarms).
                 ToPrecision(InGameData.InfValPrecision);

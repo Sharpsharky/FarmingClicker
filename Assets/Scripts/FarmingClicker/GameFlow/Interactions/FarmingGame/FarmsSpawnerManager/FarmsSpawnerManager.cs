@@ -100,10 +100,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             GameObject granaryBuildingGameObject = Instantiate(granaryBuilding, positionOfGranaryBuilding, Quaternion.identity);
             GameObject shoppingBuildingGameObject = Instantiate(shoppingBuilding, positionOfShoppingBuilding, Quaternion.identity);
 
-
             var granaryController = granaryBuildingGameObject.GetComponent<GranaryController>();
             granaryControllers.Add(granaryController);
-            
+
             var farmShopController = shoppingBuildingGameObject.GetComponent<FarmShopController>();
             farmShopControllers.Add(farmShopController);
         }
