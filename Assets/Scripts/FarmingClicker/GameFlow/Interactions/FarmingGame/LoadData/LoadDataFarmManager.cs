@@ -1,16 +1,17 @@
-using System.Collections;
-using FarmingClicker.Data;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary;
-using InfiniteValue;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 {
     using System.Collections.Generic;
     using Data;
     using UnityEngine;
-    
+    using Workplaces.FarmShop;
+    using Workplaces.Granary;
+    using InfiniteValue;
+    using Workplaces.FarmFields;
+    using System.Collections;
+    using FarmingClicker.Data;
+    using CurrencyFarm;
+    using Core.Message;
+    using Messages.Commands.Currency;
     public class LoadDataFarmManager : MonoBehaviour
     {
         public List<WorkPlaceData> FarmFieldDatas = new List<WorkPlaceData>();
@@ -76,11 +77,27 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             {
                 AddEmptyShopData();
             }
-            if(ES3.KeyExists(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm))) 
-                FarmCurrencyData = ES3.Load<FarmCurrencyData>(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm));
+
+            if (ES3.KeyExists(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm)))
+            {
+                FarmCurrencyData =
+                    ES3.Load<FarmCurrencyData>(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME,
+                        currentNumberOfFarm));
+                
+                
+                Debug.Log($"FarmCurrencyData: {FarmCurrencyData.currentCurrencyValue}, " +
+                          $"{FarmCurrencyData.currentSuperCurrencyValue}, {FarmCurrencyData.currentValueOnSecond}");
+                InfVal currentCurrencyValue = InfVal.Parse(FarmCurrencyData.currentCurrencyValue);
+                InfVal currentSuperCurrencyValue = InfVal.Parse(FarmCurrencyData.currentSuperCurrencyValue);
+                InfVal currentValueOnSecond = InfVal.Parse(FarmCurrencyData.currentValueOnSecond);
+                
+                MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(currentCurrencyValue));
+                MessageDispatcher.Instance.Send(new ModifySuperCurrencyCommand(currentSuperCurrencyValue));
+
+            }
             else
             {
-                FarmCurrencyData = new FarmCurrencyData("0","0");
+                FarmCurrencyData = new FarmCurrencyData(0,0, 0);
             }
 
             StartCoroutine(SaveLoop());
@@ -88,19 +105,19 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 
         public void AddEmptyFarmField()
         {
-            var farmFieldData = new FarmFieldData(0,new InfVal(0).ToPrecision(InGameData.InfValPrecision));
+            var farmFieldData = new FarmFieldData(0,0);
             FarmFieldDatas.Add(farmFieldData);
         }
         
         public void AddEmptyGranaryData()
         {
-            var emptyGranaryData = new FarmGranaryData(0,new InfVal(0).ToPrecision(InGameData.InfValPrecision));
+            var emptyGranaryData = new FarmGranaryData(0,0);
             FarmGranaryData.Add(emptyGranaryData);
         }
         
         public void AddEmptyShopData()
         {
-            var emptyShopData = new FarmShopData(0,new InfVal(0).ToPrecision(InGameData.InfValPrecision));
+            var emptyShopData = new FarmShopData(0,0);
             FarmShopData.Add(emptyShopData);
         }
         
@@ -140,6 +157,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             {
                 FarmShopData.Add(FarmShopControllers[i].GetSavingData());
             }
+
+            FarmCurrencyData = new FarmCurrencyData(CurrencyFarmManger.GetCurrentCurrency(), 
+                CurrencyFarmManger.GetCurrentSuperCurrency(), 1);
+
         }
         
         private void SaveData()

@@ -1,6 +1,4 @@
-﻿using FarmingClicker.Data;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -14,6 +12,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
     using InfiniteValue;
     using TMPro;
     using UnityEngine;
+    using Data;
+    using FarmsSpawnerManager;
+    using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data;
 
     public class GranaryController : WorkplaceController, IMessageReceiver
     {
@@ -25,9 +26,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary
         {
             ListenedTypes.Add(typeof(TractorWentToGranaryNotification));
             MessageDispatcher.Instance.RegisterReceiver(this);
-            SetCurrentCropText();
         }
 
+        public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, 
+            GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
+        {
+            base.Initialize(initialFarmCalculationData,workPlaceData,workerPrefab,initialWorkerProperties);
+            SetCurrentCropText();
+        }
+        
+        
         public void AddNewFieldForTractors(FarmFieldController farmFieldController)
         {
             List<TractorController> tractorControllers = workerControllers.OfType<TractorController>().ToList();

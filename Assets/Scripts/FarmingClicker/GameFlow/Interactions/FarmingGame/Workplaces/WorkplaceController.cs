@@ -51,7 +51,7 @@
 
             workerProperties.SetInitialProperties(initialWorkerProperties);
             workerProperties.ChangeUpgradeLevel(workPlaceData.upgradeLevel);
-            currentCurrency = workPlaceData.currentCurrency;
+            currentCurrency = workPlaceData.GetCurrentCurrency();
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();

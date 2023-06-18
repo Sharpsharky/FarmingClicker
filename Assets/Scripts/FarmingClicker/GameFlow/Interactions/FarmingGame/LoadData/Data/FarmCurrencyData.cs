@@ -1,14 +1,18 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data
+﻿using InfiniteValue;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data
 {
     public class FarmCurrencyData
     {
-        public string currentCurrencyValue = "0";
-        public string currentValueOnSecond = "0";
+        public string currentCurrencyValue = new InfVal(0).ToString();
+        public string currentSuperCurrencyValue = new InfVal(0).ToString();
+        public string currentValueOnSecond = new InfVal(0).ToString();
 
-        public FarmCurrencyData( string currentCurrencyValue, string currentValueOnSecond)
+        public FarmCurrencyData(InfVal currentCurrencyValue, InfVal currentSuperCurrencyValue, InfVal currentValueOnSecond)
         {
-            this.currentCurrencyValue = currentCurrencyValue;
-            this.currentValueOnSecond = currentValueOnSecond;
+            this.currentCurrencyValue = currentCurrencyValue.ToString();
+            this.currentSuperCurrencyValue = currentSuperCurrencyValue.ToString();
+            this.currentValueOnSecond = currentValueOnSecond.ToString();
         }
     }
 }

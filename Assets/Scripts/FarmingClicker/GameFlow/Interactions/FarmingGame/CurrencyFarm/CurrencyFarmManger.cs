@@ -18,7 +18,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         [SerializeField] private TMP_Text currentSuperCurrencyText;
 
         private static InfVal currentCurrency = 0;
-        private InfVal currentSuperCurrency = 0;
+        private static InfVal currentSuperCurrency = 0;
         
         private void Awake()
         {
@@ -37,6 +37,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         public static InfVal GetCurrentCurrency()
         {
             return currentCurrency;
+        }
+        
+        public static InfVal GetCurrentSuperCurrency()
+        {
+            return currentSuperCurrency;
         }
 
         private void ModifyCurrentCurrency(InfVal amountToAdd)
