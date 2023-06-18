@@ -41,6 +41,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                         workerPrefab,
                         initialWorkerProperties);
                     farmFieldControllers.Add(farmFieldConstructedNotification.NewFarmFieldController);
+                    
+                    
                     break;
                 }
             }

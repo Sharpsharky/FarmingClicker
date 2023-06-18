@@ -1,8 +1,10 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data
+﻿using InfiniteValue;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data
 {
     public class FarmShopData : WorkPlaceData
     {
-        public FarmShopData(int upgradeLevel, int numberOfWorkers, string currentCurrency) : base(upgradeLevel, numberOfWorkers, currentCurrency)
+        public FarmShopData(int upgradeLevel, InfVal currentCurrency) : base(upgradeLevel, currentCurrency)
         {
         }
     }

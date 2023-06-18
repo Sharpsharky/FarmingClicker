@@ -1,4 +1,5 @@
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary;
@@ -103,9 +104,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 
             var granaryController = granaryBuildingGameObject.GetComponent<GranaryController>();
             granaryControllers.Add(granaryController);
-            
+            LoadDataFarmManager.instance.FarmGranaryControllers.Add(granaryController);
+
             var farmShopController = shoppingBuildingGameObject.GetComponent<FarmShopController>();
             farmShopControllers.Add(farmShopController);
+            LoadDataFarmManager.instance.FarmShopControllers.Add(farmShopController);
+
         }
         
         private void GenerateNumberOfFarms(int n)
@@ -203,6 +207,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             FarmFieldController newFarmFieldController = ConstructNewFarmField(nOfFarm);
             ConstructNewFarmFieldFiller(nOfFarm);
             ConstructNewFarmPathFiller(nOfFarm);
+            LoadDataFarmManager.instance.FarmFieldControllers.Add(newFarmFieldController);
 
             return newFarmFieldController;
         }

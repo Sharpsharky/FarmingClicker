@@ -50,15 +50,22 @@
             this.initialWorkerProperties = initialWorkerProperties;
 
             workerProperties.SetInitialProperties(initialWorkerProperties);
-            workerProperties.ChangeUpgradeLevel(0);
+            workerProperties.ChangeUpgradeLevel(workPlaceData.upgradeLevel);
+            currentCurrency = workPlaceData.currentCurrency;
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
         }
 
+        public WorkPlaceData GetSavingData()
+        {
+            Debug.Log($"workerProperties.UpgradeLevel: {workerProperties.UpgradeLevel},currentCurrency: {currentCurrency}");
+            return new (workerProperties.UpgradeLevel,currentCurrency);
+        }
+        
         private void InitializeWorkers()
         {
-            for (int i = 0; i < workPlaceData.numberOfWorkers; i++)
+            for (int i = 0; i < workerProperties.NumberOfWorkers; i++)
             {
                 InitializeWorker();
             }

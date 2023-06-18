@@ -1,15 +1,16 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data
+﻿using FarmingClicker.Data;
+using InfiniteValue;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData.Data
 {
     public class WorkPlaceData
     {
         public int upgradeLevel = 0;
-        public int numberOfWorkers = 0;
-        public string currentCurrency = "0";
+        public InfVal currentCurrency = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
 
-        public WorkPlaceData(int upgradeLevel, int numberOfWorkers, string currentCurrency)
+        public WorkPlaceData(int upgradeLevel, InfVal currentCurrency)
         {
             this.upgradeLevel = upgradeLevel;
-            this.numberOfWorkers = numberOfWorkers;
             this.currentCurrency = currentCurrency;
         }
             

@@ -1,3 +1,10 @@
+using System.Collections;
+using FarmingClicker.Data;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.Granary;
+using InfiniteValue;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 {
     using System.Collections.Generic;
@@ -6,12 +13,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
     
     public class LoadDataFarmManager : MonoBehaviour
     {
-        public List<FarmFieldData> FarmFieldDatas = new List<FarmFieldData>();
-        public List<FarmGranaryData> FarmGranaryData = new List<FarmGranaryData>();
-        public List<FarmShopData> FarmShopData = new List<FarmShopData>();
+        public List<WorkPlaceData> FarmFieldDatas = new List<WorkPlaceData>();
+        public List<WorkPlaceData> FarmGranaryData = new List<WorkPlaceData>();
+        public List<WorkPlaceData> FarmShopData = new List<WorkPlaceData>();
         public FarmCurrencyData FarmCurrencyData;
         public FarmFieldCurrentlyBuildingData FarmFieldCurrentlyBuildingData;
 
+        public List<FarmFieldController> FarmFieldControllers = new List<FarmFieldController>();
+        public List<GranaryController> FarmGranaryControllers = new List<GranaryController>();
+        public List<FarmShopController> FarmShopControllers = new List<FarmShopController>();
+        
         private const string FARM_FIELD_DATAS_SAVING_NAME = "farmFieldDatas";
         private const string FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME = "farmFieldCurrentlyBuildingData";
         private const string FARM_GRANARY_DATA_SAVING_NAME = "farmGranaryData";
@@ -42,7 +53,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             
             
             if(ES3.KeyExists(GetProperSavingName(FARM_FIELD_DATAS_SAVING_NAME, currentNumberOfFarm))) 
-                FarmFieldDatas = ES3.Load<List<FarmFieldData>>(GetProperSavingName(FARM_FIELD_DATAS_SAVING_NAME, currentNumberOfFarm));
+                FarmFieldDatas = ES3.Load<List<WorkPlaceData>>(GetProperSavingName(FARM_FIELD_DATAS_SAVING_NAME, currentNumberOfFarm));
             else
             {
                 AddEmptyFarmField();
@@ -54,13 +65,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
                 FarmFieldCurrentlyBuildingData = new FarmFieldCurrentlyBuildingData("0");
             }
             if(ES3.KeyExists(GetProperSavingName(FARM_GRANARY_DATA_SAVING_NAME, currentNumberOfFarm))) 
-                FarmGranaryData = ES3.Load<List<FarmGranaryData>>(GetProperSavingName(FARM_GRANARY_DATA_SAVING_NAME, currentNumberOfFarm));
+                FarmGranaryData = ES3.Load<List<WorkPlaceData>>(GetProperSavingName(FARM_GRANARY_DATA_SAVING_NAME, currentNumberOfFarm));
             else
             {
                 AddEmptyGranaryData();
             }
             if(ES3.KeyExists(GetProperSavingName(FARM_SHOP_DATA_SAVING_NAME, currentNumberOfFarm))) 
-                FarmShopData = ES3.Load<List<FarmShopData>>(GetProperSavingName(FARM_SHOP_DATA_SAVING_NAME, currentNumberOfFarm));
+                FarmShopData = ES3.Load<List<WorkPlaceData>>(GetProperSavingName(FARM_SHOP_DATA_SAVING_NAME, currentNumberOfFarm));
             else
             {
                 AddEmptyShopData();
@@ -71,31 +82,66 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             {
                 FarmCurrencyData = new FarmCurrencyData("0","0");
             }
+
+            StartCoroutine(SaveLoop());
         }
 
         public void AddEmptyFarmField()
         {
-            var farmFieldData = new FarmFieldData(0,1,"0");
+            var farmFieldData = new FarmFieldData(0,new InfVal(0).ToPrecision(InGameData.InfValPrecision));
             FarmFieldDatas.Add(farmFieldData);
         }
         
         public void AddEmptyGranaryData()
         {
-            var emptyGranaryData = new FarmGranaryData(0,1,"0");
+            var emptyGranaryData = new FarmGranaryData(0,new InfVal(0).ToPrecision(InGameData.InfValPrecision));
             FarmGranaryData.Add(emptyGranaryData);
         }
         
         public void AddEmptyShopData()
         {
-            var emptyShopData = new FarmShopData(0,1,"0");
+            var emptyShopData = new FarmShopData(0,new InfVal(0).ToPrecision(InGameData.InfValPrecision));
             FarmShopData.Add(emptyShopData);
+        }
+        
+        private IEnumerator SaveLoop()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(1);
+                QuickSave();
+            }
+
+            yield return null;
         }
         
         public void QuickSave()
         {
+            GetData();
             SaveData();
         }
 
+        private void GetData()
+        {
+            FarmFieldDatas = new List<WorkPlaceData>();
+            for (int i = 0; i < FarmFieldControllers.Count; i++)
+            {
+                FarmFieldDatas.Add(FarmFieldControllers[i].GetSavingData());
+            }
+            
+            FarmGranaryData = new List<WorkPlaceData>();
+            for (int i = 0; i < FarmGranaryControllers.Count; i++)
+            {
+                FarmGranaryData.Add(FarmGranaryControllers[i].GetSavingData());
+            }
+            
+            FarmShopData = new List<WorkPlaceData>();
+            for (int i = 0; i < FarmShopControllers.Count; i++)
+            {
+                FarmShopData.Add(FarmShopControllers[i].GetSavingData());
+            }
+        }
+        
         private void SaveData()
         {
             ES3.Save(GetProperSavingName(FARM_FIELD_DATAS_SAVING_NAME, currentNumberOfFarm), FarmFieldDatas);
