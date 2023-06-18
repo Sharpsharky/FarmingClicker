@@ -10,17 +10,20 @@ namespace FarmingClicker.Dialogue
     using GameFlow.Interactions.FarmingGame.Upgrade;
     using GameFlow.Messages.Commands.Popups;
     using GameFlow.Interactions.FarmingGame.NewField;
+    using GameFlow.Interactions.FarmingGame.Options;
 
     public class PopupManager : SerializedMonoBehaviour, IMessageReceiver
     {
         [field: SerializeField, FoldoutGroup("UI")]  private UpgradePanelController upgradePanelController;
         [field: SerializeField, FoldoutGroup("UI")]  private BuyNewFieldController buyNewFieldController;
+        [field: SerializeField, FoldoutGroup("UI")]  private OptionsController optionsController;
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
         
         private void Start()
         {
             ListenedTypes.Add(typeof(DisplayUpgradePanelCommand));
+            ListenedTypes.Add(typeof(DisplayOptionsPanelCommand));
             ListenedTypes.Add(typeof(DisplayBuyNewFieldPanelCommand));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
@@ -50,6 +53,13 @@ namespace FarmingClicker.Dialogue
                 {
                     buyNewFieldController.OnFinished += ClosePopup;
                     buyNewFieldController.SetupData(command.data);
+                    
+                    break;
+                }
+                case DisplayOptionsPanelCommand command:
+                {
+                    optionsController.OnFinished += ClosePopup;
+                    optionsController.SetupData(command.data);
                     
                     break;
                 }

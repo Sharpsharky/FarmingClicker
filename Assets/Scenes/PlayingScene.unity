@@ -167,6 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9227c0b087b02f45a80b4e1e692a8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FarmFieldControllers: []
+  FarmGranaryControllers: []
+  FarmShopControllers: []
 --- !u!1 &104425040
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +603,17 @@ MonoBehaviour:
 --- !u!114 &1011649754 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1799390793617202748, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+  m_PrefabInstance: {fileID: 1011649752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1011649755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2959798222501603713, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
   m_PrefabInstance: {fileID: 1011649752}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -1413,6 +1427,7 @@ MonoBehaviour:
     SerializationNodes: []
   currentCurrencyText: {fileID: 1011649754}
   currentSuperCurrencyText: {fileID: 1011649753}
+  currentCurrencyPerSecText: {fileID: 1011649755}
 --- !u!1 &1806447503
 GameObject:
   m_ObjectHideFlags: 0

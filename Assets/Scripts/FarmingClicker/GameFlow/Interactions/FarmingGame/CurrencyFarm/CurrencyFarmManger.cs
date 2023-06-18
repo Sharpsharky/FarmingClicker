@@ -1,7 +1,6 @@
-using FarmingClicker.Data;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
 {
+    using Data;
     using System;
     using System.Collections.Generic;
     using Core.Message;
@@ -16,18 +15,21 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
 
         [SerializeField] private TMP_Text currentCurrencyText;
         [SerializeField] private TMP_Text currentSuperCurrencyText;
+        [SerializeField] private TMP_Text currentCurrencyPerSecText;
 
         private static InfVal currentCurrency = 0;
         private static InfVal currentSuperCurrency = 0;
+        private static InfVal currentCurrencyPerSec = 0;
         
         private void Awake()
         {
             currentCurrency = 0;
             currentSuperCurrency = 0;
+            currentCurrencyPerSec = 0;
 
             SetTextOfCurrentCurrency();
             SetTextOfCurrentSuperCurrency();
-            
+            SetTextOfCurrentCurrencyPerSec();
             
             ListenedTypes.Add(typeof(ModifyCurrencyCommand));
             ListenedTypes.Add(typeof(ModifySuperCurrencyCommand));
@@ -54,7 +56,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         {
             currentSuperCurrency += amountToAdd;
             SetTextOfCurrentSuperCurrency();
-
+        }
+        
+        private void SetCurrentCurrencyPerSec(InfVal amount)
+        {
+            currentCurrencyPerSec = amount;
+            SetTextOfCurrentSuperCurrency();
         }
         
         private void SetTextOfCurrentCurrency()
@@ -65,6 +72,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         private void SetTextOfCurrentSuperCurrency()
         {
             currentSuperCurrencyText.text = currentSuperCurrency.ToString(InGameData.MaxDigitsInInfVal);
+        }
+        
+        private void SetTextOfCurrentCurrencyPerSec()
+        {
+            currentCurrencyPerSecText.text = $"{currentCurrencyPerSec.ToString(InGameData.MaxDigitsInInfVal)}/s";
         }
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
@@ -84,6 +96,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
                     ModifyCurrentSuperCurrency(command.Amount);
                     break;
                 }
+                case SetCurrentCurrencyPerSecCommand command:
+                {
+                    SetCurrentCurrencyPerSec(command.Amount);
+                    break;
+                }
+
             }
         }
     }

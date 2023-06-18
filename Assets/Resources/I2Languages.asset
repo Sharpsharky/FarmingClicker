@@ -287,6 +287,24 @@ MonoBehaviour:
       - "\u0412\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u0438 \u043F\u0440\u0438\u0431\u044B\u043B\u044C"
       Flags: 000000000000000000000000
       Languages_Touch: []
+    - Term: UI_Options
+      TermType: 0
+      Description: 
+      Languages:
+      - Options
+      - Opcje
+      - Optionen
+      - Choix
+      - Opciones
+      - "Se\xE7enekler"
+      - Opzioni
+      - "Op\xE7\xF5es"
+      - "\u9009\u9879"
+      - "\u30AA\u30D7\u30B7\u30E7\u30F3"
+      - Opties
+      - "\u041F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 

@@ -1,10 +1,3 @@
-
-
-using FarmingClicker.Data;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm;
-using FarmingClicker.GameFlow.Messages.Commands.Currency;
-using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
 {
     using Dialogue.DialogueDataTypes;
@@ -20,6 +13,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
     using FarmingClicker.Data.Popup;
     using FarmingClicker.GameFlow.Messages.Commands.NewField;
     using InfiniteValue;
+    using Data;
+    using CurrencyFarm;
+    using Messages.Commands.Currency;
     public class BuyNewFieldController : PopupPanelBase, IMessageReceiver
     {
         [SerializeField, BoxGroup("Buttons")] private Button exitButton;
