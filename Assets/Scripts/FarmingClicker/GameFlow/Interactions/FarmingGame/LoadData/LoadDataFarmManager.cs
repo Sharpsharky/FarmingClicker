@@ -1,3 +1,7 @@
+using System;
+using Core.Message.Interfaces;
+using FarmingClicker.GameFlow.Messages.Commands.Backend;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 {
     using System.Collections.Generic;
@@ -8,11 +12,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
     using InfiniteValue;
     using Workplaces.FarmFields;
     using System.Collections;
-    using FarmingClicker.Data;
     using CurrencyFarm;
     using Core.Message;
     using Messages.Commands.Currency;
-    public class LoadDataFarmManager : MonoBehaviour
+    public class LoadDataFarmManager : MonoBehaviour, IMessageReceiver
     {
         public List<WorkPlaceData> FarmFieldDatas = new List<WorkPlaceData>();
         public List<WorkPlaceData> FarmGranaryData = new List<WorkPlaceData>();
@@ -33,7 +36,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
         private int currentNumberOfFarm = 0;
 
         public static LoadDataFarmManager instance;
-        
+        public List<Type> ListenedTypes { get; } = new List<Type>();
         
         private void InitializeSingleton()
         {
@@ -47,6 +50,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 
         public void Initialize(int numberOfFarm)
         {
+            ListenedTypes.Add(typeof(ResetBackendCommand));
+            MessageDispatcher.Instance.RegisterReceiver(this);
+            
             Debug.Log("Initialize LoadDataFarmManager");
             InitializeSingleton();
             
@@ -176,6 +182,21 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
         {
             return savingName + numberOfFarm.ToString();
         }
-        
+
+        public void OnMessageReceived(object message)
+        {
+            if(!ListenedTypes.Contains(message.GetType())) return;
+
+            switch (message)
+            {
+                case ResetBackendCommand resetBackendCommand:
+                {
+                    Debug.Log("ResetBackendCommand");
+                    ES3.DeleteFile();
+                    Application.Quit();
+                    break;
+                }
+            }        
+        }
     }
 }
