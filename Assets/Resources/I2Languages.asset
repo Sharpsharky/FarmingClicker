@@ -251,6 +251,42 @@ MonoBehaviour:
       - "\u041A\u0443\u043F\u0438\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u043F\u043E\u043B\u0435"
       Flags: 000000000000000000000000
       Languages_Touch: []
+    - Term: UI_Profit
+      TermType: 0
+      Description: 
+      Languages:
+      - Profit
+      - Zysk
+      - Profitieren
+      - Profit
+      - Ganancia
+      - "K\xE2r"
+      - Profitto
+      - Lucro
+      - "\u5229\u6DA6"
+      - "\u5229\u76CA"
+      - Winst
+      - "\u0412\u044B\u0433\u043E\u0434\u0430"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
+    - Term: Profit_YouMadeProfit
+      TermType: 0
+      Description: 
+      Languages:
+      - You made a profit
+      - "Osi\u0105gn\u0105\u0142e\u015B zysk"
+      - Du hast einen Gewinn gemacht
+      - "Vous avez r\xE9alis\xE9 un b\xE9n\xE9fice"
+      - Obtuviste una ganancia
+      - "k\xE2r ettin"
+      - Hai fatto un profitto
+      - "Voc\xEA teve lucro"
+      - "\u4F60\u8D5A\u4E86"
+      - "\u5229\u76CA\u304C\u51FA\u307E\u3057\u305F\u306D"
+      - Je hebt winst gemaakt
+      - "\u0412\u044B \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u0438 \u043F\u0440\u0438\u0431\u044B\u043B\u044C"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
