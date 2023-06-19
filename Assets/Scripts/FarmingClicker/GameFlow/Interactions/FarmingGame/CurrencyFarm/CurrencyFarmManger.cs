@@ -33,6 +33,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
             
             ListenedTypes.Add(typeof(ModifyCurrencyCommand));
             ListenedTypes.Add(typeof(ModifySuperCurrencyCommand));
+            ListenedTypes.Add(typeof(SetCurrentCurrencyPerSecCommand));
             MessageDispatcher.Instance.RegisterReceiver(this);        
         }
 
@@ -60,8 +61,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         
         private void SetCurrentCurrencyPerSec(InfVal amount)
         {
+            Debug.Log("currentCurrencyPerSec:" + amount);
             currentCurrencyPerSec = amount;
-            SetTextOfCurrentSuperCurrency();
+            SetTextOfCurrentCurrencyPerSec();
         }
         
         private void SetTextOfCurrentCurrency()

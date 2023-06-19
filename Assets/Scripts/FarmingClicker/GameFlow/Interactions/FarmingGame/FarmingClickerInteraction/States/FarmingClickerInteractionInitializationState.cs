@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
     using Core.Message;
     using Core.StateMachine;
@@ -10,6 +12,7 @@
     {
         private LoadData.LoadDataFarmManager loadDataFarmManager;
         private int numberOfFarm;
+        
         public FarmingClickerInteractionInitializationState(IStateManager<FarmingClickerInteractionMode> stateManager, 
             FarmingClickerInteractionMode stateType, LoadData.LoadDataFarmManager loadDataFarmManager, int numberOfFarm) : base(stateManager, stateType)
         {

@@ -1,3 +1,4 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmShop;
@@ -26,6 +27,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         [SerializeField, BoxGroup("Fake Data")] private int numberOfFarm = 0;
         
         [SerializeField, BoxGroup("General Managers")] private FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager;
+        [SerializeField, BoxGroup("General Managers")] private CurrencyPerSecondManager currencyPerSecondCalculatorManager;
+
         
         [SerializeField, BoxGroup("Worker Mangers")] private FarmFieldsManager farmFieldsManager;
         [SerializeField, BoxGroup("Worker Mangers")] private FarmShopManager farmShopManager; 
@@ -59,12 +62,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             stateMachineRunner.Initialize(new State<FarmingClickerInteractionMode>[]
                                           {
                                               new FarmingClickerInteractionInitializationState(stateMachineRunner.StateManager, 
-                                                  FarmingClickerInteractionMode.Initialization, loadDataFarmManager, numberOfFarm),
+                                                  FarmingClickerInteractionMode.Initialization, loadDataFarmManager, 
+                                                  numberOfFarm),
                                               new FarmingClickerInteractionDisplayUIState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.DisplayUI),
                                               new FarmingClickerInteractionBuildSceneState(stateMachineRunner.StateManager, 
-                                                  FarmingClickerInteractionMode.BuildScene, farmsSpawnerManager, farmingGameCameraController, 
-                                                  granaryManager, farmFieldsManager, farmShopManager, futureFarmFieldManager),
+                                                  FarmingClickerInteractionMode.BuildScene, farmsSpawnerManager, 
+                                                  farmingGameCameraController, granaryManager, farmFieldsManager, 
+                                                  farmShopManager, futureFarmFieldManager, currencyPerSecondCalculatorManager),
                                               new FarmingClickerInteractionWorkersActivationState(stateMachineRunner.StateManager, 
                                                   FarmingClickerInteractionMode.WorkersActivation, loadDataFarmManager),
                                               new FarmingClickerInteractionPlayingState(stateMachineRunner.StateManager, 

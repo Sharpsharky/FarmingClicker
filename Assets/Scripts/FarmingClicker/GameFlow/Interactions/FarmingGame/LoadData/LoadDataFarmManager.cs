@@ -1,7 +1,3 @@
-using System;
-using Core.Message.Interfaces;
-using FarmingClicker.GameFlow.Messages.Commands.Backend;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 {
     using System.Collections.Generic;
@@ -15,6 +11,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
     using CurrencyFarm;
     using Core.Message;
     using Messages.Commands.Currency;
+    using System;
+    using Core.Message.Interfaces;
+    using Messages.Commands.Backend;
+
     public class LoadDataFarmManager : MonoBehaviour, IMessageReceiver
     {
         public List<WorkPlaceData> FarmFieldDatas = new List<WorkPlaceData>();

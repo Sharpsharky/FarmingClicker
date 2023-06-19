@@ -1,3 +1,4 @@
+
 namespace FarmingClicker.Dialogue
 {
     using System;
@@ -11,12 +12,14 @@ namespace FarmingClicker.Dialogue
     using GameFlow.Messages.Commands.Popups;
     using GameFlow.Interactions.FarmingGame.NewField;
     using GameFlow.Interactions.FarmingGame.Options;
+    using GameFlow.Interactions.FarmingGame.Profit;
 
     public class PopupManager : SerializedMonoBehaviour, IMessageReceiver
     {
         [field: SerializeField, FoldoutGroup("UI")]  private UpgradePanelController upgradePanelController;
         [field: SerializeField, FoldoutGroup("UI")]  private BuyNewFieldController buyNewFieldController;
         [field: SerializeField, FoldoutGroup("UI")]  private OptionsController optionsController;
+        [field: SerializeField, FoldoutGroup("UI")]  private ProfitController profitController;
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
         

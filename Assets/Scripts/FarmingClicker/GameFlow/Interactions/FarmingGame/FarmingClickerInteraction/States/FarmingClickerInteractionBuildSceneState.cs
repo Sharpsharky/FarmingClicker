@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
@@ -23,11 +24,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         private FarmFieldsManager farmFieldsManager; 
         private FarmShopManager farmShopManager; 
         private FutureFarmFieldManager futureFarmFieldManager; 
+        private CurrencyPerSecondManager currencyPerSecondCalculatorManager; 
 
         public FarmingClickerInteractionBuildSceneState(IStateManager<FarmingClickerInteractionMode> stateManager, 
             FarmingClickerInteractionMode stateType, FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager, 
             FarmingGameCameraController.FarmingGameCameraController farmingGameCameraController, GranaryManager granaryManager
-            , FarmFieldsManager farmFieldsManager, FarmShopManager farmShopManager, FutureFarmFieldManager futureFarmFieldManager) : base(stateManager, stateType)
+            , FarmFieldsManager farmFieldsManager, FarmShopManager farmShopManager, FutureFarmFieldManager futureFarmFieldManager,
+            CurrencyPerSecondManager currencyPerSecondCalculatorManager) : base(stateManager, stateType)
         {
             this.farmsSpawnerManager = farmsSpawnerManager;
             this.farmingGameCameraController = farmingGameCameraController;
@@ -35,6 +38,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             this.farmFieldsManager = farmFieldsManager;
             this.farmShopManager = farmShopManager;
             this.futureFarmFieldManager = futureFarmFieldManager;
+            this.currencyPerSecondCalculatorManager = currencyPerSecondCalculatorManager;
         }
 
         public override async void OnEnter()
@@ -51,6 +55,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             farmShopManager.Initialize(farmCalculationData,new List<WorkplaceController>(farmCalculationData.FarmShopControllers));
             farmFieldsManager.Initialize(farmCalculationData, new List<WorkplaceController>(farmCalculationData.FarmFieldControllers));
             futureFarmFieldManager.Initialize(farmCalculationData, farmCalculationData.FutureFarmFieldController);
+            
+            currencyPerSecondCalculatorManager.Initialize(farmCalculationData.FarmFieldControllers, 
+                farmCalculationData.GranaryControllers, farmCalculationData.FarmShopControllers);
+            
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartActivatingBuilders(farmCalculationData));
 
         }

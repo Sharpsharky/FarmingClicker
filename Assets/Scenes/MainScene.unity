@@ -2211,6 +2211,7 @@ MonoBehaviour:
   upgradePanelController: {fileID: 954808104112051865}
   buyNewFieldController: {fileID: 2696072548370616671}
   optionsController: {fileID: 1924830558}
+  profitController: {fileID: 0}
 --- !u!1 &1348571104
 GameObject:
   m_ObjectHideFlags: 0
@@ -4009,6 +4010,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5260300229208096966, guid: 32658e43a3585c54cbfe623370e88a43, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 5260300229208096966, guid: 32658e43a3585c54cbfe623370e88a43, type: 3}
     - target: {fileID: 6947065597296146048, guid: 32658e43a3585c54cbfe623370e88a43, type: 3}
       propertyPath: mLocalizeTarget
       value: 
@@ -4104,6 +4109,10 @@ PrefabInstance:
     - target: {fileID: 6947065597455081541, guid: 32658e43a3585c54cbfe623370e88a43, type: 3}
       propertyPath: m_Name
       value: Farm profit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6947065597455081541, guid: 32658e43a3585c54cbfe623370e88a43, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6947065598004719808, guid: 32658e43a3585c54cbfe623370e88a43, type: 3}
       propertyPath: mLocalizeTarget
@@ -4690,6 +4699,10 @@ PrefabInstance:
     - target: {fileID: 6752125264346840183, guid: dfe3dba7e14fab941a1ce704c29e36f1, type: 3}
       propertyPath: m_Name
       value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752125264346840183, guid: dfe3dba7e14fab941a1ce704c29e36f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6752125264450179511, guid: dfe3dba7e14fab941a1ce704c29e36f1, type: 3}
       propertyPath: mLocalizeTarget

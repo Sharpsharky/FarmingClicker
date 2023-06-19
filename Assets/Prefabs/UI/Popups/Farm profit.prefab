@@ -264,13 +264,14 @@ GameObject:
   - component: {fileID: 6947065597455081536}
   - component: {fileID: 6947065597455081543}
   - component: {fileID: 6947065597455081542}
+  - component: {fileID: 5260300229208096966}
   m_Layer: 5
   m_Name: Farm profit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6947065597455081537
 RectTransform:
   m_ObjectHideFlags: 0
@@ -385,6 +386,29 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!114 &5260300229208096966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947065597455081541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faac9cb371904e1e839c496eea34d389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  amountOfProfit: {fileID: 6947065598227363032}
+  exitButton: {fileID: 1500593442453366242}
 --- !u!1 &6947065597701161575
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,6 +973,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6f5ff7370ee7e438152d95ac3a7ffa, type: 3}
+--- !u!114 &1500593442453366242 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1668610804245216423, guid: 0f6f5ff7370ee7e438152d95ac3a7ffa, type: 3}
+  m_PrefabInstance: {fileID: 286881716136352069}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1500593443605286918 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1668610805203142979, guid: 0f6f5ff7370ee7e438152d95ac3a7ffa, type: 3}
