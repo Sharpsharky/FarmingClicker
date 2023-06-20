@@ -73,11 +73,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
         {
             if (!LoadDataFarmManager.instance.hasPlayedTheGameBefore) return 0;
 
-            DateTimeOffset dateOfPlayerPlayingLastTime = LoadDataFarmManager.instance.LastTimePlayerOnline;
-            var currentDate = DateTimeOffset.Now;
+            DateTime dateOfPlayerPlayingLastTime = LoadDataFarmManager.instance.LastTimePlayerOnline;
+            var currentDate = DateTime.Now;
             var differenceOfDates = currentDate - dateOfPlayerPlayingLastTime;
-            Debug.Log($"asd dateOfPlayerPlayingLastTime: {dateOfPlayerPlayingLastTime}");
-            Debug.Log($"asd currentDate: {currentDate}");
 
             int secondsOff = differenceOfDates.Seconds;
             if (secondsOff < 0)
@@ -127,7 +125,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
         private void SendCommandToModifyCurrentCurrencyPerSec()
         {
             CalculateCurrencyPerSecond();
-            Debug.Log("newCurrencyPerSecond: " + currencyPerSecond);
             MessageDispatcher.Instance.Send(new SetCurrentCurrencyPerSecCommand(currencyPerSecond));
         }
         

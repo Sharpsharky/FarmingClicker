@@ -28,7 +28,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
         public List<GranaryController> FarmGranaryControllers = new List<GranaryController>();
         public List<FarmShopController> FarmShopControllers = new List<FarmShopController>();
         public bool hasPlayedTheGameBefore = false;
-        public DateTimeOffset LastTimePlayerOnline;
+        public DateTime LastTimePlayerOnline;
         
         private const string FARM_FIELD_DATAS_SAVING_NAME = "farmFieldDatas";
         private const string FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME = "farmFieldCurrentlyBuildingData";
@@ -110,7 +110,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             if (ES3.KeyExists(GetProperSavingName(FARM_SHOP_DATA_SAVING_NAME, currentNumberOfFarm)))
             {
                 PlayerFarmData = ES3.Load<PlayerFarmData>(FARM_PLAYER_DATA_SAVING_NAME);
-                Debug.Log($"PlayerFarmData: {PlayerFarmData.LastTimePlayerOnline}");
 
                 LastTimePlayerOnline = PlayerFarmData.LastTimePlayerOnline;
                 hasPlayedTheGameBefore = true;
@@ -183,8 +182,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             FarmCurrencyData = new FarmCurrencyData(CurrencyFarmManger.GetCurrentCurrency(), 
                 CurrencyFarmManger.GetCurrentSuperCurrency());
             
-            PlayerFarmData = new PlayerFarmData(DateTimeOffset.Now);
-            Debug.Log($"PlayerFarmData.LastTimePlayerOnline: {PlayerFarmData.LastTimePlayerOnline}");
+            PlayerFarmData = new PlayerFarmData(DateTime.Now);
 
         }
         

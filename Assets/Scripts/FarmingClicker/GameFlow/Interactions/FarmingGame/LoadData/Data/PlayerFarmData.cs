@@ -4,9 +4,9 @@
 
     public class PlayerFarmData
     {
-        public DateTimeOffset LastTimePlayerOnline = new DateTimeOffset();
+        public DateTime LastTimePlayerOnline = new DateTime();
 
-        public PlayerFarmData(DateTimeOffset lastTimePlayerOnline)
+        public PlayerFarmData(DateTime lastTimePlayerOnline)
         {
             LastTimePlayerOnline = lastTimePlayerOnline;
         }
