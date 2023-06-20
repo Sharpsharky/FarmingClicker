@@ -1,4 +1,3 @@
-
 namespace FarmingClicker.Dialogue
 {
     using System;
@@ -28,6 +27,7 @@ namespace FarmingClicker.Dialogue
             ListenedTypes.Add(typeof(DisplayUpgradePanelCommand));
             ListenedTypes.Add(typeof(DisplayOptionsPanelCommand));
             ListenedTypes.Add(typeof(DisplayBuyNewFieldPanelCommand));
+            ListenedTypes.Add(typeof(DisplayProfitPanelCommand));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
         }
@@ -63,6 +63,16 @@ namespace FarmingClicker.Dialogue
                 {
                     optionsController.OnFinished += ClosePopup;
                     optionsController.SetupData(command.data);
+                    
+                    break;
+                }
+                case DisplayProfitPanelCommand command:
+                {
+                    Debug.Log($"DisplayProfitPanelCommand: {command.data.Amount}");
+                    if(command.data.Amount <= 0) return;
+                    
+                    profitController.OnFinished += ClosePopup;
+                    profitController.SetupData(command.data);
                     
                     break;
                 }

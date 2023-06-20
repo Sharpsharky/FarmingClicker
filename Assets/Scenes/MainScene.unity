@@ -2211,7 +2211,7 @@ MonoBehaviour:
   upgradePanelController: {fileID: 954808104112051865}
   buyNewFieldController: {fileID: 2696072548370616671}
   optionsController: {fileID: 1924830558}
-  profitController: {fileID: 0}
+  profitController: {fileID: 1636371092}
 --- !u!1 &1348571104
 GameObject:
   m_ObjectHideFlags: 0
@@ -3445,6 +3445,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1636371092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5260300229208096966, guid: 32658e43a3585c54cbfe623370e88a43, type: 3}
+  m_PrefabInstance: {fileID: 286881716261288176}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faac9cb371904e1e839c496eea34d389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1866364683
 GameObject:
   m_ObjectHideFlags: 0

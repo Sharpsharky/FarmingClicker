@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
@@ -24,13 +25,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         private FarmFieldsManager farmFieldsManager; 
         private FarmShopManager farmShopManager; 
         private FutureFarmFieldManager futureFarmFieldManager; 
-        private CurrencyPerSecondManager currencyPerSecondCalculatorManager; 
-
+        private CurrencyPerSecondManager currencyPerSecondCalculatorManager;
         public FarmingClickerInteractionBuildSceneState(IStateManager<FarmingClickerInteractionMode> stateManager, 
             FarmingClickerInteractionMode stateType, FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager, 
             FarmingGameCameraController.FarmingGameCameraController farmingGameCameraController, GranaryManager granaryManager
             , FarmFieldsManager farmFieldsManager, FarmShopManager farmShopManager, FutureFarmFieldManager futureFarmFieldManager,
-            CurrencyPerSecondManager currencyPerSecondCalculatorManager) : base(stateManager, stateType)
+            CurrencyPerSecondManager currencyPerSecondCalculatorManager) 
+            : base(stateManager, stateType)
         {
             this.farmsSpawnerManager = farmsSpawnerManager;
             this.farmingGameCameraController = farmingGameCameraController;

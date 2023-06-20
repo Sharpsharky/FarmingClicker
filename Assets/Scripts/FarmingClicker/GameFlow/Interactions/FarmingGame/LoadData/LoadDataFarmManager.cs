@@ -22,16 +22,20 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
         public List<WorkPlaceData> FarmShopData = new List<WorkPlaceData>();
         public FarmCurrencyData FarmCurrencyData;
         public FarmFieldCurrentlyBuildingData FarmFieldCurrentlyBuildingData;
+        public PlayerFarmData PlayerFarmData;
 
         public List<FarmFieldController> FarmFieldControllers = new List<FarmFieldController>();
         public List<GranaryController> FarmGranaryControllers = new List<GranaryController>();
         public List<FarmShopController> FarmShopControllers = new List<FarmShopController>();
+        public bool hasPlayedTheGameBefore = false;
+        public DateTimeOffset LastTimePlayerOnline;
         
         private const string FARM_FIELD_DATAS_SAVING_NAME = "farmFieldDatas";
         private const string FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME = "farmFieldCurrentlyBuildingData";
         private const string FARM_GRANARY_DATA_SAVING_NAME = "farmGranaryData";
         private const string FARM_SHOP_DATA_SAVING_NAME = "farmShopData";
         private const string FARM_CURRENCY_DATA_SAVING_NAME = "farmCurrencyData";
+        private const string FARM_PLAYER_DATA_SAVING_NAME = "farmPlayerData";
 
         private int currentNumberOfFarm = 0;
 
@@ -90,12 +94,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
                     ES3.Load<FarmCurrencyData>(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME,
                         currentNumberOfFarm));
                 
-                
-                Debug.Log($"FarmCurrencyData: {FarmCurrencyData.currentCurrencyValue}, " +
-                          $"{FarmCurrencyData.currentSuperCurrencyValue}, {FarmCurrencyData.currentValueOnSecond}");
+
                 InfVal currentCurrencyValue = InfVal.Parse(FarmCurrencyData.currentCurrencyValue);
                 InfVal currentSuperCurrencyValue = InfVal.Parse(FarmCurrencyData.currentSuperCurrencyValue);
-                InfVal currentValueOnSecond = InfVal.Parse(FarmCurrencyData.currentValueOnSecond);
                 
                 MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(currentCurrencyValue));
                 MessageDispatcher.Instance.Send(new ModifySuperCurrencyCommand(currentSuperCurrencyValue));
@@ -103,9 +104,24 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             }
             else
             {
-                FarmCurrencyData = new FarmCurrencyData(0,0, 0);
+                FarmCurrencyData = new FarmCurrencyData(0,0);
             }
 
+            if (ES3.KeyExists(GetProperSavingName(FARM_SHOP_DATA_SAVING_NAME, currentNumberOfFarm)))
+            {
+                PlayerFarmData = ES3.Load<PlayerFarmData>(FARM_PLAYER_DATA_SAVING_NAME);
+                Debug.Log($"PlayerFarmData: {PlayerFarmData.LastTimePlayerOnline}");
+
+                LastTimePlayerOnline = PlayerFarmData.LastTimePlayerOnline;
+                hasPlayedTheGameBefore = true;
+            }
+            else
+            {
+                hasPlayedTheGameBefore = false;
+                
+            }
+            
+            
             StartCoroutine(SaveLoop());
         }
 
@@ -165,7 +181,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             }
 
             FarmCurrencyData = new FarmCurrencyData(CurrencyFarmManger.GetCurrentCurrency(), 
-                CurrencyFarmManger.GetCurrentSuperCurrency(), 1);
+                CurrencyFarmManger.GetCurrentSuperCurrency());
+            
+            PlayerFarmData = new PlayerFarmData(DateTimeOffset.Now);
+            Debug.Log($"PlayerFarmData.LastTimePlayerOnline: {PlayerFarmData.LastTimePlayerOnline}");
 
         }
         
@@ -176,6 +195,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             ES3.Save(GetProperSavingName(FARM_GRANARY_DATA_SAVING_NAME, currentNumberOfFarm), FarmGranaryData);
             ES3.Save(GetProperSavingName(FARM_SHOP_DATA_SAVING_NAME, currentNumberOfFarm), FarmShopData);
             ES3.Save(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm), FarmCurrencyData);
+            ES3.Save(FARM_PLAYER_DATA_SAVING_NAME, PlayerFarmData);
         }
         
         private string GetProperSavingName(string savingName, int numberOfFarm)

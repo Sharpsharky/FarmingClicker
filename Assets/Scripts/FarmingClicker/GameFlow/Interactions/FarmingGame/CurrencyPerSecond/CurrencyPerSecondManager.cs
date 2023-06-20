@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using FarmingClicker.Data.Popup;
+using FarmingClicker.GameFlow.Messages.Commands.Popups;
+using UnityEngine;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 {
@@ -18,8 +20,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
     public class CurrencyPerSecondManager : SerializedMonoBehaviour, IMessageReceiver
     {
-        private static float maxCurrencyOffset = 4;
-        private static float maxTransportedOffset = 4;
+        [SerializeField] private float maxCurrencyOffset = 4;
+        [SerializeField] private float maxTransportedOffset = 4;
+        
+        private int secondsOffline = 0;
+        private InfVal currencyPerSecond = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
         
         private List<FarmFieldController> farmFieldControllers = new List<FarmFieldController>();
         private List<GranaryController> farmGranaryControllers = new List<GranaryController>();
@@ -27,7 +32,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 
         public List<Type> ListenedTypes { get; } = new List<Type>();
 
-        public void Initialize(List<FarmFieldController> farmFieldControllers, List<GranaryController> farmGranaryControllers, List<FarmShopController> farmShopControllers)
+        public void Initialize(List<FarmFieldController> farmFieldControllers, List<GranaryController> farmGranaryControllers, 
+            List<FarmShopController> farmShopControllers)
         {
             ListenedTypes.Add(typeof(ChangeStatisticsOfUpgradeNotification));
             ListenedTypes.Add(typeof(FarmFieldConstructedNotification));
@@ -38,9 +44,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             this.farmShopControllers = farmShopControllers;
             CalculateCurrencyPerSecond();
             SendCommandToModifyCurrentCurrencyPerSec();
+
+            secondsOffline = GetSecondsOffline();
+            
+            var profitWhileOffline = CalculateProfitWhileOffline(secondsOffline);
+
+            var profitPopupData = new ProfitPopupData(profitWhileOffline);
+            MessageDispatcher.Instance.Send(new DisplayProfitPanelCommand(profitPopupData));
         }
         
-        public InfVal CalculateCurrencyPerSecond()
+        public void CalculateCurrencyPerSecond()
         {
             var biggestCurrencyOfAllFarms = FindTheBiggestCurrencyOfAllFarms(farmFieldControllers);
 
@@ -53,11 +66,33 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
                 biggestCurrencyOfAllFarms = biggestCurrencyOfAllFarms * maxTransportedOffset;
             
             
-            InfVal currencyPerSecond = maxTransportedCurrency / biggestCurrencyOfAllFarms;
-            
-            return currencyPerSecond;
+            currencyPerSecond = maxTransportedCurrency / biggestCurrencyOfAllFarms;
         }
 
+        private int GetSecondsOffline()
+        {
+            if (!LoadDataFarmManager.instance.hasPlayedTheGameBefore) return 0;
+
+            DateTimeOffset dateOfPlayerPlayingLastTime = LoadDataFarmManager.instance.LastTimePlayerOnline;
+            var currentDate = DateTimeOffset.Now;
+            var differenceOfDates = currentDate - dateOfPlayerPlayingLastTime;
+            Debug.Log($"asd dateOfPlayerPlayingLastTime: {dateOfPlayerPlayingLastTime}");
+            Debug.Log($"asd currentDate: {currentDate}");
+
+            int secondsOff = differenceOfDates.Seconds;
+            if (secondsOff < 0)
+            {
+                Debug.LogError($"The time offline is: {secondsOff}! This number should never be negative!");
+                return 0;
+            }
+            return secondsOff;
+        }
+        
+        private InfVal CalculateProfitWhileOffline(int secondsOffline)
+        {
+            return secondsOffline * currencyPerSecond;
+        }
+        
         private InfVal FindTheBiggestCurrencyOfAllFarms(List<FarmFieldController> farmFieldControllers)
         {
             InfVal maxVal = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
@@ -91,9 +126,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 
         private void SendCommandToModifyCurrentCurrencyPerSec()
         {
-            var newCurrencyPerSecond = CalculateCurrencyPerSecond();
-            Debug.Log("newCurrencyPerSecond: " + newCurrencyPerSecond);
-            MessageDispatcher.Instance.Send(new SetCurrentCurrencyPerSecCommand(newCurrencyPerSecond));
+            CalculateCurrencyPerSecond();
+            Debug.Log("newCurrencyPerSecond: " + currencyPerSecond);
+            MessageDispatcher.Instance.Send(new SetCurrentCurrencyPerSecCommand(currencyPerSecond));
         }
         
         public void OnMessageReceived(object message)

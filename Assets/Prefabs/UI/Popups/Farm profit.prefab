@@ -260,7 +260,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6947065597455081537}
-  - component: {fileID: 6947065597455081540}
   - component: {fileID: 6947065597455081536}
   - component: {fileID: 6947065597455081543}
   - component: {fileID: 6947065597455081542}
@@ -294,37 +293,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &6947065597455081540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6947065597455081541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f7304bf6055f8645aeea13339a59d69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  exitButton: {fileID: 0}
-  buyButton: {fileID: 0}
-  priceText: {fileID: 6947065598227363032}
-  timeOfConstructionText: {fileID: 0}
-  priceTitle: {fileID: 6947065597296146072}
-  timeOfConstructionTitle: {fileID: 0}
-  titleText: {fileID: 6947065598004719838}
-  priceTitleI2Loc: UI_Price
-  timeOfConstructionTitleI2Loc: UI_WaitingTime
-  titleTextI2Loc: BuyANewField
 --- !u!223 &6947065597455081536
 Canvas:
   m_ObjectHideFlags: 0

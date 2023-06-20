@@ -38,6 +38,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         [SerializeField] private FarmingGameCameraController farmingGameCameraController;
         [FormerlySerializedAs("loadDataManager")] [SerializeField] private LoadDataFarmManager loadDataFarmManager;
 
+        private DateTimeOffset dateOfPlayerPlayingLastTime;
+        
         private StateMachineRunner<FarmingClickerInteractionStateManager, FarmingClickerInteractionMode> stateMachineRunner;
         public List<Type> ListenedTypes { get; } = new List<Type>();
         private void Start()
