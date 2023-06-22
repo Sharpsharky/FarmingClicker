@@ -45,14 +45,26 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             CalculateCurrencyPerSecond();
             SendCommandToModifyCurrentCurrencyPerSec();
 
-            secondsOffline = GetSecondsOffline();
-            
-            var profitWhileOffline = CalculateProfitWhileOffline(secondsOffline);
+            LoadProfit();
+        }
 
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            Debug.Log("Onapplicationpause");
+            if (pauseStatus) return;
+
+            Debug.Log("OnApplicationUnpause");
+            LoadProfit();
+        }
+
+        private void LoadProfit()
+        {
+            secondsOffline = GetSecondsOffline();
+            var profitWhileOffline = CalculateProfitWhileOffline(secondsOffline);
             var profitPopupData = new ProfitPopupData(profitWhileOffline);
             MessageDispatcher.Instance.Send(new DisplayProfitPanelCommand(profitPopupData));
         }
-        
+
         public void CalculateCurrencyPerSecond()
         {
             var cumulativeCurrencyOfAllFarms = GetCumulativeCurrencyOfAllFarms(farmFieldControllers)

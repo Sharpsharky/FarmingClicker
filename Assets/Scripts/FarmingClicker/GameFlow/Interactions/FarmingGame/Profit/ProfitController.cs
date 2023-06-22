@@ -19,9 +19,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Profit
 
         public override void SetupData(IPopupData data)
         {
-            Debug.Log("Dupsko 1");
             if (data is not ProfitPopupData optionsPopupData) return;
-            Debug.Log("Dupsko 2");
 
             amountOfProfit.text = optionsPopupData.Amount.ToPrecision(InGameData.InfValPrecision).ToString(InGameData.MaxDigitsInInfVal);
             exitButton.onClick.AddListener(ExitOptions);
