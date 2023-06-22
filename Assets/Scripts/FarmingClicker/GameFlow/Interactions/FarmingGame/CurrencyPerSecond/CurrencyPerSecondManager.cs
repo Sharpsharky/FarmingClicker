@@ -1,4 +1,5 @@
 ﻿using FarmingClicker.Data.Popup;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
 using FarmingClicker.GameFlow.Messages.Commands.Popups;
 using UnityEngine;
 
@@ -20,8 +21,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
     public class CurrencyPerSecondManager : SerializedMonoBehaviour, IMessageReceiver
     {
-        [SerializeField] private float maxCurrencyOffset = 4;
-        [SerializeField] private float maxTransportedOffset = 4;
+        [SerializeField] private int maxProfitableDaysOffline = 30;
         
         private int secondsOffline = 0;
         private InfVal currencyPerSecond = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
@@ -55,18 +55,27 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
         
         public void CalculateCurrencyPerSecond()
         {
-            var biggestCurrencyOfAllFarms = FindTheBiggestCurrencyOfAllFarms(farmFieldControllers);
+            var cumulativeCurrencyOfAllFarms = GetCumulativeCurrencyOfAllFarms(farmFieldControllers)
+                .ToPrecision(InGameData.InfValPrecision);
 
-            var maxTransportedCurrency = GetMinTransportedCurrency(farmGranaryControllers[0], farmShopControllers[0]);
+            var minTransportedCurrencyWorkerProperties = 
+                GetMinTransportedCurrency(farmGranaryControllers[0], farmShopControllers[0]);
 
-            if (biggestCurrencyOfAllFarms > maxTransportedCurrency * maxCurrencyOffset) //TODO: Has to be tweaked
-                maxTransportedCurrency = maxTransportedCurrency * maxCurrencyOffset; 
+            var x = (cumulativeCurrencyOfAllFarms) * minTransportedCurrencyWorkerProperties.MaxTransportedCurrency;
+            var y = x * minTransportedCurrencyWorkerProperties.MovingSpeed;
+            currencyPerSecond = y / 50;
+
+            //TODO: Set 20 to some value connected to working speed
+            var transportedThreshold = minTransportedCurrencyWorkerProperties.MaxTransportedCurrency / 20; 
+            var farmsThreshold = cumulativeCurrencyOfAllFarms / 20;
+
+            var threshold = farmsThreshold < transportedThreshold ? farmsThreshold : transportedThreshold;
             
-            if (maxTransportedCurrency > biggestCurrencyOfAllFarms * maxTransportedOffset) //TODO: Has to be tweaked
-                biggestCurrencyOfAllFarms = biggestCurrencyOfAllFarms * maxTransportedOffset;
+            if (currencyPerSecond > threshold) currencyPerSecond = threshold;
             
-            
-            currencyPerSecond = maxTransportedCurrency / biggestCurrencyOfAllFarms;
+            Debug.Log($"CalculateCurrencyPerSecond: x: {x} y: {y} currencyPerSecond: {currencyPerSecond} " +
+                      $"threshold: {threshold}");
+
         }
 
         private int GetSecondsOffline()
@@ -77,6 +86,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             var currentDate = DateTime.Now;
             var differenceOfDates = currentDate - dateOfPlayerPlayingLastTime;
 
+            if (differenceOfDates.Days > maxProfitableDaysOffline) return maxProfitableDaysOffline * 60 * 60 * 24;
+            
             int secondsOff = differenceOfDates.Seconds;
             if (secondsOff < 0)
             {
@@ -91,7 +102,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             return secondsOffline * currencyPerSecond;
         }
         
-        private InfVal FindTheBiggestCurrencyOfAllFarms(List<FarmFieldController> farmFieldControllers)
+        private InfVal GetCumulativeCurrencyOfAllFarms(List<FarmFieldController> farmFieldControllers)
         {
             InfVal maxVal = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
             foreach (var farmFieldController in farmFieldControllers)
@@ -107,19 +118,24 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             return maxVal;
         }
 
-        private InfVal GetMinTransportedCurrency(GranaryController 
+        private WorkerProperties GetMinTransportedCurrency(GranaryController 
             granaryController, FarmShopController farmShopController)
         {
             
             var maxTransportedCurrencyOfGranary = granaryController.WorkerProperties.MaxTransportedCurrency *
-                                                  granaryController.WorkerProperties.NumberOfWorkers;
+                                                  granaryController.WorkerProperties.NumberOfWorkers * 
+                                                  granaryController.WorkerProperties.WorkingSpeed *
+                                                  granaryController.WorkerProperties.MovingSpeed;
             var maxTransportedCurrencyOfFarmShop = farmShopController.WorkerProperties.MaxTransportedCurrency *
-                                                   farmShopController.WorkerProperties.NumberOfWorkers;
+                                                   farmShopController.WorkerProperties.NumberOfWorkers *
+                                                   farmShopController.WorkerProperties.WorkingSpeed * 
+                                                   farmShopController.WorkerProperties.MovingSpeed;
+
             
-            if (maxTransportedCurrencyOfFarmShop < maxTransportedCurrencyOfGranary)
-                return maxTransportedCurrencyOfFarmShop;
+            if (maxTransportedCurrencyOfFarmShop > maxTransportedCurrencyOfGranary)
+                return farmShopController.WorkerProperties;
             else
-                return maxTransportedCurrencyOfGranary;
+                return granaryController.WorkerProperties;
         }
 
         private void SendCommandToModifyCurrentCurrencyPerSec()

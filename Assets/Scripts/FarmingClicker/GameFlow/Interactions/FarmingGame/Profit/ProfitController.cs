@@ -23,7 +23,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Profit
             if (data is not ProfitPopupData optionsPopupData) return;
             Debug.Log("Dupsko 2");
 
-            amountOfProfit.text = optionsPopupData.Amount.ToPrecision(InGameData.InfValPrecision).ToString();
+            amountOfProfit.text = optionsPopupData.Amount.ToPrecision(InGameData.InfValPrecision).ToString(InGameData.MaxDigitsInInfVal);
             exitButton.onClick.AddListener(ExitOptions);
             gameObject.SetActive(true);
             MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(optionsPopupData.Amount));
