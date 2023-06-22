@@ -32,6 +32,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
         [SerializeField] private GameObject farmFieldFillerGameObject;
         
         [SerializeField] private GameObject futureFarmFieldGameObject;
+        [SerializeField] private GameObject garageGameObject;
         
         private Vector3 positionOfGranaryBuilding;
         private Vector3 positionOfShoppingBuilding;

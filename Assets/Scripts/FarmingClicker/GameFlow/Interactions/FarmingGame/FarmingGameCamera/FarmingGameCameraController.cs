@@ -1,20 +1,29 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
+using TMPro;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera
 {
-    public class FarmingGameCameraController : MonoBehaviour
-    {
-        [SerializeField] private float scrollSpeedEditor = 10f;
-        [SerializeField] private float scrollSpeedApp = 0.003f;
-        [SerializeField] private float zoomSpeed = 10f;
-        [SerializeField] private float minSize = 1f;
-        [SerializeField] private float maxSize = 10f;
-        [SerializeField] private float zoomSensitivity = 1f;
-        [SerializeField] private float minY = -10f;
-        [SerializeField] private float maxY;
+    using System;
+    using System.Collections.Generic;
+    using Sirenix.OdinInspector;
+    using UnityEngine;
 
+    public class FarmingGameCameraController : SerializedMonoBehaviour
+    {
+        
+        [SerializeField, BoxGroup("Constants in game")] private float slidingSpeed = 2f;
+        [SerializeField, BoxGroup("Constants in game")] private float scrollSpeedApp = 0.003f;
+        [SerializeField, BoxGroup("Constants in game")] private float minY = -10f;
+        [SerializeField, BoxGroup("Constants in game")] private float maxY;
+
+        [SerializeField, BoxGroup("Constants in editor")] private float scrollSpeedEditor = 10f;
+        [SerializeField, BoxGroup("Constants in editor")] private float zoomSensitivity = 1f;
+
+        [SerializeField, BoxGroup("Zooming")] private float minSize = 1f;
+        [SerializeField, BoxGroup("Zooming")] private float maxSize = 10f;
+
+        [SerializeField, BoxGroup("Test")] private TMP_Text sensText;
+        [SerializeField, BoxGroup("Test")] private TMP_Text slideText;
+        
         private bool isInitialized = false;
         private Camera cam;
 
@@ -25,18 +34,24 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera
             cam = GetComponent<Camera>();
             maxY = transform.position.y;
             enabled = true;
+            sensText.text = $"Sens: {scrollSpeedApp}";
+            slideText.text = $"Slide: {slidingSpeed}";
+
         }
         
         void Update()
         {
             MobileTouch();
-            MobileZoom();
+            //MobileZoom();
             
             #if UNITY_EDITOR
             UnityTouch();
             #endif
         }
 
+
+        private Vector3 targetPosition;
+        private Vector3 currentVelocity;
         private void MobileTouch()
         {
             if (Input.touchCount == 1)
@@ -82,7 +97,18 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - scroll * scrollSpeedEditor, minSize, maxSize);
-        } 
+        }
 
+        public void SensChange(float val = 0.1f)
+        {
+            scrollSpeedApp += val;
+            sensText.text = $"Sens: {scrollSpeedApp}";
+        }
+        public void SlideChange(float val = 0.1f)
+        {
+            slidingSpeed += val;
+            slideText.text = $"Slide: {slidingSpeed}";
+        }
+        
     }
 }

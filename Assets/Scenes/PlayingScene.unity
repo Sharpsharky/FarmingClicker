@@ -497,6 +497,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 843385914885256937, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1799390794231742986, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
       propertyPath: m_Name
       value: MainCanvasPlayingDisplay
@@ -589,6 +593,158 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2722904498867904657, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2722904499931616628, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2722904499931616628, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2722904499931616628, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1113388070}
+    - target: {fileID: 2722904499931616628, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2722904499931616628, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SensChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 2722904499931616628, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera.FarmingGameCameraController,
+        Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2722904499931616628, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2722904499931616628, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395319939562494832, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395319939562494832, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395319939562494832, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1113388070}
+    - target: {fileID: 4395319939562494832, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395319939562494832, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SlideChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395319939562494832, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera.FarmingGameCameraController,
+        Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395319939562494832, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395319939562494832, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4395319940508905109, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161517345225591079, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161517346427862210, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161517346427862210, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161517346427862210, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1113388070}
+    - target: {fileID: 5161517346427862210, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161517346427862210, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SlideChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161517346427862210, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera.FarmingGameCameraController,
+        Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161517346427862210, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161517346427862210, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192106967160804097, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192106968248641252, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192106968248641252, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192106968248641252, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1113388070}
+    - target: {fileID: 8192106968248641252, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192106968248641252, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SensChange
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192106968248641252, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera.FarmingGameCameraController,
+        Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192106968248641252, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192106968248641252, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815864961366443065, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
 --- !u!114 &1011649753 stripped
@@ -616,6 +772,28 @@ MonoBehaviour:
 --- !u!114 &1011649755 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2959798222501603713, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+  m_PrefabInstance: {fileID: 1011649752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1011649756 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6785176234211633745, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
+  m_PrefabInstance: {fileID: 1011649752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1011649757 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8514157797928122499, guid: 0844925ddbfe1ff4c9c02cdc6cee8092, type: 3}
   m_PrefabInstance: {fileID: 1011649752}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -807,14 +985,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abb32e6c9aaa5342ab1981ef2e7b546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeedEditor: 10
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  slidingSpeed: 2
   scrollSpeedApp: 0.006
-  zoomSpeed: 10
-  minSize: 1
-  maxSize: 5
-  zoomSensitivity: 1
   minY: -10
   maxY: 10
+  scrollSpeedEditor: 10
+  zoomSensitivity: 1
+  minSize: 1
+  maxSize: 5
+  sensText: {fileID: 1011649757}
+  slideText: {fileID: 1011649756}
 --- !u!1 &1124221908
 GameObject:
   m_ObjectHideFlags: 0
