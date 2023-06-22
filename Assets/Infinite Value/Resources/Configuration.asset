@@ -83,7 +83,7 @@ MonoBehaviour:
   - e
   - E
   _culture:
-    type: 0
+    type: 2
     name: 
   _doubleClickDelay: 0.5
   _splitFullString: 1

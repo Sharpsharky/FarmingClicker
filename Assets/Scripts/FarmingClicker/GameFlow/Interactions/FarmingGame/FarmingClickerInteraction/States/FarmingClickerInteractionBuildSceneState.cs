@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
@@ -19,7 +20,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     public class FarmingClickerInteractionBuildSceneState : State<FarmingClickerInteractionMode>
     {
         private FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager;
-        private FarmingGameCameraController.FarmingGameCameraController farmingGameCameraController;
+        private FarmingGameCameraController farmingGameCameraController;
         
         private GranaryManager granaryManager; 
         private FarmFieldsManager farmFieldsManager; 
@@ -28,7 +29,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         private CurrencyPerSecondManager currencyPerSecondCalculatorManager;
         public FarmingClickerInteractionBuildSceneState(IStateManager<FarmingClickerInteractionMode> stateManager, 
             FarmingClickerInteractionMode stateType, FarmsSpawnerManager.FarmsSpawnerManager farmsSpawnerManager, 
-            FarmingGameCameraController.FarmingGameCameraController farmingGameCameraController, GranaryManager granaryManager
+            FarmingGameCameraController farmingGameCameraController, GranaryManager granaryManager
             , FarmFieldsManager farmFieldsManager, FarmShopManager farmShopManager, FutureFarmFieldManager futureFarmFieldManager,
             CurrencyPerSecondManager currencyPerSecondCalculatorManager) 
             : base(stateManager, stateType)

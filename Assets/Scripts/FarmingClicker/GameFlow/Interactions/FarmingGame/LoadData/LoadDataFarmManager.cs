@@ -209,6 +209,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             {
                 case ResetBackendCommand resetBackendCommand:
                 {
+                    //Resetting in Editor doesn't work since the game is being saved once per second
                     Debug.Log("ResetBackendCommand");
                     ES3.DeleteFile();
                     Application.Quit();

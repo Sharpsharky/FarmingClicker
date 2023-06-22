@@ -72,9 +72,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             var threshold = farmsThreshold < transportedThreshold ? farmsThreshold : transportedThreshold;
             
             if (currencyPerSecond > threshold) currencyPerSecond = threshold;
-            
-            Debug.Log($"CalculateCurrencyPerSecond: x: {x} y: {y} currencyPerSecond: {currencyPerSecond} " +
-                      $"threshold: {threshold}");
 
         }
 
