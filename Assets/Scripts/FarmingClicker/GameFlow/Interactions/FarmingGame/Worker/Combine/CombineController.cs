@@ -7,21 +7,17 @@
 
     public class CombineController : WorkerController
     {
-
         [SerializeField] private CombineMovement combineMovement;
         [SerializeField] private CombineAcquireCrops combineAcquireCrops;
 
-        private WorkplaceController workplaceController;
-
-        public void Initialize(WorkplaceController workplaceController, FarmCalculationData initialFarmCalculationData)
+        public void Initialize(FarmFieldController farmFieldController, FarmCalculationData initialFarmCalculationData, 
+            float leftEdgeOfCombineWay)
         {
-            this.workplaceController = workplaceController;
-
-            if (workplaceController is FarmFieldController farmFieldController)
-            {
-                combineMovement.Initialize(farmFieldController, initialFarmCalculationData);
-                combineAcquireCrops.Initialize(farmFieldController, combineMovement);
-            }
+            transform.position = new Vector3(leftEdgeOfCombineWay, farmFieldController.transform.position.y,
+                farmFieldController.transform.position.z);
+            combineMovement.Initialize(farmFieldController, initialFarmCalculationData, leftEdgeOfCombineWay);
+            combineAcquireCrops.Initialize(farmFieldController, combineMovement);
+            
         }
     }
 }

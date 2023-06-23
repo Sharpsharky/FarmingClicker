@@ -488,7 +488,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  workerPrefab: {fileID: 0}
+  workerPrefab: {fileID: 1907045685391145920, guid: d64bebb1a1adfe74e9606e9fed79942f, type: 3}
   initialWorkerProperties: {fileID: 11400000, guid: 1684a3836dd7cb54fa67268ef2f92cf8, type: 2}
 --- !u!1001 &1011649752
 PrefabInstance:

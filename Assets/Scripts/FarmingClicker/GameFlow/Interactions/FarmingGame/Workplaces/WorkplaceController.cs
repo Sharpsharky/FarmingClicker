@@ -84,14 +84,6 @@
             Debug.Log("InitializeWorker");
             
             return newWorkerController;
-            //Now initialize the Worker.
-            /*
-            newWorkerController.Initialize(new List<WorkplaceController>(initialFarmCalculationData.FarmFieldControllers), 
-                initialFarmCalculationData.StartingPoint, initialFarmCalculationData.YOfFirstStop, 
-                initialFarmCalculationData.DistanceBetweenStops, initialFarmCalculationData.NumberOfStops, 
-                initialFarmCalculationData.YOfGarage, 
-                initialFarmCalculationData.GranaryControllers[0].gameObject.transform.position);*/
-
         }
 
         protected virtual Vector3 CalculatePositionOfButton()

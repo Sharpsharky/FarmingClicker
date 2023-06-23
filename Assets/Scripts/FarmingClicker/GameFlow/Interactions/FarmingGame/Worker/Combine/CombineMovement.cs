@@ -24,33 +24,38 @@
 
         private void Start()
         {
-            isStopped = true;
+            //isStopped = true;
         }
 
-        public void Initialize(FarmFieldController farmFieldController, FarmCalculationData initialFarmCalculationData)
+        public void Initialize(FarmFieldController farmFieldController, FarmCalculationData initialFarmCalculationData, 
+            float leftEdgeOfCombineWay)
         {
             this.farmFieldController = farmFieldController;
             this.initialFarmCalculationData = initialFarmCalculationData;
+            xPosOfLeftMaxPos = leftEdgeOfCombineWay;
             xPosOfRightMaxPos = initialFarmCalculationData.RightEdgePosition.x;
-            xPosOfLeftMaxPos = farmFieldController.transform.position.x - farmFieldController.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-            ModifyRotation();
-            isStopped = true;
+            //ModifyRotation();
+            isStopped = false;
         }
         
         private void Update()
         {
             if (isStopped) return;
             
-            transform.position += new Vector3(currentDir,0,0) * farmFieldController.WorkerProperties.MovingSpeed
+            transform.position += new Vector3(-currentDir,0,0) * farmFieldController.WorkerProperties.MovingSpeed
                                                               * Time.deltaTime;
             
-            if (currentDir < 0 && transform.position.x <= xPosOfRightMaxPos)
+            if (currentDir > 0 && transform.position.x >= xPosOfLeftMaxPos)
             {
-                Debug.Log($"direction: {currentDir}, transform.position.x: {transform.position.x}");
+                Debug.Log($"Dupa1 direction: {currentDir}, transform.position.x: {transform.position.x}");
                 StopForTurningBack();
             }
-            else if 
-                (currentDir > 0 && transform.position.x >= xPosOfLeftMaxPos) StopForTurningBack();
+            else if (currentDir < 0 && transform.position.x <= xPosOfRightMaxPos)
+            {
+                Debug.Log($"Dupa2 direction: {currentDir}, transform.position.x: {transform.position.x}");
+
+                StopForTurningBack();
+            }
 
 
         }

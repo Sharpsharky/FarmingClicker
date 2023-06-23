@@ -15,7 +15,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
     public class FarmFieldController : WorkplaceController
     {
         [SerializeField] private TMP_Text currentCurrencyText;
-
+        private float leftEdgeOfCombineWay;
         public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData
             , GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
         {
@@ -24,13 +24,18 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                 farmWorkerProperties.SetNumberOfFarm(initialFarmCalculationData.FarmFieldControllers.Count);
                 Debug.Log($"SetNumberOfFarm: {initialFarmCalculationData.FarmFieldControllers.Count}");
             }
-            
+
+            leftEdgeOfCombineWay = CalculateLeftEdgeOfCombineWay();  
             base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab, initialWorkerProperties);
-            Debug.Log("Initialize + FarmFieldController_>_>_>_");
             SetCurrentCurrencyText();
-            StartCoroutine(FakeCurrencyGenerator());
+            //StartCoroutine(FakeCurrencyGenerator());
         }
 
+        private float CalculateLeftEdgeOfCombineWay()
+        {
+            return transform.position.x - GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        }
+        
         protected override Vector3 CalculatePositionOfButton()
         {
             Vector3 curPosOfUpgradeButton = gameObject.transform.position;
@@ -64,7 +69,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
 
             if (newWorkerController is not CombineController combineController) return null;
             
-            combineController.Initialize(this, initialFarmCalculationData);
+            combineController.Initialize(this, initialFarmCalculationData, leftEdgeOfCombineWay);
             return newWorkerController;
         }
     }
