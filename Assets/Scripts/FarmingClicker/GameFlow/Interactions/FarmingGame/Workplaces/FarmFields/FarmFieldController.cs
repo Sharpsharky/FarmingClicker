@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using FarmingClicker.Data;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Combine;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry;
 using InfiniteValue;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
@@ -55,6 +58,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
         {
             currentCurrencyText.text = currentCurrency.ToString(InGameData.MaxDigitsInInfVal);
         }
-        
+        protected override WorkerController InitializeWorker()
+        {
+            var newWorkerController = base.InitializeWorker();
+
+            if (newWorkerController is not CombineController combineController) return null;
+            
+            combineController.Initialize(this, initialFarmCalculationData);
+            return newWorkerController;
+        }
     }
 }

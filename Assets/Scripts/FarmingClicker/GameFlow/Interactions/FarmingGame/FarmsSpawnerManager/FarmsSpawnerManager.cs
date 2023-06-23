@@ -92,7 +92,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             FarmCalculationData farmCalculationData = new FarmCalculationData(positionOfGranaryBuilding, positionOfFirstFarmPath.y,
                 spriteRendererFillerGameObject.bounds.size.y + spriteRendererOfFarmPathGameObject.bounds.size.y, 
                 numberOfFarms, futureFarmFieldController.gameObject.transform.position.y, farmFieldControllers, 
-                granaryControllers, farmShopControllers, futureFarmFieldController, xOfFirstUpgradeFarmFieldButton);
+                granaryControllers, farmShopControllers, futureFarmFieldController, xOfFirstUpgradeFarmFieldButton, 
+                leftEdgePosition, rightEdgePosition);
             
             return farmCalculationData;
         }
