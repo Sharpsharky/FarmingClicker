@@ -10,7 +10,8 @@
     public class CombineMovement : SerializedMonoBehaviour
     {
         private FarmFieldController farmFieldController;
-        
+        private GameObject spriteCombineGo;
+
         private bool isStopped;
         private int currentDir = -1;
         
@@ -22,22 +23,33 @@
         private float xPosOfRightMaxPos;
         private float xPosOfLeftMaxPos;
 
-        private void Start()
-        {
-            //isStopped = true;
-        }
+        private GameObject spriteOfCombine;
+
 
         public void Initialize(FarmFieldController farmFieldController, FarmCalculationData initialFarmCalculationData, 
-            float leftEdgeOfCombineWay)
+            float leftEdgeOfCombineWay, float rightEdgeOfCombineWay, GameObject spriteCombineGo)
         {
+            this.spriteCombineGo = spriteCombineGo;
             this.farmFieldController = farmFieldController;
             this.initialFarmCalculationData = initialFarmCalculationData;
             xPosOfLeftMaxPos = leftEdgeOfCombineWay;
-            xPosOfRightMaxPos = initialFarmCalculationData.RightEdgePosition.x;
+            xPosOfRightMaxPos = rightEdgeOfCombineWay;
             Debug.Log($"xPosOfLeftMaxPos: {xPosOfLeftMaxPos}, xPosOfRightMaxPos: {xPosOfRightMaxPos}");
             //ModifyRotation();
-            isStopped = false;
+            isStopped = true;
+            StartCoroutine(StartTheCombineWithRandomDelay());
         }
+
+        private IEnumerator StartTheCombineWithRandomDelay()
+        {
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0, 0.8f));
+            
+            isStopped = false;
+            OnCombineStartMoving();
+
+            yield return null;
+        }
+        
         
         private void Update()
         {
@@ -75,7 +87,7 @@
         private void ModifyRotation()
         {
 
-            Quaternion curRot = transform.rotation;
+            Quaternion curRot = spriteCombineGo.transform.rotation;
 
             if (currentDir > 0)
             {
@@ -86,7 +98,7 @@
                 curRot.y = 0;
             }
 
-            transform.rotation = curRot;
+            spriteCombineGo.transform.rotation = curRot;
         }
         
         
@@ -94,11 +106,12 @@
         {
             isStopped = true;
             OnCombineStoppedMoving();
-            
+            Debug.Log($"dupa1");
             yield return new WaitForSeconds(loadingTime);
 
             isStopped = false;
             OnCombineStartMoving();
+            Debug.Log($"dupa2");
 
             yield return null;
         }

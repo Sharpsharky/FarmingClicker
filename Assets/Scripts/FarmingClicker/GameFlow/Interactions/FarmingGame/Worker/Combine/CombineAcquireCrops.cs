@@ -8,12 +8,15 @@
     using System.Collections;
     public class CombineAcquireCrops : MonoBehaviour
     {
+
+        [SerializeField] private TMP_Text currentCropCountText;
+        [SerializeField] private float harvestingRate = 0.5f;
+        
         private InfVal currentCropCount;
         private FarmFieldController farmFieldController;
 
         private bool isMoving = false;
         
-        [SerializeField] private TMP_Text currentCropCountText;
         
         public void Initialize(FarmFieldController farmFieldController, CombineMovement combineMovement)
         {
@@ -27,18 +30,26 @@
 
         private void StartGettingCrops()
         {
-            StartCoroutine(AcquireCrops());
+            Debug.Log("dupa3");
             isMoving = true;
+            StartCoroutine(AcquireCrops());
         }
         private void StopGettingCrops()
         {
+            Debug.Log("dupa4");
+
             isMoving = false;
         }
         private IEnumerator AcquireCrops()
         {
+
             while (isMoving)
             {
-                yield return new WaitForSeconds(0.5f);
+
+                yield return new WaitForSeconds(harvestingRate);
+                
+                if(!isMoving) yield return null;
+                
                 currentCropCount += farmFieldController.WorkerProperties.CroppedCurrency;
                 SetCurrentCropCountText();
             }
