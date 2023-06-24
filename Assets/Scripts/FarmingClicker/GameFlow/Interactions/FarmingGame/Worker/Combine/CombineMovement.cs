@@ -34,6 +34,7 @@
             this.initialFarmCalculationData = initialFarmCalculationData;
             xPosOfLeftMaxPos = leftEdgeOfCombineWay;
             xPosOfRightMaxPos = initialFarmCalculationData.RightEdgePosition.x;
+            Debug.Log($"xPosOfLeftMaxPos: {xPosOfLeftMaxPos}, xPosOfRightMaxPos: {xPosOfRightMaxPos}");
             //ModifyRotation();
             isStopped = false;
         }
@@ -45,30 +46,22 @@
             transform.position += new Vector3(-currentDir,0,0) * farmFieldController.WorkerProperties.MovingSpeed
                                                               * Time.deltaTime;
             
-            if (currentDir > 0 && transform.position.x >= xPosOfLeftMaxPos)
+            if (currentDir > 0 && transform.position.x <= xPosOfLeftMaxPos)
             {
-                Debug.Log($"Dupa1 direction: {currentDir}, transform.position.x: {transform.position.x}");
                 StopForTurningBack();
             }
-            else if (currentDir < 0 && transform.position.x <= xPosOfRightMaxPos)
+            else if (currentDir < 0 && transform.position.x >= xPosOfRightMaxPos)
             {
-                Debug.Log($"Dupa2 direction: {currentDir}, transform.position.x: {transform.position.x}");
 
                 StopForTurningBack();
             }
 
 
         }
-     
-        private void NotifyOnStop()
-        {
-            if (currentDir < 0) StopForTurningBack();
-            else OnCombineStoppedOnChest();
-        }
-        
         private void StopForTurningBack()
         {
-            NotifyOnStop();
+
+            if (currentDir > 0) OnCombineStoppedOnChest();
             ReverseDirection();
             StartCoroutine(TurningBackTime(1));
         }
@@ -81,9 +74,10 @@
 
         private void ModifyRotation()
         {
+
             Quaternion curRot = transform.rotation;
 
-            if (currentDir < 0)
+            if (currentDir > 0)
             {
                 curRot.y = 180;
             }
