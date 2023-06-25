@@ -30,14 +30,11 @@
 
         private void StartGettingCrops()
         {
-            Debug.Log("dupa3");
             isMoving = true;
             StartCoroutine(AcquireCrops());
         }
         private void StopGettingCrops()
         {
-            Debug.Log("dupa4");
-
             isMoving = false;
         }
         private IEnumerator AcquireCrops()
@@ -58,7 +55,7 @@
         
         private void GiveCrop()
         {
-            farmFieldController.CurrentCurrency += farmFieldController.WorkerProperties.CroppedCurrency;
+            farmFieldController.CurrentCurrency += currentCropCount;
             currentCropCount = 0;
             SetCurrentCropCountText();
             farmFieldController.SetCurrentCurrencyText();
