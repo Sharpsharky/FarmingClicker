@@ -61,7 +61,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
 
         public void SetCurrentCurrencyText()
         {
-            currentCurrencyText.text = currentCurrency.ToString(InGameData.MaxDigitsInInfVal);
+            currentCurrencyText.text = currentCurrency.ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal);
         }
         protected override WorkerController InitializeWorker()
         {

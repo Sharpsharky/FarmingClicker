@@ -49,7 +49,7 @@
 
         public void SetCurrentCropText()
         {
-            currentCropText.text = currentCurrency.ToString(InGameData.MaxDigitsInInfVal);
+            currentCropText.text = currentCurrency.ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal);
         }
         
         

@@ -80,7 +80,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             //TODO: Set 20 to some value connected to working speed
             var transportedThreshold = minTransportedCurrencyWorkerProperties.MaxTransportedCurrency / 20; 
             var farmsThreshold = cumulativeCurrencyOfAllFarms / 20;
-
+            Debug.Log($"transportedThreshold: {transportedThreshold}, farmsThreshold: {farmsThreshold}");
             var threshold = farmsThreshold < transportedThreshold ? farmsThreshold : transportedThreshold;
             
             if (currencyPerSecond > threshold) currencyPerSecond = threshold;
@@ -141,7 +141,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
                                                    farmShopController.WorkerProperties.MovingSpeed;
 
             
-            if (maxTransportedCurrencyOfFarmShop > maxTransportedCurrencyOfGranary)
+            if (maxTransportedCurrencyOfFarmShop < maxTransportedCurrencyOfGranary)
                 return farmShopController.WorkerProperties;
             else
                 return granaryController.WorkerProperties;

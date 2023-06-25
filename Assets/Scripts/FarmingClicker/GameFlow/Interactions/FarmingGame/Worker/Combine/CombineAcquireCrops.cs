@@ -63,7 +63,7 @@
         
         private void SetCurrentCropCountText()
         {
-            currentCropCountText.text = currentCropCount.ToString(InGameData.MaxDigitsInInfVal);
+            currentCropCountText.text = currentCropCount.ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal);
         }
 
     }

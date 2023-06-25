@@ -57,6 +57,8 @@ namespace InfiniteValue
             if (precision <= 0)
                 throw new ArgumentException(cannotBeNegOrZeroStr, nameof(precision));
 
+            if (ToExponent(this.exponent) < 1) precision -= 1;
+            
             if (precision == this.precision)
                 return this;
 

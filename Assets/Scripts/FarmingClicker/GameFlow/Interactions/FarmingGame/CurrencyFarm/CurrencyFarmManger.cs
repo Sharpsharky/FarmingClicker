@@ -68,17 +68,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         
         private void SetTextOfCurrentCurrency()
         {
-            currentCurrencyText.text = currentCurrency.ToString(InGameData.MaxDigitsInInfVal);
+            currentCurrencyText.text = currentCurrency.ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal);
         }
         
         private void SetTextOfCurrentSuperCurrency()
         {
-            currentSuperCurrencyText.text = currentSuperCurrency.ToString(InGameData.MaxDigitsInInfVal);
+            currentSuperCurrencyText.text = currentSuperCurrency.ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal);
         }
         
         private void SetTextOfCurrentCurrencyPerSec()
         {
-            currentCurrencyPerSecText.text = $"{currentCurrencyPerSec.ToString(InGameData.MaxDigitsInInfVal)}/s";
+            currentCurrencyPerSecText.text = $"{currentCurrencyPerSec.ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal)}/s";
         }
         
         public List<Type> ListenedTypes { get; } = new List<Type>();

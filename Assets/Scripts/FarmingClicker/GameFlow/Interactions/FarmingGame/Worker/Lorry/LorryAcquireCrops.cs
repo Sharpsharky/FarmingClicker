@@ -58,7 +58,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Lorry
         
         private void SetCurrentCropCountText()
         {
-            currentCropCountText.text = currentCropCount.ToString(InGameData.MaxDigitsInInfVal);
+            currentCropCountText.text = currentCropCount.ToPrecision(InGameData.InfValPrecisionDisplayed)
+                .ToString(InGameData.MaxDigitsInInfVal);
         }
 
         public InfVal GetCurrentCropAndResetIt()
