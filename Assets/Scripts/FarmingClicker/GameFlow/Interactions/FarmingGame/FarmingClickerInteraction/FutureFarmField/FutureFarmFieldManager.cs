@@ -65,7 +65,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             InfVal initialCroppedCurrency =
                 new InfVal(a /b).ToPrecision(InGameData.InfValPrecision);
             
-            finalPrice = (20 * initialCroppedCurrency * pow)/ scalingValI;
+            finalPrice = (1200 * initialCroppedCurrency * pow)/ scalingValI;
             
             return finalPrice;
             
