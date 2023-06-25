@@ -71,33 +71,46 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             var cumulativeCurrencyOfAllFarms = GetCumulativeCurrencyOfAllFarms(farmFieldControllers)
                 .ToPrecision(InGameData.InfValPrecision);
 
-            var minTransportedCurrencyWorkerProperties = 
+            var minTransportedCurrencyWorkerPropertiesWC = 
                 GetMinTransportedCurrency(farmGranaryControllers[0], farmShopControllers[0]);
 
-            var x = (cumulativeCurrencyOfAllFarms) * minTransportedCurrencyWorkerProperties.MaxTransportedCurrency;
-            var y = x * minTransportedCurrencyWorkerProperties.MovingSpeed;
+            var x = (cumulativeCurrencyOfAllFarms) * minTransportedCurrencyWorkerPropertiesWC.WorkerProperties.MaxTransportedCurrency;
+            var y = x * minTransportedCurrencyWorkerPropertiesWC.WorkerProperties.MovingSpeed;
             currencyPerSecond = y / 50;
 
             //TODO: Set 20 to some value connected to working speed
-            var transportedThreshold = minTransportedCurrencyWorkerProperties.MaxTransportedCurrency / 20; 
-            var farmsThreshold = cumulativeCurrencyOfAllFarms / (20);
-            Debug.Log($"transportedThreshold: {transportedThreshold}, farmsThreshold: {farmsThreshold}");
-            var threshold = farmsThreshold < transportedThreshold ? farmsThreshold : transportedThreshold;
+            var transportedThreshold = minTransportedCurrencyWorkerPropertiesWC.WorkerProperties.MaxTransportedCurrency /  
+                                       (GetTimeOfOneLoopOfWorker(minTransportedCurrencyWorkerPropertiesWC.WorkerProperties.MaxTransportedCurrency, 
+                                           new List<WorkplaceController>{minTransportedCurrencyWorkerPropertiesWC}) * 10); 
             
+            var farmsThreshold = (cumulativeCurrencyOfAllFarms * 5) / GetTimeOfOneLoopOfWorker(cumulativeCurrencyOfAllFarms, 
+                new List<WorkplaceController>(farmFieldControllers));
+            var threshold = farmsThreshold < transportedThreshold ? farmsThreshold : transportedThreshold;
+            Debug.Log($"FINAL THRESHOLD: {InfValOperations.DisplayInfVal(threshold)} -- transportedThreshold: " +
+                      $"{InfValOperations.DisplayInfVal(transportedThreshold)}, farmsThreshold: " +
+                      $"{InfValOperations.DisplayInfVal(farmsThreshold)}");
+
             if (currencyPerSecond > threshold) currencyPerSecond = threshold;
 
         }
 
-        private InfVal GetTimeOfOneLoopOfWorker(InfVal cumulativeCurrencyOfAllFarms, List<WorkplaceController> workplaceControllers)
+        private InfVal GetTimeOfOneLoopOfWorker(InfVal cumulativeValue, List<WorkplaceController> workplaceControllers)
         {
             float s = 2 * (UniversalProperties.RightPointOfCombineWayX - UniversalProperties.LeftPointOfCombineWayX);
-            
+            Debug.Log("111Road: " + s);
+
+            InfVal sumOfWagesofTimes = new InfVal(0).ToPrecision(9);
+
             foreach (var workplaceController in workplaceControllers)
             {
-                var speed = workplaceController.WorkerProperties.MovingSpeed;
+                float v = workplaceController.WorkerProperties.MovingSpeed;
+                float t = s / v;
+                Debug.Log("111Time: " + t);
+                sumOfWagesofTimes += workplaceController.WorkerProperties.NumberOfWorkers *
+                                     workplaceController.WorkerProperties.CroppedCurrency * t;
             }
 
-            return new InfVal(0);
+            return sumOfWagesofTimes / cumulativeValue;
 
         }
         
@@ -141,7 +154,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             return maxVal;
         }
 
-        private WorkerProperties GetMinTransportedCurrency(GranaryController 
+        private WorkplaceController GetMinTransportedCurrency(GranaryController 
             granaryController, FarmShopController farmShopController)
         {
             
@@ -156,9 +169,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 
             
             if (maxTransportedCurrencyOfFarmShop < maxTransportedCurrencyOfGranary)
-                return farmShopController.WorkerProperties;
+                return farmShopController;
             else
-                return granaryController.WorkerProperties;
+                return granaryController;
         }
 
         private void SendCommandToModifyCurrentCurrencyPerSec()

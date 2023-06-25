@@ -32,5 +32,5 @@ MonoBehaviour:
     s_digits: 6
     s_exponent: 0
   CroppedCurrency:
-    s_digits: 2
-    s_exponent: 0
+    s_digits: 3
+    s_exponent: -1
