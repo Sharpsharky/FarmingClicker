@@ -15,7 +15,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
     public class FarmFieldController : WorkplaceController
     {
         [SerializeField] private TMP_Text currentCurrencyText;
-        private float leftEdgeOfCombineWay;
         public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData
             , GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
         {
@@ -25,16 +24,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                 Debug.Log($"SetNumberOfFarm: {initialFarmCalculationData.FarmFieldControllers.Count}");
             }
 
-            leftEdgeOfCombineWay = CalculateLeftEdgeOfCombineWay();  
             base.Initialize(initialFarmCalculationData, workPlaceData, workerPrefab, initialWorkerProperties);
             SetCurrentCurrencyText();
             //StartCoroutine(FakeCurrencyGenerator());
         }
 
-        private float CalculateLeftEdgeOfCombineWay()
-        {
-            return transform.position.x - GetComponent<SpriteRenderer>().bounds.size.x / 2;
-        }
+
         
         protected override Vector3 CalculatePositionOfButton()
         {
@@ -69,7 +64,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
 
             if (newWorkerController is not CombineController combineController) return null;
             
-            combineController.Initialize(this, initialFarmCalculationData, leftEdgeOfCombineWay);
+            combineController.Initialize(this, initialFarmCalculationData);
             return newWorkerController;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using FarmingClicker.Data.Popup;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
 using FarmingClicker.GameFlow.Messages.Commands.Popups;
 using UnityEngine;
 
@@ -79,7 +80,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 
             //TODO: Set 20 to some value connected to working speed
             var transportedThreshold = minTransportedCurrencyWorkerProperties.MaxTransportedCurrency / 20; 
-            var farmsThreshold = cumulativeCurrencyOfAllFarms / 20;
+            var farmsThreshold = cumulativeCurrencyOfAllFarms / (20);
             Debug.Log($"transportedThreshold: {transportedThreshold}, farmsThreshold: {farmsThreshold}");
             var threshold = farmsThreshold < transportedThreshold ? farmsThreshold : transportedThreshold;
             
@@ -87,6 +88,19 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 
         }
 
+        private InfVal GetTimeOfOneLoopOfWorker(InfVal cumulativeCurrencyOfAllFarms, List<WorkplaceController> workplaceControllers)
+        {
+            float s = 2 * (UniversalProperties.RightPointOfCombineWayX - UniversalProperties.LeftPointOfCombineWayX);
+            
+            foreach (var workplaceController in workplaceControllers)
+            {
+                var speed = workplaceController.WorkerProperties.MovingSpeed;
+            }
+
+            return new InfVal(0);
+
+        }
+        
         private int GetSecondsOffline()
         {
             if (!LoadDataFarmManager.instance.hasPlayedTheGameBefore) return 0;

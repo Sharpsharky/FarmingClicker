@@ -106,12 +106,10 @@
         {
             isStopped = true;
             OnCombineStoppedMoving();
-            Debug.Log($"dupa1");
             yield return new WaitForSeconds(loadingTime);
 
             isStopped = false;
             OnCombineStartMoving();
-            Debug.Log($"dupa2");
 
             yield return null;
         }
