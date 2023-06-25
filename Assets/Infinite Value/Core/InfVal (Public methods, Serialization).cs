@@ -52,12 +52,18 @@ namespace InfiniteValue
 #if UNITY_2020_2_OR_NEWER
         readonly
 #endif
-        public InfVal ToPrecision(int precision)
+        public InfVal ToPrecision(int precision, bool modifyPrecisionForSmallNumbers = false)
         {
+            if (modifyPrecisionForSmallNumbers)
+            {
+                Debug.Log($"PRECISION: {precision}");
+                if (ToExponent(this.exponent) < 0.1f) precision -= 2;
+                else if (ToExponent(this.exponent) < 1) precision -= 1;
+            }
+
             if (precision <= 0)
                 throw new ArgumentException(cannotBeNegOrZeroStr, nameof(precision));
 
-            if (ToExponent(this.exponent) < 1) precision -= 1;
             
             if (precision == this.precision)
                 return this;

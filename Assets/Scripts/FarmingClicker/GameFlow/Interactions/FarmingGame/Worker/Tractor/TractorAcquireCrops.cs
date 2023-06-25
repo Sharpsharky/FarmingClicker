@@ -48,7 +48,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
         
         private void SetCurrentCropCountText()
         {
-            currentCropCountText.text = currentCropCount.ToString(InGameData.MaxDigitsInInfVal);
+            currentCropCountText.text = InfValOperations.DisplayInfVal(currentCropCount);
         }
 
         public InfVal GetCurrentCropAndResetIt()

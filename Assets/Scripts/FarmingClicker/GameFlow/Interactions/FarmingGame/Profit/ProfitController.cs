@@ -21,7 +21,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Profit
         {
             if (data is not ProfitPopupData optionsPopupData) return;
 
-            amountOfProfit.text = optionsPopupData.Amount.ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal);
+            amountOfProfit.text = InfValOperations.DisplayInfVal(optionsPopupData.Amount);
             exitButton.onClick.AddListener(ExitOptions);
             gameObject.SetActive(true);
             MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(optionsPopupData.Amount));

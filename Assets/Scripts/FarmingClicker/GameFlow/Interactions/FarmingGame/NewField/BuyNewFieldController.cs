@@ -43,7 +43,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
         {
             if (data is not BuyNewFieldPopupData buyNewFieldPopupData) return;
 
-            priceText.text = buyNewFieldPopupData.Price.ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal);
+            priceText.text = InfValOperations.DisplayInfVal(buyNewFieldPopupData.Price);
             timeOfConstructionText.text = buyNewFieldPopupData.TimeOfConstruction.ToString();
             
             buyButton.onClick.AddListener(()=>{Buy(buyNewFieldPopupData.Price, buyNewFieldPopupData.TimeOfConstruction);});

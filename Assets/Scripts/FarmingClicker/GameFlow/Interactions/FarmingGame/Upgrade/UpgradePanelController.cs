@@ -145,11 +145,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             
             valueStatistic.InitializeStatistic(
                 valueStatisticComponents.GetIcon(),
-                $"{valueStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.CroppedCurrency.ToPrecision(InGameData.InfValPrecisionDisplayed).
-                    ToString(InGameData.MaxDigitsInInfVal),
-                currentWorkplaceController.WorkerProperties.CalculateCroppedCurrency(levelsIncrementedByNumber)
-                    .ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal));
+                $"{valueStatisticComponents.GetTitle()}:", InfValOperations.DisplayInfVal(  
+                currentWorkplaceController.WorkerProperties.CroppedCurrency),InfValOperations.DisplayInfVal(
+                currentWorkplaceController.WorkerProperties.CalculateCroppedCurrency(levelsIncrementedByNumber)));
             
             workingSpeedStatistic.InitializeStatistic(
                 workingSpeedStatisticComponents.GetIcon(),
@@ -166,11 +164,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             
             loadStatistic.InitializeStatistic(
                 loadStatisticComponents.GetIcon(),
-                $"{loadStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.MaxTransportedCurrency.ToPrecision(InGameData.InfValPrecisionDisplayed)
-                    .ToString(InGameData.MaxDigitsInInfVal),
-                currentWorkplaceController.WorkerProperties.CalculateMaxTransportedCurrency(levelsIncrementedByNumber).
-                    ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal));
+                $"{loadStatisticComponents.GetTitle()}:",InfValOperations.DisplayInfVal(
+                currentWorkplaceController.WorkerProperties.MaxTransportedCurrency),InfValOperations.DisplayInfVal
+                    (currentWorkplaceController.WorkerProperties.CalculateMaxTransportedCurrency(levelsIncrementedByNumber)));
+
 
             levelStatistic.InitializeStatistic(
                 levelStatisticComponents.GetIcon(),
@@ -181,9 +178,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 
             
             
-            price.text =
-                currentWorkplaceController.WorkerProperties.CalculateCostOfNextLevel(levelsIncrementedByNumber)
-                    .ToPrecision(InGameData.InfValPrecisionDisplayed).ToString(InGameData.MaxDigitsInInfVal);
+            price.text = InfValOperations.DisplayInfVal(currentWorkplaceController.WorkerProperties.
+                CalculateCostOfNextLevel(levelsIncrementedByNumber));
             
             buyButton.onClick.RemoveAllListeners();
             buyButton.onClick.AddListener(() =>
