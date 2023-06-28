@@ -51,12 +51,16 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 
         private void OnApplicationPause(bool pauseStatus)
         {
-            Debug.Log("Onapplicationpause");
             if (pauseStatus) return;
-
-            Debug.Log("OnApplicationUnpause");
             LoadProfit();
         }
+        
+        void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus) return;
+            LoadProfit();
+        }
+        
 
         private void LoadProfit()
         {
