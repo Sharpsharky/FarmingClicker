@@ -21,8 +21,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera
         [SerializeField, BoxGroup("Zooming")] private float minSize = 1f;
         [SerializeField, BoxGroup("Zooming")] private float maxSize = 10f;
 
-        [SerializeField, BoxGroup("Test")] private TMP_Text sensText;
-        [SerializeField, BoxGroup("Test")] private TMP_Text slideText;
         
         private bool isInitialized = false;
         private Camera cam;
@@ -34,9 +32,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera
             cam = GetComponent<Camera>();
             maxY = transform.position.y;
             enabled = true;
-            sensText.text = $"Sens: {scrollSpeedApp}";
-            slideText.text = $"Slide: {slidingSpeed}";
-
         }
         
         void Update()
@@ -97,17 +92,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingGameCamera
 
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize - scroll * scrollSpeedEditor, minSize, maxSize);
-        }
-
-        public void SensChange(float val = 0.1f)
-        {
-            scrollSpeedApp += val;
-            sensText.text = $"Sens: {scrollSpeedApp}";
-        }
-        public void SlideChange(float val = 0.1f)
-        {
-            slidingSpeed += val;
-            slideText.text = $"Slide: {slidingSpeed}";
         }
         
     }

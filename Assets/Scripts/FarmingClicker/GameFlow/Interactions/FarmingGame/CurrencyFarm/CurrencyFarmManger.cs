@@ -1,6 +1,5 @@
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
 {
-    using Data;
     using System;
     using System.Collections.Generic;
     using Core.Message;
@@ -8,15 +7,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
     using Messages.Commands.Currency;
     using InfiniteValue;
     using Sirenix.OdinInspector;
-    using TMPro;
     using UnityEngine;
     public class CurrencyFarmManger : SerializedMonoBehaviour, IMessageReceiver
     {
-
-        [SerializeField] private TMP_Text currentCurrencyText;
-        [SerializeField] private TMP_Text currentSuperCurrencyText;
-        [SerializeField] private TMP_Text currentCurrencyPerSecText;
-
         private static InfVal currentCurrency = 0;
         private static InfVal currentSuperCurrency = 0;
         private static InfVal currentCurrencyPerSec = 0;
@@ -27,9 +20,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
             currentSuperCurrency = 0;
             currentCurrencyPerSec = 0;
 
-            SetTextOfCurrentCurrency();
-            SetTextOfCurrentSuperCurrency();
-            SetTextOfCurrentCurrencyPerSec();
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyCommand(currentCurrency));
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentSuperCurrencyCommand(currentSuperCurrency));
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyPerSecCommand(currentCurrencyPerSec));
             
             ListenedTypes.Add(typeof(ModifyCurrencyCommand));
             ListenedTypes.Add(typeof(ModifySuperCurrencyCommand));
@@ -50,35 +43,23 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         private void ModifyCurrentCurrency(InfVal amountToAdd)
         {
             currentCurrency += amountToAdd;
-            SetTextOfCurrentCurrency();
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyCommand(currentCurrency));
+
         }
         
         private void ModifyCurrentSuperCurrency(InfVal amountToAdd)
         {
             currentSuperCurrency += amountToAdd;
-            SetTextOfCurrentSuperCurrency();
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentSuperCurrencyCommand(currentSuperCurrency));
+
         }
         
         private void SetCurrentCurrencyPerSec(InfVal amount)
         {
             Debug.Log("currentCurrencyPerSec:" + amount);
             currentCurrencyPerSec = amount;
-            SetTextOfCurrentCurrencyPerSec();
-        }
-        
-        private void SetTextOfCurrentCurrency()
-        {
-            currentCurrencyText.text = InfValOperations.DisplayInfVal(currentCurrency);
-        }
-        
-        private void SetTextOfCurrentSuperCurrency()
-        {
-            currentSuperCurrencyText.text = InfValOperations.DisplayInfVal(currentSuperCurrency);
-        }
-        
-        private void SetTextOfCurrentCurrencyPerSec()
-        {
-            currentCurrencyPerSecText.text = $"{InfValOperations.DisplayInfVal(currentCurrencyPerSec)}/s";
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyPerSecCommand(currentCurrencyPerSec));
+
         }
         
         public List<Type> ListenedTypes { get; } = new List<Type>();

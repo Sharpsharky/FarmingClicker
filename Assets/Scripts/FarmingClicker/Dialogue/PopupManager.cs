@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.UI.MainCanvas;
+
 namespace FarmingClicker.Dialogue
 {
     using System;
@@ -19,6 +21,7 @@ namespace FarmingClicker.Dialogue
         [field: SerializeField, FoldoutGroup("UI")]  private BuyNewFieldController buyNewFieldController;
         [field: SerializeField, FoldoutGroup("UI")]  private OptionsController optionsController;
         [field: SerializeField, FoldoutGroup("UI")]  private ProfitController profitController;
+        [field: SerializeField, FoldoutGroup("UI")]  private MainCanvasController mainCanvasController;
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
         
@@ -28,8 +31,12 @@ namespace FarmingClicker.Dialogue
             ListenedTypes.Add(typeof(DisplayOptionsPanelCommand));
             ListenedTypes.Add(typeof(DisplayBuyNewFieldPanelCommand));
             ListenedTypes.Add(typeof(DisplayProfitPanelCommand));
+            ListenedTypes.Add(typeof(DisplayMainCanvasCommand));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
+            
+            MessageDispatcher.Instance.Send(new DisplayMainCanvasCommand(null));
+
         }
 
         void ClosePopup(PopupPanelBase panelBase)
@@ -74,6 +81,12 @@ namespace FarmingClicker.Dialogue
                     profitController.OnFinished += ClosePopup;
                     profitController.SetupData(command.data);
                     
+                    break;
+                }
+                case DisplayMainCanvasCommand command:
+                {
+                    profitController.OnFinished += ClosePopup;
+                    mainCanvasController.SetupData(command.data);
                     break;
                 }
             }
