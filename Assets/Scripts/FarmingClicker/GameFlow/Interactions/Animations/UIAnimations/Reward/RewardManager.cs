@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using _3rd_Party.Demigiant.DOTween.Modules;
+using Core.Message;
 using Core.Message.Interfaces;
 using DG.Tweening;
 using FarmingClicker.GameFlow.Messages.Commands.Currency;
@@ -15,6 +15,18 @@ namespace FarmingClicker.GameFlow.Interactions.Animations.UIAnimations.Reward
         [SerializeField] private Transform parentOfCoins;
         [SerializeField] private Transform targetOfCoins;
         public List<Type> ListenedTypes { get; } = new List<Type>();
+
+
+        public void Initialize()
+        {
+            ListenedTypes.Add(typeof(GiveRewardCoinsAnimationCommand));
+            MessageDispatcher.Instance.RegisterReceiver(this);   
+        }
+
+        private void Start()
+        {
+            //AnimateCoins();
+        }
 
         public void AnimateCoins()
         {
@@ -64,6 +76,7 @@ namespace FarmingClicker.GameFlow.Interactions.Animations.UIAnimations.Reward
                     break;
                 }
                 
-            }        }
+            }        
+        }
     }
 }

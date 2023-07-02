@@ -1,7 +1,6 @@
 ﻿namespace Core.ViewManager.Animation
 {
     using System;
-    using _3rd_Party.Demigiant.DOTween.Modules;
     using DG.Tweening;
     using UnityEngine;
 

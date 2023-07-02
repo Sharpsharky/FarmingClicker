@@ -3,7 +3,6 @@ namespace Core.Audio.AudioManager
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using _3rd_Party.Demigiant.DOTween.Modules;
     using DG.Tweening;
     using UnityEngine;
 
