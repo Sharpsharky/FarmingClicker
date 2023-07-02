@@ -2,6 +2,7 @@ using FarmingClicker.Data;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Tractor;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields;
+using FarmingClicker.GameFlow.Interactions.General.DoTweenCustom;
 using InfiniteValue;
 using TMPro;
 using UnityEngine;
@@ -45,10 +46,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker.Tractor
             farmFieldController.SetCurrentCurrency(rest);
             
         }
-        
+
         private void SetCurrentCropCountText()
         {
             currentCropCountText.text = InfValOperations.DisplayInfVal(currentCropCount);
+
         }
 
         public InfVal GetCurrentCropAndResetIt()

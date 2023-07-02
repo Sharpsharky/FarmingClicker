@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using FarmingClicker.GameFlow.Interactions.General.DoTweenCustom;
 
 namespace FarmingClicker.GameFlow.Interactions.UI.MainCanvas
 {
@@ -17,10 +18,15 @@ namespace FarmingClicker.GameFlow.Interactions.UI.MainCanvas
     public class MainCanvasController : PopupPanelBase, IMessageReceiver
     {
 
+        [SerializeField] private float scaleMultiplicationOfTexts = 0.2f;
+
+        
         [SerializeField] private TMP_Text currentCurrencyText;
         [SerializeField] private TMP_Text currentSuperCurrencyText;
         [SerializeField] private TMP_Text currentCurrencyPerSecText;
        
+        
+        
         public List<Type> ListenedTypes { get; } = new List<Type>();
 
         public override void SetupData(IPopupData data)
@@ -45,8 +51,7 @@ namespace FarmingClicker.GameFlow.Interactions.UI.MainCanvas
 
             if (difference == new InfVal(0)) return;
             
-            currentCurrencyText.transform.DOScale(1.2f, 0.25f).SetDelay(0).SetEase(Ease.OutBack);
-            currentCurrencyText.transform.DOScale(1f, 0.25f).SetDelay(0.25f).SetEase(Ease.OutBack);
+            DoTweenCustomAnimations.DoBlinkScale(currentCurrencyText.transform, 1, scaleMultiplicationOfTexts);
         }
 
         private void SetTextOfCurrentSuperCurrency(InfVal currentSuperCurrency, InfVal difference)
@@ -55,16 +60,14 @@ namespace FarmingClicker.GameFlow.Interactions.UI.MainCanvas
             
             if (difference == new InfVal(0)) return;
             
-            currentSuperCurrencyText.transform.DOScale(1.2f, 0.25f).SetDelay(0).SetEase(Ease.OutBack);
-            currentSuperCurrencyText.transform.DOScale(1f, 0.25f).SetDelay(0.25f).SetEase(Ease.OutBack);
+            DoTweenCustomAnimations.DoBlinkScale(currentSuperCurrencyText.transform, 1,scaleMultiplicationOfTexts);
         }
 
         private void SetTextOfCurrentCurrencyPerSec(InfVal currentCurrencyPerSec)
         {
             currentCurrencyPerSecText.text = $"{InfValOperations.DisplayInfVal(currentCurrencyPerSec)}/s";
             
-            currentCurrencyPerSecText.transform.DOScale(1.2f, 0.25f).SetDelay(0).SetEase(Ease.OutBack);
-            currentCurrencyPerSecText.transform.DOScale(1f, 0.25f).SetDelay(0.25f).SetEase(Ease.OutBack);
+            DoTweenCustomAnimations.DoBlinkScale(currentCurrencyPerSecText.transform, 1,scaleMultiplicationOfTexts);
         }
 
 
