@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Core.Message;
 using Core.Message.Interfaces;
 using DG.Tweening;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
 using FarmingClicker.GameFlow.Messages.Commands.Currency;
 using InfiniteValue;
 using Sirenix.OdinInspector;
@@ -103,8 +104,12 @@ namespace FarmingClicker.GameFlow.Interactions.Animations.UIAnimations.Reward
             for (int i = 0; i < parentOfCoins.childCount; i++)
             {
                 MessageDispatcher.Instance.Send(new AddCoinValueFromRewardCommand(singleCoinVal));
+                LoadDataFarmManager.instance.SubtractOfflineCurrency(singleCoinVal);
+                
                 yield return new WaitForSeconds(coinDelay);
             }
+
+            LoadDataFarmManager.instance.SaveOfflineCurrency(0);
 
             yield return null;
         }

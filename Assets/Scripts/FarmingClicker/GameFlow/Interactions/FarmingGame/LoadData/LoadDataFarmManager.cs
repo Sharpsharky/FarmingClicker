@@ -36,6 +36,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
         private const string FARM_SHOP_DATA_SAVING_NAME = "farmShopData";
         private const string FARM_CURRENCY_DATA_SAVING_NAME = "farmCurrencyData";
         private const string FARM_PLAYER_DATA_SAVING_NAME = "farmPlayerData";
+        private const string FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME = "offlineCurrencyData";
 
         private int currentNumberOfFarm = 0;
 
@@ -93,10 +94,22 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
                 FarmCurrencyData =
                     ES3.Load<FarmCurrencyData>(GetProperSavingName(FARM_CURRENCY_DATA_SAVING_NAME,
                         currentNumberOfFarm));
-                
 
                 InfVal currentCurrencyValue = InfVal.Parse(FarmCurrencyData.currentCurrencyValue);
                 InfVal currentSuperCurrencyValue = InfVal.Parse(FarmCurrencyData.currentSuperCurrencyValue);
+
+                InfVal offlineCurrencyValue = new InfVal(0);
+                
+                if (ES3.KeyExists(GetProperSavingName(FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm)))
+                {
+                    offlineCurrencyValue = InfVal.Parse(
+                        ES3.Load<string>(GetProperSavingName(FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME,
+                            currentNumberOfFarm)));
+                    
+                    currentCurrencyValue += offlineCurrencyValue;
+
+                    SaveOfflineCurrency(0);
+                }
                 
                 MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(currentCurrencyValue));
                 MessageDispatcher.Instance.Send(new ModifySuperCurrencyCommand(currentSuperCurrencyValue));
@@ -158,7 +171,28 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             GetData();
             SaveData();
         }
+        
+        public void SaveOfflineCurrency(InfVal val)
+        {
+            ES3.Save(GetProperSavingName(FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm), val.ToString());
+        }
+        
+        public void SubtractOfflineCurrency(InfVal val)
+        {
 
+            if (!ES3.KeyExists(GetProperSavingName(FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm)))
+                return;
+            
+            InfVal offlineCurrencyValue = InfVal.Parse(
+                ES3.Load<string>(GetProperSavingName(FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME,
+                    currentNumberOfFarm)));
+                
+            offlineCurrencyValue -= val;
+
+            ES3.Save(GetProperSavingName(FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm), offlineCurrencyValue.ToString());
+            
+        }
+        
         private void GetData()
         {
             FarmFieldDatas = new List<WorkPlaceData>();

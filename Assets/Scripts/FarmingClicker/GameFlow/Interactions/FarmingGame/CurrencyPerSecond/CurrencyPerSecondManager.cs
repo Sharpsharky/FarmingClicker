@@ -68,6 +68,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             var profitWhileOffline = CalculateProfitWhileOffline(secondsOffline);
             var profitPopupData = new ProfitPopupData(profitWhileOffline);
             MessageDispatcher.Instance.Send(new DisplayProfitPanelCommand(profitPopupData));
+            LoadDataFarmManager.instance.SaveOfflineCurrency(profitWhileOffline);
+
         }
 
         public void CalculateCurrencyPerSecond()
