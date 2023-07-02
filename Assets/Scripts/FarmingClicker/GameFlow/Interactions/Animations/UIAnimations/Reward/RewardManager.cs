@@ -43,7 +43,7 @@ namespace FarmingClicker.GameFlow.Interactions.Animations.UIAnimations.Reward
         public void AnimateCoins(InfVal rewardValue)
         {
             InfVal singleCoinVal = rewardValue / parentOfCoins.childCount;
-            
+
             SetInitialPosition();
             StartCoroutine(GiveCoins(singleCoinVal));
             float delay = 0f;
@@ -97,7 +97,6 @@ namespace FarmingClicker.GameFlow.Interactions.Animations.UIAnimations.Reward
         private IEnumerator GiveCoins(InfVal singleCoinVal)
         {
             float finalWaitingTime = coinDelay + timeOfMovingToFirstPoint + coinScalingTime + timeOfMovingToFinalPoint;
-            
             yield return new WaitForSeconds(finalWaitingTime);
 
                 
@@ -113,8 +112,6 @@ namespace FarmingClicker.GameFlow.Interactions.Animations.UIAnimations.Reward
         public void OnMessageReceived(object message)
         {
             if (!ListenedTypes.Contains(message.GetType())) return;
-
-            Debug.Log($"Navigation manager received load scene command.");
 
             switch (message)
             {

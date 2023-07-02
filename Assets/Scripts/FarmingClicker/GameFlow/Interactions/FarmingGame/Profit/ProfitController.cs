@@ -24,10 +24,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Profit
         {
             if (data is not ProfitPopupData optionsPopupData) return;
 
-            amountOfProfitText.text = InfValOperations.DisplayInfVal(optionsPopupData.Amount);
+            amountOfProfit = optionsPopupData.Amount;
+            
+            amountOfProfitText.text = InfValOperations.DisplayInfVal(amountOfProfit);
             exitButton.onClick.AddListener(ExitOptions);
             gameObject.SetActive(true);
-            //MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(optionsPopupData.Amount));
 
         }
 
