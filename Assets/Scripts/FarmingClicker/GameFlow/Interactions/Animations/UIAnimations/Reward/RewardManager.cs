@@ -110,6 +110,7 @@ namespace FarmingClicker.GameFlow.Interactions.Animations.UIAnimations.Reward
             }
 
             LoadDataFarmManager.instance.SaveOfflineCurrency(0);
+            coinsCanvas.gameObject.SetActive(false);
 
             yield return null;
         }

@@ -20,8 +20,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
             currentSuperCurrency = 0;
             currentCurrencyPerSec = 0;
 
-            MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyCommand(currentCurrency));
-            MessageDispatcher.Instance.Send(new SetTextOfCurrentSuperCurrencyCommand(currentSuperCurrency));
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyCommand(currentCurrency, 0));
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentSuperCurrencyCommand(currentSuperCurrency, 0));
             MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyPerSecCommand(currentCurrencyPerSec));
             
             ListenedTypes.Add(typeof(ModifyCurrencyCommand));
@@ -44,14 +44,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
         private void ModifyCurrentCurrency(InfVal amountToAdd)
         {
             currentCurrency += amountToAdd;
-            MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyCommand(currentCurrency));
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentCurrencyCommand(currentCurrency,amountToAdd));
 
         }
         
         private void ModifyCurrentSuperCurrency(InfVal amountToAdd)
         {
             currentSuperCurrency += amountToAdd;
-            MessageDispatcher.Instance.Send(new SetTextOfCurrentSuperCurrencyCommand(currentSuperCurrency));
+            MessageDispatcher.Instance.Send(new SetTextOfCurrentSuperCurrencyCommand(currentSuperCurrency, amountToAdd));
 
         }
         

@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.UI.MainCanvas
+﻿using DG.Tweening;
+
+namespace FarmingClicker.GameFlow.Interactions.UI.MainCanvas
 {
     using System;
     using System.Collections.Generic;
@@ -36,20 +38,33 @@
             
         }
 
-        private void SetTextOfCurrentCurrency(InfVal currentCurrency)
+        private void SetTextOfCurrentCurrency(InfVal currentCurrency, InfVal difference)
         {
-            Debug.Log("SetTextOfCurrentCurrency");
+            Debug.Log($"SetTextOfCurrentCurrency: {currentCurrency}");
             currentCurrencyText.text = InfValOperations.DisplayInfVal(currentCurrency);
+
+            if (difference == new InfVal(0)) return;
+            
+            currentCurrencyText.transform.DOScale(1.2f, 0.25f).SetDelay(0).SetEase(Ease.OutBack);
+            currentCurrencyText.transform.DOScale(1f, 0.25f).SetDelay(0.25f).SetEase(Ease.OutBack);
         }
 
-        private void SetTextOfCurrentSuperCurrency(InfVal currentSuperCurrency)
+        private void SetTextOfCurrentSuperCurrency(InfVal currentSuperCurrency, InfVal difference)
         {
             currentSuperCurrencyText.text = InfValOperations.DisplayInfVal(currentSuperCurrency);
+            
+            if (difference == new InfVal(0)) return;
+            
+            currentSuperCurrencyText.transform.DOScale(1.2f, 0.25f).SetDelay(0).SetEase(Ease.OutBack);
+            currentSuperCurrencyText.transform.DOScale(1f, 0.25f).SetDelay(0.25f).SetEase(Ease.OutBack);
         }
 
         private void SetTextOfCurrentCurrencyPerSec(InfVal currentCurrencyPerSec)
         {
             currentCurrencyPerSecText.text = $"{InfValOperations.DisplayInfVal(currentCurrencyPerSec)}/s";
+            
+            currentCurrencyPerSecText.transform.DOScale(1.2f, 0.25f).SetDelay(0).SetEase(Ease.OutBack);
+            currentCurrencyPerSecText.transform.DOScale(1f, 0.25f).SetDelay(0.25f).SetEase(Ease.OutBack);
         }
 
 
@@ -60,17 +75,17 @@
             {
                 case SetTextOfCurrentCurrencyCommand command:
                 {
-                    SetTextOfCurrentCurrency(command.Amount);
+                    SetTextOfCurrentCurrency(command.UpdatedAmount, command.Difference);
                     break;
                 }
                 case SetTextOfCurrentSuperCurrencyCommand command:
                 {
-                    SetTextOfCurrentSuperCurrency(command.Amount);
+                    SetTextOfCurrentSuperCurrency(command.UpdatedAmount, command.Difference);
                     break;
                 }
                 case SetTextOfCurrentCurrencyPerSecCommand command:
                 {
-                    SetTextOfCurrentCurrencyPerSec(command.Amount);
+                    SetTextOfCurrentCurrencyPerSec(command.UpdatedAmount);
                     break;
                 }
             }

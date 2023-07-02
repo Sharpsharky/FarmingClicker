@@ -5,11 +5,11 @@
     [Serializable]
     public record SetTextOfCurrentCurrencyPerSecCommand : Command
     {
-        public InfVal Amount;
+        public InfVal UpdatedAmount;
 
-        public SetTextOfCurrentCurrencyPerSecCommand(InfVal amount)
+        public SetTextOfCurrentCurrencyPerSecCommand(InfVal updatedAmount)
         {
-            Amount = amount;
+            UpdatedAmount = updatedAmount;
         }
     }
 }

@@ -5,11 +5,13 @@
     [Serializable]
     public record SetTextOfCurrentSuperCurrencyCommand : Command
     {
-        public InfVal Amount;
+        public InfVal UpdatedAmount;
+        public InfVal Difference;
 
-        public SetTextOfCurrentSuperCurrencyCommand(InfVal amount)
+        public SetTextOfCurrentSuperCurrencyCommand(InfVal updatedAmount, InfVal difference)
         {
-            Amount = amount;
+            UpdatedAmount = updatedAmount;
+            Difference = difference;
         }
     }
 }
