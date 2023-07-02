@@ -1,4 +1,5 @@
 ﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond;
+using FarmingClicker.GameFlow.Interactions.UI.MainCanvas;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.States
 {
@@ -17,14 +18,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             FarmingClickerInteractionMode stateType, LoadData.LoadDataFarmManager loadDataFarmManager, int numberOfFarm) : base(stateManager, stateType)
         {
             this.loadDataFarmManager = loadDataFarmManager;
-            this.numberOfFarm = numberOfFarm;
         }
 
         public override async void OnEnter()
         {
             base.OnEnter();
             Debug.Log("Initialization State");
-            
             loadDataFarmManager.Initialize(numberOfFarm);
             
             MessageDispatcher.Instance.Send(new FarmerClickerInteractionStartDisplayingUI());

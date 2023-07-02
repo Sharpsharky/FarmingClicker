@@ -1,4 +1,5 @@
 using Core.Message;
+using FarmingClicker.GameFlow.Interactions.UI.MainCanvas;
 using FarmingClicker.GameFlow.Messages;
 
 namespace FarmingClicker.StateMachine.ApplicationStateMachine.States
@@ -12,13 +13,17 @@ namespace FarmingClicker.StateMachine.ApplicationStateMachine.States
         private const string LOGIN_TOKEN = "LOGIN_TOKEN";
         private NavigationManager navigationManager;
         private LoadSceneCommand initialSceneLoadCommand;
+        private MainCanvasController mainCanvasController;
+
+        
         public ApplicationLoginState(IStateManager<ApplicationStateType> stateManager,
                                      ApplicationStateType stateType, NavigationManager navigationManager,
-                                     LoadSceneCommand initialSceneLoadCommand)
+                                     LoadSceneCommand initialSceneLoadCommand, MainCanvasController mainCanvasController)
             : base(stateManager, stateType)
         {
             this.navigationManager = navigationManager;
             this.initialSceneLoadCommand = initialSceneLoadCommand;
+            this.mainCanvasController = mainCanvasController;
         }
 
         public void OnUpdate()
@@ -44,6 +49,9 @@ namespace FarmingClicker.StateMachine.ApplicationStateMachine.States
             Debug.Log($"Attempting login with {loginToken}.");
             AppManager.LoginToken = loginToken;
 
+            mainCanvasController.gameObject.SetActive(true);
+            mainCanvasController.Initialize();
+            
             navigationManager.Initialize();
             
             MessageDispatcher.Instance.Send(initialSceneLoadCommand);

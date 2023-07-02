@@ -375,7 +375,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  amountOfProfit: {fileID: 6947065598227363032}
+  amountOfProfitText: {fileID: 6947065598227363032}
   exitButton: {fileID: 1500593442453366242}
 --- !u!1 &6947065597701161575
 GameObject:

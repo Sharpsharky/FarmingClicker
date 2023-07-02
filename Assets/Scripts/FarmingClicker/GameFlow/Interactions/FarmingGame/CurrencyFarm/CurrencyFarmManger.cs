@@ -27,6 +27,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
             ListenedTypes.Add(typeof(ModifyCurrencyCommand));
             ListenedTypes.Add(typeof(ModifySuperCurrencyCommand));
             ListenedTypes.Add(typeof(SetCurrentCurrencyPerSecCommand));
+            ListenedTypes.Add(typeof(AddCoinValueFromRewardCommand));
             MessageDispatcher.Instance.RegisterReceiver(this);        
         }
 
@@ -84,7 +85,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyFarm
                     SetCurrentCurrencyPerSec(command.Amount);
                     break;
                 }
-
+                case AddCoinValueFromRewardCommand command:
+                {
+                    ModifyCurrentCurrency(command.Amount);
+                    break;
+                }
             }
         }
     }

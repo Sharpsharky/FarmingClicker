@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.UI.MainCanvas;
+
 namespace FarmingClicker.StateMachine.ApplicationStateMachine.States
 {
     using Core.StateMachine;
@@ -5,13 +7,12 @@ namespace FarmingClicker.StateMachine.ApplicationStateMachine.States
     
     public class ApplicationNavigationState : State<ApplicationStateType>, IUpdatable
     {
-        private GameObject mainCanvas;
-
+        private MainCanvasController mainCanvasController;
         public ApplicationNavigationState(IStateManager<ApplicationStateType> stateManager,
-                                          ApplicationStateType stateType, GameObject mainCanvas) : base(stateManager,
+                                          ApplicationStateType stateType) : base(stateManager,
             stateType)
         {
-            this.mainCanvas = mainCanvas;
+            this.mainCanvasController = mainCanvasController;
         }
 
         public void OnUpdate()
@@ -21,14 +22,15 @@ namespace FarmingClicker.StateMachine.ApplicationStateMachine.States
         public override async void OnEnter()
         {
             base.OnEnter();
-            mainCanvas.SetActive(true);
+            //mainCanvasController.Initialize();
+            //mainCanvasController.gameObject.SetActive(true);
             Debug.Log("Entered navigation state.");
         }
 
         public override void OnExit()
         {
             base.OnEnter();
-            if(mainCanvas!= null) mainCanvas.SetActive(false);
+            if(mainCanvasController != null) mainCanvasController.gameObject.SetActive(false);
             Debug.Log("Exit navigation state.");        
         }
     }

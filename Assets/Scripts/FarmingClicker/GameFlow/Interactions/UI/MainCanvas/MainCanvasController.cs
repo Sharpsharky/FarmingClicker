@@ -23,16 +23,22 @@
 
         public override void SetupData(IPopupData data)
         {
-            ListenedTypes.Add(typeof(ModifyCurrencyCommand));
-            ListenedTypes.Add(typeof(ModifySuperCurrencyCommand));
-            ListenedTypes.Add(typeof(SetCurrentCurrencyPerSecCommand));
-            MessageDispatcher.Instance.RegisterReceiver(this);
-            
             gameObject.SetActive(true);
+        }
+
+        public void Initialize()
+        {
+            ListenedTypes.Add(typeof(SetTextOfCurrentCurrencyCommand));
+            ListenedTypes.Add(typeof(SetTextOfCurrentSuperCurrencyCommand));
+            ListenedTypes.Add(typeof(SetTextOfCurrentCurrencyPerSecCommand));
+            MessageDispatcher.Instance.RegisterReceiver(this);
+            Debug.Log("SetupDataSetupDataSetupData");
+            
         }
 
         private void SetTextOfCurrentCurrency(InfVal currentCurrency)
         {
+            Debug.Log("SetTextOfCurrentCurrency");
             currentCurrencyText.text = InfValOperations.DisplayInfVal(currentCurrency);
         }
 

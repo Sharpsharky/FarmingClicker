@@ -1,4 +1,5 @@
 
+using FarmingClicker.GameFlow.Interactions.UI.MainCanvas;
 using FarmingClicker.GameFlow.Messages;
 using FarmingClicker.Navigation;
 using FarmingClicker.StateMachine.ApplicationStateMachine;
@@ -35,7 +36,7 @@ namespace FarmingClicker.StateMachine
 
         private StateMachineRunner<AppStateMachine, ApplicationStateType> appStateMachineRunner;
 
-        [SerializeField, InlineEditor] private GameObject mainCanvas;
+        [SerializeField, InlineEditor] private MainCanvasController mainCanvasController;
 
         public static string LoginToken;
         public List<Type> ListenedTypes { get; } = new List<Type>();
@@ -56,10 +57,10 @@ namespace FarmingClicker.StateMachine
                                              {
                                                  new
                                                      ApplicationLoginState(appStateMachineRunner.StateManager,
-                                                         ApplicationStateType.Login, navigationManager, initialSceneLoadCommand),
+                                                         ApplicationStateType.Login, navigationManager, initialSceneLoadCommand, mainCanvasController),
                                                  new
                                                      ApplicationNavigationState(appStateMachineRunner.StateManager,
-                                                         ApplicationStateType.Navigation, mainCanvas),
+                                                         ApplicationStateType.Navigation),
                                                  new
                                                      ApplicationInteractionState(appStateMachineRunner.StateManager,
                                                          ApplicationStateType.Interaction),
@@ -107,10 +108,6 @@ namespace FarmingClicker.StateMachine
                     AudioManager.StopPlayingAll();
                     AudioManager.PlayRandomAudioFromGroup(typeof(AudioLibraryData.NavigationMusic), false, true);
                     appStateMachineRunner.StateManager.SwitchState(ApplicationStateType.Navigation);
-                    break;
-                }
-                default:
-                {
                     break;
                 }
             }

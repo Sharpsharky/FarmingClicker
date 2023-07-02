@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.UI.MainCanvas;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction
 {
     using System;
