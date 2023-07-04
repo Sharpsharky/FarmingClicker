@@ -61,7 +61,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
             GenerateBuildings();
             GenerateNumberOfFarms(numberOfFarms);
 
-            ListenedTypes.Add(typeof(BuyNewFieldCommand));
+            ListenedTypes.Add(typeof(NewFarmFieldConstructedNotification));
             MessageDispatcher.Instance.RegisterReceiver(this);
             
             return SetUpFarmData();
@@ -262,7 +262,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmsSpawnerManager
 
             switch (message)
             {
-                case BuyNewFieldCommand buyNewFieldCommand:
+                case NewFarmFieldConstructedNotification buyNewFieldCommand:
                 {
                     FarmFieldController newFarmFieldController = GenerateFarmComponents(farmFieldControllers.Count);
                     MessageDispatcher.Instance.Send(new FarmFieldConstructedNotification(newFarmFieldController));

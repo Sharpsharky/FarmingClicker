@@ -3495,9 +3495,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   coinDelay: 0.07
-  randomInitialScatter: 80
+  randomInitialScatter: 120
   coinScalingTime: 0.5
-  coinFinalSize: 1.1
+  coinFinalSize: 1.2
   timeOfMovingToFirstPoint: 0.5
   randomFirstPointScatterX: 150
   randomFirstPointScatterY: 50

@@ -1,3 +1,5 @@
+using System.Collections;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
 {
     using Dialogue.DialogueDataTypes;
@@ -61,11 +63,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.NewField
             if (price > CurrencyFarmManger.GetCurrentCurrency()) return;
             
             MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-price));
-            
-            MessageDispatcher.Instance.Send(new BuyNewFieldCommand(price, timeOfConstruction));
+            MessageDispatcher.Instance.Send(new StartConstructingNewFarmFieldCommand(timeOfConstruction));
+
             ExitPanel();
         }
 
+
+        
+        
         private void ExitPanel()
         {
             buyButton.onClick.RemoveAllListeners();

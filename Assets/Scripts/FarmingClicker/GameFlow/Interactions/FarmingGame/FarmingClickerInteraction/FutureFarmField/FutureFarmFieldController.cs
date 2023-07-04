@@ -1,4 +1,4 @@
-using FarmingClicker.Data;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInteraction.FutureFarmField
 {
@@ -9,10 +9,21 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
     using UnityEngine;
     using UnityEngine.UI;
     using FarmsSpawnerManager;
+    using FarmingClicker.GameFlow.Messages.Commands.NewField;
+    using Sirenix.OdinInspector;
+    using TMPro;
+    using Data;
+    using System.Collections;
 
-    public class FutureFarmFieldController : MonoBehaviour
+    public class FutureFarmFieldController : SerializedMonoBehaviour
     {
-        [SerializeField] private Button upgradeButton;
+        [SerializeField,BoxGroup("Future farm field")] private GameObject upgradeButtonParent;
+        [SerializeField,BoxGroup("Future farm field")] private Button upgradeButton;
+        
+        [SerializeField,BoxGroup("Under construction")] private GameObject boostButtonParent;
+        [SerializeField,BoxGroup("Under construction")] private GameObject timerParent;
+        [SerializeField,BoxGroup("Under construction")] private Button boostButton;
+        [SerializeField,BoxGroup("Under construction")] private TMP_Text timer;
 
         private InfVal priceToBuyTheNextFarmField = new InfVal(0, InGameData.InfValPrecision);
         private int timeOfFarmConstruction;
@@ -24,6 +35,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             this.initialFarmCalculationData = initialFarmCalculationData;
             SetPositionOfButton();
             upgradeButton.onClick.AddListener(OpenBuyNewFieldPopUp);
+            upgradeButton.onClick.AddListener(OpenSpeedUpFarmConstructing);
+            
+            upgradeButtonParent.SetActive(true);
+            boostButtonParent.SetActive(false);
+            timerParent.SetActive(false);
+            
         }
 
         public void PutFutureFarmInNewPosition()
@@ -56,7 +73,46 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             var buyNewFieldPopupData = new BuyNewFieldPopupData(priceToBuyTheNextFarmField, timeOfFarmConstruction);
             MessageDispatcher.Instance.Send(new DisplayBuyNewFieldPanelCommand(buyNewFieldPopupData));
         }
+
+        private void OpenSpeedUpFarmConstructing()
+        {
+            
+        }
         
+        
+        public void StartConstructingFarmField(int timeOfConstruction)
+        {
+            Debug.Log($"StartConstructingFarmField: {timeOfConstruction}");
+            TurnOnTimer(timeOfConstruction);
+        }
+        
+        private void TurnOnTimer(int timeOfConstruction)
+        {
+            upgradeButtonParent.SetActive(false);
+            boostButtonParent.SetActive(true);
+            timerParent.SetActive(true);
+            
+            timer.text = timeOfConstruction.ToString();
+            
+            StartCoroutine(CountTime(timeOfConstruction));
+        }
+
+        private IEnumerator CountTime(int timeOfConstruction)
+        {
+            while (timeOfConstruction >= 0)
+            {
+                yield return new WaitForSeconds(1);
+                timeOfConstruction--;
+                timer.text = timeOfConstruction.ToString();
+                LoadDataFarmManager.instance.SaveTimeOfConstructingFarmField(timeOfConstruction);
+            }
+            
+            MessageDispatcher.Instance.Send(new NewFarmFieldConstructedNotification());
+            LoadDataFarmManager.instance.NotifyOfConstructedFarmField();
+            
+            yield return null;
+            
+        }
         
         
     }

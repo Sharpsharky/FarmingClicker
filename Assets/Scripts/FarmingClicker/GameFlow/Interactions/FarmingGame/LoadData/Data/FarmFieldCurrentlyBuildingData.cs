@@ -2,11 +2,13 @@
 {
     public class FarmFieldCurrentlyBuildingData
     {
-        public string dateOfBeingDone = "0";
+        public int SecondsToBeDone = 0;
+        public bool IsBeingConstructed = false;
 
-        public FarmFieldCurrentlyBuildingData(string dateOfBeingDone)
+        public FarmFieldCurrentlyBuildingData(int secondsToBeDone, bool isBeingConstructed)
         {
-            this.dateOfBeingDone = dateOfBeingDone;
+            SecondsToBeDone = secondsToBeDone;
+            IsBeingConstructed = isBeingConstructed;
         }
     }
 }

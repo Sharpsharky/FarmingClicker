@@ -31,7 +31,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
             InitializeFutureFarmFieldData();
             futureFarmFieldController.Initialize(initialFarmCalculationData);
 
-            ListenedTypes.Add(typeof(BuyNewFieldCommand));
+            ListenedTypes.Add(typeof(StartConstructingNewFarmFieldCommand));
+            ListenedTypes.Add(typeof(NewFarmFieldConstructedNotification));
             MessageDispatcher.Instance.RegisterReceiver(this);
             
 
@@ -73,7 +74,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
         
         private int CalculateTimeOfConstruction(int numberOfOwnedFarmFields)
         {
-            return 1 * numberOfOwnedFarmFields;
+            return 100 * numberOfOwnedFarmFields;
         }
 
 
@@ -92,12 +93,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.FarmingClickerInterac
 
             switch(message)
             {
-                case BuyNewFieldCommand buyNewFieldCommand:
+                case StartConstructingNewFarmFieldCommand buyNewFieldCommand:
                 {
-                    BuyNewField();
+                    futureFarmFieldController.StartConstructingFarmField(buyNewFieldCommand.TimeOfConstruction);
                     break;
                 }
-                
+                case NewFarmFieldConstructedNotification newFarmFieldConstructedNotification:
+                {
+                    break;
+                }
             }
             
         }

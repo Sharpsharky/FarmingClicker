@@ -2,16 +2,13 @@
 
 namespace FarmingClicker.GameFlow.Messages.Commands.NewField
 {
-    using InfiniteValue;
     [Serializable]
-    public record BuyNewFieldCommand : Command
+    public record StartConstructingNewFarmFieldCommand : Command
     {
-        public InfVal Price;
         public int TimeOfConstruction;
 
-        public BuyNewFieldCommand(InfVal price, int timeOfConstruction)
+        public StartConstructingNewFarmFieldCommand(int timeOfConstruction)
         {
-            Price = price;
             TimeOfConstruction = timeOfConstruction;
         }
     }

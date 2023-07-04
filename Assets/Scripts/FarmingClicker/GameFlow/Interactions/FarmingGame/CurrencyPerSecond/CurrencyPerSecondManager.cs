@@ -1,10 +1,4 @@
-﻿using FarmingClicker.Data.Popup;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces;
-using FarmingClicker.GameFlow.Messages.Commands.Popups;
-using UnityEngine;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 {
     using System.Collections.Generic;
     using Data;
@@ -20,11 +14,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
     using Messages.Commands.Currency;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.FarmFieldConstruction;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
+    using FarmingClicker.Data.Popup;
+    using Workplaces;
+    using Messages.Commands.Popups;
+    using UnityEngine;
     public class CurrencyPerSecondManager : SerializedMonoBehaviour, IMessageReceiver
     {
-        [SerializeField] private int maxProfitableDaysOffline = 30;
         
-        private int secondsOffline = 0;
+        public static int secondsOffline = 0;
         private InfVal currencyPerSecond = new InfVal(0).ToPrecision(InGameData.InfValPrecision);
         
         private List<FarmFieldController> farmFieldControllers = new List<FarmFieldController>();
@@ -64,7 +61,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
 
         private void LoadProfit()
         {
-            secondsOffline = GetSecondsOffline();
+            LoadDataFarmManager.instance.CalculateSecondsOffline();
+            secondsOffline = LoadDataFarmManager.instance.SecondsOffline;
+
             var profitWhileOffline = CalculateProfitWhileOffline(secondsOffline);
             var profitPopupData = new ProfitPopupData(profitWhileOffline);
             MessageDispatcher.Instance.Send(new DisplayProfitPanelCommand(profitPopupData));
@@ -103,7 +102,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
         private InfVal GetTimeOfOneLoopOfWorker(InfVal cumulativeValue, List<WorkplaceController> workplaceControllers)
         {
             float s = 2 * (UniversalProperties.RightPointOfCombineWayX - UniversalProperties.LeftPointOfCombineWayX);
-            Debug.Log("111Road: " + s);
 
             InfVal sumOfWagesofTimes = new InfVal(0).ToPrecision(9);
 
@@ -111,32 +109,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.CurrencyPerSecond
             {
                 float v = workplaceController.WorkerProperties.MovingSpeed;
                 float t = s / v;
-                Debug.Log("111Time: " + t);
                 sumOfWagesofTimes += workplaceController.WorkerProperties.NumberOfWorkers *
                                      workplaceController.WorkerProperties.CroppedCurrency * t;
             }
 
             return sumOfWagesofTimes / cumulativeValue;
 
-        }
-        
-        private int GetSecondsOffline()
-        {
-            if (!LoadDataFarmManager.instance.hasPlayedTheGameBefore) return 0;
-
-            DateTime dateOfPlayerPlayingLastTime = LoadDataFarmManager.instance.LastTimePlayerOnline;
-            var currentDate = DateTime.Now;
-            var differenceOfDates = currentDate - dateOfPlayerPlayingLastTime;
-
-            if (differenceOfDates.Days > maxProfitableDaysOffline) return maxProfitableDaysOffline * 60 * 60 * 24;
-            
-            int secondsOff = differenceOfDates.Seconds;
-            if (secondsOff < 0)
-            {
-                Debug.LogError($"The time offline is: {secondsOff}! This number should never be negative!");
-                return 0;
-            }
-            return secondsOff;
         }
         
         private InfVal CalculateProfitWhileOffline(int secondsOffline)

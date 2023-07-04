@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Messages.Commands.NewField;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 {
     using System.Collections.Generic;
@@ -17,6 +19,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 
     public class LoadDataFarmManager : MonoBehaviour, IMessageReceiver
     {
+        [SerializeField] private int maxProfitableDaysOffline = 30;
+        
         public List<WorkPlaceData> FarmFieldDatas = new List<WorkPlaceData>();
         public List<WorkPlaceData> FarmGranaryData = new List<WorkPlaceData>();
         public List<WorkPlaceData> FarmShopData = new List<WorkPlaceData>();
@@ -38,6 +42,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
         private const string FARM_PLAYER_DATA_SAVING_NAME = "farmPlayerData";
         private const string FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME = "offlineCurrencyData";
 
+        public int SecondsOffline = 0;
+        
         private int currentNumberOfFarm = 0;
 
         public static LoadDataFarmManager instance;
@@ -70,12 +76,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             {
                 AddEmptyFarmField();
             }
-            if(ES3.KeyExists(GetProperSavingName(FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME, currentNumberOfFarm))) 
-                FarmFieldCurrentlyBuildingData = ES3.Load<FarmFieldCurrentlyBuildingData>(GetProperSavingName(FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME, currentNumberOfFarm));
-            else
-            {
-                FarmFieldCurrentlyBuildingData = new FarmFieldCurrentlyBuildingData("0");
-            }
+
+            
             if(ES3.KeyExists(GetProperSavingName(FARM_GRANARY_DATA_SAVING_NAME, currentNumberOfFarm))) 
                 FarmGranaryData = ES3.Load<List<WorkPlaceData>>(GetProperSavingName(FARM_GRANARY_DATA_SAVING_NAME, currentNumberOfFarm));
             else
@@ -126,17 +128,70 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 
                 LastTimePlayerOnline = PlayerFarmData.LastTimePlayerOnline;
                 hasPlayedTheGameBefore = true;
+                CalculateSecondsOffline();
             }
             else
             {
                 hasPlayedTheGameBefore = false;
                 
             }
-            
+            if (ES3.KeyExists(GetProperSavingName(FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME, currentNumberOfFarm)))
+            {
+                FarmFieldCurrentlyBuildingData = ES3.Load<FarmFieldCurrentlyBuildingData>(GetProperSavingName(FARM_FIELD_CURRENTLY_BUILDING_DATA_SAVING_NAME, currentNumberOfFarm));
+
+                if (FarmFieldCurrentlyBuildingData.IsBeingConstructed)
+                {
+                    if(SecondsOffline > FarmFieldCurrentlyBuildingData.SecondsToBeDone)
+                    {
+                        MessageDispatcher.Instance.Send(new NewFarmFieldConstructedNotification());
+
+                        Debug.Log("Farm has been constructed");
+                    }
+                    else
+                    {
+                        Debug.Log("Farm is not being constructed");
+                        MessageDispatcher.Instance.Send(new StartConstructingNewFarmFieldCommand(FarmFieldCurrentlyBuildingData.SecondsToBeDone));
+
+                    }
+                }
+
+            }
+            else
+            {
+                FarmFieldCurrentlyBuildingData = new FarmFieldCurrentlyBuildingData(0, false);
+
+            }
             
             StartCoroutine(SaveLoop());
         }
 
+        public void CalculateSecondsOffline()
+        {
+            if (!hasPlayedTheGameBefore)
+            {
+                SecondsOffline = 0;
+                return;
+            } 
+
+            DateTime dateOfPlayerPlayingLastTime = LastTimePlayerOnline;
+            var currentDate = DateTime.Now;
+            var differenceOfDates = currentDate - dateOfPlayerPlayingLastTime;
+
+            if (differenceOfDates.Days > maxProfitableDaysOffline)
+            {
+                SecondsOffline = maxProfitableDaysOffline * 60 * 60 * 24;
+                return;
+            }
+            
+            int secondsOff = differenceOfDates.Seconds;
+            if (secondsOff < 0)
+            {
+                Debug.LogError($"The time offline is: {secondsOff}! This number should never be negative!");
+                secondsOff = 0;
+            }
+            SecondsOffline = secondsOff;
+        }
+        
         public void AddEmptyFarmField()
         {
             var farmFieldData = new FarmFieldData(0,0);
@@ -192,6 +247,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
             ES3.Save(GetProperSavingName(FARM_OFFLINE_CURRENCY_DATA_SAVING_NAME, currentNumberOfFarm), offlineCurrencyValue.ToString());
             
         }
+
+        public void SaveTimeOfConstructingFarmField(int timeToFinish)
+        {
+            FarmFieldCurrentlyBuildingData = new FarmFieldCurrentlyBuildingData(timeToFinish, true);
+        }
+        
+        public void NotifyOfConstructedFarmField()
+        {
+            FarmFieldCurrentlyBuildingData = new FarmFieldCurrentlyBuildingData(0, false);
+        }
+        
         
         private void GetData()
         {
