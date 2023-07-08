@@ -1,4 +1,7 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
+﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.GlobalData;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 {
     using System.Collections.Generic;
     using Core.Message;
@@ -29,6 +32,16 @@
         protected WorkerProperties workerProperties = new WorkerProperties();
         protected InfVal currentCurrency = 0;
 
+        protected List<WorkerManagerStatistics> workerManagers = new List<WorkerManagerStatistics>();
+        protected List<StatisticsTypes> statisticsTypes = new List<StatisticsTypes>();
+
+        private int managersForSelectionNumber = 3;
+        
+        private int level0ManagerProbability = 55;
+        private int level1ManagerProbability = 30;
+        private int level2ManagerProbability = 19;
+        private int level3ManagerProbability = 1;
+
         #region Getters and Setters
         public WorkerProperties WorkerProperties => workerProperties;
 
@@ -41,17 +54,20 @@
         #endregion
         
         public virtual void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, 
-            GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
+            GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties, List<StatisticsTypes> statisticsTypes)
         {
             Debug.Log($"Initialize WorkplaceController {initialFarmCalculationData}");
             this.initialFarmCalculationData = initialFarmCalculationData;
             this.workPlaceData = workPlaceData;
             this.workerPrefab = workerPrefab;
             this.initialWorkerProperties = initialWorkerProperties;
+            this.statisticsTypes = new List<StatisticsTypes>(statisticsTypes);
 
             workerProperties.SetInitialProperties(initialWorkerProperties);
             workerProperties.ChangeUpgradeLevel(workPlaceData.upgradeLevel);
             currentCurrency = workPlaceData.GetCurrentCurrency();
+
+            DrawManagersForSelection();
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
@@ -62,6 +78,11 @@
             Debug.Log($"workerProperties.UpgradeLevel: {workerProperties.UpgradeLevel},currentCurrency: {currentCurrency}");
             return new (workerProperties.UpgradeLevel,currentCurrency);
         }
+
+        public List<WorkerManagerStatistics> GetWorkerManagers()
+        {
+            return new List<WorkerManagerStatistics>(workerManagers);
+        }
         
         private void InitializeWorkers()
         {
@@ -71,6 +92,45 @@
             }
         }
 
+        private void DrawManagersForSelection()
+        {
+            workerManagers = new List<WorkerManagerStatistics>();
+            
+            for (int i = 0; i < managersForSelectionNumber; i++)
+            {
+                var workerManagerStatistic = DrawRandomManager();
+                workerManagers.Add(workerManagerStatistic);
+            }
+        }
+
+        private WorkerManagerStatistics DrawRandomManager()
+        {
+            int levelOfManager = DrawRandomLevelOfManager();
+            StatisticsTypes randomStatisticType = GetRandomStatisticType();
+            int faceId = Random.Range(0, GlobalDataHolder.instance.spritesForManagersFaces.Count);
+
+            return new WorkerManagerStatistics(levelOfManager, randomStatisticType, faceId);
+        }
+        
+        private int DrawRandomLevelOfManager()
+        {
+            int maxRand = level0ManagerProbability + level1ManagerProbability + level2ManagerProbability +
+                          level3ManagerProbability;
+            
+            float rand = Random.Range(0, maxRand);
+            
+            if (rand < level1ManagerProbability) return 0;
+            else if (rand < level0ManagerProbability + level1ManagerProbability) return 1; 
+            else if (rand < level0ManagerProbability + level1ManagerProbability + level2ManagerProbability) return 2;
+            else return 3;
+        }
+
+        private StatisticsTypes GetRandomStatisticType()
+        {
+            int rand = Random.Range(0, statisticsTypes.Count);
+            return statisticsTypes[rand];
+        }
+        
         protected virtual WorkerController InitializeWorker()
         {
 

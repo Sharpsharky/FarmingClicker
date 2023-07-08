@@ -29,9 +29,9 @@
         }
 
         public override void Initialize(FarmCalculationData initialFarmCalculationData, WorkPlaceData workPlaceData, 
-            GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties)
+            GameObject workerPrefab, InitialWorkerProperties initialWorkerProperties, List<StatisticsTypes> statisticsTypes)
         {
-            base.Initialize(initialFarmCalculationData,workPlaceData,workerPrefab,initialWorkerProperties);
+            base.Initialize(initialFarmCalculationData,workPlaceData,workerPrefab,initialWorkerProperties, statisticsTypes);
             SetCurrentCropText();
         }
         

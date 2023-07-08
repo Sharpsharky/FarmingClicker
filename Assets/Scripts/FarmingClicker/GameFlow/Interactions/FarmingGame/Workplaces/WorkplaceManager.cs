@@ -15,6 +15,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
     {
         [SerializeField] protected GameObject workerPrefab;
         [SerializeField] protected InitialWorkerProperties initialWorkerProperties;
+        [SerializeField] protected List<StatisticsTypes> statisticsTypes = new List<StatisticsTypes>();
 
         
         protected List<WorkPlaceData> workPlaceDataList = new List<WorkPlaceData>();
@@ -46,7 +47,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
                     initialFarmCalculationData,
                     workPlaceDataList[i],
                     workerPrefab,
-                    initialWorkerProperties);
+                    initialWorkerProperties,
+                    statisticsTypes);
             }
         }
 

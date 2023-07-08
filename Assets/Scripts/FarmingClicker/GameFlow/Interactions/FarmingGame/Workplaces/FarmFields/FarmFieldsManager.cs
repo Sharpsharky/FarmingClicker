@@ -51,10 +51,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces.FarmFields
                     Debug.Log("FarmFieldConstructedNotification");
                     LoadDataFarmManager.instance.AddEmptyFarmField();
                     Debug.Log($"initialFarmCalculationData: {initialFarmCalculationData.StartingPoint}");
-                    farmFieldConstructedNotification.NewFarmFieldController.Initialize(initialFarmCalculationData,
+                    farmFieldConstructedNotification.NewFarmFieldController.Initialize(
+                        initialFarmCalculationData,
                         workPlaceDataList.LastOrDefault(),
                         workerPrefab,
-                        initialWorkerProperties);
+                        initialWorkerProperties,
+                        statisticsTypes);
                     farmFieldControllers.Add(farmFieldConstructedNotification.NewFarmFieldController);
                     
                     

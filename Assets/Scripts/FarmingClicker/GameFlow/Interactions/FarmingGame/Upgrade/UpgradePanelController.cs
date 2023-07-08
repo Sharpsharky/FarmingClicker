@@ -1,5 +1,8 @@
 using System.Diagnostics;
 using FarmingClicker.Data;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers;
+using FarmingClicker.GameFlow.Messages.Commands.Popups;
+using Unity.VisualScripting;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 {
@@ -33,6 +36,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         [SerializeField, BoxGroup("Buttons")] private List<Image> upgradeButtonImages = new List<Image>();
         [SerializeField, BoxGroup("Buttons")] private List<GameObject> upgradeButtonReflections = new List<GameObject>();
         
+        [SerializeField, BoxGroup("Manager")] private WorkerManagerFaceController workerManagerFaceController;
+        
         [SerializeField, BoxGroup("Button Images")] private Image buyButtonImage;
         
         [SerializeField, BoxGroup("Statistics")]
@@ -65,6 +70,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private int startingNumberOfIncrementedLevelsAfterDisplayingPopup = 1;
         private int currentMultiplyButtonPressed = -1;
 
+        public List<Type> ListenedTypes { get; } = new List<Type>();
+
         private void Awake()
         {
             ListenedTypes.Add(typeof(ChangeStatisticsOfUpgradeNotification));
@@ -87,6 +94,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private void RemoveListeners()
         {
             exitButton.onClick.RemoveAllListeners();
+            workerManagerFaceController.FaceButton.onClick.RemoveAllListeners();
             foreach (var upgradeButton in upgradeButtons)
             {
                 upgradeButton.onClick.RemoveAllListeners();
@@ -106,6 +114,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             InitializeStatistics(buyMultipliers[0]);
 
             InitializeButtons(upgradeDisplayPopupData);
+            
+            workerManagerFaceController.FaceButton.onClick.AddListener(TurnOnManagerSelection);
             
             gameObject.SetActive(true);
         }
@@ -229,7 +239,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         }
 
 
-        public List<Type> ListenedTypes { get; } = new List<Type>();
+        private void TurnOnManagerSelection()
+        {
+            SelectManagerPopupData data = new SelectManagerPopupData(currentWorkplaceController.GetWorkerManagers());
+            MessageDispatcher.Instance.Send(new DisplaySelectManagerCommand(data));
+        }
+        
+        
         
         public void OnMessageReceived(object message)
         {
@@ -241,7 +257,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
                 {
                     InitializeStatistics(buyMultipliers[currentMultiplyButtonPressed]);
                     break;
-            }
+                }
                 
             }
         }
