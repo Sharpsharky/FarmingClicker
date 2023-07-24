@@ -577,6 +577,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6133947651170444768, guid: 47b3025b55c1547a6b6793b026185b8c, type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cee40ca23b92f43dbbfb93dc76305ebd, type: 3}
     - target: {fileID: 6133947651170444769, guid: 47b3025b55c1547a6b6793b026185b8c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 209.639

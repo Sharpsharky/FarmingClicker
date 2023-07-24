@@ -305,6 +305,24 @@ MonoBehaviour:
       - "\u041F\u0430\u0440\u0430\u043C\u0435\u0442\u0440\u044B"
       Flags: 000000000000000000000000
       Languages_Touch: []
+    - Term: Managers_Title
+      TermType: 0
+      Description: 
+      Languages:
+      - Select a manager
+      - "Wybierz mened\u017Cera"
+      - "W\xE4hlen Sie einen Manager aus"
+      - "S\xE9lectionnez un gestionnaire"
+      - Seleccione un gerente
+      - "Bir y\xF6netici se\xE7in"
+      - Seleziona un gestore
+      - Selecione um gerente
+      - "\u9009\u62E9\u7ECF\u7406"
+      - "\u30DE\u30CD\u30FC\u30B8\u30E3\u30FC\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"
+      - Selecteer een beheerder
+      - "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043C\u0435\u043D\u0435\u0434\u0436\u0435\u0440\u0430"
+      Flags: 000000000000000000000000
+      Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
