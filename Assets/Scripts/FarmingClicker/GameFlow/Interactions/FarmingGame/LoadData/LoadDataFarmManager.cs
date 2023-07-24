@@ -1,3 +1,5 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 {
     using System.Collections.Generic;
@@ -139,19 +141,19 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.LoadData
 
         public void AddEmptyFarmField()
         {
-            var farmFieldData = new FarmFieldData(0,0);
+            var farmFieldData = new FarmFieldData(0,0, new WorkerManagerStatistics());
             FarmFieldDatas.Add(farmFieldData);
         }
         
         public void AddEmptyGranaryData()
         {
-            var emptyGranaryData = new FarmGranaryData(0,0);
+            var emptyGranaryData = new FarmGranaryData(0,0, new WorkerManagerStatistics());
             FarmGranaryData.Add(emptyGranaryData);
         }
         
         public void AddEmptyShopData()
         {
-            var emptyShopData = new FarmShopData(0,0);
+            var emptyShopData = new FarmShopData(0,0, new WorkerManagerStatistics());
             FarmShopData.Add(emptyShopData);
         }
         

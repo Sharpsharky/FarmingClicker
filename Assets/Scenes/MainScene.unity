@@ -387,16 +387,7 @@ MonoBehaviour:
   - Name: Max load
     StatisticsType: 5
     StatisticIcon: {fileID: 21300000, guid: feb742c6d2ec3429f8d4c50836ed8d4e, type: 3}
-  colorsOfManagersIcons:
-  - {r: 0.33962262, g: 0.16981433, b: 0.062477753, a: 1}
-  - {r: 0.20000002, g: 0.20000002, b: 0.20000002, a: 1}
-  - {r: 0.4716981, g: 0.30214316, b: 0.09567462, a: 1}
-  - {r: 0.3303554, g: 0.118592024, b: 0.6132076, a: 1}
-  spritesForManagersIconBackgrounds:
-  - {fileID: 21300000, guid: 0cbf0709d84404d7f804dd3e039b07a7, type: 3}
-  - {fileID: 21300000, guid: 4b1eb465e344546008755c73c10ae67f, type: 3}
-  - {fileID: 21300000, guid: 7a87f418631444a0c933be2a47feb028, type: 3}
-  - {fileID: 21300000, guid: d3a8d74ffc51e4263bd8cef63c5a8d00, type: 3}
+  noFaceManagerSprite: {fileID: 21300000, guid: 32dbba9bf97c84c5a999cce79813ad5c, type: 3}
   spritesForManagersFaces:
   - {fileID: 21300000, guid: 36e7d59ac1efc4cf7bc6a250df52e2b4, type: 3}
   - {fileID: 21300000, guid: 4fc8589904831423495909d20ce74f23, type: 3}
@@ -6806,6 +6797,10 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4892879124521163738, guid: 64f4e92f33aa3d14392be7299354e312, type: 3}
+    - target: {fileID: 5865308790312718571, guid: 64f4e92f33aa3d14392be7299354e312, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 32dbba9bf97c84c5a999cce79813ad5c, type: 3}
     - target: {fileID: 6774699485125179001, guid: 64f4e92f33aa3d14392be7299354e312, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

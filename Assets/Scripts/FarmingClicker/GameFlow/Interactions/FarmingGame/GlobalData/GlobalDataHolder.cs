@@ -10,10 +10,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.GlobalData
     {
 
         [SerializeField, BoxGroup("Workers")] private List<StatisticType> statisticTypes = new List<StatisticType>();
-        
-        [SerializeField, BoxGroup("Managers")] public List<Color> colorsOfManagersIcons = new List<Color>();
-        [SerializeField, BoxGroup("Managers")] public List<Sprite> spritesForManagersIconBackgrounds = new List<Sprite>();        
-        [SerializeField, BoxGroup("Managers")] public List<Sprite> spritesForManagersFaces = new List<Sprite>();        
+
+        [SerializeField, BoxGroup("Workers Managers")] public Sprite noFaceManagerSprite;   
+        [SerializeField, BoxGroup("Workers Managers")] public List<Sprite> spritesForManagersFaces = new List<Sprite>();   
+
+     
         
         public static GlobalDataHolder instance;
         

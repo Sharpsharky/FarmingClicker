@@ -10,7 +10,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
     using FarmingClicker.Data.Popup;
     using Dialogue.DialogueDataTypes;
     using Dialogue.DialoguePanelControllers;
-    using GlobalData;
     using Sirenix.OdinInspector;
     using UnityEngine;
     public class SelectManagerController : PopupPanelBase, IMessageReceiver
@@ -18,6 +17,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
         [SerializeField, BoxGroup("Buttons")] private Button exitButton;
         [SerializeField, BoxGroup("Managers")] private List<WorkerManagerFaceController> workerManagers = 
             new List<WorkerManagerFaceController>();
+
+        private List<WorkerManagerStatistics> workerManagerStatistics = new List<WorkerManagerStatistics>();
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
 
@@ -31,11 +32,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
             gameObject.SetActive(true);
             
             ListenedTypes.Add(typeof(WorkerManagerSelectedNotification));
+            ListenedTypes.Add(typeof(NewWorkerManagerSelectedNotification));
             MessageDispatcher.Instance.RegisterReceiver(this);        
         }
 
-        private void InitializeManagers(List<WorkerManagerStatistics> workerManagerStatistics)
+        private void InitializeManagers(List<WorkerManagerStatistics> workerManagerStats)
         {
+            workerManagerStatistics = new List<WorkerManagerStatistics>(workerManagerStats);
+            Debug.Log($"abccount: {workerManagerStatistics.Count},");
+            Debug.Log($"abcisEmpty: {workerManagerStatistics[0].isEmpty},");
             if (workerManagers.Count < workerManagerStatistics.Count)
             {
                 Debug.LogError($"Too many workerManager statistics ({workerManagerStatistics.Count}) for " +
@@ -45,11 +50,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
 
             for (int i = 0; i < workerManagerStatistics.Count; i++)
             {
-                workerManagers[i].Initialize(workerManagerStatistics[i]);
-
+                var currentWorkerManagerStatistics = workerManagerStatistics[i];
+                workerManagers[i].Initialize(currentWorkerManagerStatistics);
+                
                 workerManagers[i].FaceButton.onClick.AddListener(() =>
                 {
-                    ClickManagerButton(workerManagerStatistics[i]);
+                    ClickManagerButton(currentWorkerManagerStatistics);
                 });
                 
                 workerManagers[i].gameObject.SetActive(true);
@@ -58,7 +64,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
 
         private void ClickManagerButton(WorkerManagerStatistics workerManagerStatistics)
         {
-            MessageDispatcher.Instance.Send(new WorkerManagerSelectedNotification(workerManagerStatistics));
+            MessageDispatcher.Instance.Send(new NewWorkerManagerSelectedNotification(workerManagerStatistics));
+            Exit();
         }
         
         
@@ -83,9 +90,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
             {
                 case WorkerManagerSelectedNotification workerManagerSelectedNotification:
                 {
-                    MessageDispatcher.Instance.Send(new NewWorkerManagerSelectedNotification
-                        (workerManagerSelectedNotification.WorkerManagerStatistics));
-                    Exit();
+                    //MessageDispatcher.Instance.Send(new NewWorkerManagerSelectedNotification
+                    //    (workerManagerSelectedNotification.WorkerManagerStatistics));
+                    //Exit();
                     break;
                 }
                 

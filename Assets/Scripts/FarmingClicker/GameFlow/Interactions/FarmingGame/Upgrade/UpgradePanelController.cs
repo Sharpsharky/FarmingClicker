@@ -1,9 +1,3 @@
-using System.Diagnostics;
-using FarmingClicker.Data;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers;
-using FarmingClicker.GameFlow.Messages.Commands.Popups;
-using Unity.VisualScripting;
-
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 {
     using System;
@@ -19,7 +13,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
     using UnityEngine;
     using UnityEngine.UI;
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
-
+    using Data;
+    using WorkerManagers;
+    using Messages.Commands.Popups;
+    using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Managers;
+    
     public class UpgradePanelController : PopupPanelBase, IMessageReceiver
     {
         
@@ -75,6 +73,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private void Awake()
         {
             ListenedTypes.Add(typeof(ChangeStatisticsOfUpgradeNotification));
+            ListenedTypes.Add(typeof(NewWorkerManagerSelectedNotification));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
         }
@@ -114,12 +113,18 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             InitializeStatistics(buyMultipliers[0]);
 
             InitializeButtons(upgradeDisplayPopupData);
-            
-            workerManagerFaceController.FaceButton.onClick.AddListener(TurnOnManagerSelection);
+
+            SetUpWorkerManager();
             
             gameObject.SetActive(true);
         }
 
+        private void SetUpWorkerManager()
+        {
+            workerManagerFaceController.FaceButton.onClick.AddListener(TurnOnManagerSelection);
+            InitializeManager(currentWorkplaceController.WorkerManagerSelected);
+        }
+        
         private void InitializeButtons(UpgradeDisplayPopupData upgradeDisplayPopupData)
         {
             for (int i = 0; i < upgradeButtons.Count; i++)
@@ -244,7 +249,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             SelectManagerPopupData data = new SelectManagerPopupData(currentWorkplaceController.GetWorkerManagers());
             MessageDispatcher.Instance.Send(new DisplaySelectManagerCommand(data));
         }
-        
+
+
+        private void InitializeManager(WorkerManagerStatistics workerManagerStatistics)
+        {
+            Debug.Log("InitializeManager");
+            workerManagerFaceController.Initialize(workerManagerStatistics);
+        }
         
         
         public void OnMessageReceived(object message)
@@ -256,6 +267,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
                 case ChangeStatisticsOfUpgradeNotification changeStatisticsOfUpgradeNotification:
                 {
                     InitializeStatistics(buyMultipliers[currentMultiplyButtonPressed]);
+                    break;
+                }
+                case NewWorkerManagerSelectedNotification newWorkerManagerSelectedNotification:
+                {
+                    InitializeManager(newWorkerManagerSelectedNotification.WorkerManagerStatistics);
+                    currentWorkplaceController.SetWorkerManagerStatistics(newWorkerManagerSelectedNotification.WorkerManagerStatistics);
                     break;
                 }
                 

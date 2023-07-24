@@ -1,4 +1,5 @@
-﻿using FarmingClicker.GameFlow.Interactions.FarmingGame.GlobalData;
+﻿using System.Threading;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.GlobalData;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
@@ -32,7 +33,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         protected WorkerProperties workerProperties = new WorkerProperties();
         protected InfVal currentCurrency = 0;
 
-        protected List<WorkerManagerStatistics> workerManagers = new List<WorkerManagerStatistics>();
+        protected WorkerManagerStatistics workerManagerSelected;
+        protected List<WorkerManagerStatistics> workerManagersReadyToSelect = new List<WorkerManagerStatistics>();
         protected List<StatisticsTypes> statisticsTypes = new List<StatisticsTypes>();
 
         private int managersForSelectionNumber = 3;
@@ -44,6 +46,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 
         #region Getters and Setters
         public WorkerProperties WorkerProperties => workerProperties;
+        public WorkerManagerStatistics WorkerManagerSelected => workerManagerSelected;
 
         public InfVal CurrentCurrency
         {
@@ -63,25 +66,32 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             this.initialWorkerProperties = initialWorkerProperties;
             this.statisticsTypes = new List<StatisticsTypes>(statisticsTypes);
 
+            SetWorkerManagerStatistics(workPlaceData.workerManagerStatistics);
+            
             workerProperties.SetInitialProperties(initialWorkerProperties);
             workerProperties.ChangeUpgradeLevel(workPlaceData.upgradeLevel);
             currentCurrency = workPlaceData.GetCurrentCurrency();
-
             DrawManagersForSelection();
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
+           
         }
 
         public WorkPlaceData GetSavingData()
         {
             Debug.Log($"workerProperties.UpgradeLevel: {workerProperties.UpgradeLevel},currentCurrency: {currentCurrency}");
-            return new (workerProperties.UpgradeLevel,currentCurrency);
+            return new (workerProperties.UpgradeLevel, currentCurrency, workerManagerSelected);
         }
 
         public List<WorkerManagerStatistics> GetWorkerManagers()
         {
-            return new List<WorkerManagerStatistics>(workerManagers);
+            return new List<WorkerManagerStatistics>(workerManagersReadyToSelect);
+        }
+
+        public void SetWorkerManagerStatistics(WorkerManagerStatistics workerManagerStatistics)
+        {
+            workerManagerSelected = workerManagerStatistics;
         }
         
         private void InitializeWorkers()
@@ -94,12 +104,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 
         private void DrawManagersForSelection()
         {
-            workerManagers = new List<WorkerManagerStatistics>();
+            workerManagersReadyToSelect = new List<WorkerManagerStatistics>();
             
             for (int i = 0; i < managersForSelectionNumber; i++)
             {
                 var workerManagerStatistic = DrawRandomManager();
-                workerManagers.Add(workerManagerStatistic);
+                workerManagersReadyToSelect.Add(workerManagerStatistic);
             }
         }
 
@@ -119,7 +129,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             
             float rand = Random.Range(0, maxRand);
             
-            if (rand < level1ManagerProbability) return 0;
+            if (rand < level0ManagerProbability) return 0;
             else if (rand < level0ManagerProbability + level1ManagerProbability) return 1; 
             else if (rand < level0ManagerProbability + level1ManagerProbability + level2ManagerProbability) return 2;
             else return 3;

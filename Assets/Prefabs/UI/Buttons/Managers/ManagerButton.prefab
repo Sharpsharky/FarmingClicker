@@ -671,4 +671,16 @@ MonoBehaviour:
   faceImage: {fileID: 663434734}
   flagImage: {fileID: 779913166}
   raysEffect: {fileID: 537173042277815221}
+  startingLevelOfRays: 3
   faceButton: {fileID: 4195181236722148461}
+  colorsOfManagersIcons:
+  - {r: 0.3018868, g: 0.14991304, b: 0.058383763, a: 1}
+  - {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  - {r: 0.4811321, g: 0.3176329, b: 0, a: 1}
+  - {r: 0.24285789, g: 0, b: 0.4528302, a: 1}
+  spritesForManagersIconBackgrounds:
+  - {fileID: 21300000, guid: 0cbf0709d84404d7f804dd3e039b07a7, type: 3}
+  - {fileID: 21300000, guid: 4b1eb465e344546008755c73c10ae67f, type: 3}
+  - {fileID: 21300000, guid: e7ca49f6dde734e03993bbbcb71cab0a, type: 3}
+  - {fileID: 21300000, guid: d3a8d74ffc51e4263bd8cef63c5a8d00, type: 3}
+  noFaceSprite: {fileID: 21300000, guid: 329adbc7d5d2340638a60939d425d0c9, type: 3}
