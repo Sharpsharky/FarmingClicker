@@ -71,7 +71,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             workerProperties.SetInitialProperties(initialWorkerProperties);
             workerProperties.ChangeUpgradeLevel(workPlaceData.upgradeLevel);
             currentCurrency = workPlaceData.GetCurrentCurrency();
-            DrawManagersForSelection();
+            ChooseManagersForSelection();
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
@@ -81,7 +81,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         public WorkPlaceData GetSavingData()
         {
             Debug.Log($"workerProperties.UpgradeLevel: {workerProperties.UpgradeLevel},currentCurrency: {currentCurrency}");
-            return new (workerProperties.UpgradeLevel, currentCurrency, workerManagerSelected);
+            return new (workerProperties.UpgradeLevel, currentCurrency, workerManagerSelected, workerManagersReadyToSelect);
         }
 
         public List<WorkerManagerStatistics> GetWorkerManagers()
@@ -102,7 +102,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             }
         }
 
-        private void DrawManagersForSelection()
+        private void ChooseManagersForSelection()
+        {
+
+            if (workPlaceData.workerManagersToSelect.Count > 0)
+                workerManagersReadyToSelect = new List<WorkerManagerStatistics>(workPlaceData.workerManagersToSelect);
+            else
+                DrawManagers();
+
+        }
+
+        private void DrawManagers()
         {
             workerManagersReadyToSelect = new List<WorkerManagerStatistics>();
             

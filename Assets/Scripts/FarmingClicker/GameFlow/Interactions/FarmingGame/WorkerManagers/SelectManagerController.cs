@@ -39,8 +39,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
         private void InitializeManagers(List<WorkerManagerStatistics> workerManagerStats)
         {
             workerManagerStatistics = new List<WorkerManagerStatistics>(workerManagerStats);
-            Debug.Log($"abccount: {workerManagerStatistics.Count},");
-            Debug.Log($"abcisEmpty: {workerManagerStatistics[0].isEmpty},");
+
             if (workerManagers.Count < workerManagerStatistics.Count)
             {
                 Debug.LogError($"Too many workerManager statistics ({workerManagerStatistics.Count}) for " +
