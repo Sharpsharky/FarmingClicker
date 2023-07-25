@@ -1,6 +1,3 @@
-using FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers;
-using FarmingClicker.GameFlow.Interactions.UI.MainCanvas;
-
 namespace FarmingClicker.Dialogue
 {
     using System;
@@ -15,6 +12,9 @@ namespace FarmingClicker.Dialogue
     using GameFlow.Interactions.FarmingGame.NewField;
     using GameFlow.Interactions.FarmingGame.Options;
     using GameFlow.Interactions.FarmingGame.Profit;
+    using GameFlow.Interactions.FarmingGame.WorkerManagers;
+    using GameFlow.Interactions.FarmingGame.WorkerManagers.RandomManager;
+    using GameFlow.Interactions.UI.MainCanvas;
 
     public class PopupManager : SerializedMonoBehaviour, IMessageReceiver
     {
@@ -24,6 +24,7 @@ namespace FarmingClicker.Dialogue
         [field: SerializeField, FoldoutGroup("UI")]  private ProfitController profitController;
         [field: SerializeField, FoldoutGroup("UI")]  private MainCanvasController mainCanvasController;
         [field: SerializeField, FoldoutGroup("UI")]  private SelectManagerController selectManagerController;
+        [field: SerializeField, FoldoutGroup("UI")]  private RandomManagersController randomManagersController;
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
         
@@ -35,6 +36,7 @@ namespace FarmingClicker.Dialogue
             ListenedTypes.Add(typeof(DisplayProfitPanelCommand));
             ListenedTypes.Add(typeof(DisplayMainCanvasCommand));
             ListenedTypes.Add(typeof(DisplaySelectManagerCommand));
+            ListenedTypes.Add(typeof(DisplayRandomManagersCommand));
 
             MessageDispatcher.Instance.RegisterReceiver(this);
             
@@ -96,6 +98,12 @@ namespace FarmingClicker.Dialogue
                 {
                     selectManagerController.OnFinished += ClosePopup;
                     selectManagerController.SetupData(command.data);
+                    break;
+                }
+                case DisplayRandomManagersCommand command:
+                {
+                    randomManagersController.OnFinished += ClosePopup;
+                    randomManagersController.SetupData(command.data);
                     break;
                 }
             }

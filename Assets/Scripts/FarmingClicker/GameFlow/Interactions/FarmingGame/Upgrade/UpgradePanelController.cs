@@ -41,34 +41,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         
         [SerializeField, BoxGroup("Button Images")] private Image buyButtonImage;
         
-        [SerializeField, BoxGroup("Statistics")]
-        private UpgradeStatistics levelStatistic;        
-        [SerializeField, BoxGroup("Statistics")]
-        private UpgradeStatistics workersStatistic;
-        [SerializeField, BoxGroup("Statistics")]
-        private UpgradeStatistics valueStatistic;
-        [SerializeField, BoxGroup("Statistics")]
-        private UpgradeStatistics workingSpeedStatistic;
-        [SerializeField, BoxGroup("Statistics")]
-        private UpgradeStatistics movingSpeedStatistic;        
-        [SerializeField, BoxGroup("Statistics")]
-        private UpgradeStatistics loadStatistic;
-
-
-
-        [SerializeField, BoxGroup("Statistic Components")]
-        private UpgradeStatisticComponents levelStatisticComponents;        
-        [SerializeField, BoxGroup("Statistic Components")]
-        private UpgradeStatisticComponents workersStatisticComponents;
-        [SerializeField, BoxGroup("Statistic Components")]
-        private UpgradeStatisticComponents valueStatisticComponents;
-        [SerializeField, BoxGroup("Statistic Components")]
-        private UpgradeStatisticComponents workingSpeedStatisticComponents;
-        [SerializeField, BoxGroup("Statistic Components")]
-        private UpgradeStatisticComponents movingSpeedStatisticComponents;        
-        [SerializeField, BoxGroup("Statistic Components")]
-        private UpgradeStatisticComponents loadStatisticComponents;
-        
         [SerializeField, BoxGroup("Statistics 2")]
         private List<StatisticsTypes> defaultStatistics = new List<StatisticsTypes>();
         [SerializeField, BoxGroup("Statistics 2")]
@@ -162,47 +134,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private void InitializeStatistics(int levelsIncrementedByNumber)
         {
             Debug.Log($"CalculateCroppedCurrency: levelsIncrementedByNumber: {levelsIncrementedByNumber}" );
-/*
-            workersStatistic.InitializeStatistic(
-                workersStatisticComponents.GetIcon(),
-                $"{workersStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.NumberOfWorkers.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateNumberOfWorkers(levelsIncrementedByNumber)
-                    .ToString());
-            
-            valueStatistic.InitializeStatistic(
-                valueStatisticComponents.GetIcon(),
-                $"{valueStatisticComponents.GetTitle()}:", InfValOperations.DisplayInfVal(  
-                currentWorkplaceController.WorkerProperties.CroppedCurrency),InfValOperations.DisplayInfVal(
-                currentWorkplaceController.WorkerProperties.CalculateCroppedCurrency(levelsIncrementedByNumber)));
-            
-            workingSpeedStatistic.InitializeStatistic(
-                workingSpeedStatisticComponents.GetIcon(),
-                $"{workingSpeedStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.WorkingSpeed.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateWorkingSpeed(levelsIncrementedByNumber).ToString());
-            
-            movingSpeedStatistic.InitializeStatistic(
-                movingSpeedStatisticComponents.GetIcon(),
-                $"{movingSpeedStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.MovingSpeed.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateMovingSpeed(levelsIncrementedByNumber)
-                    .ToString());
-            
-            loadStatistic.InitializeStatistic(
-                loadStatisticComponents.GetIcon(),
-                $"{loadStatisticComponents.GetTitle()}:",InfValOperations.DisplayInfVal(
-                currentWorkplaceController.WorkerProperties.MaxTransportedCurrency),InfValOperations.DisplayInfVal
-                    (currentWorkplaceController.WorkerProperties.CalculateMaxTransportedCurrency(levelsIncrementedByNumber)));
-
-
-            levelStatistic.InitializeStatistic(
-                levelStatisticComponents.GetIcon(),
-                $"{levelStatisticComponents.GetTitle()}:",
-                currentWorkplaceController.WorkerProperties.UpgradeLevel.ToString(),
-                currentWorkplaceController.WorkerProperties.CalculateUpgradeLevel(levelsIncrementedByNumber)
-                    .ToString());
-*/
 
             foreach (var upgradeStatistic in upgradeStatisticsMap)
             {

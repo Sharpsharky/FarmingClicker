@@ -1,8 +1,4 @@
-﻿using System;
-using Core.Message;
-using Core.Message.Interfaces;
-using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Managers;
-using UnityEngine.UI;
+﻿using FarmingClicker.GameFlow.Messages.Commands.Popups;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
 {
@@ -12,9 +8,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
     using Dialogue.DialoguePanelControllers;
     using Sirenix.OdinInspector;
     using UnityEngine;
+    using System;
+    using Core.Message;
+    using Core.Message.Interfaces;
+    using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Managers;
+    using UnityEngine.UI;
+    
     public class SelectManagerController : PopupPanelBase, IMessageReceiver
     {
         [SerializeField, BoxGroup("Buttons")] private Button exitButton;
+        [SerializeField, BoxGroup("Buttons")] private Button randomManagersButton;
+        
         [SerializeField, BoxGroup("Managers")] private List<WorkerManagerFaceController> workerManagers = 
             new List<WorkerManagerFaceController>();
 
@@ -28,6 +32,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
 
             InitializeManagers(selectManagerPopupData.WorkerManagerStatistics);
             exitButton.onClick.AddListener(Exit);
+            
+            randomManagersButton.onClick.AddListener(ClickRandomManagersButton);
             
             gameObject.SetActive(true);
             
@@ -66,8 +72,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
             MessageDispatcher.Instance.Send(new NewWorkerManagerSelectedNotification(workerManagerStatistics));
             Exit();
         }
-        
-        
+
+        private void ClickRandomManagersButton()
+        {
+            MessageDispatcher.Instance.Send(new DisplayRandomManagersCommand(new RandomManagersPopupData()));
+        }
         
         private void Exit()
         {
@@ -79,6 +88,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
             }
             
             exitButton.onClick.RemoveAllListeners();
+            randomManagersButton.onClick.RemoveAllListeners();
         }
 
         public void OnMessageReceived(object message)
