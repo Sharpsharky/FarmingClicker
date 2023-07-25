@@ -36,7 +36,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         protected WorkerManagerStatistics workerManagerSelected;
         protected List<WorkerManagerStatistics> workerManagersReadyToSelect = new List<WorkerManagerStatistics>();
         protected List<StatisticsTypes> statisticsTypes = new List<StatisticsTypes>();
-
+        
         private int managersForSelectionNumber = 3;
         
         private int level0ManagerProbability = 55;
@@ -47,6 +47,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         #region Getters and Setters
         public WorkerProperties WorkerProperties => workerProperties;
         public WorkerManagerStatistics WorkerManagerSelected => workerManagerSelected;
+        public List<StatisticsTypes> StatisticsTypes=> statisticsTypes;
 
         public InfVal CurrentCurrency
         {

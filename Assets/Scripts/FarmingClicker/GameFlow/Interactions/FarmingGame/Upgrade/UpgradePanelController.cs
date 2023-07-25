@@ -1,3 +1,6 @@
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
+using Unity.VisualScripting;
+
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 {
     using System;
@@ -50,7 +53,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private UpgradeStatistics movingSpeedStatistic;        
         [SerializeField, BoxGroup("Statistics")]
         private UpgradeStatistics loadStatistic;
-        
+
+
+
         [SerializeField, BoxGroup("Statistic Components")]
         private UpgradeStatisticComponents levelStatisticComponents;        
         [SerializeField, BoxGroup("Statistic Components")]
@@ -63,6 +68,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private UpgradeStatisticComponents movingSpeedStatisticComponents;        
         [SerializeField, BoxGroup("Statistic Components")]
         private UpgradeStatisticComponents loadStatisticComponents;
+        
+        [SerializeField, BoxGroup("Statistics 2")]
+        private List<StatisticsTypes> defaultStatistics = new List<StatisticsTypes>();
+        [SerializeField, BoxGroup("Statistics 2")]
+        private Dictionary<StatisticsTypes, UpgradeStatistics> upgradeStatisticsMap;
+        [SerializeField, BoxGroup("Statistics 2")]
+        private Dictionary<StatisticsTypes, UpgradeStatisticComponents> upgradeStatisticComponentsMap;
         
         private WorkplaceController currentWorkplaceController;
         private int startingNumberOfIncrementedLevelsAfterDisplayingPopup = 1;
@@ -150,7 +162,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private void InitializeStatistics(int levelsIncrementedByNumber)
         {
             Debug.Log($"CalculateCroppedCurrency: levelsIncrementedByNumber: {levelsIncrementedByNumber}" );
-
+/*
             workersStatistic.InitializeStatistic(
                 workersStatisticComponents.GetIcon(),
                 $"{workersStatisticComponents.GetTitle()}:",
@@ -190,9 +202,44 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
                 currentWorkplaceController.WorkerProperties.UpgradeLevel.ToString(),
                 currentWorkplaceController.WorkerProperties.CalculateUpgradeLevel(levelsIncrementedByNumber)
                     .ToString());
+*/
 
+            foreach (var upgradeStatistic in upgradeStatisticsMap)
+            {
+                upgradeStatistic.Value.gameObject.SetActive(false);
+            }
+
+            foreach (var statisticsType in defaultStatistics)
+            {
+                LoadStatistic(statisticsType, levelsIncrementedByNumber);
+            }
             
+            foreach (var statisticsType in currentWorkplaceController.StatisticsTypes)
+            {
+                LoadStatistic(statisticsType, levelsIncrementedByNumber);
+            }
             
+            SetupBuyButton(levelsIncrementedByNumber);
+        }
+
+        private void LoadStatistic(StatisticsTypes statisticsType, int levelsIncrementedByNumber)
+        {
+            var upgradeStatisticComponent = upgradeStatisticComponentsMap[statisticsType];
+                
+            upgradeStatisticsMap[statisticsType].InitializeStatistic(
+                upgradeStatisticComponent.GetIcon(),
+                $"{upgradeStatisticComponent.GetTitle()}:",
+                currentWorkplaceController.WorkerProperties.GetValueOfStatistic(statisticsType),
+                currentWorkplaceController.WorkerProperties.
+                    GetValueOfStatistic(statisticsType, levelsIncrementedByNumber)
+            );
+            
+            upgradeStatisticsMap[statisticsType].gameObject.SetActive(true);
+        }
+        
+        
+        private void SetupBuyButton(int levelsIncrementedByNumber)
+        {
             price.text = InfValOperations.DisplayInfVal(currentWorkplaceController.WorkerProperties.
                 CalculateCostOfNextLevel(levelsIncrementedByNumber));
             
@@ -201,7 +248,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             {
                 BuyUpgrade(levelsIncrementedByNumber, currentWorkplaceController);
             });
-
         }
         
 

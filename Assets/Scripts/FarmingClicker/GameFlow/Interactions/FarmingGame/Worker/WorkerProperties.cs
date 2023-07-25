@@ -1,4 +1,6 @@
-﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
+﻿using System.Collections.Generic;
+
+namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 {
     using InfiniteValue;
     using Data;
@@ -26,6 +28,7 @@
         public InfVal CostOfNextLevel => costOfNextLevel;
         public InfVal CroppedCurrency => croppedCurrency;
 
+    
         #endregion
         
         public void SetInitialProperties(InitialWorkerProperties initialWorkerProperties)
@@ -104,6 +107,39 @@
             cumulativeValue = (initialWorkerProperties.CroppedCurrency * pow)/ scalingValI;
 
             return cumulativeValue;
+        }
+
+        public string GetValueOfStatistic(StatisticsTypes statisticsType, int levelIncrementation = 0)
+        {
+            switch (statisticsType)
+            {
+                case StatisticsTypes.LEVEL:
+                {
+                    return CalculateUpgradeLevel(levelIncrementation).ToString();
+                }
+                case StatisticsTypes.MAX_LOAD:
+                {
+                    return InfValOperations.DisplayInfVal(CalculateMaxTransportedCurrency(levelIncrementation));
+                }
+                case StatisticsTypes.MOVING_SPEED:
+                {
+                    return CalculateMovingSpeed(levelIncrementation).ToString();
+                }
+                case StatisticsTypes.WORKING_SPEED:
+                {
+                    return CalculateWorkingSpeed(levelIncrementation).ToString();
+                }
+                case StatisticsTypes.CROPPED_CURRENCY:
+                {
+                    return InfValOperations.DisplayInfVal(CalculateCroppedCurrency(levelIncrementation));
+                }
+                case StatisticsTypes.NUMBER_OF_WORKERS:
+                {
+                    return CalculateNumberOfWorkers(levelIncrementation).ToString();
+                }
+            }
+
+            return "ERROR";
         }
         
     }
