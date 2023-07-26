@@ -1,4 +1,5 @@
-﻿using FarmingClicker.GameFlow.Messages.Commands.Popups;
+﻿using FarmingClicker.GameFlow.Messages.Commands.Managers;
+using FarmingClicker.GameFlow.Messages.Commands.Popups;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
 {
@@ -32,13 +33,17 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
 
             InitializeManagers(selectManagerPopupData.WorkerManagerStatistics);
             exitButton.onClick.AddListener(Exit);
-            
-            randomManagersButton.onClick.AddListener(ClickRandomManagersButton);
+
+            randomManagersButton.onClick.AddListener(() =>
+            {
+                ClickRandomManagersButton(selectManagerPopupData.DrawNewRandomManagers);
+            });
             
             gameObject.SetActive(true);
             
             ListenedTypes.Add(typeof(WorkerManagerSelectedNotification));
             ListenedTypes.Add(typeof(NewWorkerManagerSelectedNotification));
+            ListenedTypes.Add(typeof(ReloadManagersCommand));
             MessageDispatcher.Instance.RegisterReceiver(this);        
         }
 
@@ -73,9 +78,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
             Exit();
         }
 
-        private void ClickRandomManagersButton()
+        private void ClickRandomManagersButton(Action drawNewRandomManagers)
         {
-            MessageDispatcher.Instance.Send(new DisplayRandomManagersCommand(new RandomManagersPopupData()));
+            MessageDispatcher.Instance.Send(new DisplayRandomManagersCommand(new RandomManagersPopupData(drawNewRandomManagers)));
         }
         
         private void Exit()
@@ -102,6 +107,11 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
                     //MessageDispatcher.Instance.Send(new NewWorkerManagerSelectedNotification
                     //    (workerManagerSelectedNotification.WorkerManagerStatistics));
                     //Exit();
+                    break;
+                }
+                case ReloadManagersCommand reloadManagersCommand:
+                {
+                    InitializeManagers(reloadManagersCommand.WorkerManagersReadyToSelect);
                     break;
                 }
                 

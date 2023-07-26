@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.GlobalData;
 using FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers;
+using FarmingClicker.GameFlow.Messages.Commands.Managers;
 
 namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 {
@@ -94,6 +95,24 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         {
             workerManagerSelected = workerManagerStatistics;
         }
+
+        public void ReloadManagers()
+        {
+            DrawManagers();
+            MessageDispatcher.Instance.Send(new ReloadManagersCommand(workerManagersReadyToSelect));
+        }
+        
+        private void DrawManagers()
+        {
+            workerManagersReadyToSelect = new List<WorkerManagerStatistics>();
+            
+            for (int i = 0; i < managersForSelectionNumber; i++)
+            {
+                var workerManagerStatistic = DrawRandomManager();
+                workerManagersReadyToSelect.Add(workerManagerStatistic);
+            }
+
+        }
         
         private void InitializeWorkers()
         {
@@ -111,17 +130,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             else
                 DrawManagers();
 
-        }
-
-        private void DrawManagers()
-        {
-            workerManagersReadyToSelect = new List<WorkerManagerStatistics>();
-            
-            for (int i = 0; i < managersForSelectionNumber; i++)
-            {
-                var workerManagerStatistic = DrawRandomManager();
-                workerManagersReadyToSelect.Add(workerManagerStatistic);
-            }
         }
 
         private WorkerManagerStatistics DrawRandomManager()

@@ -52,6 +52,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private int startingNumberOfIncrementedLevelsAfterDisplayingPopup = 1;
         private int currentMultiplyButtonPressed = -1;
 
+        private Action DrawNewRandomManagers;
+        
         public List<Type> ListenedTypes { get; } = new List<Type>();
 
         private void Awake()
@@ -88,8 +90,13 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         {
             if (data is not UpgradeDisplayPopupData upgradeDisplayPopupData) return;
             
+
             title.text = upgradeDisplayPopupData.Title;
             currentWorkplaceController = upgradeDisplayPopupData.WorkplaceController;
+            
+            DrawNewRandomManagers = null;
+            DrawNewRandomManagers += currentWorkplaceController.ReloadManagers;
+
             InitializeMultiplierButtonTexts();
             ChangeColorOfButtons(0);
             exitButton.onClick.AddListener(CloseGame);
@@ -223,7 +230,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 
         private void TurnOnManagerSelection()
         {
-            SelectManagerPopupData data = new SelectManagerPopupData(currentWorkplaceController.GetWorkerManagers());
+            SelectManagerPopupData data = new SelectManagerPopupData(currentWorkplaceController.GetWorkerManagers(), 
+                DrawNewRandomManagers);
             MessageDispatcher.Instance.Send(new DisplaySelectManagerCommand(data));
         }
 
