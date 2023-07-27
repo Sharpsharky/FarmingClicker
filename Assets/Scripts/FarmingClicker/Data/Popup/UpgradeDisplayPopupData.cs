@@ -1,3 +1,5 @@
+using System;
+
 namespace FarmingClicker.Data.Popup
 {
     using Dialogue.DialogueDataTypes;

@@ -18,6 +18,14 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 
         protected InitialWorkerProperties initialWorkerProperties;
 
+        protected Dictionary<StatisticsTypes, float> abilityCurrentCoefficient = new Dictionary<StatisticsTypes, float>()
+        {
+            {StatisticsTypes.MAX_LOAD, 1f},
+            {StatisticsTypes.MOVING_SPEED, 1f},
+            {StatisticsTypes.WORKING_SPEED, 1f},
+            {StatisticsTypes.CROPPED_CURRENCY, 1f},
+        };
+        
         #region Getters
 
         public int UpgradeLevel => upgradeLevel;
@@ -69,18 +77,24 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 
             cumulativeValue = (initialWorkerProperties.MaxTransportedCurrency * pow)/ scalingValI;
 
-            return cumulativeValue;
+            float managerAbilityCoef = abilityCurrentCoefficient[StatisticsTypes.MAX_LOAD];
+            
+            return managerAbilityCoef * cumulativeValue;
             
         }
         
         public float CalculateWorkingSpeed(int i = 0)
         {
-            return 1 + (upgradeLevel+i) * 0.1f;
+            float managerAbilityCoef = abilityCurrentCoefficient[StatisticsTypes.WORKING_SPEED];
+            
+            return managerAbilityCoef * (1 + (upgradeLevel+i) * 0.1f);
         }
 
         public float CalculateMovingSpeed(int i = 0)
         {
-            return 1 + (upgradeLevel+i) * 0.02f;
+            float managerAbilityCoef = abilityCurrentCoefficient[StatisticsTypes.MOVING_SPEED];
+            
+            return managerAbilityCoef * (1 + (upgradeLevel+i) * 0.02f);
         }
 
         public virtual InfVal CalculateCostOfNextLevel(int i = 0)
@@ -106,7 +120,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
 
             cumulativeValue = (initialWorkerProperties.CroppedCurrency * pow)/ scalingValI;
 
-            return cumulativeValue;
+            float managerAbilityCoef = abilityCurrentCoefficient[StatisticsTypes.CROPPED_CURRENCY];
+            
+            return managerAbilityCoef * cumulativeValue;
         }
 
         public string GetValueOfStatistic(StatisticsTypes statisticsType, int levelIncrementation = 0)
@@ -140,6 +156,23 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Worker
             }
 
             return "ERROR";
+        }
+
+        public void SetAbility(StatisticsTypes statisticsType, float coefficient)
+        {
+            ResetAbility();
+            abilityCurrentCoefficient[statisticsType] = coefficient;
+        }
+        
+        public void ResetAbility()
+        {
+            abilityCurrentCoefficient = new Dictionary<StatisticsTypes, float>()
+            {
+                {StatisticsTypes.MAX_LOAD, 1f},
+                {StatisticsTypes.MOVING_SPEED, 1f},
+                {StatisticsTypes.WORKING_SPEED, 1f},
+                {StatisticsTypes.CROPPED_CURRENCY, 1f},
+            };
         }
         
     }

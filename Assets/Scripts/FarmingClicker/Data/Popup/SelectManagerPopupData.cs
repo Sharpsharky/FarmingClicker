@@ -1,4 +1,5 @@
 ﻿using System;
+using FarmingClicker.GameFlow.Interactions.FarmingGame.Worker;
 using UnityEngine;
 
 namespace FarmingClicker.Data.Popup
@@ -10,12 +11,12 @@ namespace FarmingClicker.Data.Popup
     public record SelectManagerPopupData : IPopupData
     {
         public List<WorkerManagerStatistics> WorkerManagerStatistics = new List<WorkerManagerStatistics>();
-        public Action DrawNewRandomManagers;
+        public Action OnDrawNewRandomManagers;
 
-        public SelectManagerPopupData(List<WorkerManagerStatistics> workerManagerStatistics, Action drawNewRandomManagers)
+        public SelectManagerPopupData(List<WorkerManagerStatistics> workerManagerStatistics, Action OnDrawNewRandomManagers)
         {
             WorkerManagerStatistics = new List<WorkerManagerStatistics>(workerManagerStatistics);
-            DrawNewRandomManagers = drawNewRandomManagers;
+            this.OnDrawNewRandomManagers = OnDrawNewRandomManagers;
         }
     }
 }

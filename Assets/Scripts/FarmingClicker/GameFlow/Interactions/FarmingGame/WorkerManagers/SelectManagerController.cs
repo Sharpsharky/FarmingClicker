@@ -23,6 +23,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
         [SerializeField, BoxGroup("Managers")] private List<WorkerManagerFaceController> workerManagers = 
             new List<WorkerManagerFaceController>();
 
+      
+        
         private List<WorkerManagerStatistics> workerManagerStatistics = new List<WorkerManagerStatistics>();
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
@@ -36,7 +38,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers
 
             randomManagersButton.onClick.AddListener(() =>
             {
-                ClickRandomManagersButton(selectManagerPopupData.DrawNewRandomManagers);
+                ClickRandomManagersButton(selectManagerPopupData.OnDrawNewRandomManagers);
             });
             
             gameObject.SetActive(true);

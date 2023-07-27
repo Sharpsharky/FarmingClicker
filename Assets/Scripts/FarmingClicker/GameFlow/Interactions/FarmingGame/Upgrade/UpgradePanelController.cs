@@ -31,36 +31,42 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         [SerializeField, BoxGroup("Main")] private float alphaOfInactiveText = 0.65f;
 
         [SerializeField, BoxGroup("Buttons")] private Button exitButton;
-        [SerializeField, BoxGroup("Buttons")] private Button buyButton;
-        [SerializeField, BoxGroup("Buttons")] private List<Button> upgradeButtons = new List<Button>();
-        [SerializeField, BoxGroup("Buttons")] private List<TMP_Text> upgradeButtonTexts = new List<TMP_Text>();
-        [SerializeField, BoxGroup("Buttons")] private List<Image> upgradeButtonImages = new List<Image>();
-        [SerializeField, BoxGroup("Buttons")] private List<GameObject> upgradeButtonReflections = new List<GameObject>();
+        
+        [SerializeField, BoxGroup("Upgrade")] private Button buyButton;
+        [SerializeField, BoxGroup("Upgrade")] private List<Button> upgradeButtons = new List<Button>();
+        [SerializeField, BoxGroup("Upgrade")] private List<TMP_Text> upgradeButtonTexts = new List<TMP_Text>();
+        [SerializeField, BoxGroup("Upgrade")] private List<Image> upgradeButtonImages = new List<Image>();
+        [SerializeField, BoxGroup("Upgrade")] private List<GameObject> upgradeButtonReflections = new List<GameObject>();
         
         [SerializeField, BoxGroup("Manager")] private WorkerManagerFaceController workerManagerFaceController;
-        
+        [SerializeField, BoxGroup("Manager")] private Button managerAbilityButton;
+        [SerializeField, BoxGroup("Manager")] private ManagerAbilityController managerAbilityController;
+
         [SerializeField, BoxGroup("Button Images")] private Image buyButtonImage;
         
-        [SerializeField, BoxGroup("Statistics 2")]
+        [SerializeField, BoxGroup("Statistics")]
         private List<StatisticsTypes> defaultStatistics = new List<StatisticsTypes>();
-        [SerializeField, BoxGroup("Statistics 2")]
+        [SerializeField, BoxGroup("Statistics")]
         private Dictionary<StatisticsTypes, UpgradeStatistics> upgradeStatisticsMap;
-        [SerializeField, BoxGroup("Statistics 2")]
+        [SerializeField, BoxGroup("Statistics")]
         private Dictionary<StatisticsTypes, UpgradeStatisticComponents> upgradeStatisticComponentsMap;
         
         private WorkplaceController currentWorkplaceController;
         private int startingNumberOfIncrementedLevelsAfterDisplayingPopup = 1;
         private int currentMultiplyButtonPressed = -1;
 
-        private Action DrawNewRandomManagers;
+        private Action OnDrawNewRandomManagers;
+        private Action<int, int> OnSecondOfManagerCooldownLasted;
+
         
         public List<Type> ListenedTypes { get; } = new List<Type>();
 
         private void Awake()
         {
+            
             ListenedTypes.Add(typeof(ChangeStatisticsOfUpgradeNotification));
             ListenedTypes.Add(typeof(NewWorkerManagerSelectedNotification));
-
+            
             MessageDispatcher.Instance.RegisterReceiver(this);
         }
 
@@ -71,6 +77,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
 
         private void CloseGame()
         {
+            OnSecondOfManagerCooldownLasted -= ReloadManagerAbilityTime;
+
             RemoveListeners();
             gameObject.SetActive(false);
 
@@ -90,13 +98,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         {
             if (data is not UpgradeDisplayPopupData upgradeDisplayPopupData) return;
             
+            OnSecondOfManagerCooldownLasted += ReloadManagerAbilityTime;
 
             title.text = upgradeDisplayPopupData.Title;
             currentWorkplaceController = upgradeDisplayPopupData.WorkplaceController;
+            SetupManagersAbility();
             
-            DrawNewRandomManagers = null;
-            DrawNewRandomManagers += currentWorkplaceController.ReloadManagers;
-
             InitializeMultiplierButtonTexts();
             ChangeColorOfButtons(0);
             exitButton.onClick.AddListener(CloseGame);
@@ -106,10 +113,32 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             InitializeButtons(upgradeDisplayPopupData);
 
             SetUpWorkerManager();
+
+            currentWorkplaceController.SetupManagerAbilityTimer(OnSecondOfManagerCooldownLasted);
             
             gameObject.SetActive(true);
         }
+        
+        private void SetupManagersAbility()
+        {
+            OnDrawNewRandomManagers = null;
+            OnDrawNewRandomManagers += currentWorkplaceController.ReloadManagers;
+            
+            managerAbilityButton.onClick.AddListener(currentWorkplaceController.PerformManagerAbility);
 
+            if (currentWorkplaceController.WorkerManagerSelected.isEmpty)
+            {
+                managerAbilityController.TurnOnFullCooldownFill();
+            }
+            else
+            {
+                managerAbilityController.TurnOnNoCooldownFill();
+
+            }
+
+        }
+        
+        
         private void SetUpWorkerManager()
         {
             workerManagerFaceController.FaceButton.onClick.AddListener(TurnOnManagerSelection);
@@ -221,7 +250,6 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             }
         }
         
-        
         private void BuyUpgrade(int amount, WorkplaceController workplaceController)
         {
             workplaceController.BuyUpgrade(amount);
@@ -231,7 +259,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
         private void TurnOnManagerSelection()
         {
             SelectManagerPopupData data = new SelectManagerPopupData(currentWorkplaceController.GetWorkerManagers(), 
-                DrawNewRandomManagers);
+                OnDrawNewRandomManagers);
             MessageDispatcher.Instance.Send(new DisplaySelectManagerCommand(data));
         }
 
@@ -241,7 +269,12 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Upgrade
             Debug.Log("InitializeManager");
             workerManagerFaceController.Initialize(workerManagerStatistics);
         }
-        
+
+        private void ReloadManagerAbilityTime(int currentTime, int maxTime)
+        {
+            Debug.Log($"ReloadManagerAbilityTime: {currentTime}:{maxTime}" );
+            managerAbilityController.SetTimer(currentTime, maxTime);            
+        }
         
         public void OnMessageReceived(object message)
         {

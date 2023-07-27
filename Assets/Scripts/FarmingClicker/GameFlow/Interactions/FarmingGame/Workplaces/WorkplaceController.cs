@@ -1,10 +1,6 @@
-﻿using System.Threading;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.GlobalData;
-using FarmingClicker.GameFlow.Interactions.FarmingGame.WorkerManagers;
-using FarmingClicker.GameFlow.Messages.Commands.Managers;
-
-namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
+﻿namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 {
+    using System;
     using System.Collections.Generic;
     using Core.Message;
     using FarmingClicker.Data.Popup;
@@ -19,11 +15,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
     using FarmingClicker.GameFlow.Messages.Notifications.FarmingGame.Upgrades;
     using CurrencyFarm;
     using Messages.Commands.Currency;
+    using GlobalData;
+    using WorkerManagers;
+    using Messages.Commands.Managers;
     
     public abstract class WorkplaceController : SerializedMonoBehaviour
     {
         [SerializeField] protected Button upgradeButton;
         [SerializeField] protected string title;
+        [SerializeField] protected WorkerManagerController workerManagerController;
         
         protected InitialWorkerProperties initialWorkerProperties;
         protected FarmCalculationData initialFarmCalculationData;
@@ -37,7 +37,9 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         protected WorkerManagerStatistics workerManagerSelected;
         protected List<WorkerManagerStatistics> workerManagersReadyToSelect = new List<WorkerManagerStatistics>();
         protected List<StatisticsTypes> statisticsTypes = new List<StatisticsTypes>();
-        
+
+        private Action<int, int> OnSecondOfManagerCooldownLasted;
+
         private int managersForSelectionNumber = 3;
         
         private int level0ManagerProbability = 55;
@@ -45,6 +47,8 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         private int level2ManagerProbability = 19;
         private int level3ManagerProbability = 1;
 
+        [SerializeField] private Dictionary<int, float> coefficientsOfManagerAbilitiesForLevelsMap;
+        
         #region Getters and Setters
         public WorkerProperties WorkerProperties => workerProperties;
         public WorkerManagerStatistics WorkerManagerSelected => workerManagerSelected;
@@ -73,11 +77,15 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             workerProperties.SetInitialProperties(initialWorkerProperties);
             workerProperties.ChangeUpgradeLevel(workPlaceData.upgradeLevel);
             currentCurrency = workPlaceData.GetCurrentCurrency();
+            
             ChooseManagersForSelection();
+            InitializeManager();
             
             DisplayUpgradeButton(CalculatePositionOfButton());
             InitializeWorkers();
            
+
+            
         }
 
         public WorkPlaceData GetSavingData()
@@ -100,6 +108,78 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         {
             DrawManagers();
             MessageDispatcher.Instance.Send(new ReloadManagersCommand(workerManagersReadyToSelect));
+        }
+
+        public void PerformManagerAbility()
+        {
+            float coef = coefficientsOfManagerAbilitiesForLevelsMap[workerManagerSelected.LevelOfManager];
+            workerProperties.SetAbility(workerManagerSelected.StatisticsType, coef);
+
+            workerManagerController.InitializeNewTimer(ManagerAbilityCooldown.ACTIVE_ABILITY_COOLDOWN);
+        }
+        
+        
+        public void BuyUpgrade(int numberOfBoughtLevels)
+        {
+            InfVal cost = workerProperties.CalculateCostOfNextLevel(numberOfBoughtLevels);
+            if (cost > CurrencyFarmManger.GetCurrentCurrency()) return;
+            
+            MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-cost));
+            
+            workerProperties.ChangeUpgradeLevel(numberOfBoughtLevels);
+            
+            MessageDispatcher.Instance.Send(
+                new ChangeStatisticsOfUpgradeNotification(workerProperties.CroppedCurrency));
+        }
+
+        public void SetupManagerAbilityTimer(Action<int, int> OnSecondOfManagerCooldownLasted)
+        {
+            workerManagerController.OnSecondOfManagerCooldownLasted = OnSecondOfManagerCooldownLasted;
+        }
+        
+        protected virtual WorkerController InitializeWorker()
+        {
+
+            if (workerPrefab == null) return null;
+            
+            Debug.Log("InitializeWorker");
+
+            GameObject newWorker = Instantiate(workerPrefab, initialFarmCalculationData.StartingPoint, 
+                Quaternion.identity);
+            var newWorkerController = newWorker.GetComponent<WorkerController>();
+            workerControllers.Add(newWorkerController);
+           
+            return newWorkerController;
+        }
+
+        protected virtual Vector3 CalculatePositionOfButton()
+        {
+            return transform.position;
+        }
+        
+        
+        protected void DisplayUpgradeButton(Vector3 buttonPos)
+        {
+            upgradeButton.onClick.AddListener(DisplayUpgrade);
+            upgradeButton.gameObject.transform.parent.position = buttonPos;
+        }
+        
+        protected void DisplayUpgrade()
+        {
+            UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, 
+                I2.Loc.LocalizationManager.GetTranslation(title));
+            
+            MessageDispatcher.Instance.Send(new DisplayUpgradePanelCommand(data));
+        }
+
+        private void InitializeManager()
+        {
+            /*
+            if(workPlaceData.activeAbilityCooldown > 0)
+                workerManagerController.InitializePreExistingTimer(ManagerAbilityCooldown.ACTIVE_ABILITY_COOLDOWN, );
+            else if(workPlaceData.waitingForAbilityCooldown > 0)
+                workerManagerController.InitializePreExistingTimer(ManagerAbilityCooldown.WAITING_FOR_ABILITY_COOLDOWN, );
+            */
         }
         
         private void DrawManagers()
@@ -136,7 +216,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
         {
             int levelOfManager = DrawRandomLevelOfManager();
             StatisticsTypes randomStatisticType = GetRandomStatisticType();
-            int faceId = Random.Range(0, GlobalDataHolder.instance.spritesForManagersFaces.Count);
+            int faceId = UnityEngine.Random.Range(0, GlobalDataHolder.instance.spritesForManagersFaces.Count);
 
             return new WorkerManagerStatistics(levelOfManager, randomStatisticType, faceId);
         }
@@ -146,7 +226,7 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
             int maxRand = level0ManagerProbability + level1ManagerProbability + level2ManagerProbability +
                           level3ManagerProbability;
             
-            float rand = Random.Range(0, maxRand);
+            float rand = UnityEngine.Random.Range(0, maxRand);
             
             if (rand < level0ManagerProbability) return 0;
             else if (rand < level0ManagerProbability + level1ManagerProbability) return 1; 
@@ -156,57 +236,10 @@ namespace FarmingClicker.GameFlow.Interactions.FarmingGame.Workplaces
 
         private StatisticsTypes GetRandomStatisticType()
         {
-            int rand = Random.Range(0, statisticsTypes.Count);
+            int rand = UnityEngine.Random.Range(0, statisticsTypes.Count);
             return statisticsTypes[rand];
         }
-        
-        protected virtual WorkerController InitializeWorker()
-        {
 
-            if (workerPrefab == null) return null;
-            
-            GameObject newWorker = Instantiate(workerPrefab, initialFarmCalculationData.StartingPoint, 
-                Quaternion.identity);
-            var newWorkerController = newWorker.GetComponent<WorkerController>();
-            workerControllers.Add(newWorkerController);
-
-            Debug.Log("InitializeWorker");
-            
-            return newWorkerController;
-        }
-
-        protected virtual Vector3 CalculatePositionOfButton()
-        {
-            return transform.position;
-        }
-        
-        
-        protected void DisplayUpgradeButton(Vector3 buttonPos)
-        {
-            upgradeButton.onClick.AddListener(DisplayUpgrade);
-            upgradeButton.gameObject.transform.parent.position = buttonPos;
-        }
-        
-        protected void DisplayUpgrade()
-        {
-            UpgradeDisplayPopupData data = new UpgradeDisplayPopupData(this, 
-                I2.Loc.LocalizationManager.GetTranslation(title));
-            
-            MessageDispatcher.Instance.Send(new DisplayUpgradePanelCommand(data));
-        }
-
-        public void BuyUpgrade(int numberOfBoughtLevels)
-        {
-            InfVal cost = workerProperties.CalculateCostOfNextLevel(numberOfBoughtLevels);
-            if (cost > CurrencyFarmManger.GetCurrentCurrency()) return;
-            
-            MessageDispatcher.Instance.Send(new ModifyCurrencyCommand(-cost));
-            
-            workerProperties.ChangeUpgradeLevel(numberOfBoughtLevels);
-            
-            MessageDispatcher.Instance.Send(
-                new ChangeStatisticsOfUpgradeNotification(workerProperties.CroppedCurrency));
-        }
 
     }
 }
